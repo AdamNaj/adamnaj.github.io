@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Codality</title>
+    <link>http://localhost:1314/categories/</link>
+    <description>Recent content in Categories on Codality</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 23 Nov 2024 16:06:33 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1314/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Best Practices</title>
+      <link>http://localhost:1314/categories/best-practices/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/best-practices/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CMS</title>
+      <link>http://localhost:1314/categories/cms/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/cms/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Code Samples</title>
+      <link>http://localhost:1314/categories/code-samples/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/code-samples/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Configuration</title>
+      <link>http://localhost:1314/categories/configuration/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/configuration/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PowerShell</title>
+      <link>http://localhost:1314/categories/powershell/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/powershell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scripting</title>
+      <link>http://localhost:1314/categories/scripting/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/scripting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Security</title>
+      <link>http://localhost:1314/categories/security/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sitecore</title>
+      <link>http://localhost:1314/categories/sitecore/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/sitecore/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Software Development</title>
+      <link>http://localhost:1314/categories/software-development/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/categories/software-development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Open Source</title>
+      <link>http://localhost:1314/categories/open-source/</link>
+      <pubDate>Wed, 03 Aug 2016 02:00:27 +0000</pubDate>
+      <guid>http://localhost:1314/categories/open-source/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Solution</title>
+      <link>http://localhost:1314/categories/solution/</link>
+      <pubDate>Wed, 03 Aug 2016 02:00:27 +0000</pubDate>
+      <guid>http://localhost:1314/categories/solution/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Visual Studio</title>
+      <link>http://localhost:1314/categories/visual-studio/</link>
+      <pubDate>Fri, 15 May 2015 00:00:45 +0000</pubDate>
+      <guid>http://localhost:1314/categories/visual-studio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CMS UX</title>
+      <link>http://localhost:1314/categories/cms-ux/</link>
+      <pubDate>Tue, 05 May 2015 10:00:53 +0000</pubDate>
+      <guid>http://localhost:1314/categories/cms-ux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Continuous Deployment</title>
+      <link>http://localhost:1314/categories/continuous-deployment/</link>
+      <pubDate>Mon, 03 Nov 2014 14:49:07 +0000</pubDate>
+      <guid>http://localhost:1314/categories/continuous-deployment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Downloadable</title>
+      <link>http://localhost:1314/categories/downloadable/</link>
+      <pubDate>Mon, 15 Jul 2013 23:00:43 +0000</pubDate>
+      <guid>http://localhost:1314/categories/downloadable/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>EPiServer</title>
+      <link>http://localhost:1314/categories/episerver/</link>
+      <pubDate>Thu, 18 Aug 2011 17:07:04 +0000</pubDate>
+      <guid>http://localhost:1314/categories/episerver/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>EPiCode</title>
+      <link>http://localhost:1314/categories/epicode/</link>
+      <pubDate>Wed, 22 Sep 2010 00:02:06 +0000</pubDate>
+      <guid>http://localhost:1314/categories/epicode/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Faceted Navigation</title>
+      <link>http://localhost:1314/categories/faceted-navigation/</link>
+      <pubDate>Mon, 08 Feb 2010 13:01:38 +0000</pubDate>
+      <guid>http://localhost:1314/categories/faceted-navigation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Microsoft SqlServer</title>
+      <link>http://localhost:1314/categories/microsoft-sqlserver/</link>
+      <pubDate>Tue, 07 Jul 2009 12:15:25 +0000</pubDate>
+      <guid>http://localhost:1314/categories/microsoft-sqlserver/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tooling</title>
+      <link>http://localhost:1314/categories/tooling/</link>
+      <pubDate>Sun, 10 May 2009 15:27:06 +0000</pubDate>
+      <guid>http://localhost:1314/categories/tooling/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lifestyle</title>
+      <link>http://localhost:1314/categories/lifestyle/</link>
+      <pubDate>Mon, 30 Mar 2009 21:03:35 +0000</pubDate>
+      <guid>http://localhost:1314/categories/lifestyle/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Mobile</title>
+      <link>http://localhost:1314/categories/mobile/</link>
+      <pubDate>Mon, 30 Mar 2009 21:03:35 +0000</pubDate>
+      <guid>http://localhost:1314/categories/mobile/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rants</title>
+      <link>http://localhost:1314/categories/rants/</link>
+      <pubDate>Mon, 30 Mar 2009 21:03:35 +0000</pubDate>
+      <guid>http://localhost:1314/categories/rants/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Internet Information Services</title>
+      <link>http://localhost:1314/categories/internet-information-services/</link>
+      <pubDate>Tue, 17 Mar 2009 01:18:00 +0000</pubDate>
+      <guid>http://localhost:1314/categories/internet-information-services/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WebParts</title>
+      <link>http://localhost:1314/categories/webparts/</link>
+      <pubDate>Thu, 08 Jan 2009 18:06:47 +0000</pubDate>
+      <guid>http://localhost:1314/categories/webparts/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Skinning</title>
+      <link>http://localhost:1314/categories/skinning/</link>
+      <pubDate>Wed, 12 Oct 2005 03:51:24 +0000</pubDate>
+      <guid>http://localhost:1314/categories/skinning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SkinStudio</title>
+      <link>http://localhost:1314/categories/skinstudio/</link>
+      <pubDate>Wed, 12 Oct 2005 03:51:24 +0000</pubDate>
+      <guid>http://localhost:1314/categories/skinstudio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Stardock</title>
+      <link>http://localhost:1314/categories/stardock/</link>
+      <pubDate>Wed, 12 Oct 2005 03:51:24 +0000</pubDate>
+      <guid>http://localhost:1314/categories/stardock/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WindowBlinds</title>
+      <link>http://localhost:1314/categories/windowblinds/</link>
+      <pubDate>Wed, 12 Oct 2005 03:51:24 +0000</pubDate>
+      <guid>http://localhost:1314/categories/windowblinds/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Blog Navigator</title>
+      <link>http://localhost:1314/categories/blog-navigator/</link>
+      <pubDate>Mon, 16 May 2005 18:42:53 +0000</pubDate>
+      <guid>http://localhost:1314/categories/blog-navigator/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Desktop Customization</title>
+      <link>http://localhost:1314/categories/desktop-customization/</link>
+      <pubDate>Wed, 11 May 2005 01:29:46 +0000</pubDate>
+      <guid>http://localhost:1314/categories/desktop-customization/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IconDeveloper</title>
+      <link>http://localhost:1314/categories/icondeveloper/</link>
+      <pubDate>Sun, 06 Mar 2005 11:33:37 +0000</pubDate>
+      <guid>http://localhost:1314/categories/icondeveloper/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

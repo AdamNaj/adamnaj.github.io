@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IconDeveloper on Codality</title>
+    <link>http://localhost:1314/categories/icondeveloper/</link>
+    <description>Recent content in IconDeveloper on Codality</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 06 Mar 2005 11:33:37 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1314/categories/icondeveloper/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making icons with transparent background (even from flat bitmaps)</title>
+      <link>http://localhost:1314/2005/03/06/making-icons-with-transparent-background-even-from-flat-bitmaps-by-adam-najmanowicz/</link>
+      <pubDate>Sun, 06 Mar 2005 11:33:37 +0000</pubDate>
+      <guid>http://localhost:1314/2005/03/06/making-icons-with-transparent-background-even-from-flat-bitmaps-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;how-to-do-that-in-stardock-icondeveloper&#34;&gt;How to do that in Stardock IconDeveloper?&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;AID=67582&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://www.icondeveloper.com/&#34;&gt;Stardock IconDeveloper&lt;/a&gt; is a free icon creation tool available from Stardock Net,Inc. You can download it from &lt;a href=&#34;http://www.stardock.com/products/icondeveloper/downloads.asp&#34;&gt;here&lt;/a&gt;. Stardock also offers an advanced version allowing you to create icons of any sizeand other really cool things like &lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;aid=309&amp;amp;UID=1023&#34;&gt;recoloring icons or even whole icons packs&lt;/a&gt; as well as &lt;a href=&#34;http://adam.wincustomize.com/Articles.aspx--SID=59&amp;amp;AID=990&#34;&gt;skinning them&lt;/a&gt;. But as long as you do not need the advanced features available in the Professional version, you&amp;rsquo;re more than welcome to use the free edition of IconDeveloper.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How big is that thing anyway?</title>
+      <link>http://localhost:1314/2005/02/14/how-big-is-that-thing-anyway-by-adam-najmanowicz/</link>
+      <pubDate>Mon, 14 Feb 2005 05:51:43 +0000</pubDate>
+      <guid>http://localhost:1314/2005/02/14/how-big-is-that-thing-anyway-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;making-sure-everything-in-place-just-where-it-should-be&#34;&gt;Making sure everything in place, just where it should be.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;AID=65017&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Implementing FireFox support in SkinStudio and having to calculate everyting carefully in the process I got pretty tired of being unable to tell how wide something is or having to run a separate app for it. Is there one actually? I guess there is&amp;hellip; perhaps even skinnable. But being where I am - I wanted it integrated and easy to use for myself and for every skiner. available instantaneously. Seamlessly integrated into Skinstudio. (This will be available in the next SkinStudio release),&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Skinning Icons!?!</title>
+      <link>http://localhost:1314/2004/11/14/skinning-icons-by-adam-najmanowicz/</link>
+      <pubDate>Sun, 14 Nov 2004 05:49:07 +0000</pubDate>
+      <guid>http://localhost:1314/2004/11/14/skinning-icons-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;are-there-no-limits-to-customization&#34;&gt;Are there no limits to customization?&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/Articles.aspx--SID=59&amp;amp;AID=990&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Very important:&lt;/strong&gt;&lt;/em&gt; Recoloring or skinning icons does not change the original author&amp;rsquo;s copyright, nor does it make such icons yours. If you recolor or skin an icon that has not been made by yourself you may not upload or share a recolored icon without the original author&amp;rsquo;s permission.&lt;/p&gt;&#xA;&lt;p&gt;In the next few days Stardock is publishing the next component of it&amp;rsquo;s extremely successful &lt;a href=&#34;http://www.objectdesktop.net&#34;&gt;ObjectDesktop&lt;/a&gt;. The new component is called &lt;a href=&#34;http://www.stardock.com/products/icondeveloper/&#34;&gt;IconDeveloper&lt;/a&gt; - the tool&amp;rsquo;s , I&amp;rsquo;m the developer of, main purpose is to make it easy for casual users to create icons and make it faster and more efficient for professional icon artists to do their work. Celebrating the event I decided to write a short article about going really crazy with icons and how to do it with IconDeveloper. What skinning means (but is not limited to) is changing the look of certain part of applications. The article will describe how you can change the appearance of an IconPackager theme or an Icl file (Icon library).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CMS UX on Codality</title>
+    <link>http://localhost:1314/categories/cms-ux/</link>
+    <description>Recent content in CMS UX on Codality</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 05 May 2015 10:00:53 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1314/categories/cms-ux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Turn your Sitecore PowerShell reports into applications with Action Scripts</title>
+      <link>http://localhost:1314/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/</link>
+      <pubDate>Tue, 05 May 2015 10:00:53 +0000</pubDate>
+      <guid>http://localhost:1314/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://localhost:1314/images/shoot_out_of_cannon_400_clr_13993.png&#34;&gt;&lt;img src=&#34;http://localhost:1314/images/shoot_out_of_cannon_400_clr_13993.png&#34; alt=&#34;shoot_out_of_cannon_400_clr_13993&#34; class=&#34;alignleft&#34; width=&#34;400&#34; height=&#34;338&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;In one of my &lt;a href=&#34;http://localhost:1314/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/&#34;&gt;previous posts&lt;/a&gt; I described how to create reports in Sitecore PowerShell Extensions (SPE for short) that allow you to leverage the joint power of Sitecore and PowerShell to deliver complete and elegant reports in little to no time. In this post I&amp;rsquo;ll tell you how to take this a step further and operationalize them into full blown Sitecore Desktop applications.&#xA;The secret sauce is in the actions you can place on the report, the additional parameters that I haven&amp;rsquo;t mentioned in the &lt;a href=&#34;http://localhost:1314/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/&#34;&gt;previous post&lt;/a&gt;, and the use of Sitecore rules engine with some rules that come with SPE.&#xA;For the purpose of this post I will limit the scripts to samples that are (mostly) in the vanilla SPE deployment.&#xA;Let&amp;rsquo;s begin with describing the actions and how you can configure them to appear in your reports.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Be your own Sitecore Professional Services with PowerShell (Part 2)</title>
+      <link>http://localhost:1314/2013/02/08/be-your-own-sitecore-professional-services-with-powershell-part-2/</link>
+      <pubDate>Fri, 08 Feb 2013 12:59:15 +0000</pubDate>
+      <guid>http://localhost:1314/2013/02/08/be-your-own-sitecore-professional-services-with-powershell-part-2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://localhost:1314/images/PS_watchdog2.png&#34;&gt;&lt;img src=&#34;http://localhost:1314/images/PS_watchdog2_thumb.png&#34; alt=&#34;PS_watchdog2&#34; title=&#34;PS_watchdog2&#34; class=&#34;alignleft&#34; width=&#34;173&#34; height=&#34;240&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;So I&amp;rsquo;ve finally found a moment (well a few days actually) to follow up on the &lt;a href=&#34;http://localhost:1314/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/&#34;&gt;previous article&lt;/a&gt;, and just about time as there are quite a few more tricks that PowerShell can help you with when assessing the quality of your Sitecore solution.&#xA;One thing that you need to keep in mind when reading &lt;a href=&#34;http://sdn.sitecore.net/reference/sitecore%206/recommended%20practices.aspx&#34;&gt;the recommendations&lt;/a&gt; is that they are exactly that &amp;ndash; recommendations. While Sitecore strongly encourages you that you follow them &amp;ndash; I can see how most of those are perfectly fine to be ditched in some situations, you just need to be careful about picking those situations. By the general rule of thumb though, following vendor recommendations is a good thing and they are usually a good metrics of a well put together solution. Most of statistics provided in this post are hard to gather without a scripting solution like &lt;a href=&#34;http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx&#34;&gt;Sitecore PowerShell Console&lt;/a&gt; or &lt;a href=&#34;http://marketplace.sitecore.net/en/Modules/Revolver.aspx&#34;&gt;Revolver&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sitecore PowerShell Console in Visual Studio</title>
+      <link>http://localhost:1314/2013/01/29/sitecore-powershell-console-in-visual-studio/</link>
+      <pubDate>Tue, 29 Jan 2013 17:43:02 +0000</pubDate>
+      <guid>http://localhost:1314/2013/01/29/sitecore-powershell-console-in-visual-studio/</guid>
+      <description>&lt;p&gt;A while ago &lt;a href=&#34;https://twitter.com/TheRocksGuy&#34;&gt;Jakob&lt;/a&gt; suggested that putting the Sitecore PowerShell Console in Visual Studio might not be a bad idea. He even provided me with the boilerplate code that served as a stub for the module (Thanks a million Jakob!).&lt;/p&gt;&#xA;&lt;p&gt;So after some struggling on my part &lt;a href=&#34;http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_Console_for_Sitecore_Rocks.aspx&#34;&gt;the new module is now on the Sitecore Marketplace&lt;/a&gt;. There is really not much to write about. If you like PowerShell and Sitecore Rocks you will find it pretty neat. Otherwise I&amp;rsquo;m afraid those are not the droids you are looking for&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Be your own Sitecore Professional Services with PowerShell (Part 1)</title>
+      <link>http://localhost:1314/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/</link>
+      <pubDate>Fri, 22 Jun 2012 15:13:32 +0000</pubDate>
+      <guid>http://localhost:1314/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://localhost:1314/images/PS_detective1.png&#34;&gt;&lt;img src=&#34;http://localhost:1314/images/PS_detective_thumb1.png&#34; alt=&#34;PS_detective&#34; title=&#34;PS_detective&#34; class=&#34;alignleft&#34; width=&#34;201&#34; height=&#34;240&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Recently I&amp;rsquo;ve been asked to audit a site for one of our clients. Overall for a fairly seasoned Sitecore developer it&amp;rsquo;s rather obvious what to look for in a site and get a feel for whether an a solution is thoroughly thought through or just put together using brute-force development. You can usually tell if the implementation is sloppy or excellent, but how do you quantify that feeling to give the objective view to the person reading your report? Looking at the Sitecore Developer Network I&amp;rsquo;ve found the following &lt;a href=&#34;http://sdn.sitecore.net/reference/sitecore%206/recommended%20practices.aspx&#34;&gt;set of recommendations&lt;/a&gt;. This is a great help with codifying how a proper Sitecore implementation should look like, what should we pay attention to and most importantly it&amp;rsquo;s a great reference when you&amp;rsquo;re trying to prove that your feeling is something more than just nitpicking but rather an industry standard that the developers should adhere to. I recommend strongly that you look at it and think how closely your practices match those that Sitecore recommends.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Continuous deployment in Sitecore with PowerShell</title>
+      <link>http://localhost:1314/2011/12/19/continuous-deployment-in-sitecore-with-powershell/</link>
+      <pubDate>Mon, 19 Dec 2011 12:28:03 +0000</pubDate>
+      <guid>http://localhost:1314/2011/12/19/continuous-deployment-in-sitecore-with-powershell/</guid>
+      <description>&lt;p&gt;A few days back a &lt;a href=&#34;http://stackoverflow.com/users/3205/skolima&#34;&gt;budy&lt;/a&gt; from our Sitecore team has alerted me to this interesting question on &lt;a href=&#34;http://stackoverflow.com/questions/8414482/is-it-possible-to-build-a-sitecore-data-package-from-command-line-or-outside-of&#34;&gt;StackOverflow&lt;/a&gt; which asks for automation of content promotion from one Sitecore instance to another. He suggested - and rightly so &amp;ndash; that the &lt;a href=&#34;http://trac.sitecore.net/SitecorePowershellConsole&#34;&gt;PowerShell Console&lt;/a&gt; could be used in that scenario. While this was always possible by simply writing it as a PowerShell code the latest version of the console added a few commandlets making building packages much easier.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Context PowerShell scripts for Sitecore</title>
+      <link>http://localhost:1314/2011/11/22/context-powershell-scripts-for-sitecore/</link>
+      <pubDate>Tue, 22 Nov 2011 14:34:14 +0000</pubDate>
+      <guid>http://localhost:1314/2011/11/22/context-powershell-scripts-for-sitecore/</guid>
+      <description>&lt;p&gt;In the he latest update of PowerShell Console for Sitecore, I&amp;rsquo;ve started experimenting with further integration &amp;ndash; context scripts. What is that and what can it do for you?&lt;/p&gt;&#xA;&lt;p&gt;You can safely assume PowerShell is not something your regular users will aspire to learn, but it does not mean they cannot harness its power if you enable them to.&lt;/p&gt;&#xA;&lt;p&gt;If you look closely at the latest Microsoft solutions you may notice that a lot of what GUI does is running some scripting behind the scenes. This is true for a long time with the SQL Server Management studio where pretty much for any action you can generate a script that will let you automate a common task.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Context PowerShell Scripts in EPiServer</title>
+      <link>http://localhost:1314/2011/05/04/context-powershell-scripts-in-episerver/</link>
+      <pubDate>Wed, 04 May 2011 07:00:00 +0000</pubDate>
+      <guid>http://localhost:1314/2011/05/04/context-powershell-scripts-in-episerver/</guid>
+      <description>&lt;p&gt;Ok, so I&amp;rsquo;ve got my shot of endorphins writing about PowerShell last week (damn, it&amp;rsquo;s nice to be able to code again!), and I got pretty determined on making it usable and achieving all the goals I&amp;rsquo;ve initially envisioned. and in the process build a usable tool and a library of scripts that people can use either directly or to modify to meet their needs.&lt;/p&gt;&#xA;&lt;p&gt;The goal for this week: &lt;strong&gt;Context Scripts&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>CMS UX – give the content some thought!</title>
+      <link>http://localhost:1314/2010/02/08/cms-ux-give-the-content-some-thought/</link>
+      <pubDate>Mon, 08 Feb 2010 13:01:38 +0000</pubDate>
+      <guid>http://localhost:1314/2010/02/08/cms-ux-give-the-content-some-thought/</guid>
+      <description>&lt;p&gt;One of the many things we debate constantly at Cognifide is how to improve the user experience. How to make editor’s life easier, how to simplify the common everyday tasks, what can be automated, and simply how to make our customer smile a little when they use our projects.&lt;/p&gt;&#xA;&lt;p&gt;For that to work, apart from the overall big blocks to be in place and working seamlessly (which is the absolute minimum required) – you need to be VERY attentive to details.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

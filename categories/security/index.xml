@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Security on Codality</title>
+    <link>http://localhost:1314/categories/security/</link>
+    <description>Recent content in Security on Codality</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 23 Nov 2024 16:06:33 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1314/categories/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>App settings in environment variables in Sitecore.</title>
+      <link>http://localhost:1314/2024/11/23/app-settings-in-environment-variables-in-sitecore/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/2024/11/23/app-settings-in-environment-variables-in-sitecore/</guid>
+      <description>&lt;p&gt;Creating back-end integrations is inevitably linked with having to authenticate against a remote endpoint. Be that a Rest API, FTP or an APM - secrets (credentials, api tokent, shared secrets) of some sort will be involved in the process.&lt;/p&gt;&#xA;&lt;p&gt;Those credentials must be stored somewhere. At this point I hope no one even considers hardcoding those but even if you extract them to configuration - having them exposed in your repository may be a bad idea and is frowned upon by tools like SonarQube.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Do not turn Sitecore Media Request protection off and protect older Sitecore versions with ImageGuard</title>
+      <link>http://localhost:1314/2015/05/15/do-not-turn-sitecore-media-request-protection-off-and-protect-older-sitecore-versions-with-imageguard/</link>
+      <pubDate>Fri, 15 May 2015 00:00:45 +0000</pubDate>
+      <guid>http://localhost:1314/2015/05/15/do-not-turn-sitecore-media-request-protection-off-and-protect-older-sitecore-versions-with-imageguard/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://localhost:1314/images/SitecorePatched.png&#34;&gt;&lt;img src=&#34;http://localhost:1314/images/SitecorePatched_thumb.png&#34; alt=&#34;SitecorePatched&#34; title=&#34;SitecorePatched&#34; class=&#34;alignright&#34; width=&#34;237&#34; height=&#34;240&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;The post is related to the image resize vulnerability fix introduced in Sitecore 7.5. To read more about the Sitecore fix go to the&lt;/em&gt; &lt;a href=&#34;http://sdn.sitecore.net/Products/Sitecore%20V5/Sitecore%20CMS%207/ReleaseNotes/ChangeLog.aspx&#34;&gt;&lt;em&gt;Release notes page&lt;/em&gt;&lt;/a&gt; &lt;em&gt;and search for ?Media request protection?. While I was holding off for a number of months on the publication of the post as it puts the attack vector in plainer sight that I would like it to be (&lt;a href=&#34;http://www.seanholmesby.com/images-not-resizing-in-sitecore-7-5-sitecore-8-0/&#34;&gt;while the community&lt;/a&gt; figured out &lt;a href=&#34;http://sitecorepromenade.blogspot.se/2014/11/sitecore-75-image-resizing-changes.html&#34;&gt;how to work with Media Resizing in a neat way&lt;/a&gt;) - but recently I&amp;rsquo;ve seen voices raised considering &lt;a href=&#34;http://coresighted.net/2015/05/13/sitecore-media-request-protection-gone-wild/&#34;&gt;turning the Media Request protection off&lt;/a&gt; which I hope you will not be doing after reading this post. The post will also tell you how to enable such security on your older versions of Sitecore.&lt;/em&gt;&#xA;So here&amp;rsquo;s the story&amp;hellip;. At some point in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; we have performed a research around Sitecore security and one of my colleagues (&lt;a href=&#34;https://twitter.com/MarasM&#34;&gt;Marek&lt;/a&gt;)  found out that you could easily kill any Sitecore instance by performing an image resize attack on it. While the CMS did some rudimentary checks and limited the values of height and width you could still perform an attack by harvesting the images from the site and perform multiple parallel &amp;amp; iterative size increase or just plain use the scale parameter to achieve any image size. A result of such attack would be a a denial of service due to 100% CPU &amp;amp; memory usage and would potentially allow for filling the server drive by creating the endless number of scaling calls.&#xA;Marek was even kind enough to provide a proof of concept code that confirmed the hypothesis by performing attack on a few of our internal servers. The program would load the home page; parse to find images linked from it and perform resizing of the images in a number threads.&#xA;[&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Configuration on Codality</title>
+    <link>http://localhost:1314/categories/configuration/</link>
+    <description>Recent content in Configuration on Codality</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 23 Nov 2024 16:06:33 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1314/categories/configuration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>App settings in environment variables in Sitecore.</title>
+      <link>http://localhost:1314/2024/11/23/app-settings-in-environment-variables-in-sitecore/</link>
+      <pubDate>Sat, 23 Nov 2024 16:06:33 +0000</pubDate>
+      <guid>http://localhost:1314/2024/11/23/app-settings-in-environment-variables-in-sitecore/</guid>
+      <description>&lt;p&gt;Creating back-end integrations is inevitably linked with having to authenticate against a remote endpoint. Be that a Rest API, FTP or an APM - secrets (credentials, api tokent, shared secrets) of some sort will be involved in the process.&lt;/p&gt;&#xA;&lt;p&gt;Those credentials must be stored somewhere. At this point I hope no one even considers hardcoding those but even if you extract them to configuration - having them exposed in your repository may be a bad idea and is frowned upon by tools like SonarQube.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WindowBlinds on Codality</title>
+    <link>http://localhost:1314/categories/windowblinds/</link>
+    <description>Recent content in WindowBlinds on Codality</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 12 Oct 2005 03:51:24 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1314/categories/windowblinds/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windowblinds went translucency crazy!</title>
+      <link>http://localhost:1314/2005/10/12/windowblinds-went-translucency-crazy-by-adam-najmanowicz/</link>
+      <pubDate>Wed, 12 Oct 2005 03:51:24 +0000</pubDate>
+      <guid>http://localhost:1314/2005/10/12/windowblinds-went-translucency-crazy-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;windowblinds-perpixel-5---new-features-explanatory-series---part-two&#34;&gt;WindowBlinds &amp;ldquo;PerPixel&amp;rdquo; 5 - new features explanatory series - part two.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--AID=88984&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&#xA;If Stardock gave WindowBlinds version names like Microsoft did with XP and its successor, WindowBlinds 5 would probably be called &amp;ldquo;WindowBlinds Translucent&amp;rdquo; or &amp;ldquo;WindowBlinds See-Through&amp;rdquo; or&amp;hellip; oh no&amp;hellip; it can&amp;rsquo;t be&amp;hellip; or can it (?) &amp;ldquo;WindowBlinds Vista&amp;rdquo;!&#xA;In the &lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--AID=88858&amp;amp;c=1&#34;&gt;first part&lt;/a&gt; I&amp;rsquo;ve explained the most noticeable changes you will see in a new WindowBlinds 5 skin but to be honest it went all crazy about translucent parts. We&amp;rsquo;ve got used to the translucent start panel since 4.6 which I&amp;rsquo;ve described how to create in &lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--AID=78608&amp;amp;c=1&#34;&gt;this article&lt;/a&gt;. But in WindowBlinds 5 you can make the whole taskbar translucent as well as the drop down menus, and the &amp;ldquo;Please Wait&amp;rdquo; dialog!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>WindowBlinds 5 translucent frames explained</title>
+      <link>http://localhost:1314/2005/10/10/windowblinds-5-translucent-frames-explained-by-adam-najmanowicz/</link>
+      <pubDate>Mon, 10 Oct 2005 03:40:28 +0000</pubDate>
+      <guid>http://localhost:1314/2005/10/10/windowblinds-5-translucent-frames-explained-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;windowblinds-5-perpixel-new-features-explanatory-series---part-one&#34;&gt;WindowBlinds 5 &amp;ldquo;PerPixel&amp;rdquo; new features explanatory series - part one.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--AID=88858&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&#xA;One of the coolest features of &lt;a href=&#34;http://www.windowblinds.net/&#34;&gt;WindowBlinds&lt;/a&gt; 5 is the possibility to define a translucent frames in your skin. This means a lot of things and a lot of new possibilities. Your windows can drop shadows, glow but most of all you don&amp;rsquo;t have to look at those jaggies if your skin features rounded corners in them. The level of excitement can probably be shown by the fact that it does not have even shown in the public beta, yet it already has artists creating &lt;a href=&#34;http://www.deviantart.com/view/23467780/&#34;&gt;artwork advocating it&lt;/a&gt;. and a number of authors creating a mock-ups of the skins they intend to create. I have to admit I do not recall being contacted so much about any previous version of &lt;a href=&#34;http://www.windowblinds.net/&#34;&gt;WindowBlinds&lt;/a&gt; and any other version that generated such passion among even the MSStyles users.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A guide to WindowBlinds fonts in SkinStudio</title>
+      <link>http://localhost:1314/2005/09/26/a-guide-to-windowblinds-fonts-in-skinstudio-by-adam-najmanowicz/</link>
+      <pubDate>Mon, 26 Sep 2005 18:38:12 +0000</pubDate>
+      <guid>http://localhost:1314/2005/09/26/a-guide-to-windowblinds-fonts-in-skinstudio-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;how-does-one-define-a-font-to-use-for-windowblinds&#34;&gt;How does one define a font to use for WindowBlinds.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--AID=87627&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&#xA;I find a lot of users having problems with how fonts are defined in a WindowBlinds skin. It&amp;rsquo;s quite simple once you understand it how it&amp;rsquo;s done.&#xA;WindowBlinds bases on the premise that most of the skins use just a small number of font variants but use them in a number of places, meaning that one font setting will be used in a number of places like a push button, a tab, a status bar.&#xA;A font setting in SkinStudio is called &amp;ldquo;font preset&amp;rdquo; and is a set of font name, size and formatting as well as its shadow settings. When you think of it in the terms of any word processor a font setting is not different from &amp;ldquo;styles&amp;rdquo; used e.g. in Microsoft Word. And they are equally as useful! in contrast to MSStyles where you define the font for every control or its sub style in WindowBlinds you only define it a few times and then use them in multiple places.&#xA;What&amp;rsquo;s better&amp;hellip; if you decide to change the font in a style, do it only once for the style and WB will change it everywhere the font is used! Let me show you how it&amp;rsquo;s working on a sample skin for a push button.&#xA;Every control section has a font setting (at least one) in most cases grouped in the &amp;ldquo;Fonts&amp;rdquo; subgroup in its section section.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Where&#39;s that &#34;File dialog... *something*&#34; section?</title>
+      <link>http://localhost:1314/2005/09/23/wheres-that-file-dialog-something-section-by-adam-najmanowicz/</link>
+      <pubDate>Fri, 23 Sep 2005 19:51:36 +0000</pubDate>
+      <guid>http://localhost:1314/2005/09/23/wheres-that-file-dialog-something-section-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;another-feature-that-you-may-find-helpful-in-your-day-to-day-skinning&#34;&gt;Another feature that you may find helpful in your day to day skinning.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--AID=87423&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted  on Wincustomize.com&lt;/a&gt;&#xA;It all started with another brain-freeze today. I just couldn&amp;rsquo;t find a section that contained the File Dialog places bar images. You know the bar on the left on the File-&amp;gt;Save and File-&amp;gt;Open dialogs? I bet you&amp;rsquo;ve been cursing more than once searching for a section like that. SkinStudio will help you with searching for a section if you know it&amp;rsquo;s UIS name or its part AND if such section actually exist. But in my case it didn&amp;rsquo;t.&#xA;Wouldn&amp;rsquo;t it be great if I could just lookup the section by it&amp;rsquo;s name or a part of it?&#xA;So I&amp;rsquo;ve added a tool button like you can see on the image below.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Make a translucent start pane like a pro</title>
+      <link>http://localhost:1314/2005/06/16/make-a-translucent-start-pane-like-a-pro-by-adam-najmanowicz/</link>
+      <pubDate>Thu, 16 Jun 2005 23:30:07 +0000</pubDate>
+      <guid>http://localhost:1314/2005/06/16/make-a-translucent-start-pane-like-a-pro-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;as-all-problems-this-one-appears-to-obvious-when-you-know-the-answer&#34;&gt;As all problems this one appears to obvious when you know the answer.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--AID=78608&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&#xA;Little I knew that I will be involved in it, when I was posting a while ago on &lt;a href=&#34;http://www.neowin.net/forum/index.php?showtopic=311589&#34;&gt;Neowin&lt;/a&gt; and &lt;a href=&#34;http://www.winmatrix.com/forums/index.php?showtopic=4160&#34;&gt;WinMatrix&lt;/a&gt; about the cool Warcraft skins available on Wincustomize. &lt;a href=&#34;http://www.blizzard.com/&#34;&gt;Blizzard&lt;/a&gt; is offering a &lt;a href=&#34;http://www.worldofwarcraft.com/&#34;&gt;World of Warcraft&lt;/a&gt; suite now for download on their  &lt;a href=&#34;http://www.worldofwarcraft.com/&#34;&gt;US&lt;/a&gt; and &lt;a href=&#34;http://www.wow-europe.com/&#34;&gt;European&lt;/a&gt; pages pages and upon their request we needed to swiftly modify the &lt;a href=&#34;http://apocalypse67.wincustomize.com/&#34;&gt;Apocalypse&lt;/a&gt;&amp;rsquo;s great &lt;a href=&#34;http://adam.wincustomize.com/ViewSkin.aspx--SID=1&amp;amp;SkinID=4767&amp;amp;LibID=1&#34;&gt;World_of_Warcraft&lt;/a&gt; skin to meet &lt;a href=&#34;http://www.blizzard.com/&#34;&gt;Blizzard&lt;/a&gt;&amp;rsquo;s request to match the game GUI more closely. I was assigned to the task so I went swiftly to the local store with the perfect excuse to get myself a new toy!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>10 Things to check before uploading your WindowBlinds skin</title>
+      <link>http://localhost:1314/2005/04/22/10-things-to-check-before-uploading-your-windowblinds-skin-by-adam-najmanowicz/</link>
+      <pubDate>Fri, 22 Apr 2005 22:44:36 +0000</pubDate>
+      <guid>http://localhost:1314/2005/04/22/10-things-to-check-before-uploading-your-windowblinds-skin-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;the-most-common-problems-with-skins-we-find-on-wincustomize&#34;&gt;The most common problems with skins we find on Wincustomize&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;AID=71458&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Browsing the &lt;a href=&#34;http://www.wincustomize.net/&#34;&gt;WindowBlinds&lt;/a&gt; skins on &lt;a href=&#34;http://www.wincustomize.com/Skins.aspx--LibID=1&#34;&gt;Wincustomize&lt;/a&gt; and applying them is a source of a lot of joy, but there&amp;rsquo;s also a drop of frustration. There are some common problems with the skins that skinners notoriously forget to check for. Perhaps my working environment is not typical but since you&amp;rsquo;ve went all the way to create a skin it&amp;rsquo;s relatively easy to make it a perfect skin for everyone. So here are the 10 things I find most common to be wrong with a lot of skins:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>New WindowBlinds window frame possiblities</title>
+      <link>http://localhost:1314/2005/02/05/new-windowblinds-window-frame-possiblities-by-adam-najmanowicz/</link>
+      <pubDate>Sat, 05 Feb 2005 04:54:45 +0000</pubDate>
+      <guid>http://localhost:1314/2005/02/05/new-windowblinds-window-frame-possiblities-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;how-windowblinds-45-made-the-window-frames-even-more-frolicsome&#34;&gt;How WindowBlinds 4.5 made the window frames even more frolicsome.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;AID=63909&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;WindowBlinds 4.5 introduced two new cool tricks for window frames -&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;IE/Explorer special shell frames, and&lt;/li&gt;&#xA;&lt;li&gt;random frames.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The two features are mutually exclusive, meaning that if you use random frames you cannot specify the special frames for the shell windows.&lt;br&gt;&#xA;&lt;strong&gt;First of all - both features are only available in the UIS2 skins (Advanced WindowBlinds skinning format).&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Why would you use WindowBlinds - An MSStyle to WindowBlinds porter manifest.</title>
+      <link>http://localhost:1314/2004/12/27/why-would-you-use-windowblinds-an-msstyle-to-windowblinds-porter-manifest-by-adam-najmanowicz/</link>
+      <pubDate>Mon, 27 Dec 2004 15:14:34 +0000</pubDate>
+      <guid>http://localhost:1314/2004/12/27/why-would-you-use-windowblinds-an-msstyle-to-windowblinds-porter-manifest-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;if-youre-an-msstyles-author-you-may-want-to-read-it&#34;&gt;If you&amp;rsquo;re an msstyles author you may want to read it.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;AID=59294&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Very important:&lt;/strong&gt; Recoloring/converting or altering icons or skins does not change the original author&amp;rsquo;s copyright, nor does it make such skin yours! If you recolor/convert or alter a skin or icon that has not been made by yourself you may not upload or share the modified skin or icon without the original author&amp;rsquo;s permission.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Blah this color!</title>
+      <link>http://localhost:1314/2004/12/17/blah-this-color-by-adam-najmanowicz/</link>
+      <pubDate>Fri, 17 Dec 2004 18:38:26 +0000</pubDate>
+      <guid>http://localhost:1314/2004/12/17/blah-this-color-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;how-to-successfully-recolor-skins-with-skinstudio&#34;&gt;How to successfully recolor skins with SkinStudio.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;AID=58370&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;I am aware that this article is partially redundant. I&amp;rsquo;ve written &lt;a href=&#34;http://adam.joeuser.com/index.asp?aid=309&#34;&gt;similar article&lt;/a&gt; in about a year ago but it was concerning icons. IconDeveloper is fairly similar in this term to SkinStudio since they share a great deal of their code base. However there I suppose there may be a significant number of people not realizing that - hence the article.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to create a WindowBlinds shell animation file</title>
+      <link>http://localhost:1314/2004/11/27/how-to-create-a-windowblinds-shell-animation-file-by-adam-najmanowicz/</link>
+      <pubDate>Sat, 27 Nov 2004 09:12:15 +0000</pubDate>
+      <guid>http://localhost:1314/2004/11/27/how-to-create-a-windowblinds-shell-animation-file-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;its-not-as-hard-as-david-copperfield-would-like-you-to-think-it-is&#34;&gt;It&amp;rsquo;s not as hard as David Copperfield would like you to think it is.&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.joeuser.com/articles.asp--AID=36199&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on JoeUser.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;How exactly do you create those criters? At first it may seem a tedious job but once you have all the frames, you&amp;rsquo;re pretty much set.&lt;/p&gt;&#xA;&lt;p&gt;First thing I did in my research was asking the experts. I&amp;rsquo;ve asked some of the skin authors and most of them uses a kind of workaround to this. The most detailed explanation I&amp;rsquo;ve received from one of the greatest WindowBlinds skinners - &lt;a href=&#34;http://mikeb314.wincustomize.com/&#34;&gt;Mike Bryant&lt;/a&gt;:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to make a compact start menus in a substyle</title>
+      <link>http://localhost:1314/2004/11/19/how-to-make-a-compact-start-menus-in-a-substyle-by-adam-najmanowicz/</link>
+      <pubDate>Fri, 19 Nov 2004 06:29:26 +0000</pubDate>
+      <guid>http://localhost:1314/2004/11/19/how-to-make-a-compact-start-menus-in-a-substyle-by-adam-najmanowicz/</guid>
+      <description>&lt;h3 id=&#34;and-why-doesnt-it-happen-automatically&#34;&gt;and why doesn&amp;rsquo;t it happen automatically&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/articles.aspx--SID=59&amp;amp;AID=22482&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;There was a concern by some users why SkinStudio shares a start menu with the original substyle when you create another substy;le based on it..&lt;/p&gt;&#xA;&lt;p&gt;Basically the answer is - It&amp;rsquo;s not a bug - It&amp;rsquo;s a feature. It&amp;rsquo;s like that by design. If you select a prefix on save then you will get another start menu as well, otherwise skinstudio will use the same stuff for 2 reasons.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The power of clipboard</title>
+      <link>http://localhost:1314/2003/09/29/the-power-of-clipboard/</link>
+      <pubDate>Mon, 29 Sep 2003 12:59:24 +0000</pubDate>
+      <guid>http://localhost:1314/2003/09/29/the-power-of-clipboard/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://adam.joeuser.com/article/275/The_power_of_clipboard&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on JoeUser.com&lt;/a&gt;&#xA;A few days back I found that nice Visual Style. Really easy on eyes - perfect for coding - titlebar not to high - not too many distractions. So i ran it through Skinstudio, added a few mods to make it the nice place to look and shown it to Pas (Snidely Whiplash). He&amp;rsquo;s made a couple of mods himself and I wanted to have them in my skin. But my skin was USF (yes you can apply USF skins to WindowBlinds with Skinstudio) and his was WindowBlinds. But the image format is the same, so i could just copy it and change the settings in my skin. But how would i do that without wasting an hour chasing all the attributes that needs to be changed? So i came up with 2 easy features to do that.&#xA;Extract from the change log:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

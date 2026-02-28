@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Source | Codality</title>
+<meta name="description" content="[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz">
+<meta name="generator" content="Hugo 0.156.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+<script>
+  (function(){var s=localStorage.getItem('theme-preference');var t=s==='dark'||s==='light'?s:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+
+      <script src="/js/main.js"></script>
+
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1314/categories/open-source/index.xml" title="Codality">
+
+</head>
+<body>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="header-inner">
+  <div class="header-top">
+    <nav class="site-navigation" aria-label="Main Navigation">
+      
+  <nav>
+    <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/about/">About me</a>
+    </li>
+    <li>
+      <a href="/downloads/">Downloads</a>
+    </li>
+    </ul>
+  </nav>
+
+    </nav>
+    
+    <nav class="social-navigation" aria-label="Social Links">
+      <ul>
+        <li><a href="https://github.com/AdamNaj" title="GitHub"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/najmanowicz/" title="LinkedIn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a></li>
+        <li><a href="http://www.twitter.com/AdamNaj" title="Twitter"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a></li>
+        <li><a href="https://www.facebook.com/adam.najmanowicz" title="Facebook"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/adamnajmanowicz/" title="Instagram"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a></li>
+      </ul>
+    </nav>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+  <div class="site-branding">
+    <p class="site-title"><a href="/">Codality</a></p>
+    
+    <p class="site-tagline">[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz</p>
+    
+    <hr class="header-separator"><nav class="tag-cloud" aria-label="Category Cloud"><a href="/categories/best-practices/" style="font-size: 14px;" title="best practices (14 posts)">Best Practices</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/blog-navigator/" style="font-size: 12px;" title="blog navigator (8 posts)">Blog Navigator</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms/" style="font-size: 24px;" title="cms (79 posts)">CMS</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms-ux/" style="font-size: 12px;" title="cms ux (8 posts)">CMS UX</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/code-samples/" style="font-size: 16px;" title="code samples (35 posts)">Code Samples</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/continuous-deployment/" style="font-size: 11px;" title="continuous deployment (4 posts)">Continuous Deployment</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/desktop-customization/" style="font-size: 11px;" title="desktop customization (4 posts)">Desktop Customization</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/downloadable/" style="font-size: 14px;" title="downloadable (22 posts)">Downloadable</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/epicode/" style="font-size: 14px;" title="epicode (16 posts)">EPiCode</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/episerver/" style="font-size: 18px;" title="episerver (41 posts)">EPiServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/faceted-navigation/" style="font-size: 11px;" title="faceted navigation (5 posts)">Faceted Navigation</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/icondeveloper/" style="font-size: 11px;" title="icondeveloper (3 posts)">IconDeveloper</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/internet-information-services/" style="font-size: 12px;" title="internet information services (11 posts)">Internet Information Services</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/lifestyle/" style="font-size: 14px;" title="lifestyle (13 posts)">Lifestyle</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/microsoft-sqlserver/" style="font-size: 12px;" title="microsoft sqlserver (6 posts)">Microsoft SqlServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/mobile/" style="font-size: 11px;" title="mobile (4 posts)">Mobile</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/open-source/" style="font-size: 16px;" title="open source (24 posts)">Open Source</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/powershell/" style="font-size: 18px;" title="powershell (43 posts)">PowerShell</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/rants/" style="font-size: 12px;" title="rants (7 posts)">Rants</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/scripting/" style="font-size: 18px;" title="scripting (43 posts)">Scripting</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/security/" style="font-size: 11px;" title="security (2 posts)">Security</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/sitecore/" style="font-size: 18px;" title="sitecore (38 posts)">Sitecore</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinning/" style="font-size: 12px;" title="skinning (10 posts)">Skinning</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinstudio/" style="font-size: 14px;" title="skinstudio (13 posts)">SkinStudio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/software-development/" style="font-size: 28px;" title="software development (99 posts)">Software Development</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/solution/" style="font-size: 18px;" title="solution (42 posts)">Solution</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/stardock/" style="font-size: 16px;" title="stardock (25 posts)">Stardock</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/tooling/" style="font-size: 14px;" title="tooling (13 posts)">Tooling</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/visual-studio/" style="font-size: 12px;" title="visual studio (7 posts)">Visual Studio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/webparts/" style="font-size: 11px;" title="webparts (2 posts)">WebParts</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/windowblinds/" style="font-size: 12px;" title="windowblinds (12 posts)">WindowBlinds</a></nav>
+    <hr class="tag-cloud-separator"></div>
+</div>
+
+    </header>
+    <div class="site-main">
+      <aside class="sidebar">
+  <div class="widget">
+    <h2 class="widget-title">Search</h2>
+    <form class="search-form" action="http://localhost:1314/search/" method="get">
+      <input type="search" class="search-field" placeholder="Search ..." name="q">
+    </form>
+  </div>
+
+  
+  <div class="widget widget-mvp">
+    <a href="https://mvp.sitecore.com/en/Directory/Profile?id=e416ef1dabf5468ff4fa08dd30f068bb" title="Sitecore Technology MVP 2026">
+      <img src="/images/sitecore-mvp-2026-technology.png" alt="Sitecore Technology MVP 2026" class="mvp-badge" width="250">
+    </a>
+    
+    <div class="mvp-badges-history">
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2017-Technology.png" alt="MVP Badge 2017" class="mvp-badge-small">
+        <span class="mvp-badge-year">2017</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2016-Technology.png" alt="MVP Badge 2016" class="mvp-badge-small">
+        <span class="mvp-badge-year">2016</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2015-Technology.png" alt="MVP Badge 2015" class="mvp-badge-small">
+        <span class="mvp-badge-year">2015</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2014-Technology.png" alt="MVP Badge 2014" class="mvp-badge-small">
+        <span class="mvp-badge-year">2014</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2013-Technology.png" alt="MVP Badge 2013" class="mvp-badge-small">
+        <span class="mvp-badge-year">2013</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2012-Technology.png" alt="MVP Badge 2012" class="mvp-badge-small">
+        <span class="mvp-badge-year">2012</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2011-Technology.png" alt="MVP Badge 2011" class="mvp-badge-small">
+        <span class="mvp-badge-year">2011</span>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+
+  
+</aside>
+
+      <main class="content-area">
+        
+  <div class="content-area">
+    <header class="section-header">
+      <h1 class="section-title">Open Source</h1>
+    </header>
+
+    
+
+    <div class="posts-list">
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2016/08/03/roll-out-item-branches-en-masse-using-sitecore-powershell-extensions/">Roll out multilingual item branches en masse using Sitecore PowerShell Extensions</a></h3>
+          <div class="post-meta">
+            <time datetime="2016-08-03">August 3, 2016</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>I&rsquo;ve received this nice comment on <a href="/2011/11/18/sample-scripts-for-sitecore-powershell-console/">one of my earlier posts</a> and I thought it might warrant a blog post since it is a nice little challenge and might be useful for more scripters in our community.</p>
+<blockquote>
+<p>Hi Adam,
+thanks for the pointers on PowerShell! There&rsquo;s one in particular I&rsquo;m hoping to get some help with, if that&rsquo;s ok? <strong>I have created a Branch Template in Sitecore, and I want to deploy it under every item in the Content Tree that uses one particular page template (about 200 instances of deployment, in this case). For an added bit of fun, there will be several different language versions being deployed along the way, so I guess that prevents me doing a blanket rollout.</strong> Could you please recommend a script that is along the lines of &ldquo;Add this Branch Template under this Item ID in the following named language codes&rdquo;? I realise I would then be repeating that line 200 times with varying parent item ID and languages, but I can live with that if that&rsquo;s the easiest way to do it.
+Many thanks for your help!
+Phil Neale</p></p><div class="post-actions">
+            <a href="/2016/08/03/roll-out-item-branches-en-masse-using-sitecore-powershell-extensions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2016/08/03/roll-out-item-branches-en-masse-using-sitecore-powershell-extensions/#disqus_thread" class="post-comments-link" data-disqus-identifier="5035413062">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/05/15/do-not-turn-sitecore-media-request-protection-off-and-protect-older-sitecore-versions-with-imageguard/">Do not turn Sitecore Media Request protection off and protect older Sitecore versions with ImageGuard</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-05-15">May 15, 2015</time>
+            &middot; <span class="reading-time">10 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/SitecorePatched.png"><img src="/images/SitecorePatched_thumb.png" alt="SitecorePatched" title="SitecorePatched" class="alignright" width="237" height="240" /></a></p>
+<p><em>The post is related to the image resize vulnerability fix introduced in Sitecore 7.5. To read more about the Sitecore fix go to the</em> <a href="http://sdn.sitecore.net/Products/Sitecore%20V5/Sitecore%20CMS%207/ReleaseNotes/ChangeLog.aspx"><em>Release notes page</em></a> <em>and search for ?Media request protection?. While I was holding off for a number of months on the publication of the post as it puts the attack vector in plainer sight that I would like it to be (<a href="http://www.seanholmesby.com/images-not-resizing-in-sitecore-7-5-sitecore-8-0/">while the community</a> figured out <a href="http://sitecorepromenade.blogspot.se/2014/11/sitecore-75-image-resizing-changes.html">how to work with Media Resizing in a neat way</a>) - but recently I&rsquo;ve seen voices raised considering <a href="http://coresighted.net/2015/05/13/sitecore-media-request-protection-gone-wild/">turning the Media Request protection off</a> which I hope you will not be doing after reading this post. The post will also tell you how to enable such security on your older versions of Sitecore.</em>
+So here&rsquo;s the story&hellip;. At some point in <a href="http://www.cognifide.com/">Cognifide</a> we have performed a research around Sitecore security and one of my colleagues (<a href="https://twitter.com/MarasM">Marek</a>)  found out that you could easily kill any Sitecore instance by performing an image resize attack on it. While the CMS did some rudimentary checks and limited the values of height and width you could still perform an attack by harvesting the images from the site and perform multiple parallel &amp; iterative size increase or just plain use the scale parameter to achieve any image size. A result of such attack would be a a denial of service due to 100% CPU &amp; memory usage and would potentially allow for filling the server drive by creating the endless number of scaling calls.
+Marek was even kind enough to provide a proof of concept code that confirmed the hypothesis by performing attack on a few of our internal servers. The program would load the home page; parse to find images linked from it and perform resizing of the images in a number threads.
+[</p></p><div class="post-actions">
+            <a href="/2015/05/15/do-not-turn-sitecore-media-request-protection-off-and-protect-older-sitecore-versions-with-imageguard/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/05/15/do-not-turn-sitecore-media-request-protection-off-and-protect-older-sitecore-versions-with-imageguard/#disqus_thread" class="post-comments-link" data-disqus-identifier="3765624860">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/">Turn your Sitecore PowerShell reports into applications with Action Scripts</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-05-05">May 5, 2015</time>
+            &middot; <span class="reading-time">8 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/shoot_out_of_cannon_400_clr_13993.png"><img src="/images/shoot_out_of_cannon_400_clr_13993.png" alt="shoot_out_of_cannon_400_clr_13993" class="alignleft" width="400" height="338" /></a></p>
+<p>In one of my <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">previous posts</a> I described how to create reports in Sitecore PowerShell Extensions (SPE for short) that allow you to leverage the joint power of Sitecore and PowerShell to deliver complete and elegant reports in little to no time. In this post I&rsquo;ll tell you how to take this a step further and operationalize them into full blown Sitecore Desktop applications.
+The secret sauce is in the actions you can place on the report, the additional parameters that I haven&rsquo;t mentioned in the <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">previous post</a>, and the use of Sitecore rules engine with some rules that come with SPE.
+For the purpose of this post I will limit the scripts to samples that are (mostly) in the vanilla SPE deployment.
+Let&rsquo;s begin with describing the actions and how you can configure them to appear in your reports.</p></p><div class="post-actions">
+            <a href="/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/#disqus_thread" class="post-comments-link" data-disqus-identifier="3737474679">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/03/06/sitecore-powershell-extensions-in-numbers/">Sitecore PowerShell Extensions in numbers</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-03-06">March 6, 2015</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/graph_on_grid_400_clr_9636.png"><img src="/images/graph_on_grid_400_clr_9636_thumb.png" alt="graph_on_grid_400_clr_9636" title="graph_on_grid_400_clr_9636" class="alignright" width="400" height="275" /></a></p>
+<p>Recently the Sitecore PowerShell Team has been reflecting on the progress of the <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Sitecore PowerShell Extensions</a> (SPE) module. We appreciate all the feedback and contributions from the community. Without the many great people in the community, the module just wouldn&rsquo;t be where it is today. The team is proud of the accomplishments for a module developed purely by the community with no formal Sitecore support.
+The new year has revealed some exciting news out on the Marketplace for SPE.</p></p><div class="post-actions">
+            <a href="/2015/03/06/sitecore-powershell-extensions-in-numbers/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/03/06/sitecore-powershell-extensions-in-numbers/#disqus_thread" class="post-comments-link" data-disqus-identifier="3572047972">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/03/03/set-up-sitecore-powershell-extensions-development-environment/">Set up Sitecore PowerShell Extensions development environment</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-03-03">March 3, 2015</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/join_the_puzzle_crowd_400_clr_10889.png"><img src="/images/join_the_puzzle_crowd_400_clr_10889.png" alt="join_the_puzzle_crowd_400_clr_10889" class="alignright" width="400" height="275" /></a></p>
+<p>Since we&rsquo;ve seen some interest from developers wanting to join the <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Sitecore PowerShell Extensions</a> team, I thought it might be worth documenting how my development environment is put together to allow for easier on-boarding of new members (Yes, we&rsquo;re hiring! No, we can&rsquo;t pay you ;) ). Maybe you just want to compile it yourself to make sure we&rsquo;re not up to no good, or just plain see inside and play with it&hellip;
+First of all you need to have Sitecore installed somewhere (obviously). For the purpose of examples I&rsquo;ll assume your instance is located at *<strong>C:\inetpub\wwwroot\Sitecore8*</strong> and has the 3 standard folders Data, Databases and Website in them as it normally has. For that very same reason I&rsquo;ll also assume that your Sitecore PowerShell Extensions project folder is located at *<strong>C:\Projects\SitecorePowerShell*</strong></p></p><div class="post-actions">
+            <a href="/2015/03/03/set-up-sitecore-powershell-extensions-development-environment/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/03/03/set-up-sitecore-powershell-extensions-development-environment/#disqus_thread" class="post-comments-link" data-disqus-identifier="3562897080">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/11/09/introducing-powershell-actions-for-sitecore-workflows/">Introducing PowerShell Actions for Sitecore Workflows</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-11-09">November 9, 2014</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>This has been on my plate for a while and to be honest I&rsquo;m not sure what took me so long as it literally took around 4 hours from start to completion which I consider a testament to how easy it is to create additional integrations with PowerShell akin to the <a href="http://michaellwest.blogspot.com/2014/11/sitecore-powershell-extended-with-gutters.html">Gutter integration</a> or the <a href="http://michaellwest.blogspot.com/2014/10/sitecore-powershell-extended-with-pipelines.html">login/logout integration</a> Michael West has recently introduced in the platform.</p>
+<img src="/images/creating_a_better_process_800_clr_73661.png" alt="creating_a_better_process_800_clr_7366" title="creating_a_better_process_800_clr_7366" class="aligncenter" width="739" height="369" />
+<p>What this integration allows you to do is to eliminate the need for code deployment when you&rsquo;re in need for a quick action here and there for when a user executes a workflow command.
+You might find <a href="http://cognifide.com/blogs/sitecore/changing-workflow-state-of-sitecore-items-programmatically/">this article</a> helpful by a Cognifide colleague of mine. I especially like this image which illustrates nicely where actions fit in a Sitecore workflow.</p></p><div class="post-actions">
+            <a href="/2014/11/09/introducing-powershell-actions-for-sitecore-workflows/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/11/09/introducing-powershell-actions-for-sitecore-workflows/#disqus_thread" class="post-comments-link" data-disqus-identifier="3207614746">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">Creating beautiful Sitecore reports easily with PowerShell Extensions</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-10-25">October 25, 2014</time>
+            &middot; <span class="reading-time">6 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Creating reports is probably a task that every developer dread. I for once always felt like listening to <a href="https://www.youtube.com/watch?v=jIfu2A0ezq0">Tennessee Ernie Ford&rsquo;s ?16 Tons?</a> every time when I was supposed to do it for yet another project audit &ndash; especially this part resonated with me:</p>
+<blockquote>
+<p>I was born one mornin&rsquo; when the sun didn&rsquo;t shine
+I picked up my shovel and I walked to the mine
+I loaded sixteen tons of number nine coal
+And the straw boss said &ldquo;Well, a-bless my soul&rdquo;</p></p><div class="post-actions">
+            <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/#disqus_thread" class="post-comments-link" data-disqus-identifier="3155595702">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/07/15/zip-and-download-sitecore-media-library-folder-with-powershell/">Zip and Download Sitecore Media Library Folder with PowerShell</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-07-15">July 15, 2013</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/ZippingSitecoreLogs2.png"><img src="/images/ZippingSitecoreLogs_thumb2.png" alt="ZippingSitecoreLogs" title="ZippingSitecoreLogs" class="alignleft" width="240" height="210" /></a></p>
+<p>I&rsquo;ve decided to 1-up the game from my <a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/">previous post</a> and zip something that isn&rsquo;t really a real file but rather a blob in a Sitecore database. The script below is based heavily on the last post but instead of just zipping content of a flat folder traverses the Sitecore item tree and zips all files beneath the current folder.
+If you have downloaded the 2.1 version of the <a href="http://bit.ly/PsConScMplc">Sitecore PowerShell Console from the Sitecore Marketplace</a> you will actually have the script deployed on your system already.
+Here&rsquo;s how it looks like for your user in the Content Editor:</p></p><div class="post-actions">
+            <a href="/2013/07/15/zip-and-download-sitecore-media-library-folder-with-powershell/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/07/15/zip-and-download-sitecore-media-library-folder-with-powershell/#disqus_thread" class="post-comments-link" data-disqus-identifier="1503046768">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/">Zip and Download Sitecore logs with PowerShell</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-07-08">July 8, 2013</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p><em>There was a breaking change in the Console 2.1, if you&rsquo;re using version 2.1 or newer use Download-File commandlet instad of the &ldquo;Get-File&rdquo; as shown in the code below.</em></p>
+<p><a href="/images/LogFiles1.gif"><img src="/images/LogFiles_thumb1.gif" alt="LogFiles" title="LogFiles" class="alignright" width="152" height="392" /></a></p>
+<p>You might have have found yourself hunting around in the Sitecore interface for something that would allow you to download all the the log files in a fast and convenient way once time or another. Have you found one? Me neither? but luckily I had the PowerShell console installed on my server so I started looking for a script to zip all files in a folder and luckily because we have a full PowerShell power in the box I could stand on the shoulders of giants and get the zipping part from <a href="http://bit.ly/PsZip">Stack Overflow</a> &ndash; again (which is the majority of my script. The rest was super easy &ndash; just call the function and download the file?</p></p><div class="post-actions">
+            <a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/#disqus_thread" class="post-comments-link" data-disqus-identifier="1477206987">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/05/06/powershell-scripted-data-sources-in-sitecore-part-2/">PowerShell Scripted data sources in Sitecore (Part 2)</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-05-06">May 6, 2013</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>There are 2 more ways I&rsquo;ve managed to find and implement that you can control data sources with PowerShell:</p>
+<ul>
+<li>rendering data source roots</li>
+<li>rendering data source itself</li>
+</ul>
+<p>The motivation would be similar to what I&rsquo;ve described in <a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/">the ?Part 1? blog post</a>. So without further ado let&rsquo;s cut to the meat?</p>
+<h2 id="rendering-data-source-roots">Rendering Data Source Roots</h2>
+<p>You might want your roots to be dynamic and you can deliver those using a PowerShell script!</p></p><div class="post-actions">
+            <a href="/2013/05/06/powershell-scripted-data-sources-in-sitecore-part-2/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/05/06/powershell-scripted-data-sources-in-sitecore-part-2/#disqus_thread" class="post-comments-link" data-disqus-identifier="1267488175">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/01/29/sitecore-powershell-console-in-visual-studio/">Sitecore PowerShell Console in Visual Studio</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-01-29">January 29, 2013</time>
+            &middot; <span class="reading-time">1 min read</span>
+          </div>
+          <p class="post-excerpt"><p>A while ago <a href="https://twitter.com/TheRocksGuy">Jakob</a> suggested that putting the Sitecore PowerShell Console in Visual Studio might not be a bad idea. He even provided me with the boilerplate code that served as a stub for the module (Thanks a million Jakob!).</p>
+<p>So after some struggling on my part <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_Console_for_Sitecore_Rocks.aspx">the new module is now on the Sitecore Marketplace</a>. There is really not much to write about. If you like PowerShell and Sitecore Rocks you will find it pretty neat. Otherwise I&rsquo;m afraid those are not the droids you are looking for</p></p><div class="post-actions">
+            <a href="/2013/01/29/sitecore-powershell-console-in-visual-studio/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/01/29/sitecore-powershell-console-in-visual-studio/#disqus_thread" class="post-comments-link" data-disqus-identifier="1054587756">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/">Be your own Sitecore Professional Services with PowerShell (Part 1)</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-06-22">June 22, 2012</time>
+            &middot; <span class="reading-time">7 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/PS_detective1.png"><img src="/images/PS_detective_thumb1.png" alt="PS_detective" title="PS_detective" class="alignleft" width="201" height="240" /></a></p>
+<p>Recently I&rsquo;ve been asked to audit a site for one of our clients. Overall for a fairly seasoned Sitecore developer it&rsquo;s rather obvious what to look for in a site and get a feel for whether an a solution is thoroughly thought through or just put together using brute-force development. You can usually tell if the implementation is sloppy or excellent, but how do you quantify that feeling to give the objective view to the person reading your report? Looking at the Sitecore Developer Network I&rsquo;ve found the following <a href="http://sdn.sitecore.net/reference/sitecore%206/recommended%20practices.aspx">set of recommendations</a>. This is a great help with codifying how a proper Sitecore implementation should look like, what should we pay attention to and most importantly it&rsquo;s a great reference when you&rsquo;re trying to prove that your feeling is something more than just nitpicking but rather an industry standard that the developers should adhere to. I recommend strongly that you look at it and think how closely your practices match those that Sitecore recommends.</p></p><div class="post-actions">
+            <a href="/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/#disqus_thread" class="post-comments-link" data-disqus-identifier="739866578">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/04/06/using-powershell-console-for-sitecore-in-your-own-code/">Using PowerShell Console for Sitecore in your own code</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-04-06">April 6, 2012</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>All of the PowerShell blog posts so far were about using the console. Being the developer however, you probably think &ndash; well that&rsquo;s good for admins, but what&rsquo;s in it for me? How can I benefit from it in my code? Well you can. With the latest update you can run the PowerShell environment in your application and take advantage of its scripting power, by getting the results out of it and pulling them into your app.</p></p><div class="post-actions">
+            <a href="/2012/04/06/using-powershell-console-for-sitecore-in-your-own-code/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/04/06/using-powershell-console-for-sitecore-in-your-own-code/#disqus_thread" class="post-comments-link" data-disqus-identifier="638932689">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/03/31/state-of-powershell-for-sitecore-for-april-2012/">State of PowerShell for Sitecore for April 2012</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-03-31">March 31, 2012</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p>While I&rsquo;m updating it on a <a href="/sitecore-powershell-console/">separate page</a> I thought for the purpose of having a record and further tracking - it would be interesting to capture the state of the PowerShell knowledge in the Sitecore community here as well.</p>
+<p><a href="http://tieulie.com/blog/march-2012-wallpaper-calendar/"><img src="/images/March-2012-pot_o_gold-calendar-1024x768.png" alt="Image Courtesy: Steven Tieulie" title="Image Courtesy: Steven Tieulie" class="aligncenter" width="484" height="364" /></a></p>
+<h3 id="how-do-i-get-the-powershell-console-for-sitecore">How do I get the PowerShell Console for Sitecore?</h3>
+<ul>
+<li>Download the Console installation package from its <a href="http://trac.sitecore.net/SitecorePowershellConsole">Sitecore Shared Source page</a>.</li>
+<li><a href="http://trac.sitecore.net/SitecorePowershellConsole/wiki/Documentation">Introductory documentation to PowerShell console</a> on its Shared Source page.</li>
+</ul>
+<h3 id="adams-101-level-blogs-for-powershell-console-for-sitecore">Adam&rsquo;s (101 level) blogs for PowerShell Console for Sitecore</h3>
+<ul>
+<li><a href="/2011/11/17/powershell-console-for-sitecore-what-can-it-do-for-me/">So what PowerShell Console for Sitecore is and what can it do for me?</a></li>
+<li>Sitecore PowerShell Console cheat sheet <a href="/2012/01/11/sitecore-powershell-console-cheat-sheetpart-1/" title="Cheat Sheet Part 2">Part 1</a> &amp; <a href="/2012/01/23/sitecore-powershell-console-cheat-sheet-part-2/" title="Cheat Sheet">Part 2</a></li>
+<li><a href="/2011/11/18/sample-scripts-for-sitecore-powershell-console/">Sample scripts</a> for Sitecore PowerShell Console</li>
+</ul>
+<h3 id="how-powershell-console-can-help-you-extend-sitecore">How PowerShell console can help you extend Sitecore?</h3>
+<ul>
+<li><a href="/2011/12/19/continuous-deployment-in-sitecore-with-powershell/">Continuous deployment in Sitecore with PowerShell</a></li>
+<li><a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">Extending Sitecore ribbon with PowerShell scripts</a></li>
+<li><a href="../2011/11/29/powershell-driven-sitecore-scheduled-tasks/" title="Permanent Link to PowerShell driven Sitecore scheduled tasks">PowerShell driven Sitecore scheduled tasks</a></li>
+</ul>
+<h3 id="external-content-helpful-for-sitecore-powershell-scripters">External Content helpful for Sitecore PowerShell Scripters</h3>
+<ul>
+<li>Free <a href="http://tumblr.najmanowicz.com/post/5067261138/free-powershell-ebooks">PowerShell EBooks</a></li>
+<li>Sitecore Virtual User Group:  <a href="www.youtube.com/watch?v=GiTiLIOqHYo">An Introduction into PowerShell from a Sitecore .NET Developer</a></li>
+</ul>
+<h3 id="alternative-solutions">Alternative solutions</h3>
+<ul>
+<li>PowerShell console in Sitecore Rocks &ndash; part of the <a href="http://vsplugins.sitecore.net/default.aspx">Sitecore Rocks extension to Visual Studio</a></li>
+<li>psTerminal &ndash; not available yet (currently in development by Andrew Chumachenko of Sitecore UA) &ndash; introduced on <a href="http://www.sitecoreug.org/events/Introduction-to-Powershell">Sitecore Virtual User Group Webinar</a>.</li>
+</ul>
+<h3 id="the-powershell-co-nerds-within-sitecore-community">The PowerShell co-nerds within Sitecore Community</h3>
+<p>Other people that did research in the field, adopted the console early and/or are knowledgeable in the subject:</p></p><div class="post-actions">
+            <a href="/2012/03/31/state-of-powershell-for-sitecore-for-april-2012/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/03/31/state-of-powershell-for-sitecore-for-april-2012/#disqus_thread" class="post-comments-link" data-disqus-identifier="637925129">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/11/22/context-powershell-scripts-for-sitecore/">Context PowerShell scripts for Sitecore</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-11-22">November 22, 2011</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>In the he latest update of PowerShell Console for Sitecore, I&rsquo;ve started experimenting with further integration &ndash; context scripts. What is that and what can it do for you?</p>
+<p>You can safely assume PowerShell is not something your regular users will aspire to learn, but it does not mean they cannot harness its power if you enable them to.</p>
+<p>If you look closely at the latest Microsoft solutions you may notice that a lot of what GUI does is running some scripting behind the scenes. This is true for a long time with the SQL Server Management studio where pretty much for any action you can generate a script that will let you automate a common task.</p></p><div class="post-actions">
+            <a href="/2011/11/22/context-powershell-scripts-for-sitecore/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/11/22/context-powershell-scripts-for-sitecore/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229366">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2009/12/26/easy-enum-property-for-episerver/">Easy Enum property for EPiServer</a></h3>
+          <div class="post-meta">
+            <time datetime="2009-12-26">December 26, 2009</time>
+            &middot; <span class="reading-time">7 min read</span>
+          </div>
+          <p class="post-excerpt"><p>One of the most frequently and eagerly used programming constructs of the Microsoft.Net Framework is Enum. There are several interesting features that make it very compelling to use to for all kinds of dropdowns and checklists:</p>
+<ul>
+<li>The bounds factor &ndash; proper use of Enum type guarantee that the selected value will fall within the constraints of the allowed value set.</li>
+<li>The ability to treat Enums as flags (and compound them into flag sets) as well as a one-of selector.</li>
+<li>The ease of use and potentially complete separation of the ?Enum value? from the underlying machine type representation that ensures the most efficient memory usage.</li>
+</ul>
+<p>Surprisingly enough EPiServer as it stands right now does not have an easy facility to turn Enums into properties. To give credit where credit is due, the EPiServer framework provides a nice surrogate that mimic that behaviour to a degree. The relevant property types are:</p></p><div class="post-actions">
+            <a href="/2009/12/26/easy-enum-property-for-episerver/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2009/12/26/easy-enum-property-for-episerver/#disqus_thread" class="post-comments-link" data-disqus-identifier="637740993">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2009/04/06/advanced-language-manipulation-tool-for-episerver/">Advanced Language Manipulation Tool for EPiServer</a></h3>
+          <div class="post-meta">
+            <time datetime="2009-04-06">April 6, 2009</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Have you ever (or have your customers) created and edited a page in one language only to realize that their selected locale was wrong? Have you ever wished you could delete a master language branch of a page  after creating its localized counterpart but you could only delete the newly created slave language instead? Have a customer ever requested that they could copy a whole branch and you convert it to another language so that they could then translate in-place?</p></p><div class="post-actions">
+            <a href="/2009/04/06/advanced-language-manipulation-tool-for-episerver/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2009/04/06/advanced-language-manipulation-tool-for-episerver/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229435">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2009/03/12/simple-registration-for-files-served-by-episerver/">Simple registration for files served by EPiServer</a></h3>
+          <div class="post-meta">
+            <time datetime="2009-03-12">March 12, 2009</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>With the culture of knowledge sharing and open source spreading, everyone races to show they have something valuable that you may want. And while you may not ask for money for your content you may still want to get something in return, say a contact, an email address that&rsquo;s verified (or not), to keep in touch with the consumer of your content.</p>
+<p>Yet a full fledged registration doesn&rsquo;t seem like a proper thing to do &ndash; cluttering your EPiServer user repository with (let&rsquo;s face it &ndash; for a large part fake or temporary email addresses that user create only to get your content).</p></p><div class="post-actions">
+            <a href="/2009/03/12/simple-registration-for-files-served-by-episerver/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2009/03/12/simple-registration-for-files-served-by-episerver/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229377">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2009/01/08/webparts-based-sidebar-for-episerver-how-to-use-it/">WebParts based Sidebar for EPiServer – how to use it?</a></h3>
+          <div class="post-meta">
+            <time datetime="2009-01-08">January 8, 2009</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Once you’ll update the framework to the extended one, you will immediately notice that… nothing has changed. Hmm… did something go wrong?</p>
+<p>Well, not really. By default the framework will be run in the “legacy mode”. Thanks to <a href="http://marekblotny.blogspot.com/2008/07/plugins-and-datafactory-event-handlers.html">an old article by our own Marek Blotny</a>, I’ve learned how to build Plugin settings which are just perfect for the purpose!</p>
+<p>So to configure and enable the new features you need to open your admin UI and in the “Config” click on the “Plugin Manager” item and select our framework plugin as shown in the picture</p></p><div class="post-actions">
+            <a href="/2009/01/08/webparts-based-sidebar-for-episerver-how-to-use-it/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2009/01/08/webparts-based-sidebar-for-episerver-how-to-use-it/#disqus_thread" class="post-comments-link" data-disqus-identifier="643378107">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2009/01/08/webparts-based-sidebar-for-episerver-the-motivation-and-specification/">WebParts based Sidebar for EPiServer – the motivation and specification</a></h3>
+          <div class="post-meta">
+            <time datetime="2009-01-08">January 8, 2009</time>
+            &middot; <span class="reading-time">6 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Back in the day when we started designing our last project we’ve been presented with a following problem – a big number of templates with slightly different sidebars.</p>
+<p>Hmm…</p>
+<p>Is sidebar a part of content? No, rather not. We don’t want the editors to have to setup the sidebar for every article they write (and the site has a few dozens of articles created on it every day).</p>
+<p>Is sidebar more of a template thing? Well… more like it, but still… we have articles all over the site with different sidebar elements when the articles are in different parts of the site (ok so we could add rules what controls display in which part of the site). <strong>But wait! There’s more!</strong> The sidebar will be different for every language (region). Now we’re talking a dozen of templates or a rules engine just to make the sidebar different. Customising the template with properties isn’t ideal either as it makes EPiServer UI very cluttered. Additionally we want to change sidebars across many templates so the whole branch/section of the site will be able to share the same sidebar.</p></p><div class="post-actions">
+            <a href="/2009/01/08/webparts-based-sidebar-for-episerver-the-motivation-and-specification/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2009/01/08/webparts-based-sidebar-for-episerver-the-motivation-and-specification/#disqus_thread" class="post-comments-link" data-disqus-identifier="640949664">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2008/06/23/text-image-generation-virtualpathprovider-for-episerver-and-aspnet-in-general-part-1/">Text-Image generation - VirtualPathProvider for EPiServer (and ASP.NET in general) – Part 1</a></h3>
+          <div class="post-meta">
+            <time datetime="2008-06-23">June 23, 2008</time>
+            &middot; <span class="reading-time">6 min read</span>
+          </div>
+          <p class="post-excerpt"><p>The module code is already available on Epicode SVN, the relevant wiki pages will be following as soon as documentation is complete.</p>
+<p>The use case is as follows:</p>
+<ul>
+<li>The client wants the site to look exactly as in a template provided as a image,</li>
+<li>the text is using a non standard font that is not available on 60% of Windows machines,</li>
+<li>the site does not use flash.</li>
+<li>the site needs to be equally good looking in IE6 (more about it later)</li>
+</ul>
+<p>The solution was to generate images, but how to do it the right way? This has presented us with a once-in-a-lifetime :) opportunity to create a virtual path provider, do something good and learn something new &amp; cool in the process.</p></p><div class="post-actions">
+            <a href="/2008/06/23/text-image-generation-virtualpathprovider-for-episerver-and-aspnet-in-general-part-1/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2008/06/23/text-image-generation-virtualpathprovider-for-episerver-and-aspnet-in-general-part-1/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229388">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2008/03/04/episervers-brand-new-blogger/">Episerver&#39;s brand new blogger</a></h3>
+          <div class="post-meta">
+            <time datetime="2008-03-04">March 4, 2008</time>
+            &middot; <span class="reading-time">1 min read</span>
+          </div>
+          <p class="post-excerpt"><p>I&rsquo;m really glad to notice that <a href="http://marekblotny.blogspot.com/">Marek</a> is getting into blogging about <a href="http://www.episerver.com/">EPiServer</a>. Marek is a really bright developer and a colleague at <a href="http://www.cognifide.com/">Cognifide</a> with a number of successful EPiServer projects in his portfolio, we&rsquo;ve worked together on Faceted Navigation (he&rsquo;s the brain behind all the nifty editors in it) that I&rsquo;m working on open sourcing of currently, and on the <a href="http://www.setantasports.com/">Setanta Sports Portal</a> and the <a href="http://www.setanta.com/">Setanta corporate</a> site projects. Now he&rsquo;s out in the wild writing about it. Go ahead and read his analysis on the <a href="http://marekblotny.blogspot.com/2008/03/episerver-5-vs-episerver-461-part-i.html">performance of Episerver 4.x versus CMS 5</a>. It appears that the CMS is getting&hellip; nah&hellip; I won&rsquo;t spoil it for you&hellip; Read all about it on <a href="http://marekblotny.blogspot.com/">Marek&rsquo;s brand new blog</a>!</p></p><div class="post-actions">
+            <a href="/2008/03/04/episervers-brand-new-blogger/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2008/03/04/episervers-brand-new-blogger/#disqus_thread" class="post-comments-link" data-disqus-identifier="694610654">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2008/01/24/faceted-service-structure/">Faceted Service Structure</a></h3>
+          <div class="post-meta">
+            <time datetime="2008-01-24">January 24, 2008</time>
+            &middot; <span class="reading-time">6 min read</span>
+          </div>
+          <p class="post-excerpt"><p>This article is a part of the <a href="/category/episerver/faceted-navigation/">series describing the faceted navigation system for EPiServer</a> that we have developed in <a href="http://www.cognifide.com/">Cognifide</a> and that&rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site. The engine will be released shortly as an open source project.</p>
+<h2 id="so-how-is-the-faceted-engine-structured">So how is the faceted engine structured?</h2>
+<p><a href="/images/facetednavigationschema.png"><img src="/images/facetednavigationschema-thumb.png" alt="FacetedNavigationSchema" class="aligncenter" width="244" height="195" /></a></p>
+<h2 id="content-provider">Content provider</h2>
+<p>As you can see the driving force behind the engine is the Facet Tagged Content Provider. If you know EPiServer, the basic functionality of the module is roughly an an equivalent of find page with criteria for categories, which allows for searching pages tagged with facets with exclusion of some other facets and tagged some optional data, the module however is paging and and allows you to plug a feedback event handler so that your controls can accept or deny a story before they are sent to is and take part in the paging. The stories are provided to you in reverse order of publishing so you always get the latest stories first, (pretty much what any blog and any news site wants).</p></p><div class="post-actions">
+            <a href="/2008/01/24/faceted-service-structure/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2008/01/24/faceted-service-structure/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229580">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2008/01/24/faceted-navigation-engine-nomenclature/">Faceted Navigation Engine Nomenclature</a></h3>
+          <div class="post-meta">
+            <time datetime="2008-01-24">January 24, 2008</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>This article is the second of a <a href="/category/episerver/faceted-navigation/">series describing the faceted navigation system for EPiServer</a> that we have internally developed in <a href="http://www.cognifide.com/">Cognifide</a>, that&rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site, which will be released shortly as an open source project.</p>
+<p>First of all we have to explain the nomenclature as it is going to be used quite a bit. A few terms we use pretty extensively are:</p></p><div class="post-actions">
+            <a href="/2008/01/24/faceted-navigation-engine-nomenclature/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2008/01/24/faceted-navigation-engine-nomenclature/#disqus_thread" class="post-comments-link" data-disqus-identifier="644355692">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+    </div>
+  </div>
+
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-inner">
+  <p>&copy; 1999-2026 - <a href="/">Adam Najmanowicz</a></p>
+  
+</div>
+
+    </footer>
+  </div>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      block.style.position = 'relative';
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('aria-label', 'Copy code');
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      block.appendChild(btn);
+      btn.addEventListener('click', function() {
+        var code = block.querySelector('td:last-child code') || block.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(function() {
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(function() {
+              btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+        }
+      });
+    });
+  });
+  </script>
+  <script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    var visible = false;
+    window.addEventListener('scroll', function() {
+      var shouldShow = window.scrollY > 400;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        btn.classList.toggle('visible', visible);
+      }
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  </script>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
+  <script>
+  (function() {
+    var overlay = document.getElementById('lightbox');
+    var content = document.getElementById('lightbox-content');
+    var closeBtn = document.getElementById('lightbox-close');
+    var imgExts = /\.(jpe?g|png|gif|webp|svg|bmp|avif)(\?.*)?$/i;
+    var vidExts = /\.(mp4|webm|ogg)(\?.*)?$/i;
+
+    function open(href) {
+      content.innerHTML = '';
+      if (imgExts.test(href)) {
+        var img = document.createElement('img');
+        img.src = href;
+        img.alt = '';
+        content.appendChild(img);
+      } else if (vidExts.test(href)) {
+        var vid = document.createElement('video');
+        vid.src = href;
+        vid.controls = true;
+        vid.autoplay = true;
+        content.appendChild(vid);
+      } else {
+        return false;
+      }
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return true;
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      var vid = content.querySelector('video');
+      if (vid) vid.pause();
+    }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (imgExts.test(href) || vidExts.test(href)) {
+        e.preventDefault();
+        open(href);
+      }
+    });
+
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      close();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) close();
+    });
+  })();
+  </script>
+  <script id="dsq-count-scr" src="https://codality.disqus.com/count.js" async></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+      s.onload = function() {
+        var mermaidTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+        mermaid.initialize({ startOnLoad: false, theme: mermaidTheme });
+        mermaidBlocks.forEach(function(block) {
+          var pre = block.parentElement;
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+      };
+      document.head.appendChild(s);
+    }
+  });
+  </script>
+</body>
+</html>

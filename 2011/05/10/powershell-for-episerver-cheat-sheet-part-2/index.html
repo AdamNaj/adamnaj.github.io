@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerShell for EPiServer - cheat sheet - Part 2 | Codality</title>
+<meta name="description" content="[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz">
+<meta name="generator" content="Hugo 0.156.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+<script>
+  (function(){var s=localStorage.getItem('theme-preference');var t=s==='dark'||s==='light'?s:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+
+      <script src="/js/main.js"></script>
+
+
+
+</head>
+<body>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="header-inner">
+  <div class="header-top">
+    <nav class="site-navigation" aria-label="Main Navigation">
+      
+  <nav>
+    <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/about/">About me</a>
+    </li>
+    <li>
+      <a href="/downloads/">Downloads</a>
+    </li>
+    </ul>
+  </nav>
+
+    </nav>
+    
+    <nav class="social-navigation" aria-label="Social Links">
+      <ul>
+        <li><a href="https://github.com/AdamNaj" title="GitHub"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/najmanowicz/" title="LinkedIn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a></li>
+        <li><a href="http://www.twitter.com/AdamNaj" title="Twitter"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a></li>
+        <li><a href="https://www.facebook.com/adam.najmanowicz" title="Facebook"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/adamnajmanowicz/" title="Instagram"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a></li>
+      </ul>
+    </nav>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+  <div class="site-branding">
+    <p class="site-title"><a href="/">Codality</a></p>
+    
+    <p class="site-tagline">[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz</p>
+    
+    <hr class="header-separator"><nav class="tag-cloud" aria-label="Category Cloud"><a href="/categories/best-practices/" style="font-size: 14px;" title="best practices (14 posts)">Best Practices</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/blog-navigator/" style="font-size: 12px;" title="blog navigator (8 posts)">Blog Navigator</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms/" style="font-size: 24px;" title="cms (79 posts)">CMS</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms-ux/" style="font-size: 12px;" title="cms ux (8 posts)">CMS UX</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/code-samples/" style="font-size: 16px;" title="code samples (35 posts)">Code Samples</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/continuous-deployment/" style="font-size: 11px;" title="continuous deployment (4 posts)">Continuous Deployment</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/desktop-customization/" style="font-size: 11px;" title="desktop customization (4 posts)">Desktop Customization</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/downloadable/" style="font-size: 14px;" title="downloadable (22 posts)">Downloadable</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/epicode/" style="font-size: 14px;" title="epicode (16 posts)">EPiCode</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/episerver/" style="font-size: 18px;" title="episerver (41 posts)">EPiServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/faceted-navigation/" style="font-size: 11px;" title="faceted navigation (5 posts)">Faceted Navigation</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/icondeveloper/" style="font-size: 11px;" title="icondeveloper (3 posts)">IconDeveloper</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/internet-information-services/" style="font-size: 12px;" title="internet information services (11 posts)">Internet Information Services</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/lifestyle/" style="font-size: 14px;" title="lifestyle (13 posts)">Lifestyle</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/microsoft-sqlserver/" style="font-size: 12px;" title="microsoft sqlserver (6 posts)">Microsoft SqlServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/mobile/" style="font-size: 11px;" title="mobile (4 posts)">Mobile</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/open-source/" style="font-size: 16px;" title="open source (24 posts)">Open Source</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/powershell/" style="font-size: 18px;" title="powershell (43 posts)">PowerShell</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/rants/" style="font-size: 12px;" title="rants (7 posts)">Rants</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/scripting/" style="font-size: 18px;" title="scripting (43 posts)">Scripting</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/security/" style="font-size: 11px;" title="security (2 posts)">Security</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/sitecore/" style="font-size: 18px;" title="sitecore (38 posts)">Sitecore</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinning/" style="font-size: 12px;" title="skinning (10 posts)">Skinning</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinstudio/" style="font-size: 14px;" title="skinstudio (13 posts)">SkinStudio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/software-development/" style="font-size: 28px;" title="software development (99 posts)">Software Development</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/solution/" style="font-size: 18px;" title="solution (42 posts)">Solution</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/stardock/" style="font-size: 16px;" title="stardock (25 posts)">Stardock</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/tooling/" style="font-size: 14px;" title="tooling (13 posts)">Tooling</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/visual-studio/" style="font-size: 12px;" title="visual studio (7 posts)">Visual Studio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/webparts/" style="font-size: 11px;" title="webparts (2 posts)">WebParts</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/windowblinds/" style="font-size: 12px;" title="windowblinds (12 posts)">WindowBlinds</a></nav>
+    <hr class="tag-cloud-separator"></div>
+</div>
+
+    </header>
+    <div class="site-main">
+      <aside class="sidebar">
+  <div class="widget">
+    <h2 class="widget-title">Search</h2>
+    <form class="search-form" action="http://localhost:1314/search/" method="get">
+      <input type="search" class="search-field" placeholder="Search ..." name="q">
+    </form>
+  </div>
+
+  
+  <div class="widget widget-mvp">
+    <a href="https://mvp.sitecore.com/en/Directory/Profile?id=e416ef1dabf5468ff4fa08dd30f068bb" title="Sitecore Technology MVP 2026">
+      <img src="/images/sitecore-mvp-2026-technology.png" alt="Sitecore Technology MVP 2026" class="mvp-badge" width="250">
+    </a>
+    
+    <div class="mvp-badges-history">
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2017-Technology.png" alt="MVP Badge 2017" class="mvp-badge-small">
+        <span class="mvp-badge-year">2017</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2016-Technology.png" alt="MVP Badge 2016" class="mvp-badge-small">
+        <span class="mvp-badge-year">2016</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2015-Technology.png" alt="MVP Badge 2015" class="mvp-badge-small">
+        <span class="mvp-badge-year">2015</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2014-Technology.png" alt="MVP Badge 2014" class="mvp-badge-small">
+        <span class="mvp-badge-year">2014</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2013-Technology.png" alt="MVP Badge 2013" class="mvp-badge-small">
+        <span class="mvp-badge-year">2013</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2012-Technology.png" alt="MVP Badge 2012" class="mvp-badge-small">
+        <span class="mvp-badge-year">2012</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2011-Technology.png" alt="MVP Badge 2011" class="mvp-badge-small">
+        <span class="mvp-badge-year">2011</span>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+
+  
+</aside>
+
+      <main class="content-area">
+        
+  <article class="post single">
+    <div class="content-area">
+      <header class="entry-header">
+        <h1 class="entry-title">PowerShell for EPiServer - cheat sheet - Part 2</h1>
+        <div class="entry-meta">
+          <time datetime="2011-05-10T10:08:00&#43;00:00">
+            May 10, 2011
+          </time>
+          
+          <span class="author">by Adam Najmanowicz</span>
+          
+          <span class="reading-time">
+            <svg class="reading-time-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            5 min read
+          </span>
+        </div>
+        
+        <div class="entry-categories">
+          
+          <a href="http://localhost:1314/categories/cms/" class="category-badge">CMS</a>
+          
+          <a href="http://localhost:1314/categories/code-samples/" class="category-badge">Code Samples</a>
+          
+          <a href="http://localhost:1314/categories/downloadable/" class="category-badge">Downloadable</a>
+          
+          <a href="http://localhost:1314/categories/episerver/" class="category-badge">EPiServer</a>
+          
+          <a href="http://localhost:1314/categories/powershell/" class="category-badge">PowerShell</a>
+          
+          <a href="http://localhost:1314/categories/scripting/" class="category-badge">Scripting</a>
+          
+          <a href="http://localhost:1314/categories/software-development/" class="category-badge">Software Development</a>
+          
+          <a href="http://localhost:1314/categories/solution/" class="category-badge">Solution</a>
+          
+        </div>
+        
+      </header>
+
+      <div class="entry-content">
+        <p>Most of this post is also based on the Microsoft&rsquo;s <a href="http://www.microsoft.com/downloads/en/details.aspx--FamilyId=DF8ED469-9007-401C-85E7-46649A32D0E0&amp;displaylang=en" title="Windows PowerShell Quick Reference">Windows PowerShell Quick Reference</a> however despite the sharing scripting runtimes the nature of the both shells differ considerably as described in the previous post: <a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/">PowerShell for EPiServer - cheat sheet - Part 1</a>. In all cases where it made sense I&rsquo;ve converted the samples to establish them in EPiServer scenarios.</p>
+<h2 id="how-to-write-conditional-statements">How to Write Conditional Statements</h2>
+<p>To write an If statement use code similar to this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$page = Get-CurrentPage;
+</span></span><span class="line"><span class="cl">$changedBy = $page.ChangedBy;
+</span></span><span class="line"><span class="cl">$me = [EPiServer.Security.PrincipalInfo]::Current;
+</span></span><span class="line"><span class="cl">$myName = $me.Name;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if ($changedBy -eq &#34;&#34;)
+</span></span><span class="line"><span class="cl">  { &#34;Unspecified author - a system page?&#34; }
+</span></span><span class="line"><span class="cl">elseif ($changedBy -eq $myName)
+</span></span><span class="line"><span class="cl">  { &#34;The page has been last edited by me!&#34; }
+</span></span><span class="line"><span class="cl">else
+</span></span><span class="line"><span class="cl">  { &#34;The page has been last edited by &#34;+ $changedBy }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Instead of writing a series of If statements you can use a Switch statement, which is equivalent to VBScript&rsquo;s Select Case statement:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$page = Get-CurrentPage;
+</span></span><span class="line"><span class="cl">switch ($page.PageChildOrderRule) {
+</span></span><span class="line"><span class="cl">    0 {&#34;Undefined sort order. &#34;}
+</span></span><span class="line"><span class="cl">    1 {&#34;Most recently created page will be first in list&#34;}
+</span></span><span class="line"><span class="cl">    2 {&#34;Oldest created page will be first in list&#34;}
+</span></span><span class="line"><span class="cl">    3 {&#34;Sorted alphabetical on name&#34;}
+</span></span><span class="line"><span class="cl">    4 {&#34;Sorted on page index&#34;}
+</span></span><span class="line"><span class="cl">    5 {&#34;Most recently changed page will be first in list&#34;}
+</span></span><span class="line"><span class="cl">    6 {&#34;Sort on ranking, only supported by special controls&#34;}
+</span></span><span class="line"><span class="cl">    7 {&#34;Oldest published page will be first in list&#34;}
+</span></span><span class="line"><span class="cl">    8 {&#34;Most recently published page will be first in list&#34;}
+</span></span><span class="line"><span class="cl">    default {&#34;No idea what that means!&#34;}
+</span></span><span class="line"><span class="cl">  }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="how-to-write-for-and-for-each-loops">How to Write For and For Each Loops</h2>
+<h2></h2>
+<p>To write a For statement use code similar to this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">for ($a = 1; $a -le 10; $a++) {$a}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>By comparison, a For Each statement might look like this:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="nb">Get-ChildItem</span> <span class="p">.)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$i</span><span class="p">.</span><span class="py">PageTypeName</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="how-to-write-do-loops">How to Write Do Loops</h2>
+<p>To write a Do loop use code like the following, replacing the code between the curly braces with the code to be executed on each iteration of the loop. Oh: and replacing the code inside the parentheses with the loop condition:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$a</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span><span class="nv">$a</span><span class="p">;</span> <span class="nv">$a</span><span class="p">++}</span> 
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">-lt</span> <span class="mf">10</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>or</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$a</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span><span class="nv">$a</span><span class="p">;</span> <span class="nv">$a</span><span class="p">++}</span> 
+</span></span><span class="line"><span class="cl"><span class="k">until</span> <span class="p">(</span><span class="nv">$a</span> <span class="k">?</span><span class="n">gt</span> <span class="mf">10</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="how-to-use-net-objects-and-classes">How to Use .NET Objects and Classes</h2>
+<p>To use a .NET Framework class static method enclose the class name in square brackets, then separate the class name and the method using a pair of colons:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$parent</span> <span class="p">=</span> <span class="nb">Get-CurrentPage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$myPage</span> <span class="p">=</span> <span class="p">[</span><span class="no">EPiServer.DataFactory</span><span class="p">]::</span><span class="n">Instance</span><span class="p">.</span><span class="py">GetDefaultPageData</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">              <span class="nv">$parent</span><span class="p">.</span><span class="n">PageLink</span><span class="p">,</span> <span class="s2">&#34;[AlloyTech] Standard page&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$myPage</span><span class="p">.</span><span class="py">PageName</span> <span class="p">=</span> <span class="s2">&#34;My New Page&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$myPage</span><span class="p">.</span><span class="py">URLSegment</span> <span class="p">=</span> <span class="p">[</span><span class="no">EPiServer.Web.UrlSegment</span><span class="p">]::</span><span class="n">CreateUrlSegment</span><span class="p">(</span><span class="nv">$myPage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Save-Page</span><span class="p">(</span><span class="nv">$myPage</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To create an object reference to a .NET Framework object use the New-Object cmdlet:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$page</span> <span class="p">=</span> <span class="nb">Get-CurrentPage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$urlBuilder</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="err">&#39;</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">-type</span> <span class="n">EPiServer</span><span class="p">.</span><span class="py">UrlBuilder</span> 
+</span></span><span class="line"><span class="cl">                   <span class="n">-argumentlist</span> <span class="nv">$page</span><span class="p">.</span><span class="n">LinkURL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">EPiServer.Global</span><span class="p">]::</span><span class="n">UrlRewriteProvider</span><span class="p">.</span><span class="py">ConvertToExternal</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$urlBuilder</span><span class="p">,</span> <span class="nv">$page</span><span class="p">.</span><span class="n">PageLink</span><span class="p">,</span> <span class="p">[</span><span class="no">System.Text.UTF8Encoding</span><span class="p">]::</span><span class="n">UTF8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$currentPath</span> <span class="p">=</span> <span class="nv">$urlBuilder</span><span class="p">.</span><span class="py">Path</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Note</strong>. This is a cursory overview of working with .NET. The two techniques shown here will not necessarily work with all .NET classes.</p>
+<h2 id="how-to-select-properties">How to Select Properties</h2>
+<p>To work with or display specified properties of a collection, pipe the returned results to the Select-Object cmdlet:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-CurrentPage</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageTypeName</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="how-to-sort-data">How to Sort Data</h2>
+<p>To sort data returned by Windows PowerShell simply pipe that data to the Sort-Object cmdlet, specifying the property you want to sort by:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageName</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageTypeName</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You can also add the ?descending or -ascending parameters to specify a sort order:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageSaved</span> <span class="n">-descending</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageSaved</span><span class="p">,</span> <span class="n">ChangedBy</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You can even sort by multiple properties:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageTypeName</span><span class="p">,</span> <span class="n">ChangedBy</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageTypeName</span><span class="p">,</span> <span class="n">ChangedBy</span><span class="p">,</span> <span class="n">PageName</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="how-to-work-with-wmi">How to Work with WMI</h2>
+<p>To get computer information using WMI call the Get-WMIObject cmdlet followed by the class name:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-WMIObject Win32_BIOS
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>If the class you are interested in does not reside in the cimv2 namespace simply include the <strong>?namespace</strong> parameter:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Get</span><span class="p">-</span><span class="n">WMIObject</span> <span class="n">SystemRestore</span> <span class="err">`</span>
+</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="k">namespace</span> <span class="nn">root</span><span class="err">\</span><span class="k">default</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To access data on another computer use the <strong>?computername</strong> parameter:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-WMIObject Win32_BIOS `
+</span></span><span class="line"><span class="cl">    ?computername atl-ws-01
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>To limit returned data, use a WQL query and the <strong>?query</strong> parameter:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">Get</span><span class="o">-</span><span class="n">WMIObject</span><span class="w"> </span><span class="o">-</span><span class="n">query</span><span class="w"> </span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s2">&#34;Select * From Win32_Service `
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Where State = &#39;Stopped&#39;&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="how-to-interrogate-an-object">How to ?Interrogate? an Object</h2>
+<p>To get information about the properties and methods of an object retrieve an instance of that object and then ?pipe? the object to the <strong>Get-Member</strong> cmdlet. For example, this command returns the properties and methods available when working with processes:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Get-Member</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>More tips coming soon?</strong> In the mean time please download the fresh version of the plugin with the latest improvements:</p>
+<p><a href="http://www.najmanowicz.com/blog_bin/Cognifide.EPiserverControls.PowerShell.CheatSheet1.zip" title="Download Powershell console for Cheat Sheet 1">[Download &amp; Enjoy]</a></p>
+<p><strong>Get it while it&rsquo;s hot &ndash; still includes 3 bonus script collections!</strong></p>
+<h2 id="how-to-install">How to install?</h2>
+<p>Extract the DLL form the ZIP file into the BIN folder of your web application to install the plugin. Remove the DLL to uninstall it.</p>
+<p>All feedback appreciated!</p>
+<p><strong>In lieu of the regular disclaimer</strong>:</p>
+<blockquote>
+<p>*</p>
+</blockquote>
+<img src="/images/Aperture_Science_thumb.png" alt="Aperture_Science" title="Aperture_Science" class="alignleft" width="150" height="150" />
+<p>Science isn&rsquo;t about why, it&rsquo;s about why not!?**You ask: why is so much of our science dangerous?</p>
+<blockquote>
+<p>I say: why not marry safe science if you love it so much. In fact, why not invent a special safety door that won&rsquo;t hit you in the butt on the way out, because YOU ARE FIRED!*</p>
+<p><em>Yes you, box your stuff, out the front door, parking lot, car, goodbye.</em></p>
+<p>&ndash; <strong><a href="http://apscience.wikia.com/wiki/Cave_Johnson">Cave Johnson</a></strong></p>
+</blockquote>
+
+      </div>
+
+      <footer class="entry-footer">
+        
+
+        <nav class="post-navigation">
+          
+          <div class="nav-previous">
+            <a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/">&laquo; PowerShell for EPiServer - cheat sheet - Part 1</a>
+          </div>
+          
+          
+          <div class="nav-next">
+            <a href="/2011/08/18/copying-files-between-path-providers-with-powershell-in-episerver/">Copying files between path providers with PowerShell in EPiServer &raquo;</a>
+          </div>
+          
+        </nav>
+      </footer>
+
+      
+<div class="comments">
+  <h2 class="comments-title">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:1314/2011/05/10/powershell-for-episerver-cheat-sheet-part-2/";
+      this.page.identifier = "/2011/05/10/powershell-for-episerver-cheat-sheet-part-2/";
+      this.page.identifier = '637686246';
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codality.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+    </div>
+  </article>
+
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-inner">
+  <p>&copy; 1999-2026 - <a href="/">Adam Najmanowicz</a></p>
+  
+</div>
+
+    </footer>
+  </div>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      block.style.position = 'relative';
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('aria-label', 'Copy code');
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      block.appendChild(btn);
+      btn.addEventListener('click', function() {
+        var code = block.querySelector('td:last-child code') || block.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(function() {
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(function() {
+              btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+        }
+      });
+    });
+  });
+  </script>
+  <script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    var visible = false;
+    window.addEventListener('scroll', function() {
+      var shouldShow = window.scrollY > 400;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        btn.classList.toggle('visible', visible);
+      }
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  </script>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
+  <script>
+  (function() {
+    var overlay = document.getElementById('lightbox');
+    var content = document.getElementById('lightbox-content');
+    var closeBtn = document.getElementById('lightbox-close');
+    var imgExts = /\.(jpe?g|png|gif|webp|svg|bmp|avif)(\?.*)?$/i;
+    var vidExts = /\.(mp4|webm|ogg)(\?.*)?$/i;
+
+    function open(href) {
+      content.innerHTML = '';
+      if (imgExts.test(href)) {
+        var img = document.createElement('img');
+        img.src = href;
+        img.alt = '';
+        content.appendChild(img);
+      } else if (vidExts.test(href)) {
+        var vid = document.createElement('video');
+        vid.src = href;
+        vid.controls = true;
+        vid.autoplay = true;
+        content.appendChild(vid);
+      } else {
+        return false;
+      }
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return true;
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      var vid = content.querySelector('video');
+      if (vid) vid.pause();
+    }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (imgExts.test(href) || vidExts.test(href)) {
+        e.preventDefault();
+        open(href);
+      }
+    });
+
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      close();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) close();
+    });
+  })();
+  </script>
+  <script id="dsq-count-scr" src="https://codality.disqus.com/count.js" async></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+      s.onload = function() {
+        var mermaidTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+        mermaid.initialize({ startOnLoad: false, theme: mermaidTheme });
+        mermaidBlocks.forEach(function(block) {
+          var pre = block.parentElement;
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+      };
+      document.head.appendChild(s);
+    }
+  });
+  </script>
+</body>
+</html>

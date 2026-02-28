@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turn your Sitecore PowerShell reports into applications with Action Scripts | Codality</title>
+<meta name="description" content="[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz">
+<meta name="generator" content="Hugo 0.156.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+<script>
+  (function(){var s=localStorage.getItem('theme-preference');var t=s==='dark'||s==='light'?s:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+
+      <script src="/js/main.js"></script>
+
+
+
+</head>
+<body>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="header-inner">
+  <div class="header-top">
+    <nav class="site-navigation" aria-label="Main Navigation">
+      
+  <nav>
+    <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/about/">About me</a>
+    </li>
+    <li>
+      <a href="/downloads/">Downloads</a>
+    </li>
+    </ul>
+  </nav>
+
+    </nav>
+    
+    <nav class="social-navigation" aria-label="Social Links">
+      <ul>
+        <li><a href="https://github.com/AdamNaj" title="GitHub"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/najmanowicz/" title="LinkedIn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a></li>
+        <li><a href="http://www.twitter.com/AdamNaj" title="Twitter"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a></li>
+        <li><a href="https://www.facebook.com/adam.najmanowicz" title="Facebook"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/adamnajmanowicz/" title="Instagram"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a></li>
+      </ul>
+    </nav>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+  <div class="site-branding">
+    <p class="site-title"><a href="/">Codality</a></p>
+    
+    <p class="site-tagline">[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz</p>
+    
+    <hr class="header-separator"><nav class="tag-cloud" aria-label="Category Cloud"><a href="/categories/best-practices/" style="font-size: 14px;" title="best practices (14 posts)">Best Practices</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/blog-navigator/" style="font-size: 12px;" title="blog navigator (8 posts)">Blog Navigator</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms/" style="font-size: 24px;" title="cms (79 posts)">CMS</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms-ux/" style="font-size: 12px;" title="cms ux (8 posts)">CMS UX</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/code-samples/" style="font-size: 16px;" title="code samples (35 posts)">Code Samples</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/continuous-deployment/" style="font-size: 11px;" title="continuous deployment (4 posts)">Continuous Deployment</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/desktop-customization/" style="font-size: 11px;" title="desktop customization (4 posts)">Desktop Customization</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/downloadable/" style="font-size: 14px;" title="downloadable (22 posts)">Downloadable</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/epicode/" style="font-size: 14px;" title="epicode (16 posts)">EPiCode</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/episerver/" style="font-size: 18px;" title="episerver (41 posts)">EPiServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/faceted-navigation/" style="font-size: 11px;" title="faceted navigation (5 posts)">Faceted Navigation</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/icondeveloper/" style="font-size: 11px;" title="icondeveloper (3 posts)">IconDeveloper</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/internet-information-services/" style="font-size: 12px;" title="internet information services (11 posts)">Internet Information Services</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/lifestyle/" style="font-size: 14px;" title="lifestyle (13 posts)">Lifestyle</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/microsoft-sqlserver/" style="font-size: 12px;" title="microsoft sqlserver (6 posts)">Microsoft SqlServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/mobile/" style="font-size: 11px;" title="mobile (4 posts)">Mobile</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/open-source/" style="font-size: 16px;" title="open source (24 posts)">Open Source</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/powershell/" style="font-size: 18px;" title="powershell (43 posts)">PowerShell</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/rants/" style="font-size: 12px;" title="rants (7 posts)">Rants</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/scripting/" style="font-size: 18px;" title="scripting (43 posts)">Scripting</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/security/" style="font-size: 11px;" title="security (2 posts)">Security</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/sitecore/" style="font-size: 18px;" title="sitecore (38 posts)">Sitecore</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinning/" style="font-size: 12px;" title="skinning (10 posts)">Skinning</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinstudio/" style="font-size: 14px;" title="skinstudio (13 posts)">SkinStudio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/software-development/" style="font-size: 28px;" title="software development (99 posts)">Software Development</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/solution/" style="font-size: 18px;" title="solution (42 posts)">Solution</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/stardock/" style="font-size: 16px;" title="stardock (25 posts)">Stardock</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/tooling/" style="font-size: 14px;" title="tooling (13 posts)">Tooling</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/visual-studio/" style="font-size: 12px;" title="visual studio (7 posts)">Visual Studio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/webparts/" style="font-size: 11px;" title="webparts (2 posts)">WebParts</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/windowblinds/" style="font-size: 12px;" title="windowblinds (12 posts)">WindowBlinds</a></nav>
+    <hr class="tag-cloud-separator"></div>
+</div>
+
+    </header>
+    <div class="site-main">
+      <aside class="sidebar">
+  <div class="widget">
+    <h2 class="widget-title">Search</h2>
+    <form class="search-form" action="http://localhost:1314/search/" method="get">
+      <input type="search" class="search-field" placeholder="Search ..." name="q">
+    </form>
+  </div>
+
+  
+  <div class="widget widget-mvp">
+    <a href="https://mvp.sitecore.com/en/Directory/Profile?id=e416ef1dabf5468ff4fa08dd30f068bb" title="Sitecore Technology MVP 2026">
+      <img src="/images/sitecore-mvp-2026-technology.png" alt="Sitecore Technology MVP 2026" class="mvp-badge" width="250">
+    </a>
+    
+    <div class="mvp-badges-history">
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2017-Technology.png" alt="MVP Badge 2017" class="mvp-badge-small">
+        <span class="mvp-badge-year">2017</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2016-Technology.png" alt="MVP Badge 2016" class="mvp-badge-small">
+        <span class="mvp-badge-year">2016</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2015-Technology.png" alt="MVP Badge 2015" class="mvp-badge-small">
+        <span class="mvp-badge-year">2015</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2014-Technology.png" alt="MVP Badge 2014" class="mvp-badge-small">
+        <span class="mvp-badge-year">2014</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2013-Technology.png" alt="MVP Badge 2013" class="mvp-badge-small">
+        <span class="mvp-badge-year">2013</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2012-Technology.png" alt="MVP Badge 2012" class="mvp-badge-small">
+        <span class="mvp-badge-year">2012</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2011-Technology.png" alt="MVP Badge 2011" class="mvp-badge-small">
+        <span class="mvp-badge-year">2011</span>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+
+  
+</aside>
+
+      <main class="content-area">
+        
+  <article class="post single">
+    <div class="content-area">
+      <header class="entry-header">
+        <h1 class="entry-title">Turn your Sitecore PowerShell reports into applications with Action Scripts</h1>
+        <div class="entry-meta">
+          <time datetime="2015-05-05T10:00:53&#43;00:00">
+            May 5, 2015
+          </time>
+          
+          <span class="author">by Adam Najmanowicz</span>
+          
+          <span class="reading-time">
+            <svg class="reading-time-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            8 min read
+          </span>
+        </div>
+        
+        <div class="entry-categories">
+          
+          <a href="http://localhost:1314/categories/cms/" class="category-badge">CMS</a>
+          
+          <a href="http://localhost:1314/categories/cms-ux/" class="category-badge">CMS UX</a>
+          
+          <a href="http://localhost:1314/categories/code-samples/" class="category-badge">Code Samples</a>
+          
+          <a href="http://localhost:1314/categories/open-source/" class="category-badge">Open Source</a>
+          
+          <a href="http://localhost:1314/categories/powershell/" class="category-badge">PowerShell</a>
+          
+          <a href="http://localhost:1314/categories/scripting/" class="category-badge">Scripting</a>
+          
+          <a href="http://localhost:1314/categories/sitecore/" class="category-badge">Sitecore</a>
+          
+          <a href="http://localhost:1314/categories/software-development/" class="category-badge">Software Development</a>
+          
+          <a href="http://localhost:1314/categories/solution/" class="category-badge">Solution</a>
+          
+        </div>
+        
+      </header>
+
+      <div class="entry-content">
+        <p><a href="/images/shoot_out_of_cannon_400_clr_13993.png"><img src="/images/shoot_out_of_cannon_400_clr_13993.png" alt="shoot_out_of_cannon_400_clr_13993" class="alignleft" width="400" height="338" /></a></p>
+<p>In one of my <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">previous posts</a> I described how to create reports in Sitecore PowerShell Extensions (SPE for short) that allow you to leverage the joint power of Sitecore and PowerShell to deliver complete and elegant reports in little to no time. In this post I&rsquo;ll tell you how to take this a step further and operationalize them into full blown Sitecore Desktop applications.
+The secret sauce is in the actions you can place on the report, the additional parameters that I haven&rsquo;t mentioned in the <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">previous post</a>, and the use of Sitecore rules engine with some rules that come with SPE.
+For the purpose of this post I will limit the scripts to samples that are (mostly) in the vanilla SPE deployment.
+Let&rsquo;s begin with describing the actions and how you can configure them to appear in your reports.</p>
+<h2 id="what-are-report-actions">What are report actions?</h2>
+<p>Actions are simply commands powered by scripts and with visibility dependent on certain conditions like the .Net class of the object that is displayed or perhaps other session settings.</p>
+<p><a href="/images/Action-Scripts.png"><img src="/images/Action-Scripts.png" alt="Action Scripts" class="aligncenter" width="460" height="414" /></a></p>
+<p>You define an action as a script located in an SPE script library and appears in the Actions panel. In the simplest scenario the action would appear when the script library name matches the .Net class name of the items displayed. In the above scenario the actions are placed under <code>/Platform/Internal/List View/Ribbon/Item/</code> where Platform is the module and Item is a script library. Let&rsquo;s take a look at the script here <code>/Platform/Internal/List View/Ribbon/Item/Open</code>
+Contents of the <em>Open</em> script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$item</span> <span class="k">in</span> <span class="nv">$selectedData</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Run Sheer application on Desktop</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Show-Application</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-Application</span> <span class="s2">&#34;Content Editor&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-Parameter</span> <span class="vm">@</span><span class="p">{</span><span class="n">id</span> <span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="n">ID</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> <span class="n">fo</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="n">ID</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">                 <span class="n">la</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Language</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> <span class="n">vs</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Version</span><span class="p">.</span><span class="n">Number</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">sc_content</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The variable <code>$selectedData</code> is provided to the script automatically by SPE in context of the content of the results on <code>Show-ListView</code>.</p>
+<h2 id="what-input-is-passed-to-an-action-script">What input is passed to an action script?</h2>
+<p>When your action script is executed the environment is initialized with a number of variables at your disposal as seen below:</p>
+<ul>
+<li><code>$selectedData</code> ? the selected objects in the list view (the same will be passed to the $resultSet variable for compatibility with older scripts)</li>
+<li><code>$allData</code> ? all objects passed to the list view using the <code>-Data</code> parameter.</li>
+<li><code>$filteredData</code> - all objects displayed after filtering is performed with the search criteria entered by the user in the ribbon.</li>
+<li><code>$exportData</code> - same as $filteredData, however in this case the objects will have additional properties to support easy display with properties processed as text.</li>
+<li><code>$actionData</code> ? any object that was passed to <code>Show-ListView</code> using the <code>-ActionData</code> parameter. Useful when you need additional context that the <code>Show-ListView</code> command does not explicitly know about. It&rsquo;s your custom data.</li>
+<li><code>$formatProperty</code> ? the content of the ?Property parameter when running the command.</li>
+<li><code>$title</code> - window title of the list view.</li>
+<li><code>$infoTitle</code> ? info title of the list view.</li>
+<li><code>$infoDescription</code> ? info title of the list view.</li>
+</ul>
+<p>Consequently you get the full state of the report the user sees in the UI and you can act upon it.</p>
+<h2 id="how-the-report-determines-if-your-action-is-visible">How the report determines if your action is visible?</h2>
+<p>You can have multiple actions defined with dynamic visibility. The actions are generally only relevant in the context of your report. This is done on two levels. The first level happens based on the location of the script and .Net object type you are displaying in the report. The second level is based on Sitecore rules. For the action to appear all of the following conditions must be met:</p>
+<ul>
+<li>All scripts visible in the report should be located in an enabled module.</li>
+<li>The action script should be within the path <code>/Internal/List View/Ribbon/&lt;Object type&gt;</code> . The <code>&lt;Object type&gt;</code> is the name of the .Net class for which the action is valid. For example, if you want your action to be visible for <code>Sitecore.Data.Items.Item</code> then save the script at the path  <code>/Internal/List View/Ribbon/Item</code>.</li>
+<li>If the action script has no rules defined in the &ldquo;Show if rules are met or not defined&rdquo; field it will appear for all objects passed to <code>Show-ListView</code> that are of the type based on location. Rules will provide more granular control and allow for rule-based conditions that determine action visibility.</li>
+</ul>
+<h3 id="using-rules-to-control-action-visibility">Using rules to control action visibility</h3>
+<p>Rules add the full power of the Sitecore rules engine - similarly to what you can do on context menu items or ribbon actions in Content Editor like I&rsquo;ve described in <a href="/2014/10/26/sitecore-powershell-extensions-persistent-sessions/">my previous post</a>. Some examples where this can be useful include only enabling or disabling the action for items located under a specific branch of the tree or if a <a href="/2014/10/26/sitecore-powershell-extensions-persistent-sessions/">persistent session exists</a>.
+The following screenshot shows how to create an action that only appears in reports that list objects of type <code>Item</code> that are of template <code>Schedule</code>.</p>
+<p><a href="/images/Schedule-Action.png"><img src="/images/Schedule-Action-1024x867.png" alt="Schedule Action" class="aligncenter" width="1024" height="867" /></a></p>
+<p>For specific reports this global state might not always be enough. You can narrow down the rules further by using the report <strong>name</strong>. Name your report by providing an additional parameter to your <code>Show-List view</code> in addition to what I described in <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">my previous post about reports</a>.
+Consider the following script:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-ViewName</span> <span class="n">ListChildren</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The output of the report will be like any other unnamed report but adds support for additional rules. Let&rsquo;s say I want my action to open a new report that lists all the children of the selected items in the report &ldquo;ListChildren&rdquo;. After running the action my script should display the new report with the children and close the &ldquo;ListChildren&rdquo; report. Not very useful but illustrates the point.</p>
+<p><a href="/images/Action-Script1.png"><img src="/images/Action-Script1.png" alt="Action Script" class="aligncenter" width="790" height="496" /></a></p>
+<p>Now I need to save my script in the proper Script Library in my enabled module:</p>
+<p><a href="/images/Action-Save.png"><img src="/images/Action-Save.png" alt="Action Save" class="aligncenter" width="889" height="690" /></a></p>
+<p> 
+At this point my action will show on all reports what list <code>Item</code> objects. But now that my script is saved I can modify its rules to narrow it down only to Show for reports named &ldquo;ListChildren&rdquo;. For this I can click the &ldquo;Runtime&rdquo; button in the ISE ribbon and edit the &ldquo;Show if rules are met or not defined&rdquo; field.</p>
+<p><a href="/images/Script-Runtime-Settings.png"><img src="/images/Script-Runtime-Settings.png" alt="Script Runtime Settings" class="aligncenter" width="943" height="895" /></a></p>
+<p>Now you can specify that you want the action to only appear when the report is named &ldquo;ListChildren&rdquo;</p>
+<p><a href="/images/Script-Rule.png"><img src="/images/Script-Rule.png" alt="Script Rule" class="aligncenter" width="764" height="671" /></a></p>
+<p>Confirm the save on all dialogs to persist your changes. Now our action appears when we run this script in ISE.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-ViewName</span> <span class="n">ListChildren</span> <span class="n">-Property</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ProviderPath</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a href="/images/Now-you-see-me1.png"><img src="/images/Now-you-see-me1.png" alt="Now you see me" class="aligncenter" width="1000" height="570" /></a></p>
+<p>The actiona does not appear if no view name is provided to the <code>-ViewName</code> parameter. Running the script below will produce a report with the action not shown:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ProviderPath</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a href="/images/Now-you-dont1.png"><img src="/images/Now-you-dont1.png" alt="Now you dont" class="aligncenter" width="965" height="541" /></a></p>
+<h2 id="but-wait-theres-more">But wait, there&rsquo;s more!</h2>
+<h3 id="updating-report-in-place">Updating report in place</h3>
+<p>The above action works just fine but will close the previous report and open a new report window in the Sitecore desktop. That&rsquo;s not a great user experience. What if you want to update the content of the report in place using the action? That&rsquo;s possible using the <code>Update-ListView</code> command. Consider the following script:</p>
+<p><a href="/images/Update-ListView.png"><img src="/images/Update-ListView.png" alt="Update ListView" class="aligncenter" width="795" height="540" /></a></p>
+<p>In this case we&rsquo;re not closing the existing report but rather updating the list in place, all you need to do is send the new data to the <code>Update-ListView</code> command.</p>
+<h3 id="showing-user-progress-for-long-running-scripts">Showing user progress for long running scripts</h3>
+<p>One last thing that you might wonder is if the <code>Write-Progress</code> command works as it does in case of ISE or the dialog that runs scripts from Content Editor context menu. Let&rsquo;s copy the following script into your action:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-le</span> <span class="mf">10</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++){</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;I need to do something important for 5 seconds&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;I&#39;m quite on track...&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-PercentComplete</span> <span class="p">(</span><span class="nv">$i</span><span class="p">*</span><span class="mf">10</span><span class="p">)</span> <span class="n">-SecondsRemaining</span> <span class="p">(</span><span class="mf">5</span><span class="p">-</span><span class="nv">$i</span><span class="p">/</span><span class="mf">2</span><span class="p">)</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-CurrentOperation</span> <span class="s2">&#34;Trying to look busy.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Start-Sleep</span> <span class="n">-m</span> <span class="mf">500</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;Now I&#39;m doing something else...&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;Should take me about 3 seconds but I&#39;m not quite sure...&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Start-Sleep</span> <span class="n">-s</span> <span class="mf">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-le</span> <span class="mf">10</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++){</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;Ok let me revisit one more thing...&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;Just 5 more seconds&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-PercentComplete</span> <span class="p">(</span><span class="nv">$i</span><span class="p">*</span><span class="mf">10</span><span class="p">)</span> <span class="n">-SecondsRemaining</span> <span class="p">(</span><span class="mf">5</span><span class="p">-</span><span class="nv">$i</span><span class="p">/</span><span class="mf">2</span><span class="p">)</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">-CurrentOperation</span> <span class="s2">&#34;Just making sure.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Start-Sleep</span> <span class="n">-m</span> <span class="mf">500</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Write-Progress</span> <span class="n">-Completed</span> <span class="n">-Activity</span> <span class="s2">&#34;Done.&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And you will see the following output:</p>
+<p><a href="/images/Write-Progress.png"><img src="/images/Write-Progress.png" alt="Write Progress" class="aligncenter" width="910" height="574" /></a></p>
+<h3 id="showing-other-powershell-dialogs">Showing other PowerShell dialogs</h3>
+<p>The action runs fully asynchronously so you&rsquo;re free to show any of the power of the provided commands. This means that you can ask for additional input using the <code>Read-Variable</code> command or Show alert using the <code>Show-Alert</code> command or do just about anything possible otherwise from the context menu, ribbon or other interactive integration points.</p>
+<h3 id="passing-additional-data-to-actions">Passing additional data to actions</h3>
+<p>The <code>Show-ListView</code> command has one more useful parameter named <code>-ActionData</code> which I mentioned above but is worth mentioning again. Anything passed using this parameter will be set as the <code>$actionData</code> variable &ndash; this means your report and actions can pass custom data in them it can be as simple as an object or as complex as a hashtable so there is really no hard limit on what can progress from a report to report. Any object that was passed to <code>Show-ListView</code> using the <code>-ActionData</code> parameter will be available to your action.</p>
+<h3 id="actions-running-in-persistent-sessions">Actions running in persistent sessions</h3>
+<p>The persistent session ID as described in <a href="/2014/10/26/sitecore-powershell-extensions-persistent-sessions/">my previous post</a> will be respected and your script will run in that persistent session if it&rsquo;s already in memory or create a persistent session if it&rsquo;s not.
+Alternatively you can elect to simply freeze the session the initial script that generated report was running in and run actions in that same frozen session by using the <code>-ActionsInSession</code> parameter.</p>
+<h3 id="godspeed">Godspeed!</h3>
+<p>I hope this blog post will help you deliver the best functionality your users expect from you. Happy scripting!</p>
+
+      </div>
+
+      <footer class="entry-footer">
+        
+
+        <nav class="post-navigation">
+          
+          <div class="nav-previous">
+            <a href="/2015/04/13/rapid-api-prototyping-for-sitecore-with-powershell-extensions/">&laquo; Rapid API prototyping for Sitecore with PowerShell Extensions</a>
+          </div>
+          
+          
+          <div class="nav-next">
+            <a href="/2015/05/15/do-not-turn-sitecore-media-request-protection-off-and-protect-older-sitecore-versions-with-imageguard/">Do not turn Sitecore Media Request protection off and protect older Sitecore versions with ImageGuard &raquo;</a>
+          </div>
+          
+        </nav>
+      </footer>
+
+      
+<div class="comments">
+  <h2 class="comments-title">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:1314/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/";
+      this.page.identifier = "/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/";
+      this.page.identifier = '3737474679';
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codality.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+    </div>
+  </article>
+
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-inner">
+  <p>&copy; 1999-2026 - <a href="/">Adam Najmanowicz</a></p>
+  
+</div>
+
+    </footer>
+  </div>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      block.style.position = 'relative';
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('aria-label', 'Copy code');
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      block.appendChild(btn);
+      btn.addEventListener('click', function() {
+        var code = block.querySelector('td:last-child code') || block.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(function() {
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(function() {
+              btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+        }
+      });
+    });
+  });
+  </script>
+  <script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    var visible = false;
+    window.addEventListener('scroll', function() {
+      var shouldShow = window.scrollY > 400;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        btn.classList.toggle('visible', visible);
+      }
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  </script>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
+  <script>
+  (function() {
+    var overlay = document.getElementById('lightbox');
+    var content = document.getElementById('lightbox-content');
+    var closeBtn = document.getElementById('lightbox-close');
+    var imgExts = /\.(jpe?g|png|gif|webp|svg|bmp|avif)(\?.*)?$/i;
+    var vidExts = /\.(mp4|webm|ogg)(\?.*)?$/i;
+
+    function open(href) {
+      content.innerHTML = '';
+      if (imgExts.test(href)) {
+        var img = document.createElement('img');
+        img.src = href;
+        img.alt = '';
+        content.appendChild(img);
+      } else if (vidExts.test(href)) {
+        var vid = document.createElement('video');
+        vid.src = href;
+        vid.controls = true;
+        vid.autoplay = true;
+        content.appendChild(vid);
+      } else {
+        return false;
+      }
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return true;
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      var vid = content.querySelector('video');
+      if (vid) vid.pause();
+    }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (imgExts.test(href) || vidExts.test(href)) {
+        e.preventDefault();
+        open(href);
+      }
+    });
+
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      close();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) close();
+    });
+  })();
+  </script>
+  <script id="dsq-count-scr" src="https://codality.disqus.com/count.js" async></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+      s.onload = function() {
+        var mermaidTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+        mermaid.initialize({ startOnLoad: false, theme: mermaidTheme });
+        mermaidBlocks.forEach(function(block) {
+          var pre = block.parentElement;
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+      };
+      document.head.appendChild(s);
+    }
+  });
+  </script>
+</body>
+</html>

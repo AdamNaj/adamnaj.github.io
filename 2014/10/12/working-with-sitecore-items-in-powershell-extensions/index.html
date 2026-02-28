@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Working with Sitecore items in PowerShell Extensions | Codality</title>
+<meta name="description" content="[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz">
+<meta name="generator" content="Hugo 0.156.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+<script>
+  (function(){var s=localStorage.getItem('theme-preference');var t=s==='dark'||s==='light'?s:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+
+      <script src="/js/main.js"></script>
+
+
+
+</head>
+<body>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="header-inner">
+  <div class="header-top">
+    <nav class="site-navigation" aria-label="Main Navigation">
+      
+  <nav>
+    <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/about/">About me</a>
+    </li>
+    <li>
+      <a href="/downloads/">Downloads</a>
+    </li>
+    </ul>
+  </nav>
+
+    </nav>
+    
+    <nav class="social-navigation" aria-label="Social Links">
+      <ul>
+        <li><a href="https://github.com/AdamNaj" title="GitHub"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/najmanowicz/" title="LinkedIn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a></li>
+        <li><a href="http://www.twitter.com/AdamNaj" title="Twitter"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a></li>
+        <li><a href="https://www.facebook.com/adam.najmanowicz" title="Facebook"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/adamnajmanowicz/" title="Instagram"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a></li>
+      </ul>
+    </nav>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+  <div class="site-branding">
+    <p class="site-title"><a href="/">Codality</a></p>
+    
+    <p class="site-tagline">[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz</p>
+    
+    <hr class="header-separator"><nav class="tag-cloud" aria-label="Category Cloud"><a href="/categories/best-practices/" style="font-size: 14px;" title="best practices (14 posts)">Best Practices</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/blog-navigator/" style="font-size: 12px;" title="blog navigator (8 posts)">Blog Navigator</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms/" style="font-size: 24px;" title="cms (79 posts)">CMS</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms-ux/" style="font-size: 12px;" title="cms ux (8 posts)">CMS UX</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/code-samples/" style="font-size: 16px;" title="code samples (35 posts)">Code Samples</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/continuous-deployment/" style="font-size: 11px;" title="continuous deployment (4 posts)">Continuous Deployment</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/desktop-customization/" style="font-size: 11px;" title="desktop customization (4 posts)">Desktop Customization</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/downloadable/" style="font-size: 14px;" title="downloadable (22 posts)">Downloadable</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/epicode/" style="font-size: 14px;" title="epicode (16 posts)">EPiCode</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/episerver/" style="font-size: 18px;" title="episerver (41 posts)">EPiServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/faceted-navigation/" style="font-size: 11px;" title="faceted navigation (5 posts)">Faceted Navigation</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/icondeveloper/" style="font-size: 11px;" title="icondeveloper (3 posts)">IconDeveloper</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/internet-information-services/" style="font-size: 12px;" title="internet information services (11 posts)">Internet Information Services</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/lifestyle/" style="font-size: 14px;" title="lifestyle (13 posts)">Lifestyle</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/microsoft-sqlserver/" style="font-size: 12px;" title="microsoft sqlserver (6 posts)">Microsoft SqlServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/mobile/" style="font-size: 11px;" title="mobile (4 posts)">Mobile</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/open-source/" style="font-size: 16px;" title="open source (24 posts)">Open Source</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/powershell/" style="font-size: 18px;" title="powershell (43 posts)">PowerShell</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/rants/" style="font-size: 12px;" title="rants (7 posts)">Rants</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/scripting/" style="font-size: 18px;" title="scripting (43 posts)">Scripting</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/security/" style="font-size: 11px;" title="security (2 posts)">Security</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/sitecore/" style="font-size: 18px;" title="sitecore (38 posts)">Sitecore</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinning/" style="font-size: 12px;" title="skinning (10 posts)">Skinning</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinstudio/" style="font-size: 14px;" title="skinstudio (13 posts)">SkinStudio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/software-development/" style="font-size: 28px;" title="software development (99 posts)">Software Development</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/solution/" style="font-size: 18px;" title="solution (42 posts)">Solution</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/stardock/" style="font-size: 16px;" title="stardock (25 posts)">Stardock</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/tooling/" style="font-size: 14px;" title="tooling (13 posts)">Tooling</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/visual-studio/" style="font-size: 12px;" title="visual studio (7 posts)">Visual Studio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/webparts/" style="font-size: 11px;" title="webparts (2 posts)">WebParts</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/windowblinds/" style="font-size: 12px;" title="windowblinds (12 posts)">WindowBlinds</a></nav>
+    <hr class="tag-cloud-separator"></div>
+</div>
+
+    </header>
+    <div class="site-main">
+      <aside class="sidebar">
+  <div class="widget">
+    <h2 class="widget-title">Search</h2>
+    <form class="search-form" action="http://localhost:1314/search/" method="get">
+      <input type="search" class="search-field" placeholder="Search ..." name="q">
+    </form>
+  </div>
+
+  
+  <div class="widget widget-mvp">
+    <a href="https://mvp.sitecore.com/en/Directory/Profile?id=e416ef1dabf5468ff4fa08dd30f068bb" title="Sitecore Technology MVP 2026">
+      <img src="/images/sitecore-mvp-2026-technology.png" alt="Sitecore Technology MVP 2026" class="mvp-badge" width="250">
+    </a>
+    
+    <div class="mvp-badges-history">
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2017-Technology.png" alt="MVP Badge 2017" class="mvp-badge-small">
+        <span class="mvp-badge-year">2017</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2016-Technology.png" alt="MVP Badge 2016" class="mvp-badge-small">
+        <span class="mvp-badge-year">2016</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2015-Technology.png" alt="MVP Badge 2015" class="mvp-badge-small">
+        <span class="mvp-badge-year">2015</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2014-Technology.png" alt="MVP Badge 2014" class="mvp-badge-small">
+        <span class="mvp-badge-year">2014</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2013-Technology.png" alt="MVP Badge 2013" class="mvp-badge-small">
+        <span class="mvp-badge-year">2013</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2012-Technology.png" alt="MVP Badge 2012" class="mvp-badge-small">
+        <span class="mvp-badge-year">2012</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2011-Technology.png" alt="MVP Badge 2011" class="mvp-badge-small">
+        <span class="mvp-badge-year">2011</span>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+
+  
+</aside>
+
+      <main class="content-area">
+        
+  <article class="post single">
+    <div class="content-area">
+      <header class="entry-header">
+        <h1 class="entry-title">Working with Sitecore items in PowerShell Extensions</h1>
+        <div class="entry-meta">
+          <time datetime="2014-10-12T23:27:00&#43;00:00">
+            October 12, 2014
+          </time>
+          
+          <span class="author">by Adam Najmanowicz</span>
+          
+          <span class="reading-time">
+            <svg class="reading-time-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            9 min read
+          </span>
+        </div>
+        
+        <div class="entry-categories">
+          
+          <a href="http://localhost:1314/categories/best-practices/" class="category-badge">Best Practices</a>
+          
+          <a href="http://localhost:1314/categories/cms/" class="category-badge">CMS</a>
+          
+          <a href="http://localhost:1314/categories/code-samples/" class="category-badge">Code Samples</a>
+          
+          <a href="http://localhost:1314/categories/powershell/" class="category-badge">PowerShell</a>
+          
+          <a href="http://localhost:1314/categories/scripting/" class="category-badge">Scripting</a>
+          
+          <a href="http://localhost:1314/categories/sitecore/" class="category-badge">Sitecore</a>
+          
+          <a href="http://localhost:1314/categories/software-development/" class="category-badge">Software Development</a>
+          
+          <a href="http://localhost:1314/categories/solution/" class="category-badge">Solution</a>
+          
+        </div>
+        
+      </header>
+
+      <div class="entry-content">
+        <p>Reading <a href="http://sitecorejunkie.com/2014/09/22/add-scripts-to-the-powershell-toolbox-in-sitecore-powershell-extensions/">some</a> of the <a href="https://medium.com/@HLeautaud/migrating-large-amounts-of-content-in-sitecore-fb35a488cba">blogs</a> <a href="http://bartlomiejmucha.com/en/blog/how-to-populate-sitecore-with-test-data-using-power-shell/">from</a> the Sitecore community I find it pretty apparent that we didn&rsquo;t do a great job advocating the optimizations that <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">PowerShell Extensions</a> have introduced for working with Sitecore items. This blog attempts to rectify this problem to a degree.</p>
+<img src="/images/group_construction_workers_400_clr_8597_thumb.png" alt="group_construction_workers_400_clr_8597" title="group_construction_workers_400_clr_8597" class="aligncenter" width="400" height="300" />
+<h2 id="how-do-i-retrieve-my-sitecore-items-the-powershell-way">How do I retrieve my Sitecore items the PowerShell way?</h2>
+<p>The most natural way to retrieve Sitecore items is with use of <strong>Get-Item</strong> and <strong>Get-ChildItem</strong> commandlets. That is because those 2 commandlets add a PowerShell wrapping around them that allows the functionalities that I&rsquo;m going to describe in the next section of this blog after I&rsquo;ll tell you all about retrieving items.
+If you have retrieved your item directly using the Sitecore API you can still add the nice wrapper when you pipe them through the <strong>Wrap-Item</strong> commandlet as well. Some of those enhancements work in the older versions of PowerShell Extensions but I would encourage you to upgrade to the latest version (2.7 at the time this blog was written) to leverage the full potential of the environment.</p>
+<h3 id="getting-items-based-on-path">Getting Items based on path</h3>
+<p>If you know the path to your item and the database you can simply retrieve your item as follows:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Name</span> <span class="n">Children</span> <span class="n">Languages</span>                <span class="n">Id</span>                                     <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">----</span> <span class="p">--------</span> <span class="p">---------</span>                <span class="p">--</span>                                     <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span> <span class="n">True</span>     <span class="p">{</span><span class="n">en</span><span class="p">,</span> <span class="nb">de-DE</span><span class="p">,</span> <span class="nb">es-ES</span><span class="p">,</span> <span class="n">pt</span><span class="p">...</span> <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You&rsquo;ve noticed we&rsquo;ve skipped the <em><strong>/sitecore</strong></em> part in the path &ndash; that&rsquo;s because this item is represented by the root item of the drive: <em><strong>master:</strong></em> The above will return the latest version of the item in your current language. But what if you want the item in another language? No problem - let&rsquo;s retrieve the Danish version of <em><strong>Home</strong></em>?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span> <span class="n">-Language</span> <span class="n">da</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Id</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DisplayName</span> <span class="n">Language</span> <span class="n">ID</span>                                     <span class="n">Version</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">-----------</span> <span class="p">--------</span> <span class="p">--</span>                                     <span class="p">-------</span> <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hjem</span>        <span class="n">da</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I&rsquo;ve formatted the output above to show you that indeed the right language war returned. If you want to get all languages - the commandlet will support wildcards for both <strong>-Language</strong> and <strong>-Version</strong> parameter. The following returns the latest version for all languages of an item:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span> <span class="n">-Language</span> <span class="p">*</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Id</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">DisplayName</span> <span class="n">Language</span> <span class="n">ID</span>                                     <span class="n">Version</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">-----------</span> <span class="p">--------</span> <span class="p">--</span>                                     <span class="p">-------</span> <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="n">en</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">de-DE</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">pl-PL</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">3</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">en-GB</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hjem</span>        <span class="n">da</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You can see that the <em><strong>en-US</strong></em> above shows the version number as 3&hellip; meaning there are other versions&hellip; let&rsquo;s retrieve the item in all languages and all versions&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span> <span class="n">-Language</span> <span class="p">*</span> <span class="n">-Version</span> <span class="p">*|</span> <span class="nb">Format-Table</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Id</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">DisplayName</span> <span class="n">Language</span> <span class="n">ID</span>                                     <span class="n">Version</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">-----------</span> <span class="p">--------</span> <span class="p">--</span>                                     <span class="p">-------</span> <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="n">en</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">de-DE</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">pl-PL</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">2</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">3</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>        <span class="nb">en-GB</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hjem</span>        <span class="n">da</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>So you can see that those can be used in conjunction to retrieve all possible variants of the item in every language and every version. Filters like <em><strong>en-*</strong></em> and as expected an execution with such filter would return all items in the English language, ignoring the region.
+Similarly Get-ChildItem supports this functionality for its children.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span> <span class="n">-Language</span> <span class="p">*</span> <span class="n">-Version</span> <span class="p">*</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Id</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">DisplayName</span>         <span class="n">Language</span> <span class="n">ID</span>                                     <span class="n">Version</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">-----------</span>         <span class="p">--------</span> <span class="p">--</span>                                     <span class="p">-------</span> <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy </span><span class="n">of</span> <span class="n">Home</span>        <span class="n">en</span>       <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="nb">de-DE</span>    <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy </span><span class="n">of</span> <span class="n">Home</span>        <span class="nb">pl-PL</span>    <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy </span><span class="n">of</span> <span class="n">Home</span>        <span class="nb">en-US</span>    <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hjem</span>                <span class="n">da</span>       <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="n">en</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="nb">de-DE</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="nb">pl-PL</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">2</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">3</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                <span class="nb">en-GB</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hjem</span>                <span class="n">da</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">CognifideCom</span>        <span class="n">en</span>       <span class="p">{</span><span class="n">6A1EC18E-AF9B</span><span class="p">-</span><span class="n">443E</span><span class="p">-</span><span class="n">84C7</span><span class="p">-</span><span class="n">5528F2363A10</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">Demo</span>                <span class="n">en</span>       <span class="p">{</span><span class="n">4F02AEDF</span><span class="p">-</span><span class="n">1CC6</span><span class="p">-</span><span class="n">4B84</span><span class="p">-</span><span class="n">8B6E-F5CB465F8AD9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">GetEngaged</span>          <span class="n">en</span>       <span class="p">{</span><span class="n">68AD4037-EE50</span><span class="p">-</span><span class="mf">4615</span><span class="n">-BA2E-AE11B1D3F6CC</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">GetEngaged</span>          <span class="nb">de-DE</span>    <span class="p">{</span><span class="n">68AD4037-EE50</span><span class="p">-</span><span class="mf">4615</span><span class="n">-BA2E-AE11B1D3F6CC</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">GetEngaged</span>          <span class="nb">es-ES</span>    <span class="p">{</span><span class="n">68AD4037-EE50</span><span class="p">-</span><span class="mf">4615</span><span class="n">-BA2E-AE11B1D3F6CC</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">GetEngaged</span>          <span class="nb">pt-BR</span>    <span class="p">{</span><span class="n">68AD4037-EE50</span><span class="p">-</span><span class="mf">4615</span><span class="n">-BA2E-AE11B1D3F6CC</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">GetEngaged</span>          <span class="nb">pl-PL</span>    <span class="p">{</span><span class="n">68AD4037-EE50</span><span class="p">-</span><span class="mf">4615</span><span class="n">-BA2E-AE11B1D3F6CC</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">RetailTheatre</span>       <span class="n">en</span>       <span class="p">{</span><span class="n">436460CF</span><span class="p">-</span><span class="mf">33E2</span><span class="p">-</span><span class="n">47C0</span><span class="p">-</span><span class="n">90B5-F856630266E3</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="n">Showcase</span>            <span class="n">en</span>       <span class="p">{</span><span class="n">DB8C05B8</span><span class="p">-</span><span class="n">25B5</span><span class="p">-</span><span class="n">42DE-B6CB</span><span class="p">-</span><span class="n">4ACE186283DA</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="n">Zengage</span>             <span class="n">en</span>       <span class="p">{</span><span class="n">D55FE1D5</span><span class="p">-</span><span class="n">1CAC</span><span class="p">-</span><span class="n">4A2E</span><span class="p">-</span><span class="n">9DFE-D624D0F51886</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">TenantTemplate</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="getting-large-number-of-filtered-items-with-sitecore-queries">Getting large number of filtered items with Sitecore queries</h3>
+<p>Sometimes however it&rsquo;s not the most efficient to operate on items by traversing the tree using <strong>Get-ChildItem</strong> especially if you need to work on large trees but need to select only a few items of e.g. a specific template. For this we&rsquo;ve introduced support for the Sitecore query within our provider. Below example fetches all items in <em><strong>/sitecore/content/</strong></em> branch in the <em><strong>Master</strong></em> database for items of <em><strong>Sample Item</strong></em> template:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span> <span class="n">-Query</span> <span class="s2">&#34;/sitecore/content//*[@@templatename=&#39;Sample Item&#39;]&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">Name</span>                             <span class="n">Children</span> <span class="n">Languages</span>                <span class="n">Id</span>                                     <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">----</span>                             <span class="p">--------</span> <span class="p">---------</span>                <span class="p">--</span>                                     <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy </span><span class="n">of</span> <span class="n">Home</span>                     <span class="n">True</span>     <span class="p">{</span><span class="n">en</span><span class="p">,</span> <span class="nb">de-DE</span><span class="p">,</span> <span class="nb">es-ES</span><span class="p">,</span> <span class="n">pt</span><span class="p">...</span> <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>                             <span class="n">True</span>     <span class="p">{</span><span class="n">en</span><span class="p">,</span> <span class="nb">de-DE</span><span class="p">,</span> <span class="nb">es-ES</span><span class="p">,</span> <span class="n">pt</span><span class="p">...</span> <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Naturally the <strong>-Language</strong> parameter still works&hellip;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span> <span class="n">-Query</span> <span class="s2">&#34;/sitecore/content//*[@@templatename=&#39;Sample Item&#39;]&#34;</span> <span class="n">-Language</span> <span class="p">*</span> <span class="n">-Version</span> <span class="p">*</span> <span class="p">|</span> <span class="nb">Format-Table</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Id</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">TemplateName</span> <span class="n">-auto</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">DisplayName</span>  <span class="n">Language</span> <span class="n">ID</span>                                     <span class="n">Version</span> <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">-----------</span>  <span class="p">--------</span> <span class="p">--</span>                                     <span class="p">-------</span> <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy </span><span class="n">of</span> <span class="n">Home</span> <span class="n">en</span>       <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="nb">de-DE</span>    <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy </span><span class="n">of</span> <span class="n">Home</span> <span class="nb">pl-PL</span>    <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Copy </span><span class="n">of</span> <span class="n">Home</span> <span class="nb">en-US</span>    <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hjem</span>         <span class="n">da</span>       <span class="p">{</span><span class="mf">503713E5</span><span class="n">-F9EE</span><span class="p">-</span><span class="mf">4847</span><span class="n">-AEAF-DD13FD853004</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="n">en</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="nb">de-DE</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="nb">pl-PL</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">2</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="nb">en-US</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">3</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>         <span class="nb">en-GB</span>    <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hjem</span>         <span class="n">da</span>       <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="mf">1</span>       <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="using-id-to-address-an-item">Using ID to address an item.</h3>
+<p>You can also fetch for items by ID like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span> <span class="n">-ID</span> <span class="s2">&#34;{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">Name</span>  <span class="n">Children</span> <span class="n">Languages</span>                <span class="n">Id</span>                                     <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">----</span>  <span class="p">--------</span> <span class="p">---------</span>                <span class="p">--</span>                                     <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span>  <span class="n">True</span>     <span class="p">{</span><span class="n">en</span><span class="p">,</span> <span class="nb">de-DE</span><span class="p">,</span> <span class="nb">es-ES</span><span class="p">,</span> <span class="n">pt</span><span class="p">...</span> <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="using-item-uri">Using Item Uri</h3>
+<p>You can also query item using its Uri (which contains version and language information encoded directly in it):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span> <span class="n">-Uri</span> <span class="s2">&#34;sitecore://master/{110D559F-DEA5-42EA-9C1C-8A5DF7E70EF9}?lang=en&amp;ver=1&#34;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">Name</span> <span class="n">Children</span> <span class="n">Languages</span>                <span class="n">Id</span>                                     <span class="n">TemplateName</span>
+</span></span><span class="line"><span class="cl"><span class="p">----</span> <span class="p">--------</span> <span class="p">---------</span>                <span class="p">--</span>                                     <span class="p">------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">Home</span> <span class="n">True</span>     <span class="p">{</span><span class="n">en</span><span class="p">,</span> <span class="nb">de-DE</span><span class="p">,</span> <span class="nb">es-ES</span><span class="p">,</span> <span class="n">pt</span><span class="p">...</span> <span class="p">{</span><span class="n">110D559F-DEA5</span><span class="p">-</span><span class="n">42EA</span><span class="p">-</span><span class="n">9C1C</span><span class="p">-</span><span class="n">8A5DF7E70EF9</span><span class="p">}</span> <span class="n">Sample</span> <span class="n">Item</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>In both of the above cases you need to specify a database (like <em><strong>master:</strong></em>) as the path &ndash; that&rsquo;s because PowerShell needs to know in context of which provider those parameters are supposed to be executed as other providers are not support those for obvious reasons. (e.g. files don&rsquo;t have versions or support for languages).</p>
+<h2 id="so-what-are-those-item-extensions-i-was-talking-at-the-beginning">So what are those item extensions I was talking at the beginning?</h2>
+<p>I often see the following two ways of accessing and changing fields used in scripts:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Set-ItemProperty</span> <span class="n">-Path</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span> <span class="n">-Name</span> <span class="s2">&#34;Title&#34;</span> <span class="n">-Value</span> <span class="s2">&#34;New Title&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Or something that would feel very natural for a Sitecore developer:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$item</span><span class="p">.</span><span class="py">Editing</span><span class="p">.</span><span class="py">BeginEdit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$item</span><span class="p">[</span><span class="s2">&#34;Title&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="s2">&#34;New Title&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$item</span><span class="p">.</span><span class="py">Editing</span><span class="p">.</span><span class="py">EndEdit</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And I&rsquo;m it makes me cry a little when I see it? not because it won&rsquo;t work. You haven&rsquo;t done anything wrong &ndash; it&rsquo;s just me who failed to communicate that there are much better ways of doing those operations (which really prompted me to write this blog). The items that you&rsquo;re getting from the provider give you a better way of doing it as they turn all the fields into semi-native PowerShell properties so instead of doing the above you can do:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$item</span><span class="p">.</span><span class="py">Title</span> <span class="p">=</span> <span class="s2">&#34;New Title&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>&hellip; or even shorter if you don&rsquo;t want to use a variable:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">).</span><span class="py">Title</span> <span class="p">=</span> <span class="s2">&#34;New Title&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>But wait &ndash; there&rsquo;s more? it doesn&rsquo;t work for string properties exclusively&hellip; there are a few other hidden gems in those properties. For example if we detect that the field is a <em><strong>Date</strong></em> or <em><strong>Datetime</strong></em> field, we will return <strong>System.DateTime</strong> typed value from a field rather than the string Sitecore stores internally.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;(</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">).</span><span class="py">__Created</span> 
+</span></span><span class="line"><span class="cl"><span class="n">Monday</span><span class="p">,</span> <span class="n">April</span> <span class="mf">07</span><span class="p">,</span> <span class="mf">2008</span> <span class="mf">1</span><span class="err">:</span><span class="mf">59</span><span class="err">:</span><span class="mf">00</span> <span class="n">PM</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>And not just read - you can also assign <strong>System.DateTime</strong> value to such &ldquo;native&rdquo; property:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;(</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">).</span><span class="py">__Created</span> <span class="p">=</span> <span class="p">[</span><span class="no">DateTime</span><span class="p">]::</span><span class="n">Now</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>? now let&rsquo;s read it again:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">master</span><span class="err">:</span><span class="p">\&gt;(</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">).</span><span class="py">__Created</span> 
+</span></span><span class="line"><span class="cl"><span class="n">Monday</span><span class="p">,</span> <span class="n">October</span> <span class="mf">13</span><span class="p">,</span> <span class="mf">2014</span> <span class="mf">1</span><span class="err">:</span><span class="mf">59</span><span class="err">:</span><span class="mf">41</span> <span class="n">AM</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Great we&rsquo;ve just changed it! Our property handlers take care of all the necessary .Editing.BeginEdit-s and .Editing.EndEdit-s.
+It works for assigning content items and media items as well. If your item has link fields in it, you can assign other items to them and not worry about the link format &ndash; we will do all the plumbing for you.
+To provide an example - I&rsquo;ve extended my home with additional fields as follows:</p>
+<p><a href="/images/image.png"><img src="/images/image_thumb.png" alt="image" title="image" class="aligncenter" width="644" height="357" /></a></p>
+<p>I can do the following to assign an image to my <em><strong>Image</strong></em> field</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">).</span><span class="py">Image</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="s1">&#39;master:\media library\logo&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Easy enough, isn&rsquo;t it? Let us (the PowerShell Extensions) detect the field type for you and worry about what to call! Now let&rsquo;s assign a content item to <em><strong>GeneralLink</strong></em> and Link fields&hellip; just like you expected:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">).</span><span class="py">GeneralLink</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="s1">&#39;master:\content\CognifideCom&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Even better - if you assign a media item to it, it will detect that and do the right thing assigning it as a media link.
+What about fields that accept lists of items? We&rsquo;ve got your back here as well&hellip; Let&rsquo;s assign all children of <em><strong>/sitecore/content/</strong></em> item to the <em><strong>ItemList</strong></em> field:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">(</span><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">).</span><span class="py">ItemList</span> <span class="p">=</span> <span class="nb">Get-ChildItem</span> <span class="s1">&#39;master:\content\&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Ok, so let&rsquo;s see how our item looks in the Content editor after all the assignments that we&rsquo;ve just performed:</p>
+<p><a href="/images/image1.png"><img src="/images/image_thumb1.png" alt="image" title="image" class="aligncenter" width="644" height="435" /></a></p>
+<p>Great! Looks like it worked?
+It&rsquo;s funny how those little improvements make your scripts much more succinct and understandable &ndash; try it for yourself!</p>
+<h2 id="when-not-to-use-the-automated-properties">When not to use the automated properties?</h2>
+<p>As with every rule there is an exception to this one. Those automated properties perform the <strong>$item.Editing.BeginEdit()</strong> and <strong>$item.Editing.EndEdit()</strong> every time as they should which results in saving the item after every assignment. If you&rsquo;re assigning multiple properties on one item this might be detrimental to performance of your script. In such cases you might want to choose to call <strong>$item.Editing.BeginEdit()</strong> yourself before modifying the item call the <strong>$item[?field name?] = ?new value?</strong> for each property you want to modify, and then end the burst with the <strong>$item.Editing.EndEdit()</strong>. But that is very situational and will usually only be required if you&rsquo;re working with a large volume of data. In those cases you might also want to introduce the <strong>Sitecore.Data.BulkUpdateContext</strong> trick that <a href="http://bartlomiejmucha.com/en/blog">Bartek</a> has used in <a href="http://bartlomiejmucha.com/en/blog/how-to-populate-sitecore-with-test-data-using-power-shell/">his blog post</a>.
+Godspeed and happy scripting!</p>
+
+      </div>
+
+      <footer class="entry-footer">
+        
+
+        <nav class="post-navigation">
+          
+          <div class="nav-previous">
+            <a href="/2014/10/10/sitecore-powershell-extensions-remoting/">&laquo; Sitecore PowerShell Extensions Remoting</a>
+          </div>
+          
+          
+          <div class="nav-next">
+            <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">Creating beautiful Sitecore reports easily with PowerShell Extensions &raquo;</a>
+          </div>
+          
+        </nav>
+      </footer>
+
+      
+<div class="comments">
+  <h2 class="comments-title">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:1314/2014/10/12/working-with-sitecore-items-in-powershell-extensions/";
+      this.page.identifier = "/2014/10/12/working-with-sitecore-items-in-powershell-extensions/";
+      this.page.identifier = '3111353914';
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codality.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+    </div>
+  </article>
+
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-inner">
+  <p>&copy; 1999-2026 - <a href="/">Adam Najmanowicz</a></p>
+  
+</div>
+
+    </footer>
+  </div>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      block.style.position = 'relative';
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('aria-label', 'Copy code');
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      block.appendChild(btn);
+      btn.addEventListener('click', function() {
+        var code = block.querySelector('td:last-child code') || block.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(function() {
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(function() {
+              btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+        }
+      });
+    });
+  });
+  </script>
+  <script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    var visible = false;
+    window.addEventListener('scroll', function() {
+      var shouldShow = window.scrollY > 400;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        btn.classList.toggle('visible', visible);
+      }
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  </script>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
+  <script>
+  (function() {
+    var overlay = document.getElementById('lightbox');
+    var content = document.getElementById('lightbox-content');
+    var closeBtn = document.getElementById('lightbox-close');
+    var imgExts = /\.(jpe?g|png|gif|webp|svg|bmp|avif)(\?.*)?$/i;
+    var vidExts = /\.(mp4|webm|ogg)(\?.*)?$/i;
+
+    function open(href) {
+      content.innerHTML = '';
+      if (imgExts.test(href)) {
+        var img = document.createElement('img');
+        img.src = href;
+        img.alt = '';
+        content.appendChild(img);
+      } else if (vidExts.test(href)) {
+        var vid = document.createElement('video');
+        vid.src = href;
+        vid.controls = true;
+        vid.autoplay = true;
+        content.appendChild(vid);
+      } else {
+        return false;
+      }
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return true;
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      var vid = content.querySelector('video');
+      if (vid) vid.pause();
+    }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (imgExts.test(href) || vidExts.test(href)) {
+        e.preventDefault();
+        open(href);
+      }
+    });
+
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      close();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) close();
+    });
+  })();
+  </script>
+  <script id="dsq-count-scr" src="https://codality.disqus.com/count.js" async></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+      s.onload = function() {
+        var mermaidTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+        mermaid.initialize({ startOnLoad: false, theme: mermaidTheme });
+        mermaidBlocks.forEach(function(block) {
+          var pre = block.parentElement;
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+      };
+      document.head.appendChild(s);
+    }
+  });
+  </script>
+</body>
+</html>

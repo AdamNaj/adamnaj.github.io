@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerShell | Codality</title>
+<meta name="description" content="[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz">
+<meta name="generator" content="Hugo 0.156.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+<script>
+  (function(){var s=localStorage.getItem('theme-preference');var t=s==='dark'||s==='light'?s:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+
+      <script src="/js/main.js"></script>
+
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1314/categories/powershell/index.xml" title="Codality">
+
+</head>
+<body>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="header-inner">
+  <div class="header-top">
+    <nav class="site-navigation" aria-label="Main Navigation">
+      
+  <nav>
+    <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/about/">About me</a>
+    </li>
+    <li>
+      <a href="/downloads/">Downloads</a>
+    </li>
+    </ul>
+  </nav>
+
+    </nav>
+    
+    <nav class="social-navigation" aria-label="Social Links">
+      <ul>
+        <li><a href="https://github.com/AdamNaj" title="GitHub"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/najmanowicz/" title="LinkedIn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a></li>
+        <li><a href="http://www.twitter.com/AdamNaj" title="Twitter"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a></li>
+        <li><a href="https://www.facebook.com/adam.najmanowicz" title="Facebook"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/adamnajmanowicz/" title="Instagram"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a></li>
+      </ul>
+    </nav>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+  <div class="site-branding">
+    <p class="site-title"><a href="/">Codality</a></p>
+    
+    <p class="site-tagline">[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz</p>
+    
+    <hr class="header-separator"><nav class="tag-cloud" aria-label="Category Cloud"><a href="/categories/best-practices/" style="font-size: 14px;" title="best practices (14 posts)">Best Practices</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/blog-navigator/" style="font-size: 12px;" title="blog navigator (8 posts)">Blog Navigator</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms/" style="font-size: 24px;" title="cms (79 posts)">CMS</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms-ux/" style="font-size: 12px;" title="cms ux (8 posts)">CMS UX</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/code-samples/" style="font-size: 16px;" title="code samples (35 posts)">Code Samples</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/continuous-deployment/" style="font-size: 11px;" title="continuous deployment (4 posts)">Continuous Deployment</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/desktop-customization/" style="font-size: 11px;" title="desktop customization (4 posts)">Desktop Customization</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/downloadable/" style="font-size: 14px;" title="downloadable (22 posts)">Downloadable</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/epicode/" style="font-size: 14px;" title="epicode (16 posts)">EPiCode</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/episerver/" style="font-size: 18px;" title="episerver (41 posts)">EPiServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/faceted-navigation/" style="font-size: 11px;" title="faceted navigation (5 posts)">Faceted Navigation</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/icondeveloper/" style="font-size: 11px;" title="icondeveloper (3 posts)">IconDeveloper</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/internet-information-services/" style="font-size: 12px;" title="internet information services (11 posts)">Internet Information Services</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/lifestyle/" style="font-size: 14px;" title="lifestyle (13 posts)">Lifestyle</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/microsoft-sqlserver/" style="font-size: 12px;" title="microsoft sqlserver (6 posts)">Microsoft SqlServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/mobile/" style="font-size: 11px;" title="mobile (4 posts)">Mobile</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/open-source/" style="font-size: 16px;" title="open source (24 posts)">Open Source</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/powershell/" style="font-size: 18px;" title="powershell (43 posts)">PowerShell</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/rants/" style="font-size: 12px;" title="rants (7 posts)">Rants</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/scripting/" style="font-size: 18px;" title="scripting (43 posts)">Scripting</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/security/" style="font-size: 11px;" title="security (2 posts)">Security</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/sitecore/" style="font-size: 18px;" title="sitecore (38 posts)">Sitecore</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinning/" style="font-size: 12px;" title="skinning (10 posts)">Skinning</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinstudio/" style="font-size: 14px;" title="skinstudio (13 posts)">SkinStudio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/software-development/" style="font-size: 28px;" title="software development (99 posts)">Software Development</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/solution/" style="font-size: 18px;" title="solution (42 posts)">Solution</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/stardock/" style="font-size: 16px;" title="stardock (25 posts)">Stardock</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/tooling/" style="font-size: 14px;" title="tooling (13 posts)">Tooling</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/visual-studio/" style="font-size: 12px;" title="visual studio (7 posts)">Visual Studio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/webparts/" style="font-size: 11px;" title="webparts (2 posts)">WebParts</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/windowblinds/" style="font-size: 12px;" title="windowblinds (12 posts)">WindowBlinds</a></nav>
+    <hr class="tag-cloud-separator"></div>
+</div>
+
+    </header>
+    <div class="site-main">
+      <aside class="sidebar">
+  <div class="widget">
+    <h2 class="widget-title">Search</h2>
+    <form class="search-form" action="http://localhost:1314/search/" method="get">
+      <input type="search" class="search-field" placeholder="Search ..." name="q">
+    </form>
+  </div>
+
+  
+  <div class="widget widget-mvp">
+    <a href="https://mvp.sitecore.com/en/Directory/Profile?id=e416ef1dabf5468ff4fa08dd30f068bb" title="Sitecore Technology MVP 2026">
+      <img src="/images/sitecore-mvp-2026-technology.png" alt="Sitecore Technology MVP 2026" class="mvp-badge" width="250">
+    </a>
+    
+    <div class="mvp-badges-history">
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2017-Technology.png" alt="MVP Badge 2017" class="mvp-badge-small">
+        <span class="mvp-badge-year">2017</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2016-Technology.png" alt="MVP Badge 2016" class="mvp-badge-small">
+        <span class="mvp-badge-year">2016</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2015-Technology.png" alt="MVP Badge 2015" class="mvp-badge-small">
+        <span class="mvp-badge-year">2015</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2014-Technology.png" alt="MVP Badge 2014" class="mvp-badge-small">
+        <span class="mvp-badge-year">2014</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2013-Technology.png" alt="MVP Badge 2013" class="mvp-badge-small">
+        <span class="mvp-badge-year">2013</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2012-Technology.png" alt="MVP Badge 2012" class="mvp-badge-small">
+        <span class="mvp-badge-year">2012</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2011-Technology.png" alt="MVP Badge 2011" class="mvp-badge-small">
+        <span class="mvp-badge-year">2011</span>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+
+  
+</aside>
+
+      <main class="content-area">
+        
+  <div class="content-area">
+    <header class="section-header">
+      <h1 class="section-title">PowerShell</h1>
+    </header>
+
+    
+
+    <div class="posts-list">
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2024/11/23/app-settings-in-environment-variables-in-sitecore/">App settings in environment variables in Sitecore.</a></h3>
+          <div class="post-meta">
+            <time datetime="2024-11-23">November 23, 2024</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Creating back-end integrations is inevitably linked with having to authenticate against a remote endpoint. Be that a Rest API, FTP or an APM - secrets (credentials, api tokent, shared secrets) of some sort will be involved in the process.</p>
+<p>Those credentials must be stored somewhere. At this point I hope no one even considers hardcoding those but even if you extract them to configuration - having them exposed in your repository may be a bad idea and is frowned upon by tools like SonarQube.</p></p><div class="post-actions">
+            <a href="/2024/11/23/app-settings-in-environment-variables-in-sitecore/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2024/11/23/app-settings-in-environment-variables-in-sitecore/#disqus_thread" class="post-comments-link" >Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2016/08/03/roll-out-item-branches-en-masse-using-sitecore-powershell-extensions/">Roll out multilingual item branches en masse using Sitecore PowerShell Extensions</a></h3>
+          <div class="post-meta">
+            <time datetime="2016-08-03">August 3, 2016</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>I&rsquo;ve received this nice comment on <a href="/2011/11/18/sample-scripts-for-sitecore-powershell-console/">one of my earlier posts</a> and I thought it might warrant a blog post since it is a nice little challenge and might be useful for more scripters in our community.</p>
+<blockquote>
+<p>Hi Adam,
+thanks for the pointers on PowerShell! There&rsquo;s one in particular I&rsquo;m hoping to get some help with, if that&rsquo;s ok? <strong>I have created a Branch Template in Sitecore, and I want to deploy it under every item in the Content Tree that uses one particular page template (about 200 instances of deployment, in this case). For an added bit of fun, there will be several different language versions being deployed along the way, so I guess that prevents me doing a blanket rollout.</strong> Could you please recommend a script that is along the lines of &ldquo;Add this Branch Template under this Item ID in the following named language codes&rdquo;? I realise I would then be repeating that line 200 times with varying parent item ID and languages, but I can live with that if that&rsquo;s the easiest way to do it.
+Many thanks for your help!
+Phil Neale</p></p><div class="post-actions">
+            <a href="/2016/08/03/roll-out-item-branches-en-masse-using-sitecore-powershell-extensions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2016/08/03/roll-out-item-branches-en-masse-using-sitecore-powershell-extensions/#disqus_thread" class="post-comments-link" data-disqus-identifier="5035413062">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/">Turn your Sitecore PowerShell reports into applications with Action Scripts</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-05-05">May 5, 2015</time>
+            &middot; <span class="reading-time">8 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/shoot_out_of_cannon_400_clr_13993.png"><img src="/images/shoot_out_of_cannon_400_clr_13993.png" alt="shoot_out_of_cannon_400_clr_13993" class="alignleft" width="400" height="338" /></a></p>
+<p>In one of my <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">previous posts</a> I described how to create reports in Sitecore PowerShell Extensions (SPE for short) that allow you to leverage the joint power of Sitecore and PowerShell to deliver complete and elegant reports in little to no time. In this post I&rsquo;ll tell you how to take this a step further and operationalize them into full blown Sitecore Desktop applications.
+The secret sauce is in the actions you can place on the report, the additional parameters that I haven&rsquo;t mentioned in the <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">previous post</a>, and the use of Sitecore rules engine with some rules that come with SPE.
+For the purpose of this post I will limit the scripts to samples that are (mostly) in the vanilla SPE deployment.
+Let&rsquo;s begin with describing the actions and how you can configure them to appear in your reports.</p></p><div class="post-actions">
+            <a href="/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/05/05/turn-your-sitecore-powershell-reports-into-applications-with-action-scripts/#disqus_thread" class="post-comments-link" data-disqus-identifier="3737474679">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/04/13/rapid-api-prototyping-for-sitecore-with-powershell-extensions/">Rapid API prototyping for Sitecore with PowerShell Extensions</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-04-13">April 13, 2015</time>
+            &middot; <span class="reading-time">7 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/short_cut_400_clr_7608.png"><img src="/images/short_cut_400_clr_7608_thumb.png" alt="short_cut_400_clr_7608" title="short_cut_400_clr_7608" class="alignleft" width="400" height="210" /></a></p>
+<p>This post describes how you can deliver JSON/XML/HTML APIs quickly with Sitecore PowerShell Extensions.
+Technically this was also available earlier but the API was not refined to the state it is now.
+As Sitecore is constantly progressing from predominantly serving as a  CMS towards becoming a mobile and web application delivery platform (which is very apparent by the recent increase of SPEAK popularity, the introduction of Item Web API and the app centric nature of the new Sitecore 8 interface there is an increased need to rapidly deliver APIs for those those front end applications to work seamlessly with the CMS back-end.
+PowerShell Extensions can help you with that move by enabling rapid prototyping of APIs that are either JSON or XML in nature.</p></p><div class="post-actions">
+            <a href="/2015/04/13/rapid-api-prototyping-for-sitecore-with-powershell-extensions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/04/13/rapid-api-prototyping-for-sitecore-with-powershell-extensions/#disqus_thread" class="post-comments-link" data-disqus-identifier="3677796294">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/04/07/using-sitecore-content-search-in-powershell-extensions/">Using Sitecore Content Search in PowerShell Extensions</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-04-07">April 7, 2015</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/boxy_robot_searching_400_clr_14606.png"><img src="/images/boxy_robot_searching_400_clr_14606.png" alt="" class="alignright" width="321" height="400" /></a></p>
+<p>This is just a short post to supplement the &ldquo;<a href="/2014/10/12/working-with-sitecore-items-in-powershell-extensions/">Working with Sitecore items in PowerShell Extensions</a>&rdquo; as we now have a new cmdlet of retrieving items in SPE 3.0.
+<code>Find-Item</code> cmdlet allows you to leverage the glorious new search API Sitecore introduced in the 7.0 version of its CMS to retrieve items using the Sitecore Content Search indexes.
+You will find the available parameters on it as follows:</p></p><div class="post-actions">
+            <a href="/2015/04/07/using-sitecore-content-search-in-powershell-extensions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/04/07/using-sitecore-content-search-in-powershell-extensions/#disqus_thread" class="post-comments-link" data-disqus-identifier="3661259787">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/03/06/sitecore-powershell-extensions-in-numbers/">Sitecore PowerShell Extensions in numbers</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-03-06">March 6, 2015</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/graph_on_grid_400_clr_9636.png"><img src="/images/graph_on_grid_400_clr_9636_thumb.png" alt="graph_on_grid_400_clr_9636" title="graph_on_grid_400_clr_9636" class="alignright" width="400" height="275" /></a></p>
+<p>Recently the Sitecore PowerShell Team has been reflecting on the progress of the <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Sitecore PowerShell Extensions</a> (SPE) module. We appreciate all the feedback and contributions from the community. Without the many great people in the community, the module just wouldn&rsquo;t be where it is today. The team is proud of the accomplishments for a module developed purely by the community with no formal Sitecore support.
+The new year has revealed some exciting news out on the Marketplace for SPE.</p></p><div class="post-actions">
+            <a href="/2015/03/06/sitecore-powershell-extensions-in-numbers/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/03/06/sitecore-powershell-extensions-in-numbers/#disqus_thread" class="post-comments-link" data-disqus-identifier="3572047972">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/03/03/set-up-sitecore-powershell-extensions-development-environment/">Set up Sitecore PowerShell Extensions development environment</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-03-03">March 3, 2015</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/join_the_puzzle_crowd_400_clr_10889.png"><img src="/images/join_the_puzzle_crowd_400_clr_10889.png" alt="join_the_puzzle_crowd_400_clr_10889" class="alignright" width="400" height="275" /></a></p>
+<p>Since we&rsquo;ve seen some interest from developers wanting to join the <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Sitecore PowerShell Extensions</a> team, I thought it might be worth documenting how my development environment is put together to allow for easier on-boarding of new members (Yes, we&rsquo;re hiring! No, we can&rsquo;t pay you ;) ). Maybe you just want to compile it yourself to make sure we&rsquo;re not up to no good, or just plain see inside and play with it&hellip;
+First of all you need to have Sitecore installed somewhere (obviously). For the purpose of examples I&rsquo;ll assume your instance is located at *<strong>C:\inetpub\wwwroot\Sitecore8*</strong> and has the 3 standard folders Data, Databases and Website in them as it normally has. For that very same reason I&rsquo;ll also assume that your Sitecore PowerShell Extensions project folder is located at *<strong>C:\Projects\SitecorePowerShell*</strong></p></p><div class="post-actions">
+            <a href="/2015/03/03/set-up-sitecore-powershell-extensions-development-environment/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/03/03/set-up-sitecore-powershell-extensions-development-environment/#disqus_thread" class="post-comments-link" data-disqus-identifier="3562897080">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2015/02/27/upgrading-your-sitecore-powershell-extensions-from-2-x-to-3-x-what-you-need-to-know/">Upgrading your Sitecore PowerShell Extensions from 2.x to 3.x - what you need to know</a></h3>
+          <div class="post-meta">
+            <time datetime="2015-02-27">February 27, 2015</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/figure_moving_the_needle_400_clr_134341.png"><img src="/images/figure_moving_the_needle_400_clr_134341.png" alt="" class="alignright" width="400" height="360" /></a></p>
+<p>I&rsquo;m really excited to see the <a href="https://github.com/SitecorePowerShell/Console/releases">3.0</a> version of <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Sitecore PowerShell Extensions</a> released. There have been more effort, love and sweat poured into this version by the whole team than I would ever expect. This blog has been written to assert the smoothest upgrade experience possible. While we&rsquo;re always striving for the smoothest upgrade possible - this version introduces some changes that require you to perform a manual step or two. While those could be automated to a degree, making those manual was a conscious choice as I didn&rsquo;t want to break e.g. your Insite instance that stores some of its files in the &ldquo;Console&rdquo; sub-folder of the Website folder.
+Before upgrading your instance from Sitecore PowerShell Extensions 2.x to 3.0 please make sure you have your scripts backed up as the upgrade process might cause some of your scripts to be removed. This is especially true if you used the integration script libraries and you are upgrading from SPE 2.7 or earlier. If you&rsquo;re upgrading from version 2.8 and your script live in your own modules You should be safe although it&rsquo;s always smart to back up.
+The steps you need to take prior or after installing the new version of the PowerShell Extensions:</p></p><div class="post-actions">
+            <a href="/2015/02/27/upgrading-your-sitecore-powershell-extensions-from-2-x-to-3-x-what-you-need-to-know/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2015/02/27/upgrading-your-sitecore-powershell-extensions-from-2-x-to-3-x-what-you-need-to-know/#disqus_thread" class="post-comments-link" data-disqus-identifier="3553495940">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/11/09/introducing-powershell-actions-for-sitecore-workflows/">Introducing PowerShell Actions for Sitecore Workflows</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-11-09">November 9, 2014</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>This has been on my plate for a while and to be honest I&rsquo;m not sure what took me so long as it literally took around 4 hours from start to completion which I consider a testament to how easy it is to create additional integrations with PowerShell akin to the <a href="http://michaellwest.blogspot.com/2014/11/sitecore-powershell-extended-with-gutters.html">Gutter integration</a> or the <a href="http://michaellwest.blogspot.com/2014/10/sitecore-powershell-extended-with-pipelines.html">login/logout integration</a> Michael West has recently introduced in the platform.</p>
+<img src="/images/creating_a_better_process_800_clr_73661.png" alt="creating_a_better_process_800_clr_7366" title="creating_a_better_process_800_clr_7366" class="aligncenter" width="739" height="369" />
+<p>What this integration allows you to do is to eliminate the need for code deployment when you&rsquo;re in need for a quick action here and there for when a user executes a workflow command.
+You might find <a href="http://cognifide.com/blogs/sitecore/changing-workflow-state-of-sitecore-items-programmatically/">this article</a> helpful by a Cognifide colleague of mine. I especially like this image which illustrates nicely where actions fit in a Sitecore workflow.</p></p><div class="post-actions">
+            <a href="/2014/11/09/introducing-powershell-actions-for-sitecore-workflows/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/11/09/introducing-powershell-actions-for-sitecore-workflows/#disqus_thread" class="post-comments-link" data-disqus-identifier="3207614746">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/11/03/update-to-state-of-knowledge-for-powershell-extensions-for-sitecore-november-2014/">Update to State of knowledge for PowerShell Extensions for Sitecore - November 2014</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-11-03">November 3, 2014</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>It&rsquo;s been a while since <a href="/2012/03/31/state-of-powershell-for-sitecore-for-april-2012/">my last summary on April 2012</a> but finally getting to update the Reference page with the latest community summary for <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Sitecore PowerShell Extensions</a>.</p>
+<p><a href="/images/book_open_light_shine_out_800_clr_9090.png"><img src="/images/book_open_light_shine_out_800_clr_9090_thumb.png" alt="book_open_light_shine_out_800_clr_9090" title="book_open_light_shine_out_800_clr_9090" class="aligncenter" width="800" height="356" /></a></p>
+<p>Following are the updates I will be pushing onto the <a href="/sitecore-powershell-console/">reference page</a> I&rsquo;m trying to keep up to date and failing miserably most of the time.</p>
+<h3 id="101-level-tutorials-for-powershell-extensions-for-sitecore-updated">101 level tutorials for PowerShell Extensions for Sitecore (updated)</h3>
+<ul>
+<li><a href="/2014/10/12/working-with-sitecore-items-in-powershell-extensions/">Working with Sitecore items</a></li>
+<li><a href="http://sitecorejunkie.com/2014/06/02/make-bulk-item-updates-using-sitecore-powershell-extensions/">Bulk Item Updates</a></li>
+</ul>
+<h3 id="how-powershell-console-can-help-you-extend-sitecore-updated">How PowerShell console can help you extend Sitecore? (updated)</h3>
+<ul>
+<li><a href="http://michaellwest.blogspot.com/2013/11/SPE-ScheduledTasks.html">Scheduled Tasks &ndash; Video tutorial</a></li>
+<li><a href="/2013/05/27/react-to-sitecore-events-with-powershell-scripts/">React to Sitecore events with PowerShell scripts</a></li>
+<li><a href="http://sitecorejunkie.com/2014/05/31/execute-powershell-scripts-in-scheduled-tasks-using-sitecore-powershell-extensions/">Execute PowerShell Scripts in Scheduled Tasks</a></li>
+<li><a href="http://sitecorejunkie.com/2014/09/22/add-scripts-to-the-powershell-toolbox-in-sitecore-powershell-extensions/">Add Scripts to the PowerShell Toolbox</a></li>
+<li><a href="http://sitecorejunkie.com/2014/05/27/launch-powershell-scripts-in-the-item-context-menu-using-sitecore-powershell-extensions/">Launch PowerShell Scripts in the Item Context Menu</a></li>
+</ul>
+<h3 id="interesting-use-cases-of-the-powershell-extensions-module-new-section">Interesting use cases of the PowerShell Extensions Module (new section)</h3>
+<ul>
+<li><a href="http://michaellwest.blogspot.com/2014/10/sitecore-powershell-run-task-on-demand.html">Using PowerShell to create and run on demand tasks</a></li>
+<li><a href="http://michaellwest.blogspot.com/2014/11/sitecore-powershell-extended-with-gutters.html">Sitecore PowerShell Extended with Gutters</a> (part of the SPE core since v2.7.5)</li>
+<li><a href="http://michaellwest.blogspot.com/2014/10/sitecore-powershell-extended-with-pipelines.html">Sitecore PowerShell Extended with Pipelines</a> (part of the SPE core since v2.7.5)</li>
+</ul>
+<h3 id="extending-powershell-extensions-new-section">Extending PowerShell Extensions (new section)</h3>
+<ul>
+<li><a href="/2012/04/03/your-own-powershell-commandlets/">Building your own commandlets for PowerShell Extensions &ndash; tutorial</a>.</li>
+<li><a href="http://sitecorejunkie.com/2014/05/29/build-a-custom-command-in-sitecore-powershell-extensions/">Build a custom command in Sitecore PowerShell Extensions</a> &ndash; similar tutorial from Mike.</li>
+<li><a href="http://sitecorejunkie.com/2013/09/22/expand-tokens-on-sitecore-items-using-a-powershell-function-in-sitecore-powershell-extensions/">Expand Tokens on Sitecore Items Using a PowerShell Function</a>
+<ul>
+<li><a href="http://sitecorejunkie.com/2013/09/21/expand-tokens-on-sitecore-items-using-a-custom-command-in-sitecore-powershell-extensions/">or build a custom commandlet to do the same</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="powershell-extensions-as-tooling-for-sitecore-development-new-section">PowerShell Extensions as tooling for Sitecore development (new section)</h3>
+<ul>
+<li><a href="http://reasoncodeexample.com/2014/01/28/integration-tests-using-powershell-sitecore-powershell-extensions/">Writing integration tests using PowerShell</a>
+<ul>
+<li><a href="http://reasoncodeexample.com/2014/01/29/powershell-commandlets-sitecore-powershell-extensions/">Part 2 &ndash; Building your own PowerShell commandlets</a></li>
+<li><a href="http://reasoncodeexample.com/2014/01/29/remote-automation-sitecore-powershell-extensions/">Part 3 &ndash; Using Remote Automation web service to run them</a></li>
+</ul>
+</li>
+<li><a href="http://coreblimey.azurewebsites.net/?p=1671">Sitecore and PowerShell: Feel like He-man</a></li>
+<li><a href="http://www.cognifide.com/blogs/sitecore/serialization-and-deserialization-with-sitecore-powershell-extensions/">Serialization and deserialization with Sitecore PowerShell Extensions</a></li>
+<li><a href="/2013/01/29/sitecore-powershell-console-in-visual-studio/">Sitecore PowerShell console in Visual Studio</a></li>
+<li><a href="http://www.cognifide.com/blogs/sitecore/feel-the-power-in-powershell/">Fixing problematic content or Workflow state</a></li>
+<li><a href="http://bartlomiejmucha.com/en/blog/how-to-populate-sitecore-with-test-data-using-power-shell/">How to populate Sitecore with test data using PowerShell</a></li>
+<li><a href="https://medium.com/@HLeautaud/migrating-large-amounts-of-content-in-sitecore-fb35a488cba">Migrating large amounts of content in Sitecore with PowerShell Extensions</a></li>
+<li><a href="/2014/10/10/sitecore-powershell-extensions-remoting/">Remoting into your Sitecore PowerShell instance</a></li>
+</ul>
+<h3 id="using-powershell-extensions-for-reporting-new-section">Using PowerShell Extensions for reporting (new section)</h3>
+<ul>
+<li><a href="http://michaellwest.blogspot.com/2014/04/reports-with-sitecore-powershell.html">Reports with Sitecore PowerShell Extensions</a> (Michael West&rsquo;s take)</li>
+<li><a href="http://sitecorejunkie.com/2014/05/28/create-a-custom-report-in-sitecore-powershell-extensions/">Create a Custom Report in Sitecore PowerShell Extensions</a> (this time by Mike Reynolds)</li>
+<li>And then again ?<a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">Creating beautiful Sitecore reports easily with PowerShell Extensions</a>? by yours truly &ndash; because we can never have enough articles about reports</li>
+</ul>
+<h3 id="code-examples-new-section">Code Examples (new section)</h3>
+<ul>
+<li><a href="https://gist.github.com/AdamNaj/6200176">Read-Variable Example</a></li>
+<li><a href="/2013/07/02/re-create-a-site-structure-from-its-sitemap-in-your-sitecore-instance-with-powershell/">Re-create a site structure from its sitemap in your Sitecore instance with PowerShell</a></li>
+<li><a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/">Zip and download Sitecore logs</a></li>
+<li><a href="/2013/07/15/zip-and-download-sitecore-media-library-folder-with-powershell/">Zip and download Sitecore Media Library folder</a></li>
+<li><a href="http://michaellwest.blogspot.com/2014/05/archive-log-files-with-sitecore.html">Archive Log Files</a></li>
+<li><a href="https://gist.github.com/michaellwest/f563b0b3597f6c0a75d6">Link to one image instead of another &ndash; everywhere it&rsquo;s used</a></li>
+<li><a href="http://bartlomiejmucha.com/en/blog/how-to-query-for-unused-assets-in-media-library-in-sitecore-using-power-shell/">Query for unused assets in Media Library in Sitecore using PowerShell</a></li>
+<li><a href="http://michaellwest.blogspot.com/2014/10/sitecore-powershell-extensions-tip.html">Delete Unused Media Items</a></li>
+<li><a href="http://michaellwest.blogspot.com/2014/10/sitecore-powershell-extensions-tip-2.html">Set Random Wallpaper</a></li>
+<li><a href="http://michaellwest.blogspot.com/2013/09/SPE-UnlockItems.html">Unlock Items</a></li>
+<li><a href="http://michaellwest.blogspot.com/2013/09/SPE-KickUsers.html">Kick Users</a></li>
+</ul>
+<h3 id="creative-uses-of-powershell-extension-runtime-in-code">Creative uses of PowerShell Extension runtime in code</h3>
+<ul>
+<li><a href="/2012/04/06/using-powershell-console-for-sitecore-in-your-own-code/">Using PowerShell Extensions runtime in your own code</a>.</li>
+<li>PowerShell scripted Data Sources in Sitecore (<a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/">part 1</a>) &amp; (<a href="/2013/05/06/powershell-scripted-data-sources-in-sitecore-part-2/">part 2</a>)</li>
+</ul>
+<h3 id="external-content-helpful-for-sitecore-powershell-scripters-updated">External Content helpful for Sitecore PowerShell Scripters (updated)</h3>
+<ul>
+<li><a href="http://tumblr.najmanowicz.com/post/56618765494/powershell-guidelines-best-practices">PowerShell Guidelines &amp; Best Practices</a></li>
+<li>If <a href="https://twitter.com/hashtag/Sitecore?src=hash"><del>#</del><strong>Sitecore</strong></a> <a href="https://twitter.com/hashtag/PowerShell?src=hash"><del>#</del><strong>PowerShell</strong></a> is something that interests but still eludes you, here&rsquo;s a <a href="http://channel9.msdn.com/Events/TechEd/NorthAmerica/2013/MDC-B340">great video</a> by <a href="https://twitter.com/jsnover"><del>@</del><strong>jsnover</strong></a> &ndash; the architect of PowerShell.</li>
+</ul>
+<h3 id="powershell-extensions-on-conferences-and-user-groups-new-section">PowerShell Extensions on Conferences and User Groups (new section)</h3>
+<ul>
+<li>Michael Reynolds ?Sitecore from the Command Line? ? <a href="http://www.meetup.com/Sitecore-User-Group-New-England/events/137031082/?a=ea1_grp&amp;rv=ea1&amp;_af_eid=137031082&amp;_af=event">Event</a> &amp; <a href="https://www.youtube.com/playlist?list=PLCB3zlgqNwcTi7_DIirILu7b3LhN0ucWY">Video</a>.
+<ul>
+<li><a href="http://www.velir.com/blog/index.php/2013/09/20/a-command-line-for-sitecore/">Dan Soloway&rsquo;s Blog about the event</a></li>
+</ul>
+</li>
+<li>Adam Najmanowicz&rsquo;s ?<a href="https://plus.google.com/u/0/events/cakbregnlv62a33nsohgt8n259o">Supercharge your Sitecore Solution with PowerShell</a>? ? on Sitecore Users Virtual Summit</li>
+<li>Michael West&rsquo;s <a href="https://www.youtube.com/watch?v=HxslVGnpCek">presentation of PowerShell Extensions to PowerShell users who do not know Sitecore</a>.</li>
+<li>Michael Reynolds ?Making Magic with Sitecore PowerShell Extensions? (<a href="http://www.meetup.com/NY-Metro-Sitecore-User-Group/events/196386352/">event page</a>)</li>
+<li>Michael Reynold&rsquo;s <a href="https://www.youtube.com/watch?v=Eo4V2uJadMU">?Sitecore PowerShell Extensions? presentation at SUGCON 2014</a> and the <a href="http://sitecorejunkie.files.wordpress.com/2014/06/sitecore-powershell-extensions.pptx">PowerPoint deck</a> from it.</li>
+</ul>
+<h3 id="powershell-extensions-development--internals">PowerShell Extensions Development &amp; internals</h3>
+<ul>
+<li><a href="/2013/05/16/how-sitecore-powershell-got-gui-support-a-tale-of-jobmonitor-and-sitecore-async-ui-api/">How Sitecore PowerShell got GUI support? a tale of JobMonitor and Sitecore Async UI API.</a></li>
+<li><a href="https://github.com/SitecorePowerShell/Console/blob/master/Release%20process.md">What does it take the Release the PowerShell Extensions module</a></li>
+<li><a href="/2014/10/26/sitecore-powershell-extensions-persistent-sessions/">Sitecore PowerShell Extensions persistent sessions &ndash; what you need to know about them</a></li>
+<li><a href="/2014/11/01/sitecore-powershell-extensions-3-0-modules-proposal/">Sitecore PowerShell Extensions 3.0 modules proposal</a></li>
+</ul>
+<h3 id="the-powershell-co-nerds-within-sitecore-community-updated">The PowerShell co-nerds within Sitecore Community (updated)</h3>
+<ul>
+<li><strong>Uli</strong> ? (<a href="http://reasoncodeexample.com/">Blog</a>) Fantastic series about the <a href="http://reasoncodeexample.com/2014/01/28/integration-tests-using-powershell-sitecore-powershell-extensions/">use of PowerShell to deliver Integration tests</a>.
+<ul>
+<li><a href="http://reasoncodeexample.com/2014/01/28/integration-tests-using-powershell-sitecore-powershell-extensions/">Integration tests using PowerShell</a>
+<ul>
+<li><a href="http://reasoncodeexample.com/2014/01/29/powershell-commandlets-sitecore-powershell-extensions/">Part 2 &ndash; Building your own PowerShell commandlets</a></li>
+<li><a href="http://reasoncodeexample.com/2014/01/29/remote-automation-sitecore-powershell-extensions/">Part 3 &ndash; Using Remote Automation web service to run them</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Ian Graham</strong> ? (<a href="https://twitter.com/ianjohngraham">@ianjohngraham</a>) &ndash; using PowerShell in his daily routines:
+<ul>
+<li><a href="http://coreblimey.azurewebsites.net/?p=1671">Sitecore and PowerShell: Feel like He-man</a></li>
+</ul>
+</li>
+<li><strong>Chris Lewis</strong> (<a href="https://twitter.com/ChrisLewisDev">@ChrisLewisDev</a>) &ndash; joins the PowerShell Extensions contributor?s team with <a href="https://github.com/SitecorePowerShell/Console/issues/244">his excellent commit improving Publish-Item commandlet</a>!</li>
+<li><strong>Bartłomiej Mucha</strong> (<a href="http://bartlomiejmucha.com/en/blog">blog</a>) &ndash; PowerShell blogger from Poland (Yay! Go Poland!)</li>
+<li><strong>Hans Léautaud</strong> (<a href="https://twitter.com/HLeautaud">@HLeautaud</a>) &ndash; migrates a large amount of content with PowerShell Extensions and <a href="https://medium.com/@HLeautaud/migrating-large-amounts-of-content-in-sitecore-fb35a488cba">blogs about it</a>.</li>
+</ul>
+<p>Ufff?. this was A LOT more work than I expected? now let me use the remainder of the night to integrate it back into the <a href="/sitecore-powershell-console/">Sitecore PowerShell Extensions resources page</a>.</p></p><div class="post-actions">
+            <a href="/2014/11/03/update-to-state-of-knowledge-for-powershell-extensions-for-sitecore-november-2014/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/11/03/update-to-state-of-knowledge-for-powershell-extensions-for-sitecore-november-2014/#disqus_thread" class="post-comments-link" data-disqus-identifier="3188092253">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/11/01/sitecore-powershell-extensions-3-0-modules-proposal/">Sitecore PowerShell Extensions 3.0 Modules</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-11-01">November 1, 2014</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/brown_cardboard_box_light_800_clr_4510.png"><img src="/images/brown_cardboard_box_light_800_clr_4510_thumb.png" alt="brown_cardboard_box_light_800_clr_4510" title="brown_cardboard_box_light_800_clr_4510" class="aligncenter" width="800" height="700" /></a></p>
+<p>A large problem with Sitecore PowerShell Extensions up to version 3.0 was the lack of proper separation of solutions provided on top of it from the core of the module. The problem is that all integrations look for scripts in the main Script Library but they look for them solely in their single libraries. The specification outlined in this blog aims at solving this issue.
+The current structure of the tree looks somewhat as follows:</p></p><div class="post-actions">
+            <a href="/2014/11/01/sitecore-powershell-extensions-3-0-modules-proposal/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/11/01/sitecore-powershell-extensions-3-0-modules-proposal/#disqus_thread" class="post-comments-link" data-disqus-identifier="3181690017">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/10/26/sitecore-powershell-extensions-persistent-sessions/">Sitecore PowerShell Extensions Persistent Sessions</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-10-26">October 26, 2014</time>
+            &middot; <span class="reading-time">8 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/coach_time_out_400_clr_4749.png"><img src="/images/coach_time_out_400_clr_4749_thumb.png" alt="coach_time_out_400_clr_4749" title="coach_time_out_400_clr_4749" class="alignleft" width="300" height="400" /></a></p>
+<p>If you&rsquo;re reading this, chances are you&rsquo;ve probably read about the ways of putting scripts in the <a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">Content Editor ribbon</a> or <a href="/2011/11/22/context-powershell-scripts-for-sitecore/">Context Menu</a>. Those are some simple and quick ways of extending the Sitecore UI to do quick actions accessible for your users without them having to even know about the existence of PowerShell in your system. Up until now however we&rsquo;ve not been very vocal about the fact that those does not really have to be quick one-off actions but they can indeed form a broader solution to your problem through the use of persistent, named sessions. In fact Sitecore PowerShell Extensions (SPE) allow you to manage sessions and decide that it should stay in memory after the script have executed. In fact SPE does quite a bit of session maintenance itself that you might want to be aware of.</p></p><div class="post-actions">
+            <a href="/2014/10/26/sitecore-powershell-extensions-persistent-sessions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/10/26/sitecore-powershell-extensions-persistent-sessions/#disqus_thread" class="post-comments-link" data-disqus-identifier="3160883544">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">Creating beautiful Sitecore reports easily with PowerShell Extensions</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-10-25">October 25, 2014</time>
+            &middot; <span class="reading-time">6 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Creating reports is probably a task that every developer dread. I for once always felt like listening to <a href="https://www.youtube.com/watch?v=jIfu2A0ezq0">Tennessee Ernie Ford&rsquo;s ?16 Tons?</a> every time when I was supposed to do it for yet another project audit &ndash; especially this part resonated with me:</p>
+<blockquote>
+<p>I was born one mornin&rsquo; when the sun didn&rsquo;t shine
+I picked up my shovel and I walked to the mine
+I loaded sixteen tons of number nine coal
+And the straw boss said &ldquo;Well, a-bless my soul&rdquo;</p></p><div class="post-actions">
+            <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/#disqus_thread" class="post-comments-link" data-disqus-identifier="3155595702">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/10/12/working-with-sitecore-items-in-powershell-extensions/">Working with Sitecore items in PowerShell Extensions</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-10-12">October 12, 2014</time>
+            &middot; <span class="reading-time">9 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Reading <a href="http://sitecorejunkie.com/2014/09/22/add-scripts-to-the-powershell-toolbox-in-sitecore-powershell-extensions/">some</a> of the <a href="https://medium.com/@HLeautaud/migrating-large-amounts-of-content-in-sitecore-fb35a488cba">blogs</a> <a href="http://bartlomiejmucha.com/en/blog/how-to-populate-sitecore-with-test-data-using-power-shell/">from</a> the Sitecore community I find it pretty apparent that we didn&rsquo;t do a great job advocating the optimizations that <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">PowerShell Extensions</a> have introduced for working with Sitecore items. This blog attempts to rectify this problem to a degree.</p>
+<img src="/images/group_construction_workers_400_clr_8597_thumb.png" alt="group_construction_workers_400_clr_8597" title="group_construction_workers_400_clr_8597" class="aligncenter" width="400" height="300" />
+<h2 id="how-do-i-retrieve-my-sitecore-items-the-powershell-way">How do I retrieve my Sitecore items the PowerShell way?</h2>
+<p>The most natural way to retrieve Sitecore items is with use of <strong>Get-Item</strong> and <strong>Get-ChildItem</strong> commandlets. That is because those 2 commandlets add a PowerShell wrapping around them that allows the functionalities that I&rsquo;m going to describe in the next section of this blog after I&rsquo;ll tell you all about retrieving items.
+If you have retrieved your item directly using the Sitecore API you can still add the nice wrapper when you pipe them through the <strong>Wrap-Item</strong> commandlet as well. Some of those enhancements work in the older versions of PowerShell Extensions but I would encourage you to upgrade to the latest version (2.7 at the time this blog was written) to leverage the full potential of the environment.</p></p><div class="post-actions">
+            <a href="/2014/10/12/working-with-sitecore-items-in-powershell-extensions/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/10/12/working-with-sitecore-items-in-powershell-extensions/#disqus_thread" class="post-comments-link" data-disqus-identifier="3111353914">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2014/10/10/sitecore-powershell-extensions-remoting/">Sitecore PowerShell Extensions Remoting</a></h3>
+          <div class="post-meta">
+            <time datetime="2014-10-10">October 10, 2014</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/hand_controlling_puppet_figure_400_clr_14285.png"><img src="/images/hand_controlling_puppet_figure_400_clr_14285_thumb.png" alt="hand_controlling_puppet_figure_400_clr_14285" title="hand_controlling_puppet_figure_400_clr_14285" class="alignright" width="163" height="400" /></a></p>
+<p>I&rsquo;ve been meaning to write this article for quite a while since the functionality to remote into the Sitecore environment exists in the module at least for at least a couple of versions now and the recent email from one of the <a href="http://bit.ly/PsConScMplc">Sitecore PowerShell Extensions</a> users convinced me this cannot wait any longer.</p>
+<h2 id="when-would-i-remote-into-my-sitecore-instance">When would I remote into my Sitecore instance?</h2>
+<p>You would probably need this as part of your Continuous Integration or installation scripts. If you need to manipulate Sitecore data from your deployment script remoting is the right solution for you.</p></p><div class="post-actions">
+            <a href="/2014/10/10/sitecore-powershell-extensions-remoting/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2014/10/10/sitecore-powershell-extensions-remoting/#disqus_thread" class="post-comments-link" data-disqus-identifier="3104352653">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/07/15/zip-and-download-sitecore-media-library-folder-with-powershell/">Zip and Download Sitecore Media Library Folder with PowerShell</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-07-15">July 15, 2013</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/ZippingSitecoreLogs2.png"><img src="/images/ZippingSitecoreLogs_thumb2.png" alt="ZippingSitecoreLogs" title="ZippingSitecoreLogs" class="alignleft" width="240" height="210" /></a></p>
+<p>I&rsquo;ve decided to 1-up the game from my <a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/">previous post</a> and zip something that isn&rsquo;t really a real file but rather a blob in a Sitecore database. The script below is based heavily on the last post but instead of just zipping content of a flat folder traverses the Sitecore item tree and zips all files beneath the current folder.
+If you have downloaded the 2.1 version of the <a href="http://bit.ly/PsConScMplc">Sitecore PowerShell Console from the Sitecore Marketplace</a> you will actually have the script deployed on your system already.
+Here&rsquo;s how it looks like for your user in the Content Editor:</p></p><div class="post-actions">
+            <a href="/2013/07/15/zip-and-download-sitecore-media-library-folder-with-powershell/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/07/15/zip-and-download-sitecore-media-library-folder-with-powershell/#disqus_thread" class="post-comments-link" data-disqus-identifier="1503046768">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/">Zip and Download Sitecore logs with PowerShell</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-07-08">July 8, 2013</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p><em>There was a breaking change in the Console 2.1, if you&rsquo;re using version 2.1 or newer use Download-File commandlet instad of the &ldquo;Get-File&rdquo; as shown in the code below.</em></p>
+<p><a href="/images/LogFiles1.gif"><img src="/images/LogFiles_thumb1.gif" alt="LogFiles" title="LogFiles" class="alignright" width="152" height="392" /></a></p>
+<p>You might have have found yourself hunting around in the Sitecore interface for something that would allow you to download all the the log files in a fast and convenient way once time or another. Have you found one? Me neither? but luckily I had the PowerShell console installed on my server so I started looking for a script to zip all files in a folder and luckily because we have a full PowerShell power in the box I could stand on the shoulders of giants and get the zipping part from <a href="http://bit.ly/PsZip">Stack Overflow</a> &ndash; again (which is the majority of my script. The rest was super easy &ndash; just call the function and download the file?</p></p><div class="post-actions">
+            <a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/07/08/zip-and-download-sitecore-logs-with-powershell/#disqus_thread" class="post-comments-link" data-disqus-identifier="1477206987">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/07/02/re-create-a-site-structure-from-its-sitemap-in-your-sitecore-instance-with-powershell/">Re-create a site structure from its sitemap in your Sitecore instance with PowerShell</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-07-02">July 2, 2013</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/figures_carrying_house_400_clr_12497.png"><img src="/images/figures_carrying_house_400_clr_12497.png" alt="figures_carrying_house_400_clr_12497" class="alignleft" width="400" height="363" /></a></p>
+<p>Last night I needed to reproduce really quickly a site structure we will be moving from another CMS and create a matching item hierarchy in my Sitecore instance&hellip; I could face an hour or so of boring clicking and copying and pasting and hoping I&rsquo;ve not missed anything or&hellip; I could write a short PowerShell script to do the work for me&hellip; Guess which path I chose?</p>
+<p>Before you use the script you should customize the script parameters:</p></p><div class="post-actions">
+            <a href="/2013/07/02/re-create-a-site-structure-from-its-sitemap-in-your-sitecore-instance-with-powershell/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/07/02/re-create-a-site-structure-from-its-sitemap-in-your-sitecore-instance-with-powershell/#disqus_thread" class="post-comments-link" data-disqus-identifier="1456913572">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/05/27/react-to-sitecore-events-with-powershell-scripts/">React to Sitecore events with PowerShell scripts</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-05-27">May 27, 2013</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/PsRocket.png"><img src="/images/PsRocket_thumb.png" alt="PsRocket" title="PsRocket" class="alignleft" width="260" height="330" /></a></p>
+<p><a href="https://twitter.com/Kieranties">Kieranties</a> must be the biggest PowerShell nerd (together with yours truly) I&rsquo;ve had a privilege to chat with (I guess this implies I talk to myself?). So it shouldn&rsquo;t be a surprise when the two started talking PowerShell/Sitecore pixie dust started sparkling.</p>
+<p>This time &ndash; events integration.</p>
+<h2 id="what-does-it-take-to-integrate-powershell-with-sitecore-events">What does it take to integrate PowerShell with Sitecore events?</h2>
+<p>This is a fairly easy task that Sitecore pretty thoroughly describes in the ?<a href="http://sdn.sitecore.net/Articles/API/Using%20Events.aspx">Using Events</a>? SDN article. So there is little point for me to reiterate it here.</p></p><div class="post-actions">
+            <a href="/2013/05/27/react-to-sitecore-events-with-powershell-scripts/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/05/27/react-to-sitecore-events-with-powershell-scripts/#disqus_thread" class="post-comments-link" data-disqus-identifier="1325537602">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/05/16/how-sitecore-powershell-got-gui-support-a-tale-of-jobmonitor-and-sitecore-async-ui-api/">How Sitecore PowerShell got GUI support… a tale of JobMonitor and Sitecore async UI API.</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-05-16">May 16, 2013</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>One thing I always wanted to add to the <a href="http://bit.ly/PsConScMplc">Cognifide PowerShell Console for Sitecore</a> but never had the chance to investigate properly, was GUI and user interaction. For example in a regular PowerShell console when an irreversible action needs to be taken or one that user needs to be notified about – a question is asked:</p>
+<p><a href="/images/image1.png"><img src="/images/image_thumb1.png" alt="image" title="image" class="aligncenter" width="585" height="251" /></a></p>
+<p>Unfortunately due to the stateless and non-persistent nature of HTTP connections this is not easily achievable in Sitecore Sheer environment especially since in our case a PowerShell session usually lives in a separate thread within a Sitecore Job.</p></p><div class="post-actions">
+            <a href="/2013/05/16/how-sitecore-powershell-got-gui-support-a-tale-of-jobmonitor-and-sitecore-async-ui-api/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/05/16/how-sitecore-powershell-got-gui-support-a-tale-of-jobmonitor-and-sitecore-async-ui-api/#disqus_thread" class="post-comments-link" data-disqus-identifier="1291225700">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/05/06/powershell-scripted-data-sources-in-sitecore-part-2/">PowerShell Scripted data sources in Sitecore (Part 2)</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-05-06">May 6, 2013</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>There are 2 more ways I&rsquo;ve managed to find and implement that you can control data sources with PowerShell:</p>
+<ul>
+<li>rendering data source roots</li>
+<li>rendering data source itself</li>
+</ul>
+<p>The motivation would be similar to what I&rsquo;ve described in <a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/">the ?Part 1? blog post</a>. So without further ado let&rsquo;s cut to the meat?</p>
+<h2 id="rendering-data-source-roots">Rendering Data Source Roots</h2>
+<p>You might want your roots to be dynamic and you can deliver those using a PowerShell script!</p></p><div class="post-actions">
+            <a href="/2013/05/06/powershell-scripted-data-sources-in-sitecore-part-2/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/05/06/powershell-scripted-data-sources-in-sitecore-part-2/#disqus_thread" class="post-comments-link" data-disqus-identifier="1267488175">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/">PowerShell Scripted datasources in Sitecore (Part 1)</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-04-17">April 17, 2013</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/sitecore-powershell-yin-yang.jpg"><img src="/images/sitecore-powershell-yin-yang_thumb.jpg" alt="sitecore-powershell-yin-yang" title="sitecore-powershell-yin-yang" class="alignleft" width="240" height="240" /></a></p>
+<p>Reading some time ago the Item Buckets documentation I discovered something really cool called code data sources. We delivered something similar in our internal libraries and it proved super useful ever since. I&rsquo;ve also recently read a nice article by <a href="http://newguid.net/sitecore/2013/coded-field-datasources-in-sitecore/">Ronald Nieuwenhuis on NewGuid</a> about their approach to the subject.</p>
+<p>So what a PowerShell and Sitecore nut does when he sees stuff like that? Obviously delivers a scripted data source!</p></p><div class="post-actions">
+            <a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/#disqus_thread" class="post-comments-link" data-disqus-identifier="1222108878">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/02/08/be-your-own-sitecore-professional-services-with-powershell-part-2/">Be your own Sitecore Professional Services with PowerShell (Part 2)</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-02-08">February 8, 2013</time>
+            &middot; <span class="reading-time">8 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/PS_watchdog2.png"><img src="/images/PS_watchdog2_thumb.png" alt="PS_watchdog2" title="PS_watchdog2" class="alignleft" width="173" height="240" /></a></p>
+<p>So I&rsquo;ve finally found a moment (well a few days actually) to follow up on the <a href="/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/">previous article</a>, and just about time as there are quite a few more tricks that PowerShell can help you with when assessing the quality of your Sitecore solution.
+One thing that you need to keep in mind when reading <a href="http://sdn.sitecore.net/reference/sitecore%206/recommended%20practices.aspx">the recommendations</a> is that they are exactly that &ndash; recommendations. While Sitecore strongly encourages you that you follow them &ndash; I can see how most of those are perfectly fine to be ditched in some situations, you just need to be careful about picking those situations. By the general rule of thumb though, following vendor recommendations is a good thing and they are usually a good metrics of a well put together solution. Most of statistics provided in this post are hard to gather without a scripting solution like <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Sitecore PowerShell Console</a> or <a href="http://marketplace.sitecore.net/en/Modules/Revolver.aspx">Revolver</a>.</p></p><div class="post-actions">
+            <a href="/2013/02/08/be-your-own-sitecore-professional-services-with-powershell-part-2/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/02/08/be-your-own-sitecore-professional-services-with-powershell-part-2/#disqus_thread" class="post-comments-link" data-disqus-identifier="1072060863">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2013/01/29/sitecore-powershell-console-in-visual-studio/">Sitecore PowerShell Console in Visual Studio</a></h3>
+          <div class="post-meta">
+            <time datetime="2013-01-29">January 29, 2013</time>
+            &middot; <span class="reading-time">1 min read</span>
+          </div>
+          <p class="post-excerpt"><p>A while ago <a href="https://twitter.com/TheRocksGuy">Jakob</a> suggested that putting the Sitecore PowerShell Console in Visual Studio might not be a bad idea. He even provided me with the boilerplate code that served as a stub for the module (Thanks a million Jakob!).</p>
+<p>So after some struggling on my part <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_Console_for_Sitecore_Rocks.aspx">the new module is now on the Sitecore Marketplace</a>. There is really not much to write about. If you like PowerShell and Sitecore Rocks you will find it pretty neat. Otherwise I&rsquo;m afraid those are not the droids you are looking for</p></p><div class="post-actions">
+            <a href="/2013/01/29/sitecore-powershell-console-in-visual-studio/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2013/01/29/sitecore-powershell-console-in-visual-studio/#disqus_thread" class="post-comments-link" data-disqus-identifier="1054587756">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/">Be your own Sitecore Professional Services with PowerShell (Part 1)</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-06-22">June 22, 2012</time>
+            &middot; <span class="reading-time">7 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/PS_detective1.png"><img src="/images/PS_detective_thumb1.png" alt="PS_detective" title="PS_detective" class="alignleft" width="201" height="240" /></a></p>
+<p>Recently I&rsquo;ve been asked to audit a site for one of our clients. Overall for a fairly seasoned Sitecore developer it&rsquo;s rather obvious what to look for in a site and get a feel for whether an a solution is thoroughly thought through or just put together using brute-force development. You can usually tell if the implementation is sloppy or excellent, but how do you quantify that feeling to give the objective view to the person reading your report? Looking at the Sitecore Developer Network I&rsquo;ve found the following <a href="http://sdn.sitecore.net/reference/sitecore%206/recommended%20practices.aspx">set of recommendations</a>. This is a great help with codifying how a proper Sitecore implementation should look like, what should we pay attention to and most importantly it&rsquo;s a great reference when you&rsquo;re trying to prove that your feeling is something more than just nitpicking but rather an industry standard that the developers should adhere to. I recommend strongly that you look at it and think how closely your practices match those that Sitecore recommends.</p></p><div class="post-actions">
+            <a href="/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/06/22/be-your-own-sitecore-professional-services-with-powershell-part-1/#disqus_thread" class="post-comments-link" data-disqus-identifier="739866578">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/04/06/using-powershell-console-for-sitecore-in-your-own-code/">Using PowerShell Console for Sitecore in your own code</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-04-06">April 6, 2012</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>All of the PowerShell blog posts so far were about using the console. Being the developer however, you probably think &ndash; well that&rsquo;s good for admins, but what&rsquo;s in it for me? How can I benefit from it in my code? Well you can. With the latest update you can run the PowerShell environment in your application and take advantage of its scripting power, by getting the results out of it and pulling them into your app.</p></p><div class="post-actions">
+            <a href="/2012/04/06/using-powershell-console-for-sitecore-in-your-own-code/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/04/06/using-powershell-console-for-sitecore-in-your-own-code/#disqus_thread" class="post-comments-link" data-disqus-identifier="638932689">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/04/03/your-own-powershell-commandlets/">Your own PowerShell commandlets</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-04-03">April 3, 2012</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p><a href="/images/swiss-choc.jpg"><img src="/images/swiss-choc_thumb.jpg" alt="swiss-choc" title="swiss-choc" class="alignright" width="240" height="276" /></a></p>
+<p>There is a lot of new stuff in the imminent 2.0 release of the PowerShell Console for Sitecore. Some of it is fairly obvious like the improved console window, some of it not so much. The aim of the console has always be to enable Sitecore developers to extend the CMS in new exciting ways. For this to happen it had to become a mini-platform on its own. So far you could use it to add scripts to <a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">ribbons and menus</a>, write <a href="/2012/03/31/2011/11/29/powershell-driven-sitecore-scheduled-tasks/">scripted tasks</a> and <a href="/2011/12/19/continuous-deployment-in-sitecore-with-powershell/">execute scripts just by launching them from a URL call</a>.
+That&rsquo;s extending Sitecore with PowerShell but what about PowerShell itself?
+One of the coolest features introduced in 2.0 is the ability to write your own commandlets. Sure you could always use PowerShell to do it and <a href="http://technet.microsoft.com/en-us/magazine/ff677563.aspx">write commandlets in script</a>. But then the caveat was that you had to attach such commandlets to your own scripts (or put them in the initial script that would have to execute prior to the console). Now I&rsquo;m talking about writing the real commandlets, just like those that come with the PowerShell console itself. Starting from 2.0 the console does not default to only attach commandlets that come with it, but can also scan other assemblies to attach your commandlets. To add your own all you have to do is well.. write them but then? all you have to do is to use the standard Sitecore include mechanism to enable the console to find them.</p></p><div class="post-actions">
+            <a href="/2012/04/03/your-own-powershell-commandlets/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/04/03/your-own-powershell-commandlets/#disqus_thread" class="post-comments-link" data-disqus-identifier="637585371">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/03/31/state-of-powershell-for-sitecore-for-april-2012/">State of PowerShell for Sitecore for April 2012</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-03-31">March 31, 2012</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p>While I&rsquo;m updating it on a <a href="/sitecore-powershell-console/">separate page</a> I thought for the purpose of having a record and further tracking - it would be interesting to capture the state of the PowerShell knowledge in the Sitecore community here as well.</p>
+<p><a href="http://tieulie.com/blog/march-2012-wallpaper-calendar/"><img src="/images/March-2012-pot_o_gold-calendar-1024x768.png" alt="Image Courtesy: Steven Tieulie" title="Image Courtesy: Steven Tieulie" class="aligncenter" width="484" height="364" /></a></p>
+<h3 id="how-do-i-get-the-powershell-console-for-sitecore">How do I get the PowerShell Console for Sitecore?</h3>
+<ul>
+<li>Download the Console installation package from its <a href="http://trac.sitecore.net/SitecorePowershellConsole">Sitecore Shared Source page</a>.</li>
+<li><a href="http://trac.sitecore.net/SitecorePowershellConsole/wiki/Documentation">Introductory documentation to PowerShell console</a> on its Shared Source page.</li>
+</ul>
+<h3 id="adams-101-level-blogs-for-powershell-console-for-sitecore">Adam&rsquo;s (101 level) blogs for PowerShell Console for Sitecore</h3>
+<ul>
+<li><a href="/2011/11/17/powershell-console-for-sitecore-what-can-it-do-for-me/">So what PowerShell Console for Sitecore is and what can it do for me?</a></li>
+<li>Sitecore PowerShell Console cheat sheet <a href="/2012/01/11/sitecore-powershell-console-cheat-sheetpart-1/" title="Cheat Sheet Part 2">Part 1</a> &amp; <a href="/2012/01/23/sitecore-powershell-console-cheat-sheet-part-2/" title="Cheat Sheet">Part 2</a></li>
+<li><a href="/2011/11/18/sample-scripts-for-sitecore-powershell-console/">Sample scripts</a> for Sitecore PowerShell Console</li>
+</ul>
+<h3 id="how-powershell-console-can-help-you-extend-sitecore">How PowerShell console can help you extend Sitecore?</h3>
+<ul>
+<li><a href="/2011/12/19/continuous-deployment-in-sitecore-with-powershell/">Continuous deployment in Sitecore with PowerShell</a></li>
+<li><a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">Extending Sitecore ribbon with PowerShell scripts</a></li>
+<li><a href="../2011/11/29/powershell-driven-sitecore-scheduled-tasks/" title="Permanent Link to PowerShell driven Sitecore scheduled tasks">PowerShell driven Sitecore scheduled tasks</a></li>
+</ul>
+<h3 id="external-content-helpful-for-sitecore-powershell-scripters">External Content helpful for Sitecore PowerShell Scripters</h3>
+<ul>
+<li>Free <a href="http://tumblr.najmanowicz.com/post/5067261138/free-powershell-ebooks">PowerShell EBooks</a></li>
+<li>Sitecore Virtual User Group:  <a href="www.youtube.com/watch?v=GiTiLIOqHYo">An Introduction into PowerShell from a Sitecore .NET Developer</a></li>
+</ul>
+<h3 id="alternative-solutions">Alternative solutions</h3>
+<ul>
+<li>PowerShell console in Sitecore Rocks &ndash; part of the <a href="http://vsplugins.sitecore.net/default.aspx">Sitecore Rocks extension to Visual Studio</a></li>
+<li>psTerminal &ndash; not available yet (currently in development by Andrew Chumachenko of Sitecore UA) &ndash; introduced on <a href="http://www.sitecoreug.org/events/Introduction-to-Powershell">Sitecore Virtual User Group Webinar</a>.</li>
+</ul>
+<h3 id="the-powershell-co-nerds-within-sitecore-community">The PowerShell co-nerds within Sitecore Community</h3>
+<p>Other people that did research in the field, adopted the console early and/or are knowledgeable in the subject:</p></p><div class="post-actions">
+            <a href="/2012/03/31/state-of-powershell-for-sitecore-for-april-2012/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/03/31/state-of-powershell-for-sitecore-for-april-2012/#disqus_thread" class="post-comments-link" data-disqus-identifier="637925129">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/01/23/sitecore-powershell-console-cheat-sheet-part-2/">Sitecore PowerShell Console cheat sheet – Part 2</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-01-23">January 23, 2012</time>
+            &middot; <span class="reading-time">4 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Most of this post is also based on the Microsoft’s <a href="http://www.microsoft.com/downloads/en/details.aspx--FamilyId=DF8ED469-9007-401C-85E7-46649A32D0E0&amp;displaylang=en" title="Windows PowerShell Quick Reference">Windows PowerShell Quick Reference</a> however despite the sharing scripting runtimes the nature of the both shells differ considerably as described in the previous post: <a href="/2012/01/11/sitecore-powershell-console-cheat-sheetpart-1/">Sitecore PowerShell Console cheat sheet – Part 1</a>. In all cases where it made sense I’ve converted the samples to establish them in Sitecore scenarios.</p>
+<h2 id="how-to-write-conditional-statements">How to Write Conditional Statements</h2>
+<p>To write an If statement use code similar to this:</p></p><div class="post-actions">
+            <a href="/2012/01/23/sitecore-powershell-console-cheat-sheet-part-2/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/01/23/sitecore-powershell-console-cheat-sheet-part-2/#disqus_thread" class="post-comments-link" data-disqus-identifier="637585853">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2012/01/11/sitecore-powershell-console-cheat-sheetpart-1/">Sitecore PowerShell Console cheat sheet – Part 1</a></h3>
+          <div class="post-meta">
+            <time datetime="2012-01-11">January 11, 2012</time>
+            &middot; <span class="reading-time">6 min read</span>
+          </div>
+          <p class="post-excerpt"><p>I’m realizing time and time again that the learning curve for PowerShell can be steep without a proper guidance. While most people I talk to are very excited about the concept they become discouraged after a having some tries and not realizing its full potential. Therefore I decided it’s worth spending some time introducing some basic principles to help scripting alleviate some of the initial pains.</p>
+<p>I have <a href="http://tumblr.najmanowicz.com/post/5067261138/free-powershell-ebooks">gathered some literature available for free about the topic of PowerShell in general you might want to read</a>, but I also think that a distillation of the basic concepts is really important so you can have some quick wins while you begin your PowerShell journey.</p></p><div class="post-actions">
+            <a href="/2012/01/11/sitecore-powershell-console-cheat-sheetpart-1/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2012/01/11/sitecore-powershell-console-cheat-sheetpart-1/#disqus_thread" class="post-comments-link" data-disqus-identifier="637704176">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/12/19/continuous-deployment-in-sitecore-with-powershell/">Continuous deployment in Sitecore with PowerShell</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-12-19">December 19, 2011</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>A few days back a <a href="http://stackoverflow.com/users/3205/skolima">budy</a> from our Sitecore team has alerted me to this interesting question on <a href="http://stackoverflow.com/questions/8414482/is-it-possible-to-build-a-sitecore-data-package-from-command-line-or-outside-of">StackOverflow</a> which asks for automation of content promotion from one Sitecore instance to another. He suggested - and rightly so &ndash; that the <a href="http://trac.sitecore.net/SitecorePowershellConsole">PowerShell Console</a> could be used in that scenario. While this was always possible by simply writing it as a PowerShell code the latest version of the console added a few commandlets making building packages much easier.</p></p><div class="post-actions">
+            <a href="/2011/12/19/continuous-deployment-in-sitecore-with-powershell/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/12/19/continuous-deployment-in-sitecore-with-powershell/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229599">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/11/29/powershell-driven-sitecore-scheduled-tasks/">PowerShell driven Sitecore scheduled tasks</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-11-29">November 29, 2011</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p>So now that you can easily create the <a href="/2011/11/22/context-powershell-scripts-for-sitecore/">menus</a> and <a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">ribbons</a> executing PowerShell scripts, it might be a good time to do some more administrative tasks? let&rsquo;s start with scheduled tasks. I&rsquo;m not going to go deep into the task scheduling, you can find an <a href="http://www.sitecore.net/deutsch/Community/Technical-Blogs/John-West-Sitecore-Blog/Posts/2010/11/All-About-Sitecore-Scheduling-Agents-and-Tasks.aspx">excellent post by John West on his blog regarding task scheduling</a>. Currently the PowerShell module supports one of the ways described in the post &ndash; the section describing how to configure them is called ?Scheduled Tasks? in the blog.</p></p><div class="post-actions">
+            <a href="/2011/11/29/powershell-driven-sitecore-scheduled-tasks/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/11/29/powershell-driven-sitecore-scheduled-tasks/#disqus_thread" class="post-comments-link" data-disqus-identifier="640804283">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">Extending Sitecore ribbon with PowerShell scripts</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-11-24">November 24, 2011</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Sitecore is built from the grounds up with extendibility in mind. Be that plugging into any place in its internal pipelines or any aspect of its User eXperience, therefore when I&rsquo;ve managed to <a href="/2011/11/22/context-powershell-scripts-for-sitecore/" title="Context PowerShell scripts for Sitecore">extend it&rsquo;s context menu</a>, I expected to have no problems whatsoever doing the same to its ribbon. Mind you I was right?</p>
+<p>Using the <a href="http://trac.sitecore.net/SitecorePowershellConsole" title="Sitecore PowerShell Console">PowerShell Console Module</a> it took me less than 10 minutes total to add a nice piece of functionality that I thought was missing &ndash; Publish items I have modified.</p></p><div class="post-actions">
+            <a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/#disqus_thread" class="post-comments-link" data-disqus-identifier="637612182">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/11/22/context-powershell-scripts-for-sitecore/">Context PowerShell scripts for Sitecore</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-11-22">November 22, 2011</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>In the he latest update of PowerShell Console for Sitecore, I&rsquo;ve started experimenting with further integration &ndash; context scripts. What is that and what can it do for you?</p>
+<p>You can safely assume PowerShell is not something your regular users will aspire to learn, but it does not mean they cannot harness its power if you enable them to.</p>
+<p>If you look closely at the latest Microsoft solutions you may notice that a lot of what GUI does is running some scripting behind the scenes. This is true for a long time with the SQL Server Management studio where pretty much for any action you can generate a script that will let you automate a common task.</p></p><div class="post-actions">
+            <a href="/2011/11/22/context-powershell-scripts-for-sitecore/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/11/22/context-powershell-scripts-for-sitecore/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229366">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/11/18/sample-scripts-for-sitecore-powershell-console/">Sample scripts for Sitecore PowerShell Console</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-11-18">November 18, 2011</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><h2 id="find-out-about-your-configuration">Find out about your configuration:</h2>
+<p>List your available site providers. You will use the name provided in the &ldquo;Name&rdquo; column in place of where I use &ldquo;cms&rdquo; in the later samples.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-psdrive</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Provider</span><span class="p">.</span><span class="py">ToString</span><span class="p">()</span> <span class="o">-eq</span> <span class="s2">&#34;CmsItemProvider&#34;</span><span class="p">}</span> <span class="p">`</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="nb">format-table</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Root</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="sample-scripts-for-working-with-pages">Sample scripts for working with pages:</h2>
+<p>For the same of brevity I&rsquo;m assuming your location is already somewhere within a Sitecore tree (e.g. you did something akin to <em><strong>cd master:\content</strong></em> prior to executing the following scripts.</p></p><div class="post-actions">
+            <a href="/2011/11/18/sample-scripts-for-sitecore-powershell-console/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/11/18/sample-scripts-for-sitecore-powershell-console/#disqus_thread" class="post-comments-link" data-disqus-identifier="637587257">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/11/17/powershell-console-for-sitecore-what-can-it-do-for-me/">PowerShell Console for Sitecore – what can it do for me?</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-11-17">November 17, 2011</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>The aim of the PowerShell console for Sitecore is to create a command line interface to your data so you can automate and aggregate mundane tasks as well as create statistics and a discoverability layer on top of your content.
+Have you ever found yourself:</p>
+<ul>
+<li>having to make a mundane change to a large number of pages?</li>
+<li>in need of getting statistics field or template usages?</li>
+<li>being curious of e.g. what’s the oldest page on your site?</li>
+<li>in need to find out how many authors really create your content and how active they are?</li>
+<li>having to copy or move a large number of files from one folder to another?</li>
+<li>renaming or deleting files in your file store en-masse?</li>
+<li>publish pages that match some specific feature rather than a whole branch?</li>
+</ul>
+<img src="/images/sharp_tool1.jpg" alt="sharp_tool" title="sharp_tool" class="alignleft" width="220" height="225" />
+<p>If the answer to any of those (and more) is something akin to “<strong>yes I did!</strong>”, I believe you might find my little plugin useful.
+The idea is to create a scripting environment to work within Sitecore process, being able to make native calls to Sitecore API and modify content on a per-property level. The goal was to make it familiar to your IT and developers so they can reuse their skillset with it or if they rather learn it here, this knowledge will benefit them in the long run as clearly PowerShell is becoming an industry standard. The plugin’s aim is to manipulate not just sites, but files and pages on a large scale or perform statistical analysis of your content using  a familiar and well documented query language. The console allows you to execute and test scripts interactively, but also gives the admin means of exposing scripts to end users within context menus and in the ribbon. I’m sure in the long run I’ll come up with more applications. Scripted pipeline processors? Scripted renderings? Scripting campaigns statistics and engagement workflow steps? You name it…
+Now there is <a href="http://vsplugins.sitecore.net/Sitecore-PowerShell.ashx">Rocks interface</a> that performs similar task which I think is brilliant, however slightly - yet significantly different. Rocks integrates with your Windows PowerShell console and allows you to work on your remote website as if it was a file system on your machine. Rocks also features a number of commandlets that help you with some common tasks. The definite bonus of this approach is that you can simply use it in your deployment script and integrate some common content modifications, or clear caches/recycle bins on your server in a timely manner from your monitoring environment. I think the solution is a really needed addition to your Sitecore toolbox, but… it’s somewhat limited. Namely whatever new idea you want to employ in your script, is either supported by the commandlets provided – or impossible. You have access to all the goodies of rocks, but any extension must first be imagined and implemented in Rocks (both server and client side).
+The Sitecore Console however works within the process of your Sitecore site and therefore can instantiate and execute any API Sitecore features. The only limit is that of the imagination. this comes at a price too though. The most important thing is security. The PowerShell plugin by itself does not run with elevated privileges, nor does it circumvent the rights, but since you can use any Sitecore API a malicious person could potentially do it themselves – therefore you need to be careful whom do you grant access to the PowerShell Console.
+The console comes with some sample scripts when you install it – review the script and press Ctrl+Enter to execute and see some of the interesting use cases for it.
+By default the console creates a “drive” for each of your databases so you will definitely have a “core” and “master” drives, and you will most probably have a “web” drive.
+Since this is only an introductory post I’ll let you discover the full list of commands by yourself, just use the following script within the console:</p></p><div class="post-actions">
+            <a href="/2011/11/17/powershell-console-for-sitecore-what-can-it-do-for-me/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/11/17/powershell-console-for-sitecore-what-can-it-do-for-me/#disqus_thread" class="post-comments-link" data-disqus-identifier="637564661">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/08/18/copying-files-between-path-providers-with-powershell-in-episerver/">Copying files between path providers with PowerShell in EPiServer</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-08-18">August 18, 2011</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>We had a situation in <a href="http://www.cognifide.com/">the company</a> this week which required us to deliver the whole EPiServer virtual path provider file structure to the client &ndash; zipped. Easy enough? go to the EpiServer VPP directory and? well? ok? hmm? so the path provider is versioning and as a consequence the physical organization of files on the disk does not make any sense for a human trying to browse it.
+Fine! So let&rsquo;s create a native provider and do a copy and paste within the file manager?. hmm an exception complaining about the provider incompatibility?
+Naturally, my knee-jerk reaction is &ndash; let&rsquo;s do it with the PowerShell? which I recall was doing something like this in it&rsquo;s previous version? The example I&rsquo;ve tested and placed in the ?Samples? tab was:</p></p><div class="post-actions">
+            <a href="/2011/08/18/copying-files-between-path-providers-with-powershell-in-episerver/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/08/18/copying-files-between-path-providers-with-powershell-in-episerver/#disqus_thread" class="post-comments-link" data-disqus-identifier="647946193">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/05/10/powershell-for-episerver-cheat-sheet-part-2/">PowerShell for EPiServer - cheat sheet - Part 2</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-05-10">May 10, 2011</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Most of this post is also based on the Microsoft&rsquo;s <a href="http://www.microsoft.com/downloads/en/details.aspx--FamilyId=DF8ED469-9007-401C-85E7-46649A32D0E0&amp;displaylang=en" title="Windows PowerShell Quick Reference">Windows PowerShell Quick Reference</a> however despite the sharing scripting runtimes the nature of the both shells differ considerably as described in the previous post: <a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/">PowerShell for EPiServer - cheat sheet - Part 1</a>. In all cases where it made sense I&rsquo;ve converted the samples to establish them in EPiServer scenarios.</p>
+<h2 id="how-to-write-conditional-statements">How to Write Conditional Statements</h2>
+<p>To write an If statement use code similar to this:</p></p><div class="post-actions">
+            <a href="/2011/05/10/powershell-for-episerver-cheat-sheet-part-2/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/05/10/powershell-for-episerver-cheat-sheet-part-2/#disqus_thread" class="post-comments-link" data-disqus-identifier="637686246">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/">PowerShell for EPiServer - cheat sheet - Part 1</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-05-09">May 9, 2011</time>
+            &middot; <span class="reading-time">6 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Most of this is based on the Microsoft&rsquo;s <a href="http://www.microsoft.com/downloads/en/details.aspx--FamilyId=DF8ED469-9007-401C-85E7-46649A32D0E0&amp;displaylang=en" title="Windows PowerShell Quick Reference">Windows PowerShell Quick Reference</a> however despite the sharing scripting runtimes the nature of the both shells are pretty different (although the differences are not as vast as one might think).</p>
+<table>
+  <thead>
+      <tr>
+          <th>Windows PowerShell</th>
+          <th>PowerShell Console for EPiServer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Interactive</strong> ? command can ask for confirmations and can be aborted. User can be solicited to provide input.</td>
+          <td><strong>Batch</strong> ? all commands are being executed in one go, the script has no chance to ask questions, go or no-go decisions have to be solved within the script.</td>
+      </tr>
+      <tr>
+          <td>Supports colouring.</td>
+          <td>Supports plain text output only.</td>
+      </tr>
+      <tr>
+          <td>Supports command line arguments for running scripts.</td>
+          <td>All arguments are defined directly within the script or derived from context automatically.</td>
+      </tr>
+      <tr>
+          <td>Can access any file depending on the rights of the user.</td>
+          <td>Can only access files the web application identity can write to. Cannot access files on user?s machine but rather operates on the server?s file system. Cannot operate with elevated privileges.</td>
+      </tr>
+  </tbody>
+</table>
+<p>That said, I considered that enough of the Reference document is irrelevant in the EPiServer scenario that it&rsquo;s beneficial for the users of the console to have a bespoke cheat sheet created especially for the purpose of this plugin.</p></p><div class="post-actions">
+            <a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229556">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/05/07/episerver-admin-mode-powershell-scripts/">EPiServer Admin Mode PowerShell scripts</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-05-07">May 7, 2011</time>
+            &middot; <span class="reading-time">2 min read</span>
+          </div>
+          <p class="post-excerpt"><p>The PowerShell plugin gets an update once again to support Admin mode script collections in addition to the context scripts.</p>
+<h2 id="how-to-write-an-admin-mode-script-collections">How to write an Admin mode script collections?</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContextScriptCollection&gt;
+</span></span><span class="line"><span class="cl">  &lt;Title&gt;Statistics Scripts&lt;/Title&gt;
+</span></span><span class="line"><span class="cl">  &lt;Description&gt;This script collection ... &lt;/Description&gt;
+</span></span><span class="line"><span class="cl">  &lt;Area&gt;Administration&lt;/Area&gt;
+</span></span><span class="line"><span class="cl">  &lt;Scripts&gt;
+</span></span><span class="line"><span class="cl">    &lt;ContextScript&gt;
+</span></span><span class="line"><span class="cl">      &lt;Title&gt;Restart Application&lt;/Title&gt;
+</span></span><span class="line"><span class="cl">      &lt;Description&gt;The script restarts this instance of EPiServer...&lt;/Warning&gt;
+</span></span><span class="line"><span class="cl">      &lt;Script&gt;Restart-Application&lt;/Script&gt;
+</span></span><span class="line"><span class="cl">      &lt;Icon&gt;/App_Themes/Default/Images/Tools/Refresh.gif&lt;/Icon&gt;
+</span></span><span class="line"><span class="cl">      &lt;Groups&gt;
+</span></span><span class="line"><span class="cl">      &lt;/Groups&gt;
+</span></span><span class="line"><span class="cl">    &lt;/ContextScript&gt;
+</span></span><span class="line"><span class="cl">  &lt;/Scripts&gt;
+</span></span><span class="line"><span class="cl">&lt;/ContextScriptCollection&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="where-can-i-access-that">Where can I access that?</h2>
+<p><a href="/images/image.png"><img src="/images/image_thumb.png" alt="image" title="image" class="aligncenter" width="244" height="200" /></a></p></p><div class="post-actions">
+            <a href="/2011/05/07/episerver-admin-mode-powershell-scripts/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/05/07/episerver-admin-mode-powershell-scripts/#disqus_thread" class="post-comments-link" data-disqus-identifier="671738363">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/05/04/context-powershell-scripts-in-episerver/">Context PowerShell Scripts in EPiServer</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-05-04">May 4, 2011</time>
+            &middot; <span class="reading-time">5 min read</span>
+          </div>
+          <p class="post-excerpt"><p>Ok, so I&rsquo;ve got my shot of endorphins writing about PowerShell last week (damn, it&rsquo;s nice to be able to code again!), and I got pretty determined on making it usable and achieving all the goals I&rsquo;ve initially envisioned. and in the process build a usable tool and a library of scripts that people can use either directly or to modify to meet their needs.</p>
+<p>The goal for this week: <strong>Context Scripts</strong></p></p><div class="post-actions">
+            <a href="/2011/05/04/context-powershell-scripts-in-episerver/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/05/04/context-powershell-scripts-in-episerver/#disqus_thread" class="post-comments-link" data-disqus-identifier="647116521">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2011/04/29/powershell-console-now-compatible-with-episerver-cms-6-r2/">PowerShell console – now compatible with EPiServer CMS 6 R2</a></h3>
+          <div class="post-meta">
+            <time datetime="2011-04-29">April 29, 2011</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>It’s been a while since I had a chance to do any coding&hellip; turns out leading a development division tends to not have much to do with development… who knew?!</p>
+<p>But I’ve finally got a moment to sit down and refresh the EPiServer PowerShell console and make it compatible with both CMS versions 5 &amp; 6. You could technically use it before on CMS 6 but the looks of it was broken. (<a href="/2010/09/22/the-console-of-mass-content-management/">previous version available here</a>)</p></p><div class="post-actions">
+            <a href="/2011/04/29/powershell-console-now-compatible-with-episerver-cms-6-r2/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2011/04/29/powershell-console-now-compatible-with-episerver-cms-6-r2/#disqus_thread" class="post-comments-link" data-disqus-identifier="638669044">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+      <article class="post-summary">
+        <div class="post-info">
+          <h3 class="post-title"><a href="/2010/09/22/the-console-of-mass-content-management/">The Console of Mass Content Management</a></h3>
+          <div class="post-meta">
+            <time datetime="2010-09-22">September 22, 2010</time>
+            &middot; <span class="reading-time">3 min read</span>
+          </div>
+          <p class="post-excerpt"><p>This one definitely took more time than I initially expected, and before I devote even more to it I would very much like to hear your opinion. Do you find it useful? Which way should the development be going? But first things first?</p>
+<p>Have you ever found yourself:</p>
+<ul>
+<li>having to make a mundane change to a large number of pages?</li>
+<li>in need of getting statistics on page properties or page type usages?</li>
+<li>being curious of e.g. what&rsquo;s the oldest page on your site?</li>
+<li>having to copy or move a large number of files from one folder to another or between versioning and non versioning virtual path providers?</li>
+<li>renaming or deleting files in your file store en-masse?</li>
+</ul>
+<p>If the answer to any of those (and more) is a ?yes!?, I believe you might find my little plugin useful.</p></p><div class="post-actions">
+            <a href="/2010/09/22/the-console-of-mass-content-management/" class="read-more">Read More</a>
+            <span class="post-comments-sep">&middot;</span>
+            <a href="/2010/09/22/the-console-of-mass-content-management/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229357">Comments</a>
+          </div>
+        </div>
+      </article>
+      
+    </div>
+  </div>
+
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-inner">
+  <p>&copy; 1999-2026 - <a href="/">Adam Najmanowicz</a></p>
+  
+</div>
+
+    </footer>
+  </div>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      block.style.position = 'relative';
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('aria-label', 'Copy code');
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      block.appendChild(btn);
+      btn.addEventListener('click', function() {
+        var code = block.querySelector('td:last-child code') || block.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(function() {
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(function() {
+              btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+        }
+      });
+    });
+  });
+  </script>
+  <script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    var visible = false;
+    window.addEventListener('scroll', function() {
+      var shouldShow = window.scrollY > 400;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        btn.classList.toggle('visible', visible);
+      }
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  </script>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
+  <script>
+  (function() {
+    var overlay = document.getElementById('lightbox');
+    var content = document.getElementById('lightbox-content');
+    var closeBtn = document.getElementById('lightbox-close');
+    var imgExts = /\.(jpe?g|png|gif|webp|svg|bmp|avif)(\?.*)?$/i;
+    var vidExts = /\.(mp4|webm|ogg)(\?.*)?$/i;
+
+    function open(href) {
+      content.innerHTML = '';
+      if (imgExts.test(href)) {
+        var img = document.createElement('img');
+        img.src = href;
+        img.alt = '';
+        content.appendChild(img);
+      } else if (vidExts.test(href)) {
+        var vid = document.createElement('video');
+        vid.src = href;
+        vid.controls = true;
+        vid.autoplay = true;
+        content.appendChild(vid);
+      } else {
+        return false;
+      }
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return true;
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      var vid = content.querySelector('video');
+      if (vid) vid.pause();
+    }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (imgExts.test(href) || vidExts.test(href)) {
+        e.preventDefault();
+        open(href);
+      }
+    });
+
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      close();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) close();
+    });
+  })();
+  </script>
+  <script id="dsq-count-scr" src="https://codality.disqus.com/count.js" async></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+      s.onload = function() {
+        var mermaidTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+        mermaid.initialize({ startOnLoad: false, theme: mermaidTheme });
+        mermaidBlocks.forEach(function(block) {
+          var pre = block.parentElement;
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+      };
+      document.head.appendChild(s);
+    }
+  });
+  </script>
+</body>
+</html>
