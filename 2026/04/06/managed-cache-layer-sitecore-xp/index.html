@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Generic Managed Cache Layer for Sitecore XM/XP That Almost Writes Itself Into Your Code | Codality</title>
+<meta name="description" content="[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz">
+<meta name="generator" content="Hugo 0.156.0">
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-MXK49KSC1M"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-MXK49KSC1M');
+        }
+      </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+<script>
+  (function(){var s=localStorage.getItem('theme-preference');var t=s==='dark'||s==='light'?s:(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)})();
+</script>
+
+      <script src="/js/main.js"></script>
+
+
+
+</head>
+<body>
+  <div class="site-wrapper">
+    <header class="site-header">
+      <div class="header-inner">
+  <div class="header-top">
+    <nav class="site-navigation" aria-label="Main Navigation">
+      
+  <nav>
+    <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/about/">About me</a>
+    </li>
+    <li>
+      <a href="/downloads/">Downloads</a>
+    </li>
+    </ul>
+  </nav>
+
+    </nav>
+    
+    <nav class="social-navigation" aria-label="Social Links">
+      <ul>
+        <li><a href="https://github.com/AdamNaj" title="GitHub"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/najmanowicz/" title="LinkedIn"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a></li>
+        <li><a href="http://www.twitter.com/AdamNaj" title="Twitter"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a></li>
+        <li><a href="https://www.facebook.com/adam.najmanowicz" title="Facebook"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a></li>
+        <li><a href="https://www.instagram.com/adamnajmanowicz/" title="Instagram"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg></a></li>
+      </ul>
+    </nav>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+  <div class="site-branding">
+    <p class="site-title"><a href="/">Codality</a></p>
+    
+    <p class="site-tagline">[noun] - \ko-&#39;da-la-te\ - Code and Effect - solving problems with just enough amount of code - by Adam Najmanowicz</p>
+    
+    <hr class="header-separator"><nav class="tag-cloud" aria-label="Category Cloud"><a href="/categories/best-practices/" style="font-size: 14px;" title="best practices (18 posts)">Best Practices</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/blog-navigator/" style="font-size: 12px;" title="blog navigator (8 posts)">Blog Navigator</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms/" style="font-size: 24px;" title="cms (83 posts)">CMS</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/cms-ux/" style="font-size: 12px;" title="cms ux (8 posts)">CMS UX</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/code-samples/" style="font-size: 18px;" title="code samples (39 posts)">Code Samples</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/configuration/" style="font-size: 11px;" title="configuration (4 posts)">Configuration</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/continuous-deployment/" style="font-size: 11px;" title="continuous deployment (4 posts)">Continuous Deployment</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/desktop-customization/" style="font-size: 11px;" title="desktop customization (4 posts)">Desktop Customization</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/downloadable/" style="font-size: 14px;" title="downloadable (22 posts)">Downloadable</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/epicode/" style="font-size: 14px;" title="epicode (16 posts)">EPiCode</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/episerver/" style="font-size: 18px;" title="episerver (41 posts)">EPiServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/faceted-navigation/" style="font-size: 11px;" title="faceted navigation (5 posts)">Faceted Navigation</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/icondeveloper/" style="font-size: 11px;" title="icondeveloper (3 posts)">IconDeveloper</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/internet-information-services/" style="font-size: 12px;" title="internet information services (11 posts)">Internet Information Services</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/lifestyle/" style="font-size: 12px;" title="lifestyle (13 posts)">Lifestyle</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/microsoft-sqlserver/" style="font-size: 11px;" title="microsoft sqlserver (6 posts)">Microsoft SqlServer</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/mobile/" style="font-size: 11px;" title="mobile (4 posts)">Mobile</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/open-source/" style="font-size: 16px;" title="open source (24 posts)">Open Source</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/powershell/" style="font-size: 18px;" title="powershell (43 posts)">PowerShell</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/rants/" style="font-size: 12px;" title="rants (7 posts)">Rants</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/scripting/" style="font-size: 18px;" title="scripting (43 posts)">Scripting</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/security/" style="font-size: 11px;" title="security (3 posts)">Security</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/sitecore/" style="font-size: 18px;" title="sitecore (42 posts)">Sitecore</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinning/" style="font-size: 12px;" title="skinning (10 posts)">Skinning</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/skinstudio/" style="font-size: 12px;" title="skinstudio (13 posts)">SkinStudio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/software-development/" style="font-size: 28px;" title="software development (103 posts)">Software Development</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/solution/" style="font-size: 18px;" title="solution (46 posts)">Solution</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/stardock/" style="font-size: 16px;" title="stardock (25 posts)">Stardock</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/tooling/" style="font-size: 12px;" title="tooling (13 posts)">Tooling</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/visual-studio/" style="font-size: 12px;" title="visual studio (7 posts)">Visual Studio</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/webparts/" style="font-size: 11px;" title="webparts (2 posts)">WebParts</a><span class="tag-cloud-sep" aria-hidden="true">&middot;</span><a href="/categories/windowblinds/" style="font-size: 12px;" title="windowblinds (12 posts)">WindowBlinds</a></nav>
+    <hr class="tag-cloud-separator"></div>
+</div>
+
+    </header>
+    <div class="site-main">
+      <aside class="sidebar">
+  <div class="widget">
+    <h2 class="widget-title">Search</h2>
+    <form class="search-form" action="/search/" method="get">
+      <input type="search" class="search-field" placeholder="Search ..." name="q">
+    </form>
+  </div>
+
+  
+  <div class="widget widget-mvp">
+    <a href="https://mvp.sitecore.com/en/Directory/Profile?id=e416ef1dabf5468ff4fa08dd30f068bb" title="Sitecore Technology MVP 2026">
+      <img src="/images/sitecore-mvp-2026-technology.png" alt="Sitecore Technology MVP 2026" class="mvp-badge" width="250">
+    </a>
+    
+    <div class="mvp-badges-history">
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2017-Technology.png" alt="MVP Badge 2017" class="mvp-badge-small">
+        <span class="mvp-badge-year">2017</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2016-Technology.png" alt="MVP Badge 2016" class="mvp-badge-small">
+        <span class="mvp-badge-year">2016</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2015-Technology.png" alt="MVP Badge 2015" class="mvp-badge-small">
+        <span class="mvp-badge-year">2015</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2014-Technology.png" alt="MVP Badge 2014" class="mvp-badge-small">
+        <span class="mvp-badge-year">2014</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2013-Technology.png" alt="MVP Badge 2013" class="mvp-badge-small">
+        <span class="mvp-badge-year">2013</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2012-Technology.png" alt="MVP Badge 2012" class="mvp-badge-small">
+        <span class="mvp-badge-year">2012</span>
+      </div>
+      
+      
+      
+      <div class="mvp-badge-item">
+        <img src="/images/mvp/2011-Technology.png" alt="MVP Badge 2011" class="mvp-badge-small">
+        <span class="mvp-badge-year">2011</span>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+
+  
+</aside>
+
+      <main class="content-area">
+        
+  <article class="post single">
+    <div class="content-area">
+      <header class="entry-header">
+        <h1 class="entry-title">A Generic Managed Cache Layer for Sitecore XM/XP That Almost Writes Itself Into Your Code</h1>
+        <div class="entry-meta">
+          <time datetime="2026-04-06T10:00:00&#43;00:00">
+            April 6, 2026
+          </time>
+          
+          <span class="author">by Adam Najmanowicz</span>
+          
+          <span class="reading-time">
+            <svg class="reading-time-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            9 min read
+          </span>
+        </div>
+        
+        <div class="entry-categories">
+          
+          <a href="http://localhost:1313/categories/best-practices/" class="category-badge">Best Practices</a>
+          
+          <a href="http://localhost:1313/categories/cms/" class="category-badge">CMS</a>
+          
+          <a href="http://localhost:1313/categories/code-samples/" class="category-badge">Code Samples</a>
+          
+          <a href="http://localhost:1313/categories/sitecore/" class="category-badge">Sitecore</a>
+          
+          <a href="http://localhost:1313/categories/software-development/" class="category-badge">Software Development</a>
+          
+          <a href="http://localhost:1313/categories/solution/" class="category-badge">Solution</a>
+          
+        </div>
+        
+      </header>
+
+      <div class="entry-content">
+        <p>When you run a Sitecore XM/XP solution that leans heavily on Solr for content aggregation, faceted search, and product listings, you eventually hit a wall. In our case that wall was Solr query quotas. Our client&rsquo;s solution was hammering Solr so hard that we were bumping against the allocated limits on a regular basis, and scaling Solr may be neither cheap nor instant.</p>
+<p>The solution was obvious: cache the results. The challenge was less obvious: how do you introduce caching across dozens of services, each with their own data shapes and invalidation requirements, without turning the codebase into a maintenance headache?</p>
+<p>It called for a caching layer that is so transparent to use that adding it to an existing service is practically a one-line change. And removing it (or disabling it for tests) is even simpler - you pass <code>null</code> instead of a cache reference and everything keeps working. No <code>if (cache != null)</code> guards scattered through your code, no special test doubles, no ceremony.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>Our Sitecore XP solution uses Solr extensively - not just for search, but for product listings, category filtering, attribute faceting, and content aggregation. Every page render was triggering multiple Solr queries, many of which returned the same results for the same content that had not changed since the last publish.</p>
+<p>The Solr queries themselves were well-optimized. The problem was volume. Hundreds of identical queries per minute across multiple CD instances, all hitting the same Solr cluster. We needed a caching layer, but the solution had to satisfy several constraints:</p>
+<ul>
+<li><strong>Easy to add</strong> - developers should be able to wrap existing service calls with caching without restructuring anything</li>
+<li><strong>Easy to remove</strong> - for unit tests, we do not want the cache involved at all</li>
+<li><strong>Serialization-aware</strong> - Sitecore&rsquo;s cache infrastructure requires every entry to report its size, which means storing serialized strings rather than raw objects</li>
+<li><strong>Template-sensitive flushing</strong> - when a content author saves a Product item, the product cache should clear automatically, but the unrelated menus cache should not</li>
+<li><strong>Custom flushing</strong> - some services need finer control over what gets flushed and when</li>
+<li><strong>Multi-instance aware</strong> - cache clears on the CM should propagate to all CD instances</li>
+</ul>
+<h2 id="the-core-managedcache-and-imanagedcacheservice">The Core: ManagedCache and IManagedCacheService</h2>
+<p>The foundation is a <code>ManagedCache</code> class that extends <code>Sitecore.XA.Foundation.Caching.DictionaryCache</code>. It adds two capabilities that the stock SXA cache does not have: a list of template IDs that trigger automatic clearing, and a pluggable <code>ManagedCacheInvalidationDelegate</code> for custom flushing logic.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ManagedCache</span> <span class="p">:</span> <span class="n">Sitecore</span><span class="p">.</span><span class="n">XA</span><span class="p">.</span><span class="n">Foundation</span><span class="p">.</span><span class="n">Caching</span><span class="p">.</span><span class="n">DictionaryCache</span><span class="p">,</span> <span class="n">IManagedCache</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ID</span><span class="p">&gt;</span> <span class="n">InvalidatingTemplateIds</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">_cacheClearer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ManagedCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">long</span> <span class="n">maxSize</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">cacheClearer</span> <span class="p">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">maxSize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_cacheClearer</span> <span class="p">=</span> <span class="n">cacheClearer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InvalidatingTemplateIds</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ID</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">LastCleared</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">bool</span> <span class="n">Clear</span><span class="p">(</span><span class="n">Item</span> <span class="n">item</span><span class="p">,</span> <span class="n">ItemEventType</span> <span class="n">eventType</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">remote</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">result</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">InvalidatingTemplateIds</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">InvalidatingTemplateIds</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">id</span> <span class="p">=&gt;</span> <span class="n">CheckItemInheritance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">id</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">_cacheClearer</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="n">_cacheClearer</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">||</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The <code>Clear(Item item, ...)</code> method is the decision point. When a Sitecore item event fires (save, delete, rename, publish), the event handler calls this method on every managed cache. The cache first checks its template list - if the changed item inherits from any of the registered templates, it clears itself. Then it calls the custom delegate if one was provided. Both mechanisms can coexist on the same cache.</p>
+<p>The <code>IManagedCacheService</code> manages the lifecycle of all caches. You ask it for a cache by name, and it either returns an existing one or creates a new one with your specified size, flushing delegate, and template IDs:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">interface</span> <span class="nc">IManagedCacheService</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">IManagedCache</span> <span class="n">GetCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">defaultMaxSize</span> <span class="p">=</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">clearer</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span> <span class="n">ID</span><span class="p">[]</span> <span class="n">invalidatingTemplateIds</span> <span class="p">=</span> <span class="kc">null</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">ClearCaches</span><span class="p">(</span><span class="n">Item</span> <span class="n">item</span><span class="p">,</span> <span class="n">ItemEventType</span> <span class="n">eventType</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">remote</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">GetCacheNames</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">ClearCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">RaiseClearCacheEvent</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">userName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">RaiseClearCacheEventOnRemotes</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">userName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The service is registered as a singleton via Sitecore&rsquo;s DI container. Every service that needs caching takes <code>IManagedCacheService</code> as a constructor parameter, calls <code>GetCache(...)</code> once in the constructor, and then uses the returned <code>IManagedCache</code> throughout its lifetime.</p>
+<h2 id="the-secret-sauce-managedcacheextensions">The Secret Sauce: ManagedCacheExtensions</h2>
+<p>Here is where the design gets interesting. The <code>GetOrSetIfNotCached&lt;T&gt;</code> extension method is what makes the cache essentially invisible to the consuming code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">GetOrSetIfNotCached</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">IManagedCache</span> <span class="n">cache</span><span class="p">,</span> <span class="kt">string</span> <span class="n">cacheKey</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">getObject</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">objectToString</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">T</span><span class="p">&gt;</span> <span class="n">stringToObject</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cache</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">cacheValue</span> <span class="p">=</span> <span class="n">cache</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cacheValue</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">sCachedObject</span> <span class="p">=</span> <span class="n">cacheValue</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">sCachedObject</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">stringToObject</span><span class="p">(</span><span class="n">sCachedObject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="k">value</span> <span class="p">=</span> <span class="n">getObject</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cache</span> <span class="p">!=</span> <span class="kc">null</span> <span class="p">&amp;&amp;</span> <span class="k">value</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">cachedValue</span> <span class="p">=</span> <span class="n">objectToString</span><span class="p">(</span><span class="k">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cache</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">,</span> <span class="k">new</span> <span class="n">DictionaryCacheValue</span> <span class="p">{</span> <span class="n">Value</span> <span class="p">=</span> <span class="n">cachedValue</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Notice the <code>if (cache != null)</code> checks. When the cache reference is null, this method simply calls <code>getObject()</code> and returns the result. No caching, no serialization, no overhead. This is what makes it transparent:</p>
+<ul>
+<li><strong>In production</strong>, <code>IManagedCacheService.GetCache(...)</code> returns a real cache, and every call goes through the cache-check-then-fetch-and-store flow.</li>
+<li><strong>In unit tests</strong>, you can pass <code>null</code> for the cache (or simply not register <code>IManagedCacheService</code>), and all your service logic runs without caching. You test your business logic, not the caching layer.</li>
+<li><strong>When cache is disabled via config</strong>, <code>GetCache(...)</code> returns null, and the same transparency applies.</li>
+</ul>
+<p>The serialization pair (<code>objectToString</code> / <code>stringToObject</code>) is the developer&rsquo;s responsibility. For simple objects, <code>ToString()</code> and a parse method work. For complex objects, JSON serialization does the job. This keeps Sitecore&rsquo;s cache size tracking accurate, since Sitecore caches store strings and need to know the byte size of each entry.</p>
+<h2 id="usage-example-1-template-sensitive-flushing">Usage Example 1: Template-Sensitive Flushing</h2>
+<p>Here is how a product listing provider uses the cache with automatic template-based flushing. The cache will auto-clear whenever any item inheriting from the <code>Product</code> or <code>ProductCategory</code> templates is saved, deleted, or published:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CachedProductListingProvider</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_productCache</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_categoryCache</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">CachedProductListingProvider</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">cacheService</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// These caches auto-flush when Product or ProductCategory items change</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_productCache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">?.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;ProductSolrCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="kc">null</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">Product</span><span class="p">.</span><span class="n">ItemTemplateId</span><span class="p">,</span> <span class="n">ProductCategory</span><span class="p">.</span><span class="n">ItemTemplateId</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">_categoryCache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">?.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;CategorySolrCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="kc">null</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">ProductCategory</span><span class="p">.</span><span class="n">ItemTemplateId</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ProductSearchResultItem</span><span class="p">&gt;</span> <span class="n">GetProducts</span><span class="p">(</span><span class="n">Database</span> <span class="n">database</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_productCache</span><span class="p">.</span><span class="n">GetOrSetIfNotCached</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="s">$&#34;ProductSolrCache::{database.Name}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">QuerySolrForProducts</span><span class="p">(</span><span class="n">database</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">ProductSearchResultItem</span><span class="p">&gt;&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The <code>null</code> passed as the <code>clearer</code> parameter means no custom flush logic. The template ID array does all the work. When a content author publishes a Product item, the event handler fires, the <code>ManagedCache.Clear(Item, ...)</code> method checks template inheritance, finds a match, and clears the cache.</p>
+<p>Notice how <code>JsonConvert.SerializeObject</code> and <code>JsonConvert.DeserializeObject&lt;T&gt;</code> are passed directly as the serialization pair. For most use cases, that is all you need.</p>
+<h2 id="usage-example-2-custom-flushing-delegate">Usage Example 2: Custom Flushing Delegate</h2>
+<p>Sometimes template-based flushing is not enough. An output cache service, for example, needs to selectively flush only the cache entries that are affected by a specific content change, rather than clearing everything:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">OutputCacheService</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_cache</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">OutputCacheService</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">managedCacheService</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_cache</span> <span class="p">=</span> <span class="n">managedCacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;OutputCache&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clearer</span><span class="p">:</span> <span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// Custom logic: only flush entries affected by this item</span>
+</span></span><span class="line"><span class="cl">                <span class="n">FlushEntriesForItem</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The <code>ManagedCacheInvalidationDelegate</code> receives the cache reference, the changed item, the event type (save, delete, rename, etc.), and whether the event is remote. You return <code>true</code> if you handled the clearing, <code>false</code> if the cache should remain untouched for this particular change.</p>
+<p>This delegate runs <em>after</em> the template check, so you can combine both approaches: register invalidating templates for broad flushing and a delegate for fine-grained control.</p>
+<h2 id="usage-example-3-selective-template-check-in-the-delegate">Usage Example 3: Selective Template Check in the Delegate</h2>
+<p>A product resolver service uses a custom delegate that checks template inheritance manually, giving it full control over when to flush:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ProductResolverService</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_cache</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ProductResolverService</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">cacheService</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_cache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;ProductResolveCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">TemplateID</span> <span class="p">==</span> <span class="n">Product</span><span class="p">.</span><span class="n">ItemTemplateId</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">cache</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Product</span> <span class="n">ResolveProduct</span><span class="p">(</span><span class="kt">string</span> <span class="n">productId</span><span class="p">,</span> <span class="n">Database</span> <span class="n">database</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_cache</span><span class="p">.</span><span class="n">GetOrSetIfNotCached</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;(</span>
+</span></span><span class="line"><span class="cl">            <span class="s">$&#34;ProductResolveCache::{database.Name}::{productId}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">GetProductByIdInternal</span><span class="p">(</span><span class="n">productId</span><span class="p">,</span> <span class="n">database</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">product</span> <span class="p">=&gt;</span> <span class="n">product</span><span class="p">?.</span><span class="n">ID</span><span class="p">?.</span><span class="n">ToString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sCachedItemId</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ID</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">sCachedItemId</span><span class="p">,</span> <span class="k">out</span> <span class="n">ID</span> <span class="n">itemId</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">?</span> <span class="n">database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">sCachedItemId</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">:</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Notice the serialization approach here. Instead of serializing the entire Product object, we store just the Sitecore item ID as a string. On cache hit, we resolve the item from the database. This is a useful pattern when the object is cheap to construct from an ID but expensive to find through a search index.</p>
+<h2 id="the-event-plumbing">The Event Plumbing</h2>
+<p>For the automatic flushing to work, Sitecore item events need to reach the <code>ManagedCacheService</code>. The <code>ManagedCacheInvalidationHandler</code> event handler handles this. It hooks into all relevant Sitecore item events (saved, deleted, moved, renamed, copied, published) and calls <code>ClearCaches(item, eventType, remote)</code> on the service. The service iterates all managed caches and lets each one decide whether to flush.</p>
+<p>The event handler supports both local and remote events. In a multi-instance deployment (CM + multiple CDs), when a cache is manually cleared on the CM, you can propagate that clear to all CDs via <code>RaiseClearCacheEvent(...)</code>. This uses Sitecore&rsquo;s event queue, so it works across instances without any custom messaging infrastructure.</p>
+<p>The whole thing is wired in via a single Sitecore config patch file. No code changes needed to your existing event handlers.</p>
+<h2 id="results">Results</h2>
+<p>After wrapping the heaviest Solr-backed services with this cache, the results were significant:</p>
+<ul>
+<li><strong>Solr query volume dropped dramatically</strong> - most pages now serve entirely from cache, with Solr queries only firing after publishes or when the cache is cold</li>
+<li><strong>Page render times improved</strong> - eliminating serialization round-trips to Solr on every request made a noticeable difference</li>
+<li><strong>Infrastructure costs decreased</strong> - lower Solr load meant we could stay within quota allocations without scaling</li>
+<li><strong>Developer adoption was fast</strong> - the transparency of the extension method meant that adding caching to a new service was a 10-minute change, not a half-day refactor</li>
+</ul>
+<h2 id="getting-the-code">Getting the Code</h2>
+<p>The full implementation is available in the <a href="https://github.com/SitecorePowerShell/PerformantSitecore">PerformantSitecore</a> repository on GitHub. The <code>Foundation.ManagedCache</code> project contains everything described here. Drop the DLL and config file into your Sitecore 10.x solution, register the DI service, and start wrapping your expensive calls.</p>
+<p>This is for Sitecore XM/XP 10.x running on .NET Framework 4.8. It requires the SXA caching package (<code>Sitecore.XA.Foundation.Caching</code>) since it builds on top of the SXA <code>DictionaryCache</code> class.</p>
+<p>The repository also contains a <code>Foundation.SqlDataProvider</code> module that caches <code>GetChildIdsByName</code> calls at the data provider level, reducing SQL round-trips by 7-10x. That is a different optimization targeting a different bottleneck, covered in a <a href="/2026/03/09/caching-sitecore-sql-data-provider/">separate blog post</a>.</p>
+
+      </div>
+
+      <footer class="entry-footer">
+        
+
+        <nav class="post-navigation">
+          
+          <div class="nav-previous">
+            <a href="/2026/03/23/async-sxa-site-provider-sitecore-xp/">&laquo; Making the SXA Site Provider Asynchronous for Sitecore XM/XP at Scale</a>
+          </div>
+          
+          
+          <div class="nav-next">
+            <a href="/2026/04/20/managed-cache-api-sitecore-xp/">When the Cache Works Too Well: Adding Diagnostics and Manual Control to the Managed Cache Layer &raquo;</a>
+          </div>
+          
+        </nav>
+      </footer>
+
+      
+<div class="comments">
+  <h2 class="comments-title">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://localhost:1313/2026/04/06/managed-cache-layer-sitecore-xp/";
+      this.page.identifier = "/2026/04/06/managed-cache-layer-sitecore-xp/";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://codality.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+    </div>
+  </article>
+
+      </main>
+    </div>
+    <footer class="site-footer">
+      <div class="footer-inner">
+  <p>&copy; 1999-2026 - <a href="/">Adam Najmanowicz</a></p>
+  
+</div>
+
+    </footer>
+  </div>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      block.style.position = 'relative';
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.setAttribute('aria-label', 'Copy code');
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+      block.appendChild(btn);
+      btn.addEventListener('click', function() {
+        var code = block.querySelector('td:last-child code') || block.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(function() {
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(function() {
+              btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+        }
+      });
+    });
+  });
+  </script>
+  <script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    var visible = false;
+    window.addEventListener('scroll', function() {
+      var shouldShow = window.scrollY > 400;
+      if (shouldShow !== visible) {
+        visible = shouldShow;
+        btn.classList.toggle('visible', visible);
+      }
+    }, { passive: true });
+    btn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+  </script>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
+  <script>
+  (function() {
+    var overlay = document.getElementById('lightbox');
+    var content = document.getElementById('lightbox-content');
+    var closeBtn = document.getElementById('lightbox-close');
+    var imgExts = /\.(jpe?g|png|gif|webp|svg|bmp|avif)(\?.*)?$/i;
+    var vidExts = /\.(mp4|webm|ogg)(\?.*)?$/i;
+
+    function open(href) {
+      content.innerHTML = '';
+      if (imgExts.test(href)) {
+        var img = document.createElement('img');
+        img.src = href;
+        img.alt = '';
+        content.appendChild(img);
+      } else if (vidExts.test(href)) {
+        var vid = document.createElement('video');
+        vid.src = href;
+        vid.controls = true;
+        vid.autoplay = true;
+        content.appendChild(vid);
+      } else {
+        return false;
+      }
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      return true;
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      var vid = content.querySelector('video');
+      if (vid) vid.pause();
+    }
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (imgExts.test(href) || vidExts.test(href)) {
+        e.preventDefault();
+        open(href);
+      }
+    });
+
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      close();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) close();
+    });
+  })();
+  </script>
+  <script id="dsq-count-scr" src="https://codality.disqus.com/count.js" async></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var mermaidBlocks = document.querySelectorAll('pre > code.language-mermaid');
+    if (mermaidBlocks.length > 0) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+      s.onload = function() {
+        var mermaidTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default';
+        mermaid.initialize({ startOnLoad: false, theme: mermaidTheme });
+        mermaidBlocks.forEach(function(block) {
+          var pre = block.parentElement;
+          var div = document.createElement('div');
+          div.className = 'mermaid';
+          div.textContent = block.textContent;
+          pre.parentNode.replaceChild(div, pre);
+        });
+        mermaid.run();
+      };
+      document.head.appendChild(s);
+    }
+  });
+  </script>
+</body>
+</html>

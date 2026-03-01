@@ -245,6 +245,7 @@ img.alignnone {
   margin: 0 auto;
   background-color: var(--color-bg-wrapper);
   min-height: 100vh;
+  overflow-x: hidden;
   transition: background-color 0.3s ease;
 }
 
@@ -611,7 +612,8 @@ img.alignnone {
   flex: 1;
   min-width: 0;
   order: 2;
-  max-width: none;
+  max-width: 100%;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
@@ -696,6 +698,8 @@ img.alignnone {
   font-size: 17px;
   line-height: 1.7;
   color: var(--color-text);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .entry-content h2 {
@@ -926,7 +930,8 @@ pre code {
   border-left: 3px solid var(--color-pre-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-subtle);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1339,6 +1344,7 @@ pre code {
 
   .site-main {
     flex-direction: column;
+    flex-wrap: nowrap;
     padding: 20px;
   }
 
