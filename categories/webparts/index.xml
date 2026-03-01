@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>WebParts on Codality</title>
-    <link>http://localhost:1314/categories/webparts/</link>
+    <link>https://blog.najmanowicz.com/categories/webparts/</link>
     <description>Recent content in WebParts on Codality</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 08 Jan 2009 18:06:47 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1314/categories/webparts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.najmanowicz.com/categories/webparts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WebParts based Sidebar for EPiServer – how to use it?</title>
-      <link>http://localhost:1314/2009/01/08/webparts-based-sidebar-for-episerver-how-to-use-it/</link>
+      <link>https://blog.najmanowicz.com/2009/01/08/webparts-based-sidebar-for-episerver-how-to-use-it/</link>
       <pubDate>Thu, 08 Jan 2009 18:06:47 +0000</pubDate>
-      <guid>http://localhost:1314/2009/01/08/webparts-based-sidebar-for-episerver-how-to-use-it/</guid>
+      <guid>https://blog.najmanowicz.com/2009/01/08/webparts-based-sidebar-for-episerver-how-to-use-it/</guid>
       <description>&lt;p&gt;Once you’ll update the framework to the extended one, you will immediately notice that… nothing has changed. Hmm… did something go wrong?&lt;/p&gt;&#xA;&lt;p&gt;Well, not really. By default the framework will be run in the “legacy mode”. Thanks to &lt;a href=&#34;http://marekblotny.blogspot.com/2008/07/plugins-and-datafactory-event-handlers.html&#34;&gt;an old article by our own Marek Blotny&lt;/a&gt;, I’ve learned how to build Plugin settings which are just perfect for the purpose!&lt;/p&gt;&#xA;&lt;p&gt;So to configure and enable the new features you need to open your admin UI and in the “Config” click on the “Plugin Manager” item and select our framework plugin as shown in the picture&lt;/p&gt;</description>
     </item>
     <item>
       <title>WebParts based Sidebar for EPiServer – the motivation and specification</title>
-      <link>http://localhost:1314/2009/01/08/webparts-based-sidebar-for-episerver-the-motivation-and-specification/</link>
+      <link>https://blog.najmanowicz.com/2009/01/08/webparts-based-sidebar-for-episerver-the-motivation-and-specification/</link>
       <pubDate>Thu, 08 Jan 2009 15:04:12 +0000</pubDate>
-      <guid>http://localhost:1314/2009/01/08/webparts-based-sidebar-for-episerver-the-motivation-and-specification/</guid>
+      <guid>https://blog.najmanowicz.com/2009/01/08/webparts-based-sidebar-for-episerver-the-motivation-and-specification/</guid>
       <description>&lt;p&gt;Back in the day when we started designing our last project we’ve been presented with a following problem – a big number of templates with slightly different sidebars.&lt;/p&gt;&#xA;&lt;p&gt;Hmm…&lt;/p&gt;&#xA;&lt;p&gt;Is sidebar a part of content? No, rather not. We don’t want the editors to have to setup the sidebar for every article they write (and the site has a few dozens of articles created on it every day).&lt;/p&gt;&#xA;&lt;p&gt;Is sidebar more of a template thing? Well… more like it, but still… we have articles all over the site with different sidebar elements when the articles are in different parts of the site (ok so we could add rules what controls display in which part of the site). &lt;strong&gt;But wait! There’s more!&lt;/strong&gt; The sidebar will be different for every language (region). Now we’re talking a dozen of templates or a rules engine just to make the sidebar different. Customising the template with properties isn’t ideal either as it makes EPiServer UI very cluttered. Additionally we want to change sidebars across many templates so the whole branch/section of the site will be able to share the same sidebar.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -2,59 +2,59 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rants on Codality</title>
-    <link>http://localhost:1314/categories/rants/</link>
+    <link>https://blog.najmanowicz.com/categories/rants/</link>
     <description>Recent content in Rants on Codality</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Mon, 30 Mar 2009 21:03:35 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1314/categories/rants/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.najmanowicz.com/categories/rants/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My private little G1/Android wish and hit list</title>
-      <link>http://localhost:1314/2009/03/30/my-private-little-g1android-wish-and-hit-list/</link>
+      <link>https://blog.najmanowicz.com/2009/03/30/my-private-little-g1android-wish-and-hit-list/</link>
       <pubDate>Mon, 30 Mar 2009 21:03:35 +0000</pubDate>
-      <guid>http://localhost:1314/2009/03/30/my-private-little-g1android-wish-and-hit-list/</guid>
+      <guid>https://blog.najmanowicz.com/2009/03/30/my-private-little-g1android-wish-and-hit-list/</guid>
       <description>&lt;p&gt;First of all, I have to say that I like the phone a lot. While you may get an impression from the rest of the post that I have a lot of beef with the phone, that&amp;rsquo;s really not the case. The very fact that I can compile a short, coherent list of things that I think could be improved upon, made me realize how little there is to be wishing for. And none of the problems is a deal breaker. It&amp;rsquo;s not like the phone is missing Copy&amp;amp;Paste or MMS ;). It does almost all I expected it to do (even in version 1.0), but since a few of my colleagues is looking forward to get one I thought I&amp;rsquo;d throw in a list of the little annoyances that I have faced using it, so they might verify how important the drawbacks might be to them. I am not sure how many of those can be addressed with third party applications but, for sure not all of them can, and I would definitely love Google to step in and provide a system-fix for them at some point.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Is it Yeti? Is it a magazine? I sense disturbance in The Force</title>
-      <link>http://localhost:1314/2008/03/11/is-it-yeti-is-it-a-magazine-i-sense-disturbance-in-the-force/</link>
+      <link>https://blog.najmanowicz.com/2008/03/11/is-it-yeti-is-it-a-magazine-i-sense-disturbance-in-the-force/</link>
       <pubDate>Tue, 11 Mar 2008 19:21:42 +0000</pubDate>
-      <guid>http://localhost:1314/2008/03/11/is-it-yeti-is-it-a-magazine-i-sense-disturbance-in-the-force/</guid>
+      <guid>https://blog.najmanowicz.com/2008/03/11/is-it-yeti-is-it-a-magazine-i-sense-disturbance-in-the-force/</guid>
       <description>&lt;p&gt;There&amp;rsquo;s been a great link to an article forwarded to me today to a Newsweek&amp;rsquo;s Apple PR division Technology columnist Steven Levy. Where he claimed that he has lost (although he is not sure (LOL) ) his MacBook Air. &lt;a href=&#34;http://blogs.zdnet.com/Apple/?p=1395&#34;&gt;blogosphere&lt;/a&gt; is throwing their hands up in the Air ;), but really&amp;hellip; it&amp;rsquo;s so funny on so many levels that people are all about the story (ironically so am I with this post). The article is such a great example of the Apple hype machine at its best. Let me elaborate&lt;/p&gt;</description>
     </item>
     <item>
       <title>Common Language Runtime, now even more common</title>
-      <link>http://localhost:1314/2007/05/07/common-language-runtime-now-even-more-common/</link>
+      <link>https://blog.najmanowicz.com/2007/05/07/common-language-runtime-now-even-more-common/</link>
       <pubDate>Mon, 07 May 2007 19:05:26 +0000</pubDate>
-      <guid>http://localhost:1314/2007/05/07/common-language-runtime-now-even-more-common/</guid>
+      <guid>https://blog.najmanowicz.com/2007/05/07/common-language-runtime-now-even-more-common/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://developers.slashdot.org/article.pl?sid=07/05/01/200226&#34;&gt;There&lt;/a&gt; &lt;a href=&#34;http://blogs.zdnet.com/microsoft/?p=414&#34;&gt;seems&lt;/a&gt; to be a &lt;a href=&#34;http://www.itwriting.com/blog/?postid=387&#34;&gt;storm&lt;/a&gt; over at &lt;a href=&#34;http://codebetter.com/blogs/sam.gentile/archive/2007/04/30/cross-platform-clr.aspx&#34;&gt;over&lt;/a&gt; at the &lt;a href=&#34;http://www.knowing.Net/CommentView,guid,36df9349-f62c-41c2-b833-def7f0c65dcf.aspx#commentstart&#34;&gt;Internet&lt;/a&gt; about Microsoft going Cross platform and &amp;ldquo;opening the common language runtime to a multitude of platforms&amp;rdquo;. What seems to be a false perception that even such respectable podcasts as &lt;a href=&#34;http://bol.cnet.com&#34;&gt;Buzz Out Loud&lt;/a&gt; or even &lt;a href=&#34;http://twit.tv&#34;&gt;TWIT&lt;/a&gt; fail to realize and mislead people on is that this has NOTHING to do with portable .Net desktop applications. Someone even suggested at one of the BOL podcasts that it&amp;rsquo;s Microsoft&amp;rsquo;s attempt to put .Net Framework on Linux servers. (Huh? Beg your pardon?) You may have not noticed it but when they say about cross-platform capability of Silverlight it always says Windows, Mac.. and then on a single breath they start enumerating browsers. A casual listener just measures the quantity and the list has an impressive 5-6 bullets. heh&amp;hellip; wait&amp;hellip; erm&amp;hellip; not really&amp;hellip; it&amp;rsquo;s actually only 2 platforms. You cannot enumerate browsers as platforms! You share 99% implementation between them, the only cross-browser thing is the interaction between the plugin and the host browser!&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Wiki Family</title>
-      <link>http://localhost:1314/2007/01/24/wiki-family/</link>
+      <link>https://blog.najmanowicz.com/2007/01/24/wiki-family/</link>
       <pubDate>Wed, 24 Jan 2007 19:57:20 +0000</pubDate>
-      <guid>http://localhost:1314/2007/01/24/wiki-family/</guid>
+      <guid>https://blog.najmanowicz.com/2007/01/24/wiki-family/</guid>
       <description>&lt;p&gt;Writing user documents for our company, I &amp;rsquo;ve been using our corporate wiki a lot recently.&#xA;&lt;a href=&#34;http://www.atlassian.com/software/confluence/&#34;&gt;Confluence&lt;/a&gt; is incredible. I can honestly say I&amp;rsquo;ve not been impressed by a piece of software to that degree for quite a while.&#xA;I really like how it provides me with the possibility for creating small pages like &amp;ldquo;format specifications&amp;rdquo; and &amp;ldquo;installation info&amp;rdquo; which I can then assemble into e.g. &amp;ldquo;User&amp;rsquo;s manual&amp;rdquo; simple and seamless:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Is everything going to web based?</title>
-      <link>http://localhost:1314/2006/08/21/is-everything-going-to-web-based/</link>
+      <link>https://blog.najmanowicz.com/2006/08/21/is-everything-going-to-web-based/</link>
       <pubDate>Mon, 21 Aug 2006 12:33:34 +0000</pubDate>
-      <guid>http://localhost:1314/2006/08/21/is-everything-going-to-web-based/</guid>
+      <guid>https://blog.najmanowicz.com/2006/08/21/is-everything-going-to-web-based/</guid>
       <description>&lt;p&gt;Yeah… Mr. Obvious, am I not?&lt;/p&gt;&#xA;&lt;p&gt;Check out this web Word processor. Neat toy… not sure why would I use it but still…&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://www.writely.com/&#34;&gt;http://www.writely.com/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;One of the gazillion Google web apps.&lt;/p&gt;&#xA;&lt;p&gt;Let me remain sceptic - editing belongs to desktop if you asked me.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Vista security - the first thing you will want to disable?</title>
-      <link>http://localhost:1314/2006/08/01/vista-security-the-first-thing-you-will-want-to-disable/</link>
+      <link>https://blog.najmanowicz.com/2006/08/01/vista-security-the-first-thing-you-will-want-to-disable/</link>
       <pubDate>Tue, 01 Aug 2006 11:04:07 +0000</pubDate>
-      <guid>http://localhost:1314/2006/08/01/vista-security-the-first-thing-you-will-want-to-disable/</guid>
+      <guid>https://blog.najmanowicz.com/2006/08/01/vista-security-the-first-thing-you-will-want-to-disable/</guid>
       <description>&lt;p&gt;Let me start by digressing… I’ve got this &lt;a href=&#34;http://www.desktopsidebar.com/&#34;&gt;Desktop Sidebar&lt;/a&gt; installed (wich by the way seems to be one of those viral softwares since a lot of people in the team started using it upon looking at my screen) and on the daily comic roll I’ve got the &lt;a href=&#34;http://www.grimmy.com/comics.php&#34; title=&#34;Mother Goose &amp;amp; Grim&#34;&gt;Mother Goose &amp;amp; Grim&lt;/a&gt; displayed in it among others. And looking at todays comic made me roll on the floor laughing (not that it does not usually do it anyway) since I realized that I can totally relate to it in the sense how I feel when I log on to my computer at home.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Konfabulator for Windows - Everything old is new again!</title>
-      <link>http://localhost:1314/2004/11/05/konfabulator-for-windows-everything-old-is-new-again-by-adam-najmanowicz/</link>
+      <link>https://blog.najmanowicz.com/2004/11/05/konfabulator-for-windows-everything-old-is-new-again-by-adam-najmanowicz/</link>
       <pubDate>Fri, 05 Nov 2004 18:46:33 +0000</pubDate>
-      <guid>http://localhost:1314/2004/11/05/konfabulator-for-windows-everything-old-is-new-again-by-adam-najmanowicz/</guid>
+      <guid>https://blog.najmanowicz.com/2004/11/05/konfabulator-for-windows-everything-old-is-new-again-by-adam-najmanowicz/</guid>
       <description>&lt;h3 id=&#34;could-we-have-some-decency-here&#34;&gt;Could we have some decency here?&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://adam.wincustomize.com/Articles.aspx--SID=59&amp;amp;AID=33940&amp;amp;c=1&#34; title=&#34;Originally posted on another site&#34;&gt;Originally posted on Wincustomize.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;There&amp;rsquo;s a lot of noise in the news sites (&lt;a href=&#34;http://developers.slashdot.org/developers/04/11/05/1324254.shtml&#34;&gt;Slashdot.org&lt;/a&gt;, &lt;a href=&#34;http://news.com.com/Mac+developer+looks+to+Windows+to+escape+Tiger/2100-1046_3-5439243.html?tag=nefd.top&#34;&gt;News.com&lt;/a&gt; and &lt;a href=&#34;http://www.neowin.net/comments.php?id=25393&amp;amp;category=main&#34;&gt;Neowin.net&lt;/a&gt;) about the Monday release of Konfabulator for Windows. But to be honest they just make me think that journalists today no longer care to be through and accurate and will chew in everything  that a PR department will send them. I do not personally rant about those kind of things, but this one got me going. Especially one thing Mr Alro said which is cited in about all of the sources:&lt;/p&gt;</description>
     </item>
   </channel>

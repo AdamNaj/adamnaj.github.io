@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Microsoft SqlServer on Codality</title>
-    <link>http://localhost:1314/categories/microsoft-sqlserver/</link>
+    <link>https://blog.najmanowicz.com/categories/microsoft-sqlserver/</link>
     <description>Recent content in Microsoft SqlServer on Codality</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Tue, 07 Jul 2009 12:15:25 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1314/categories/microsoft-sqlserver/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.najmanowicz.com/categories/microsoft-sqlserver/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Database-based paged EPiServer searches for CMS 5 R2 SP2</title>
-      <link>http://localhost:1314/2009/07/07/database-based-paged-episerver-searches-for-cms-5-r2-sp2/</link>
+      <link>https://blog.najmanowicz.com/2009/07/07/database-based-paged-episerver-searches-for-cms-5-r2-sp2/</link>
       <pubDate>Tue, 07 Jul 2009 12:15:25 +0000</pubDate>
-      <guid>http://localhost:1314/2009/07/07/database-based-paged-episerver-searches-for-cms-5-r2-sp2/</guid>
-      <description>&lt;p&gt;Aparently I have written &lt;a href=&#34;http://localhost:1314/2007/05/21/database-based-paged-episerver-searches/&#34;&gt;something on that note before for CMS 4&lt;/a&gt; and it looks like someone still needs it as I got a request for an updated version for it a couple of days ago. So here we go:&lt;/p&gt;&#xA;&lt;p&gt;for the most part the syntax for the call is equivalent to what is was before so go to my previous article regarding that (check out the old article for details). What I&amp;rsquo;ve added this time around is:&lt;/p&gt;</description>
+      <guid>https://blog.najmanowicz.com/2009/07/07/database-based-paged-episerver-searches-for-cms-5-r2-sp2/</guid>
+      <description>&lt;p&gt;Aparently I have written &lt;a href=&#34;https://blog.najmanowicz.com/2007/05/21/database-based-paged-episerver-searches/&#34;&gt;something on that note before for CMS 4&lt;/a&gt; and it looks like someone still needs it as I got a request for an updated version for it a couple of days ago. So here we go:&lt;/p&gt;&#xA;&lt;p&gt;for the most part the syntax for the call is equivalent to what is was before so go to my previous article regarding that (check out the old article for details). What I&amp;rsquo;ve added this time around is:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Advanced Language Manipulation Tool for EPiServer</title>
-      <link>http://localhost:1314/2009/04/06/advanced-language-manipulation-tool-for-episerver/</link>
+      <link>https://blog.najmanowicz.com/2009/04/06/advanced-language-manipulation-tool-for-episerver/</link>
       <pubDate>Mon, 06 Apr 2009 16:49:11 +0000</pubDate>
-      <guid>http://localhost:1314/2009/04/06/advanced-language-manipulation-tool-for-episerver/</guid>
+      <guid>https://blog.najmanowicz.com/2009/04/06/advanced-language-manipulation-tool-for-episerver/</guid>
       <description>&lt;p&gt;Have you ever (or have your customers) created and edited a page in one language only to realize that their selected locale was wrong? Have you ever wished you could delete a master language branch of a page  after creating its localized counterpart but you could only delete the newly created slave language instead? Have a customer ever requested that they could copy a whole branch and you convert it to another language so that they could then translate in-place?&lt;/p&gt;</description>
     </item>
     <item>
       <title>CogniScale - virtual hosting made easy</title>
-      <link>http://localhost:1314/2008/06/02/cogniscale-virtual-hosting-made-easy/</link>
+      <link>https://blog.najmanowicz.com/2008/06/02/cogniscale-virtual-hosting-made-easy/</link>
       <pubDate>Mon, 02 Jun 2008 22:10:03 +0000</pubDate>
-      <guid>http://localhost:1314/2008/06/02/cogniscale-virtual-hosting-made-easy/</guid>
+      <guid>https://blog.najmanowicz.com/2008/06/02/cogniscale-virtual-hosting-made-easy/</guid>
       <description>&lt;p&gt;We&amp;rsquo;ve not been talking much about it and that&amp;rsquo;s partially my fault as well (busy with other projects), but &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; has a really cool initiative called &lt;a href=&#34;http://labs.cognifide.com/&#34;&gt;Cognifide Labs&lt;/a&gt; that we intend to grow over time. The plan is to devote up to 10% company time into side projects that help us grow expertise and allow our devs to dwell into interesting technologies, methodologies and languages and develop their skills.&lt;/p&gt;&#xA;&lt;p&gt;One of the first projects (that I took part in) is &lt;a href=&#34;http://cogniscale.cognifide.com/&#34;&gt;CogniScale&lt;/a&gt; - an app that allows &lt;a href=&#34;http://www.flexiscale.com/&#34;&gt;FlexiScale&lt;/a&gt; users to manage their servers. Here&amp;rsquo;s the story&amp;hellip;&lt;/p&gt;</description>
     </item>
     <item>
       <title>The challenges of a high traffic site with EPiServer</title>
-      <link>http://localhost:1314/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</link>
+      <link>https://blog.najmanowicz.com/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</link>
       <pubDate>Wed, 23 Jan 2008 15:43:38 +0000</pubDate>
-      <guid>http://localhost:1314/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</guid>
-      <description>&lt;p&gt;&amp;hellip;with an unconventional approach to data fetching.&lt;/p&gt;&#xA;&lt;p&gt;This article is a first of a &lt;a href=&#34;http://localhost:1314/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have internally developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; and that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site, which will be released shortly as an open source project. The article outlines some pitfalls of EPiServer that we&amp;rsquo;ve run into and the nature of the &lt;a href=&#34;http://www.setantasports.com/&#34;&gt;project&lt;/a&gt; in which the module was used first and which influenced a lot of our design decisions.&lt;/p&gt;</description>
+      <guid>https://blog.najmanowicz.com/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</guid>
+      <description>&lt;p&gt;&amp;hellip;with an unconventional approach to data fetching.&lt;/p&gt;&#xA;&lt;p&gt;This article is a first of a &lt;a href=&#34;https://blog.najmanowicz.com/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have internally developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; and that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site, which will be released shortly as an open source project. The article outlines some pitfalls of EPiServer that we&amp;rsquo;ve run into and the nature of the &lt;a href=&#34;http://www.setantasports.com/&#34;&gt;project&lt;/a&gt; in which the module was used first and which influenced a lot of our design decisions.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Misadventures with Database Engine Tuning Advisor</title>
-      <link>http://localhost:1314/2007/09/05/misadventures-with-database-engine-tuning-advisor/</link>
+      <link>https://blog.najmanowicz.com/2007/09/05/misadventures-with-database-engine-tuning-advisor/</link>
       <pubDate>Wed, 05 Sep 2007 14:19:09 +0000</pubDate>
-      <guid>http://localhost:1314/2007/09/05/misadventures-with-database-engine-tuning-advisor/</guid>
+      <guid>https://blog.najmanowicz.com/2007/09/05/misadventures-with-database-engine-tuning-advisor/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve been on a sole task today to improve a database performance of the project we&amp;rsquo;ve been working on. As much as I enjoyed the task there is one thing that costed me quite a bit of head scratching. Being a standard nerd I usually have about 20-30 applications running on my machine at a time, I didn&amp;rsquo;t immediately associated the error with the tuning advisor but rather assumed it&amp;rsquo;s one of my other 29 applications/servers/daemons/services in background did something stupid, probably even some of my code craving for a bit of attention, right? So I moved to tune the database on the server via remote desktop, but when I hit a wall there I&amp;rsquo;ve looked around for the solution and it looks like that it&amp;rsquo;s been &lt;a href=&#34;http://support.microsoft.com/kb/913395&#34;&gt;known to MS for almost 2 years now&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Database-based paged EPiServer searches</title>
-      <link>http://localhost:1314/2007/05/21/database-based-paged-episerver-searches/</link>
+      <link>https://blog.najmanowicz.com/2007/05/21/database-based-paged-episerver-searches/</link>
       <pubDate>Mon, 21 May 2007 17:04:56 +0000</pubDate>
-      <guid>http://localhost:1314/2007/05/21/database-based-paged-episerver-searches/</guid>
+      <guid>https://blog.najmanowicz.com/2007/05/21/database-based-paged-episerver-searches/</guid>
       <description>&lt;p&gt;Searches paged in the database have posed a problem in SQL Server at least prior to version 2005. I&amp;rsquo;ve found some solution to the problem on the net but they were so cludgy that I would never really put anything like that in a production server. I hope the following will shed some light on how they work in general by using in in EPiServer context.&lt;/p&gt;&#xA;&lt;p&gt;Theoretically in EPiServer you can pull the pages that match the criteria from the database with EPiServer.Global.EPDataFactory.FindPagesWithCriteria() into the PageList but that seemed to be imposing a strong performance penalty with increased number of pages meeting the criteria. Since this search is sometimes done even multiple times on a page request in our project we needed something better.&lt;/p&gt;</description>
     </item>
   </channel>

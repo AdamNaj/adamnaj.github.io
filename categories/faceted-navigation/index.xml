@@ -2,46 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Faceted Navigation on Codality</title>
-    <link>http://localhost:1314/categories/faceted-navigation/</link>
+    <link>https://blog.najmanowicz.com/categories/faceted-navigation/</link>
     <description>Recent content in Faceted Navigation on Codality</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Mon, 08 Feb 2010 13:01:38 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1314/categories/faceted-navigation/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://blog.najmanowicz.com/categories/faceted-navigation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CMS UX – give the content some thought!</title>
-      <link>http://localhost:1314/2010/02/08/cms-ux-give-the-content-some-thought/</link>
+      <link>https://blog.najmanowicz.com/2010/02/08/cms-ux-give-the-content-some-thought/</link>
       <pubDate>Mon, 08 Feb 2010 13:01:38 +0000</pubDate>
-      <guid>http://localhost:1314/2010/02/08/cms-ux-give-the-content-some-thought/</guid>
+      <guid>https://blog.najmanowicz.com/2010/02/08/cms-ux-give-the-content-some-thought/</guid>
       <description>&lt;p&gt;One of the many things we debate constantly at Cognifide is how to improve the user experience. How to make editor’s life easier, how to simplify the common everyday tasks, what can be automated, and simply how to make our customer smile a little when they use our projects.&lt;/p&gt;&#xA;&lt;p&gt;For that to work, apart from the overall big blocks to be in place and working seamlessly (which is the absolute minimum required) – you need to be VERY attentive to details.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Episerver&#39;s brand new blogger</title>
-      <link>http://localhost:1314/2008/03/04/episervers-brand-new-blogger/</link>
+      <link>https://blog.najmanowicz.com/2008/03/04/episervers-brand-new-blogger/</link>
       <pubDate>Tue, 04 Mar 2008 16:56:28 +0000</pubDate>
-      <guid>http://localhost:1314/2008/03/04/episervers-brand-new-blogger/</guid>
+      <guid>https://blog.najmanowicz.com/2008/03/04/episervers-brand-new-blogger/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m really glad to notice that &lt;a href=&#34;http://marekblotny.blogspot.com/&#34;&gt;Marek&lt;/a&gt; is getting into blogging about &lt;a href=&#34;http://www.episerver.com/&#34;&gt;EPiServer&lt;/a&gt;. Marek is a really bright developer and a colleague at &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; with a number of successful EPiServer projects in his portfolio, we&amp;rsquo;ve worked together on Faceted Navigation (he&amp;rsquo;s the brain behind all the nifty editors in it) that I&amp;rsquo;m working on open sourcing of currently, and on the &lt;a href=&#34;http://www.setantasports.com/&#34;&gt;Setanta Sports Portal&lt;/a&gt; and the &lt;a href=&#34;http://www.setanta.com/&#34;&gt;Setanta corporate&lt;/a&gt; site projects. Now he&amp;rsquo;s out in the wild writing about it. Go ahead and read his analysis on the &lt;a href=&#34;http://marekblotny.blogspot.com/2008/03/episerver-5-vs-episerver-461-part-i.html&#34;&gt;performance of Episerver 4.x versus CMS 5&lt;/a&gt;. It appears that the CMS is getting&amp;hellip; nah&amp;hellip; I won&amp;rsquo;t spoil it for you&amp;hellip; Read all about it on &lt;a href=&#34;http://marekblotny.blogspot.com/&#34;&gt;Marek&amp;rsquo;s brand new blog&lt;/a&gt;!&lt;/p&gt;</description>
     </item>
     <item>
       <title>Faceted Service Structure</title>
-      <link>http://localhost:1314/2008/01/24/faceted-service-structure/</link>
+      <link>https://blog.najmanowicz.com/2008/01/24/faceted-service-structure/</link>
       <pubDate>Thu, 24 Jan 2008 17:18:33 +0000</pubDate>
-      <guid>http://localhost:1314/2008/01/24/faceted-service-structure/</guid>
-      <description>&lt;p&gt;This article is a part of the &lt;a href=&#34;http://localhost:1314/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; and that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site. The engine will be released shortly as an open source project.&lt;/p&gt;&#xA;&lt;h2 id=&#34;so-how-is-the-faceted-engine-structured&#34;&gt;So how is the faceted engine structured?&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1314/images/facetednavigationschema.png&#34;&gt;&lt;img src=&#34;http://localhost:1314/images/facetednavigationschema-thumb.png&#34; alt=&#34;FacetedNavigationSchema&#34; class=&#34;aligncenter&#34; width=&#34;244&#34; height=&#34;195&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;content-provider&#34;&gt;Content provider&lt;/h2&gt;&#xA;&lt;p&gt;As you can see the driving force behind the engine is the Facet Tagged Content Provider. If you know EPiServer, the basic functionality of the module is roughly an an equivalent of find page with criteria for categories, which allows for searching pages tagged with facets with exclusion of some other facets and tagged some optional data, the module however is paging and and allows you to plug a feedback event handler so that your controls can accept or deny a story before they are sent to is and take part in the paging. The stories are provided to you in reverse order of publishing so you always get the latest stories first, (pretty much what any blog and any news site wants).&lt;/p&gt;</description>
+      <guid>https://blog.najmanowicz.com/2008/01/24/faceted-service-structure/</guid>
+      <description>&lt;p&gt;This article is a part of the &lt;a href=&#34;https://blog.najmanowicz.com/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; and that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site. The engine will be released shortly as an open source project.&lt;/p&gt;&#xA;&lt;h2 id=&#34;so-how-is-the-faceted-engine-structured&#34;&gt;So how is the faceted engine structured?&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://blog.najmanowicz.com/images/facetednavigationschema.png&#34;&gt;&lt;img src=&#34;https://blog.najmanowicz.com/images/facetednavigationschema-thumb.png&#34; alt=&#34;FacetedNavigationSchema&#34; class=&#34;aligncenter&#34; width=&#34;244&#34; height=&#34;195&#34; /&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;content-provider&#34;&gt;Content provider&lt;/h2&gt;&#xA;&lt;p&gt;As you can see the driving force behind the engine is the Facet Tagged Content Provider. If you know EPiServer, the basic functionality of the module is roughly an an equivalent of find page with criteria for categories, which allows for searching pages tagged with facets with exclusion of some other facets and tagged some optional data, the module however is paging and and allows you to plug a feedback event handler so that your controls can accept or deny a story before they are sent to is and take part in the paging. The stories are provided to you in reverse order of publishing so you always get the latest stories first, (pretty much what any blog and any news site wants).&lt;/p&gt;</description>
     </item>
     <item>
       <title>Faceted Navigation Engine Nomenclature</title>
-      <link>http://localhost:1314/2008/01/24/faceted-navigation-engine-nomenclature/</link>
+      <link>https://blog.najmanowicz.com/2008/01/24/faceted-navigation-engine-nomenclature/</link>
       <pubDate>Thu, 24 Jan 2008 16:36:35 +0000</pubDate>
-      <guid>http://localhost:1314/2008/01/24/faceted-navigation-engine-nomenclature/</guid>
-      <description>&lt;p&gt;This article is the second of a &lt;a href=&#34;http://localhost:1314/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have internally developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt;, that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site, which will be released shortly as an open source project.&lt;/p&gt;&#xA;&lt;p&gt;First of all we have to explain the nomenclature as it is going to be used quite a bit. A few terms we use pretty extensively are:&lt;/p&gt;</description>
+      <guid>https://blog.najmanowicz.com/2008/01/24/faceted-navigation-engine-nomenclature/</guid>
+      <description>&lt;p&gt;This article is the second of a &lt;a href=&#34;https://blog.najmanowicz.com/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have internally developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt;, that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site, which will be released shortly as an open source project.&lt;/p&gt;&#xA;&lt;p&gt;First of all we have to explain the nomenclature as it is going to be used quite a bit. A few terms we use pretty extensively are:&lt;/p&gt;</description>
     </item>
     <item>
       <title>The challenges of a high traffic site with EPiServer</title>
-      <link>http://localhost:1314/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</link>
+      <link>https://blog.najmanowicz.com/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</link>
       <pubDate>Wed, 23 Jan 2008 15:43:38 +0000</pubDate>
-      <guid>http://localhost:1314/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</guid>
-      <description>&lt;p&gt;&amp;hellip;with an unconventional approach to data fetching.&lt;/p&gt;&#xA;&lt;p&gt;This article is a first of a &lt;a href=&#34;http://localhost:1314/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have internally developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; and that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site, which will be released shortly as an open source project. The article outlines some pitfalls of EPiServer that we&amp;rsquo;ve run into and the nature of the &lt;a href=&#34;http://www.setantasports.com/&#34;&gt;project&lt;/a&gt; in which the module was used first and which influenced a lot of our design decisions.&lt;/p&gt;</description>
+      <guid>https://blog.najmanowicz.com/2008/01/23/the-challenges-of-a-high-traffic-site-with-episerver/</guid>
+      <description>&lt;p&gt;&amp;hellip;with an unconventional approach to data fetching.&lt;/p&gt;&#xA;&lt;p&gt;This article is a first of a &lt;a href=&#34;https://blog.najmanowicz.com/category/episerver/faceted-navigation/&#34;&gt;series describing the faceted navigation system for EPiServer&lt;/a&gt; that we have internally developed in &lt;a href=&#34;http://www.cognifide.com/&#34;&gt;Cognifide&lt;/a&gt; and that&amp;rsquo;s already proven to be a robust solution for delivering tagged content a heavy traffic site, which will be released shortly as an open source project. The article outlines some pitfalls of EPiServer that we&amp;rsquo;ve run into and the nature of the &lt;a href=&#34;http://www.setantasports.com/&#34;&gt;project&lt;/a&gt; in which the module was used first and which influenced a lot of our design decisions.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
