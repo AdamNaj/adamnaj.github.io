@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -213,15 +213,8 @@ And the straw boss said &ldquo;Well, a-bless my soul&rdquo;</p>
 <p>the module.</p>
 <p><a href="/images/figure_presenting_report.png"><img src="/images/figure_presenting_report_thumb.png" alt="figure_presenting_report" title="figure_presenting_report" class="aligncenter" width="604" height="480" /></a></p>
 <p>At the heart of Sitecore PowerShell Extensions (SPE) reports is the  Show-ListView commandlet. The commandlet is somewhat based on how the Out-GridView commandlet in the Windows PowerShell. You can try it out by running the following command in your Windows PowerShell Console:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\&gt;</span> <span class="nb">Get-ChildItem</span> <span class="n">C:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Out-GridView</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>What you should see as a result of execution of the above will look somewhat like the following image:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\&gt;</span> <span class="nb">Get-ChildItem</span> <span class="n">C:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Out-GridView</span>
+</span></span></code></pre></div><p>What you should see as a result of execution of the above will look somewhat like the following image:</p>
 <p><a href="/images/image4.png"><img src="/images/image_thumb4.png" alt="image" title="image" class="aligncenter" width="463" height="503" /></a></p>
 <p>Now using this commandlet is not possible in the remote/web scenario PowerShell Extensions.</p>
 <h2 id="meet-the-show-listview-commandlet">Meet the Show-ListView commandlet</h2>
@@ -235,54 +228,24 @@ The Show-ListView commandlet sends the output from a command to a grid view wind
 <li>Export contents of the view in XML, CSV, JSON, HTML or Excel file and download that onto the user&rsquo;s computer. The downloaded results will take into account current filter and order of the items.</li>
 </ul>
 <p>So an effect of the following one liner:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">__Updated</span> <span class="p">,</span> <span class="s2">&#34;__Updated by&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>is&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">__Updated</span> <span class="p">,</span> <span class="s2">&#34;__Updated by&#34;</span>
+</span></span></code></pre></div><p>is&hellip;</p>
 <p><a href="/images/image5.png"><img src="/images/image_thumb5.png" alt="image" title="image" class="aligncenter" width="771" height="418" /></a></p>
 <p>That&rsquo;s a lot of functionality for a single line of script, don&rsquo;t you think? But I don&rsquo;t particularly like how the columns are named. And I don&rsquo;t have everything exposed as properties but I rather need some more functionality to get the data from my items. This is fully supported and achievable pretty much in the same vein as you would to it using the Format-Table commandlet. Let&rsquo;s rename the columns to have some more user criendly names and add an information whether an item is Read Only (which is contained within the Appearance propery on an item.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Display Name&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">}},</span> <span class="c"># property renamed</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated&#34;</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated by&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated by&#34;</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Read Only&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="py">Appearance</span><span class="p">.</span><span class="n">ReadOnly</span><span class="p">}}</span> <span class="c"># We can access and manipulate object properties in the Expression</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><a href="/images/image6.png"><img src="/images/image_thumb6.png" alt="image" title="image" class="aligncenter" width="772" height="388" /></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Display Name&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">}},</span> <span class="c"># property renamed</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated&#34;</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated by&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated by&#34;</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Read Only&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="py">Appearance</span><span class="p">.</span><span class="n">ReadOnly</span><span class="p">}}</span> <span class="c"># We can access and manipulate object properties in the Expression</span>
+</span></span></code></pre></div><p><a href="/images/image6.png"><img src="/images/image_thumb6.png" alt="image" title="image" class="aligncenter" width="772" height="388" /></a></p>
 <p>That&rsquo;s far better! You can see that We&rsquo;ve even detected that the property is a boolean value and turned result into a checkbox instead of showing a true/false text. What I still don&rsquo;t like in this report is how the users are presented. I would much rather have a proper user name there. Which is easily achievable since we have full access to the Sitecore API from PowerShell in our script.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Display Name&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated&#34;</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="c">#I can use Sitecore API for that!</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated by&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={[</span><span class="no">Sitecore.Security.Accounts.User</span><span class="p">]::</span><span class="n">FromName</span><span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated by&#34;</span><span class="p">,</span> <span class="vm">$false</span><span class="p">).</span><span class="py">Profile</span><span class="p">.</span><span class="n">FullName</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Read Only&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="py">Appearance</span><span class="p">.</span><span class="n">ReadOnly</span><span class="p">}}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><a href="/images/image7.png"><img src="/images/image_thumb7.png" alt="image" title="image" class="aligncenter" width="509" height="348" /></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Display Name&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated&#34;</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="c">#I can use Sitecore API for that!</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated by&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={[</span><span class="no">Sitecore.Security.Accounts.User</span><span class="p">]::</span><span class="n">FromName</span><span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated by&#34;</span><span class="p">,</span> <span class="vm">$false</span><span class="p">).</span><span class="py">Profile</span><span class="p">.</span><span class="n">FullName</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Read Only&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="py">Appearance</span><span class="p">.</span><span class="n">ReadOnly</span><span class="p">}}</span>
+</span></span></code></pre></div><p><a href="/images/image7.png"><img src="/images/image_thumb7.png" alt="image" title="image" class="aligncenter" width="509" height="348" /></a></p>
 <p>Obviously You&rsquo;re not always going to be sending a straight output from a Get-Child item listing there. That wouldn&rsquo;t be of much use. But since you can do any operations and pre-process your list you can do any rich operation with your data set as you need prior to sending it to Show-ListView. But that&rsquo;s just straight PowerShell and is beyond of scope of this article.
 How else can I influence my report?</p>
 <ul>
@@ -298,33 +261,17 @@ How else can I influence my report?</p>
 <li>Specify the report window size using the ?Width and ?Height parameters</li>
 </ul>
 <p>Let&rsquo;s try that on our script</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Display Name&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated&#34;</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated by&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={[</span><span class="no">Sitecore.Security.Accounts.User</span><span class="p">]::</span><span class="n">FromName</span><span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated by&#34;</span><span class="p">,</span> <span class="vm">$false</span><span class="p">).</span><span class="py">Profile</span><span class="p">.</span><span class="n">FullName</span><span class="p">}},</span> 
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Read Only&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="py">Appearance</span><span class="p">.</span><span class="n">ReadOnly</span><span class="p">}}</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Title</span> <span class="s2">&#34;Children of Sitecore Item&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-InfoTitle</span> <span class="s2">&#34;Report showing children of the Sitecore item&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="c">#I can even do some additional logic inside my script - like count the children</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-InfoDescription</span> <span class="s2">&#34;There are </span><span class="p">$((</span><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\).</span><span class="n">Count</span><span class="p">)</span><span class="s2"> immediate children to the /sitecore/ item.&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Icon</span> <span class="s2">&#34;Software/32x32/branch.png&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><a href="/images/image8.png"><img src="/images/image_thumb8.png" alt="image" title="image" class="aligncenter" width="766" height="401" /></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Display Name&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">DisplayName</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated&#34;</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Updated by&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={[</span><span class="no">Sitecore.Security.Accounts.User</span><span class="p">]::</span><span class="n">FromName</span><span class="p">(</span><span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Updated by&#34;</span><span class="p">,</span> <span class="vm">$false</span><span class="p">).</span><span class="py">Profile</span><span class="p">.</span><span class="n">FullName</span><span class="p">}},</span> 
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="vm">@</span><span class="p">{</span> <span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Read Only&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="py">Appearance</span><span class="p">.</span><span class="n">ReadOnly</span><span class="p">}}</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">-Title</span> <span class="s2">&#34;Children of Sitecore Item&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">-InfoTitle</span> <span class="s2">&#34;Report showing children of the Sitecore item&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="c">#I can even do some additional logic inside my script - like count the children</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">-InfoDescription</span> <span class="s2">&#34;There are </span><span class="p">$((</span><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\).</span><span class="n">Count</span><span class="p">)</span><span class="s2"> immediate children to the /sitecore/ item.&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">-Icon</span> <span class="s2">&#34;Software/32x32/branch.png&#34;</span>
+</span></span></code></pre></div><p><a href="/images/image8.png"><img src="/images/image_thumb8.png" alt="image" title="image" class="aligncenter" width="766" height="401" /></a></p>
 <p>I think you will find it pretty appealing considering especially a size of the script and the fact that you can also export it as both Excel:</p>
 <p><a href="/images/image9.png"><img src="/images/image_thumb9.png" alt="image" title="image" class="aligncenter" width="573" height="468" /></a></p>
 <p>or a beautiful HTML report:</p>

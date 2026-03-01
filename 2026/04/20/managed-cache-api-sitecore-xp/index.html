@@ -211,130 +211,62 @@
 <p>The answer is a small Web API controller that exposes three endpoints: statistics, inspection, and flushing. All three support wildcard pattern matching on cache names and cache keys, and all three can be targeted at a specific server instance.</p>
 <p>The API lives at <code>/api/v1/managedcache/</code> and is protected by API key validation and instance name filtering.</p>
 <p>Here is the controller:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[RoutePrefix(&#34;api/v1/managedcache&#34;)]</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CacheInsightsController</span> <span class="p">:</span> <span class="n">ApiController</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCacheService</span> <span class="n">_managedCacheService</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_maxInspectedKeys</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">CacheInsightsController</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">managedCacheService</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">_managedCacheService</span> <span class="p">=</span> <span class="n">managedCacheService</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">_maxInspectedKeys</span> <span class="p">=</span> <span class="n">Settings</span><span class="p">.</span><span class="n">GetIntSetting</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">            <span class="s">&#34;PerformantSitecore.CacheInsights.MaxInspectedKeys&#34;</span><span class="p">,</span> <span class="m">10</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The controller takes the same <code>IManagedCacheService</code> that every cached service in the solution uses. It asks the service for cache names, retrieves caches by name, and operates on them. No new infrastructure required.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="na">[RoutePrefix(&#34;api/v1/managedcache&#34;)]</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CacheInsightsController</span> <span class="p">:</span> <span class="n">ApiController</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCacheService</span> <span class="n">_managedCacheService</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_maxInspectedKeys</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kd">public</span> <span class="n">CacheInsightsController</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">managedCacheService</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">_managedCacheService</span> <span class="p">=</span> <span class="n">managedCacheService</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="n">_maxInspectedKeys</span> <span class="p">=</span> <span class="n">Settings</span><span class="p">.</span><span class="n">GetIntSetting</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="s">&#34;PerformantSitecore.CacheInsights.MaxInspectedKeys&#34;</span><span class="p">,</span> <span class="m">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The controller takes the same <code>IManagedCacheService</code> that every cached service in the solution uses. It asks the service for cache names, retrieves caches by name, and operates on them. No new infrastructure required.</p>
 <h2 id="wildcard-matching-everywhere">Wildcard Matching Everywhere</h2>
 <p>The single most useful design decision was supporting wildcard patterns on every parameter. The <code>cacheName</code> parameter does not need an exact name. You can pass <code>*Product*</code> and it will match every cache with &ldquo;Product&rdquo; in the name. The <code>keys</code> parameter works the same way: pass <code>*{3459D75F-BE49-473D-9C30-44A80E696816}*</code> and it finds every cached entry that references that Sitecore item ID, across all matching caches.</p>
 <p>The wildcard matching uses PowerShell&rsquo;s <code>WildcardPattern</code> class, which gives you the same globbing behavior you are used to from file system patterns:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="k">class</span> <span class="nc">GlobFilterExtensions</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">WildcardPattern</span> <span class="n">GetWildcardPattern</span><span class="p">(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="n">name</span> <span class="p">=</span> <span class="s">&#34;*&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">WildcardPattern</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">WildcardOptions</span><span class="p">.</span><span class="n">Compiled</span> <span class="p">|</span> <span class="n">WildcardOptions</span><span class="p">.</span><span class="n">IgnoreCase</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">WildcardFilter</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span> <span class="kt">string</span> <span class="n">filter</span><span class="p">,</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">items</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">wildcardPattern</span> <span class="p">=</span> <span class="n">filter</span><span class="p">.</span><span class="n">GetWildcardPattern</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">items</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">item</span> <span class="p">=&gt;</span> <span class="n">wildcardPattern</span><span class="p">.</span><span class="n">IsMatch</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Every endpoint runs cache name matching through this filter first, then applies the same filtering to cache keys within each matched cache:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="n">CacheOperationResult</span> <span class="n">ExecuteForCache</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">cacheNamePattern</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">IManagedCache</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;</span> <span class="n">func</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">matchingCacheNames</span> <span class="p">=</span> <span class="n">cacheNamePattern</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">WildcardFilter</span><span class="p">(</span><span class="n">_managedCacheService</span><span class="p">.</span><span class="n">GetCacheNames</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(!</span><span class="n">matchingCacheNames</span><span class="p">.</span><span class="n">Any</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Wrap</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="n">cacheNamePattern</span><span class="p">,</span> <span class="s">&#34;Cache not found&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;();</span>
-</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">cacheName</span> <span class="k">in</span> <span class="n">matchingCacheNames</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">cacheResult</span> <span class="p">=</span> <span class="n">func</span><span class="p">(</span><span class="n">_managedCacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="n">cacheName</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cacheResult</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">cacheName</span><span class="p">,</span> <span class="n">cacheResult</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Wrap</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">cacheNamePattern</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="the-three-endpoints">The Three Endpoints</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="k">class</span> <span class="nc">GlobFilterExtensions</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">WildcardPattern</span> <span class="n">GetWildcardPattern</span><span class="p">(</span><span class="k">this</span> <span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">            <span class="n">name</span> <span class="p">=</span> <span class="s">&#34;*&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">WildcardPattern</span><span class="p">(</span><span class="n">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">            <span class="n">WildcardOptions</span><span class="p">.</span><span class="n">Compiled</span> <span class="p">|</span> <span class="n">WildcardOptions</span><span class="p">.</span><span class="n">IgnoreCase</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">WildcardFilter</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="k">this</span> <span class="kt">string</span> <span class="n">filter</span><span class="p">,</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">items</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="kt">var</span> <span class="n">wildcardPattern</span> <span class="p">=</span> <span class="n">filter</span><span class="p">.</span><span class="n">GetWildcardPattern</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="k">return</span> <span class="n">items</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">item</span> <span class="p">=&gt;</span> <span class="n">wildcardPattern</span><span class="p">.</span><span class="n">IsMatch</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Every endpoint runs cache name matching through this filter first, then applies the same filtering to cache keys within each matched cache:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span> <span class="n">CacheOperationResult</span> <span class="n">ExecuteForCache</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="kt">string</span> <span class="n">cacheNamePattern</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">IManagedCache</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;</span> <span class="n">func</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kt">var</span> <span class="n">matchingCacheNames</span> <span class="p">=</span> <span class="n">cacheNamePattern</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="p">.</span><span class="n">WildcardFilter</span><span class="p">(</span><span class="n">_managedCacheService</span><span class="p">.</span><span class="n">GetCacheNames</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="p">.</span><span class="n">ToList</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="k">if</span> <span class="p">(!</span><span class="n">matchingCacheNames</span><span class="p">.</span><span class="n">Any</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="k">return</span> <span class="n">Wrap</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="n">cacheNamePattern</span><span class="p">,</span> <span class="s">&#34;Cache not found&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SortedDictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">cacheName</span> <span class="k">in</span> <span class="n">matchingCacheNames</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="kt">var</span> <span class="n">cacheResult</span> <span class="p">=</span> <span class="n">func</span><span class="p">(</span><span class="n">_managedCacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="n">cacheName</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cacheResult</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">            <span class="n">result</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">cacheName</span><span class="p">,</span> <span class="n">cacheResult</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="k">return</span> <span class="n">Wrap</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">cacheNamePattern</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="the-three-endpoints">The Three Endpoints</h2>
 <h3 id="statistics">Statistics</h3>
 <p><code>GET /api/v1/managedcache/statistics?cacheName=*&amp;instanceName=*&amp;apiKey=your-key</code></p>
 <p>Returns size, entry count, max size, remaining capacity, last cleared timestamp, and the list of template IDs that trigger auto-invalidation. If you pass <code>keys=*</code> it also lists all cache keys (names only, not values). If you pass a key pattern like <code>keys=*{ITEM-GUID}*</code> it returns only caches containing matching keys.</p>
@@ -347,76 +279,37 @@
 <p><code>GET /api/v1/managedcache/flush?cacheName=*Product*&amp;keys=*{ITEM-GUID}*&amp;instanceName=*&amp;apiKey=your-key</code></p>
 <p>This is where it gets powerful. If you omit the <code>keys</code> parameter, the entire matched cache is cleared. If you provide a key pattern, only matching entries are removed and everything else stays warm.</p>
 <p>Selective flushing matters. When a content author publishes one product out of 2,000, you do not want to dump the entire product cache and force Solr to rebuild all 2,000 entries. You want to remove just the entries that reference that specific product&rsquo;s ID.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[HttpGet]</span>
-</span></span><span class="line"><span class="cl"><span class="na">[Route(&#34;flush&#34;)]</span>
-</span></span><span class="line"><span class="cl"><span class="na">[CacheControlApiHeader]</span>
-</span></span><span class="line"><span class="cl"><span class="na">[RequireApiKey]</span>
-</span></span><span class="line"><span class="cl"><span class="na">[TargetInstance]</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">IHttpActionResult</span> <span class="n">Flush</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl"><span class="na">    [FromUri]</span> <span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="p">[</span><span class="n">FromUri</span><span class="p">]</span> <span class="kt">string</span> <span class="n">keys</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Json</span><span class="p">(</span><span class="n">ExecuteForCache</span><span class="p">(</span><span class="n">cacheName</span><span class="p">,</span> <span class="n">cache</span> <span class="p">=&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cache</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">GetCacheSnapshot</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s">&#34;*&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">keyFound</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">key</span> <span class="k">in</span> <span class="n">keys</span><span class="p">.</span><span class="n">WildcardFilter</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">GetCacheKeys</span><span class="p">()))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cache</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">keyFound</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">keyFound</span> <span class="p">?</span> <span class="n">GetCacheSnapshot</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s">&#34;*&#34;</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}));</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="security-api-key-and-instance-targeting">Security: API Key and Instance Targeting</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="na">[HttpGet]</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="na">[Route(&#34;flush&#34;)]</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="na">[CacheControlApiHeader]</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="na">[RequireApiKey]</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="na">[TargetInstance]</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="kd">public</span> <span class="n">IHttpActionResult</span> <span class="n">Flush</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="na">    [FromUri]</span> <span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="p">[</span><span class="n">FromUri</span><span class="p">]</span> <span class="kt">string</span> <span class="n">keys</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="k">return</span> <span class="n">Json</span><span class="p">(</span><span class="n">ExecuteForCache</span><span class="p">(</span><span class="n">cacheName</span><span class="p">,</span> <span class="n">cache</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="n">cache</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">            <span class="k">return</span> <span class="n">GetCacheSnapshot</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s">&#34;*&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="kt">bool</span> <span class="n">keyFound</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">key</span> <span class="k">in</span> <span class="n">keys</span><span class="p">.</span><span class="n">WildcardFilter</span><span class="p">(</span><span class="n">cache</span><span class="p">.</span><span class="n">GetCacheKeys</span><span class="p">()))</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="n">cache</span><span class="p">.</span><span class="n">Remove</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            <span class="n">keyFound</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="k">return</span> <span class="n">keyFound</span> <span class="p">?</span> <span class="n">GetCacheSnapshot</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s">&#34;*&#34;</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="p">}));</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="security-api-key-and-instance-targeting">Security: API Key and Instance Targeting</h2>
 <p>Every endpoint is protected by two action filter attributes.</p>
 <p>The <code>RequireApiKey</code> attribute checks for an <code>apiKey</code> query parameter and validates it against a pipe-separated list of accepted keys stored in Sitecore settings. Each endpoint can have its own key configured separately, so you can give your operations team flush access without giving them inspect access, or vice versa.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[RequireApiKey]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Reads from settings like <code>CacheInsights.Flush.KeyValues</code> and <code>CacheInsights.Inspect.KeyValues</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="na">[RequireApiKey]</span>
+</span></span></code></pre></div><p>Reads from settings like <code>CacheInsights.Flush.KeyValues</code> and <code>CacheInsights.Inspect.KeyValues</code>.</p>
 <p>The <code>TargetInstance</code> attribute is not a security mechanism. It is an operational control. In a load-balanced environment, when you call this API, the load balancer decides which CD instance receives the request. That is fine for statistics, but for flushing you need to hit a specific instance. The <code>instanceName</code> parameter lets you target by hostname, with wildcard support:</p>
 <ul>
 <li><code>instanceName=WIN-7HBI*</code> targets a specific server</li>
@@ -425,70 +318,34 @@
 <p>To flush across all instances, you call the endpoint once per instance, targeting each one by name. Or if you just need to flush on all instances, the <code>RaiseClearCacheEvent</code> mechanism from the first blog post handles that through the Sitecore event queue.</p>
 <h2 id="response-envelope">Response Envelope</h2>
 <p>Every response follows the same envelope structure:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://your-site.com/api/v1/managedcache/statistics?cacheName=*&amp;...&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Instance&#34;</span><span class="p">:</span> <span class="s2">&#34;WIN-7HBI3PTQ95S&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;CacheName&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Message&#34;</span><span class="p">:</span> <span class="s2">&#34;success&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Success&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Timestamp&#34;</span><span class="p">:</span> <span class="s2">&#34;2026-02-20T11:12:45.588+00:00&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Data&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&#34;PerformantSitecore.ProductSolrCache&#34;</span><span class="p">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Size&#34;</span><span class="p">:</span> <span class="mi">30321</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;MaxSize&#34;</span><span class="p">:</span> <span class="mi">52428800</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Count&#34;</span><span class="p">:</span> <span class="mi">94</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;RemainingSpace&#34;</span><span class="p">:</span> <span class="mi">52398479</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;LastCleared&#34;</span><span class="p">:</span> <span class="s2">&#34;2026-02-20T10:11:55.611Z&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;InvalidatingTemplateIds&#34;</span><span class="p">:</span> <span class="p">[],</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&#34;Keys&#34;</span><span class="p">:</span> <span class="p">[</span><span class="err">...</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The <code>Instance</code> field tells you which server actually processed your request. Check this every time. In a load-balanced setup, if you flush a cache and the <code>Instance</code> field shows a different server than you expected, you know the load balancer routed your request elsewhere.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="nt">&#34;Url&#34;</span><span class="p">:</span> <span class="s2">&#34;https://your-site.com/api/v1/managedcache/statistics?cacheName=*&amp;...&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nt">&#34;Instance&#34;</span><span class="p">:</span> <span class="s2">&#34;WIN-7HBI3PTQ95S&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="nt">&#34;CacheName&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="nt">&#34;Message&#34;</span><span class="p">:</span> <span class="s2">&#34;success&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="nt">&#34;Success&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="nt">&#34;Timestamp&#34;</span><span class="p">:</span> <span class="s2">&#34;2026-02-20T11:12:45.588+00:00&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="nt">&#34;Data&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="nt">&#34;PerformantSitecore.ProductSolrCache&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="nt">&#34;Size&#34;</span><span class="p">:</span> <span class="mi">30321</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="nt">&#34;MaxSize&#34;</span><span class="p">:</span> <span class="mi">52428800</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">            <span class="nt">&#34;Count&#34;</span><span class="p">:</span> <span class="mi">94</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="nt">&#34;RemainingSpace&#34;</span><span class="p">:</span> <span class="mi">52398479</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">            <span class="nt">&#34;LastCleared&#34;</span><span class="p">:</span> <span class="s2">&#34;2026-02-20T10:11:55.611Z&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">            <span class="nt">&#34;InvalidatingTemplateIds&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">            <span class="nt">&#34;Keys&#34;</span><span class="p">:</span> <span class="p">[</span><span class="err">...</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The <code>Instance</code> field tells you which server actually processed your request. Check this every time. In a load-balanced setup, if you flush a cache and the <code>Instance</code> field shows a different server than you expected, you know the load balancer routed your request elsewhere.</p>
 <h2 id="configuration">Configuration</h2>
 <p>The whole thing is wired in through the same config patch file that sets up the managed cache layer. The new settings:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- Cache Insights API settings --&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;PerformantSitecore.CacheInsights.MaxInspectedKeys&#34;</span> <span class="na">value=</span><span class="s">&#34;10&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;CacheInsights.Flush.KeyValues&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;CacheInsights.Inspect.KeyValues&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;CacheInsights.GetStatistics.KeyValues&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Set the <code>KeyValues</code> settings to a GUID or other secret that you share with your operations team. Leave them empty and the API will reject all requests, which is the safe default.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="c">&lt;!-- Cache Insights API settings --&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;PerformantSitecore.CacheInsights.MaxInspectedKeys&#34;</span> <span class="na">value=</span><span class="s">&#34;10&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;CacheInsights.Flush.KeyValues&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;CacheInsights.Inspect.KeyValues&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="nt">&lt;setting</span> <span class="na">name=</span><span class="s">&#34;CacheInsights.GetStatistics.KeyValues&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>Set the <code>KeyValues</code> settings to a GUID or other secret that you share with your operations team. Leave them empty and the API will reject all requests, which is the safe default.</p>
 <h2 id="practical-scenarios">Practical Scenarios</h2>
 <ol>
 <li>

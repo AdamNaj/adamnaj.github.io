@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -206,105 +206,45 @@
         <p>Creating back-end integrations is inevitably linked with having to authenticate against a remote endpoint. Be that a Rest API, FTP or an APM - secrets (credentials, api tokent, shared secrets) of some sort will be involved in the process.</p>
 <p>Those credentials must be stored somewhere. At this point I hope no one even considers hardcoding those but even if you extract them to configuration - having them exposed in your repository may be a bad idea and is frowned upon by tools like SonarQube.</p>
 <p>You would be encouraged to access those secrets by having them anchored against web.config <code>appSettings</code> section such as:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;appSettings&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;EmailReminder.FromAddress&#34;</span> <span class="na">value=</span><span class="s">&#34;name@server.net&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;Foundation.RemoteApi.AccessKey&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">  ...
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/appSettings&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This is because you can easily and conveniently edit such settings in Azure portal. Arguably you could also do this using connection strings, but those are not full connection strings we&rsquo;re dealing with&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;appSettings&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;EmailReminder.FromAddress&#34;</span> <span class="na">value=</span><span class="s">&#34;name@server.net&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;Foundation.RemoteApi.AccessKey&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  ...
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="nt">&lt;/appSettings&gt;</span>
+</span></span></code></pre></div><p>This is because you can easily and conveniently edit such settings in Azure portal. Arguably you could also do this using connection strings, but those are not full connection strings we&rsquo;re dealing with&hellip;</p>
 <p>You cannot keep them in a dev only patch file as this section is not patchable with standard Sitecore practices&hellip; So for a long time, we just kept empty placeholders this list in <code>web.config</code> and when you needed to work with a specific integration point you scrambled to find the credentials and struggled with them being wiped when the project was published.</p>
 <p>This is handled elegantly in .Net Core OOTB as they can cascade from environment variables, but somehow despite decades of aggregated Sitecore experience in the team we just kept doing it.</p>
 <p>Yesterday morning something in me broke&hellip; I&rsquo;ve had enough! Decided that we need a proper reusable solution that would not be harder than sharing a file with the necessary secrets between developers.</p>
 <p>I sat down with the intention of writing something that would just let me use environment variables. This way we still don&rsquo;t have to store them in the repository, and they don&rsquo;t get wiped when an app is republished (akin to how it works in Azure.</p>
 <h2 id="lets-see-what-were-dealing-with">Let&rsquo;s see what we&rsquo;re dealing with&hellip;</h2>
 <p>So the xml had some AppSettings builder OOTB that maybe I could reuse/inherit in some capacity&hellip;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;appSettings</span> <span class="na">configBuilders=</span><span class="s">&#34;SitecoreAppSettingsBuilder&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;EmailReminder.FromAddress&#34;</span> <span class="na">value=</span><span class="s">&#34;name@server.net&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/appSettings&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><code>SitecoreAppSettingsBuilder</code> looked curiously like what I wanted to do&hellip;</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configSections&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&#34;sitecore&#34;</span> <span class="na">type=</span><span class="s">&#34;Sitecore.Configuration.RuleBasedConfigReader, Sitecore.Kernel&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&#34;log4net&#34;</span> <span class="na">type=</span><span class="s">&#34;log4net.Config.Log4NetConfigurationSectionHandler, Sitecore.Logging&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&#34;configBuilders&#34;</span> <span class="na">type=</span><span class="s">&#34;System.Configuration.ConfigurationBuildersSection, System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#34;</span> <span class="na">restartOnExternalChanges=</span><span class="s">&#34;false&#34;</span> <span class="na">requirePermission=</span><span class="s">&#34;false&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/configSections&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;configBuilders&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;builders&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&#34;SitecoreAppSettingsBuilder&#34;</span> <span class="na">mode=</span><span class="s">&#34;Strict&#34;</span> <span class="na">prefix=</span><span class="s">&#34;SITECORE_APPSETTINGS_&#34;</span> <span class="na">stripPrefix=</span><span class="s">&#34;true&#34;</span> <span class="na">type=</span><span class="s">&#34;Sitecore.Configuration.FlexibleEnvironmentConfigBuilder, Sitecore.Kernel&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&#34;SitecoreConnectionStringsBuilder&#34;</span> <span class="na">mode=</span><span class="s">&#34;Strict&#34;</span> <span class="na">prefix=</span><span class="s">&#34;SITECORE_CONNECTIONSTRINGS_&#34;</span> <span class="na">stripPrefix=</span><span class="s">&#34;true&#34;</span> <span class="na">type=</span><span class="s">&#34;Microsoft.Configuration.ConfigurationBuilders.EnvironmentConfigBuilder, Microsoft.Configuration.ConfigurationBuilders.Environment, Version=1.0.0.0, Culture=neutral&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/builders&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/configBuilders&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>I started investigating the classes, which looked intriguing, something didn&rsquo;t feel right. Then it struck me&ndash;Sitecore already provided all the configuration builders for the job&hellip; undocumented&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;appSettings</span> <span class="na">configBuilders=</span><span class="s">&#34;SitecoreAppSettingsBuilder&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;EmailReminder.FromAddress&#34;</span> <span class="na">value=</span><span class="s">&#34;name@server.net&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">...
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nt">&lt;/appSettings&gt;</span>
+</span></span></code></pre></div><p><code>SitecoreAppSettingsBuilder</code> looked curiously like what I wanted to do&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nt">&lt;configSections&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&#34;sitecore&#34;</span> <span class="na">type=</span><span class="s">&#34;Sitecore.Configuration.RuleBasedConfigReader, Sitecore.Kernel&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&#34;log4net&#34;</span> <span class="na">type=</span><span class="s">&#34;log4net.Config.Log4NetConfigurationSectionHandler, Sitecore.Logging&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&#34;configBuilders&#34;</span> <span class="na">type=</span><span class="s">&#34;System.Configuration.ConfigurationBuildersSection, System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&#34;</span> <span class="na">restartOnExternalChanges=</span><span class="s">&#34;false&#34;</span> <span class="na">requirePermission=</span><span class="s">&#34;false&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  <span class="nt">&lt;/configSections&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="nt">&lt;configBuilders&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="nt">&lt;builders&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">      <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&#34;SitecoreAppSettingsBuilder&#34;</span> <span class="na">mode=</span><span class="s">&#34;Strict&#34;</span> <span class="na">prefix=</span><span class="s">&#34;SITECORE_APPSETTINGS_&#34;</span> <span class="na">stripPrefix=</span><span class="s">&#34;true&#34;</span> <span class="na">type=</span><span class="s">&#34;Sitecore.Configuration.FlexibleEnvironmentConfigBuilder, Sitecore.Kernel&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">      <span class="nt">&lt;add</span> <span class="na">name=</span><span class="s">&#34;SitecoreConnectionStringsBuilder&#34;</span> <span class="na">mode=</span><span class="s">&#34;Strict&#34;</span> <span class="na">prefix=</span><span class="s">&#34;SITECORE_CONNECTIONSTRINGS_&#34;</span> <span class="na">stripPrefix=</span><span class="s">&#34;true&#34;</span> <span class="na">type=</span><span class="s">&#34;Microsoft.Configuration.ConfigurationBuilders.EnvironmentConfigBuilder, Microsoft.Configuration.ConfigurationBuilders.Environment, Version=1.0.0.0, Culture=neutral&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="nt">&lt;/builders&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  <span class="nt">&lt;/configBuilders&gt;</span>
+</span></span></code></pre></div><p>I started investigating the classes, which looked intriguing, something didn&rsquo;t feel right. Then it struck me&ndash;Sitecore already provided all the configuration builders for the job&hellip; undocumented&hellip;</p>
 <h2 id="the-least-buggy-most-hassle-free-code-is-the-one-you-never-write">The least buggy, most hassle-free code is the one you never write</h2>
 <p>There is no code to write here, when dealing with app settings defined in the main web.config <code>&lt;appSettings&gt;</code> section (not patchable by the usual sitecore Sitecore-specific configs), such as:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;Foundation.RemoteApi.AccessKey&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>We can use <strong>environment variables</strong> with a prefix <code>SITECORE_APPSETTINGS_</code>. For instance, the setting above could be stored in the following environment variable:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SITECORE_APPSETTINGS_Foundation.RemoteApi.AccessKey
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="handling-environment-variables-in-iis">Handling Environment Variables in IIS</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;add</span> <span class="na">key=</span><span class="s">&#34;Foundation.RemoteApi.AccessKey&#34;</span> <span class="na">value=</span><span class="s">&#34;&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>We can use <strong>environment variables</strong> with a prefix <code>SITECORE_APPSETTINGS_</code>. For instance, the setting above could be stored in the following environment variable:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">SITECORE_APPSETTINGS_Foundation.RemoteApi.AccessKey
+</span></span></code></pre></div><h3 id="handling-environment-variables-in-iis">Handling Environment Variables in IIS</h3>
 <p>Since environment variables are fixed at application startup, you can&rsquo;t use a newly modified variable immediately. Unfortunately, even recycling the application wasn&rsquo;t enough in my case. I had restart IIS for them to take:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">iisreset /stop
-</span></span><span class="line"><span class="cl">iisreset /start
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="automating-the-process">Automating the Process</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">iisreset /stop
+</span></span><span class="line"><span class="ln">2</span><span class="cl">iisreset /start
+</span></span></code></pre></div><h3 id="automating-the-process">Automating the Process</h3>
 <p>To streamline this, I created short <strong>PowerShell script</strong> that globally sets all required variables. Here are some key points about the script:</p>
 <ul>
 <li><strong>No repo storage:</strong> This script isn&rsquo;t stored in the repository, but we can share it securely via direct messaging or other private channels.</li>
@@ -314,95 +254,46 @@
 </ul>
 <h3 id="checking-app-settings-in-sitecore">Checking App Settings in Sitecore</h3>
 <p>To verify the value of an <code>appSetting</code> in Sitecore, open <strong>Sitecore Desktop</strong>, launch <strong>PowerShell ISE</strong>, and run the following one-liner, replacing the variable name with the one you want to check:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[System.Web.Configuration.WebConfigurationManager]::AppSettings[&#34;Foundation.RemoteApi.AccessKey&#34;]
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="powershell-script-simplified-and-ready">PowerShell Script: Simplified and Ready</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">[System.Web.Configuration.WebConfigurationManager]::AppSettings[&#34;Foundation.RemoteApi.AccessKey&#34;]
+</span></span></code></pre></div><h3 id="powershell-script-simplified-and-ready">PowerShell Script: Simplified and Ready</h3>
 <p>Below is the script I mentioned earlier:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Check if the script is running as Administrator</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">([</span><span class="no">Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity</span><span class="p">]::</span><span class="n">GetCurrent</span><span class="p">()).</span><span class="py">IsInRole</span><span class="p">([</span><span class="no">Security.Principal.WindowsBuiltInRole</span><span class="p">]::</span><span class="n">Administrator</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;The script is not running with administrative privileges. Relaunching as Administrator...&#34;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c"># Get the current script&#39;s full path</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$scriptPath</span> <span class="p">=</span> <span class="nv">$MyInvocation</span><span class="p">.</span><span class="py">MyCommand</span><span class="p">.</span><span class="py">Path</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c"># Create a new PowerShell process as Administrator</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="s2">&#34;powershell.exe&#34;</span> <span class="n">-ArgumentList</span> <span class="s2">&#34;-NoProfile -ExecutionPolicy Bypass -File </span><span class="se">`&#34;</span><span class="nv">$scriptPath</span><span class="se">`&#34;</span><span class="s2">&#34;</span> <span class="n">-Verb</span> <span class="n">RunAs</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c"># Exit the current non-admin script</span>
-</span></span><span class="line"><span class="cl">    <span class="n">exit</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Code below runs with administrative privileges</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;Script is running with administrative privileges.&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Set-SitecoreAppSetting</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nb">CmdletBinding</span><span class="p">()]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">param</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span> <span class="na">Mandatory</span><span class="p">=</span><span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$VariableName</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">1</span><span class="p">,</span> <span class="na">Mandatory</span><span class="p">=</span><span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$VariableValue</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">process</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Setting variable </span><span class="se">`&#34;</span><span class="s2">SITECORE_APPSETTINGS_</span><span class="nv">$VariableName</span><span class="se">`&#34;</span><span class="s2"> to value </span><span class="se">`&#34;</span><span class="nv">$VariableValue</span><span class="se">`&#34;</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">       <span class="p">[</span><span class="no">System.Environment</span><span class="p">]::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;SITECORE_APPSETTINGS_</span><span class="nv">$VariableName</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nv">$VariableValue</span><span class="p">,</span> <span class="p">[</span><span class="no">System.EnvironmentVariableTarget</span><span class="p">]::</span><span class="n">Machine</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># store your variables below - to speed up onboarding your colleagues...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">Set-SitecoreAppSetting</span> <span class="s2">&#34;VariableName1&#34;</span> <span class="s1">&#39;VariableValue1&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Set-SitecoreAppSetting</span> <span class="s2">&#34;VariableName2&#34;</span> <span class="s1">&#39;VariableValue2&#39;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="conclusion">Conclusion</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c"># Check if the script is running as Administrator</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">-not</span> <span class="p">([</span><span class="no">Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity</span><span class="p">]::</span><span class="n">GetCurrent</span><span class="p">()).</span><span class="py">IsInRole</span><span class="p">([</span><span class="no">Security.Principal.WindowsBuiltInRole</span><span class="p">]::</span><span class="n">Administrator</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nb">Write-Host</span> <span class="s2">&#34;The script is not running with administrative privileges. Relaunching as Administrator...&#34;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c"># Get the current script&#39;s full path</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="nv">$scriptPath</span> <span class="p">=</span> <span class="nv">$MyInvocation</span><span class="p">.</span><span class="py">MyCommand</span><span class="p">.</span><span class="py">Path</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="c"># Create a new PowerShell process as Administrator</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="nb">Start-Process</span> <span class="n">-FilePath</span> <span class="s2">&#34;powershell.exe&#34;</span> <span class="n">-ArgumentList</span> <span class="s2">&#34;-NoProfile -ExecutionPolicy Bypass -File </span><span class="se">`&#34;</span><span class="nv">$scriptPath</span><span class="se">`&#34;</span><span class="s2">&#34;</span> <span class="n">-Verb</span> <span class="n">RunAs</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="c"># Exit the current non-admin script</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">exit</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="c"># Code below runs with administrative privileges</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="nb">Write-Host</span> <span class="s2">&#34;Script is running with administrative privileges.&#34;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Set-SitecoreAppSetting</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">[</span><span class="nb">CmdletBinding</span><span class="p">()]</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="k">param</span> <span class="p">(</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span> <span class="na">Mandatory</span><span class="p">=</span><span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$VariableName</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">1</span><span class="p">,</span> <span class="na">Mandatory</span><span class="p">=</span><span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$VariableValue</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="k">process</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">        <span class="nb">Write-Host</span> <span class="s2">&#34;Setting variable </span><span class="se">`&#34;</span><span class="s2">SITECORE_APPSETTINGS_</span><span class="nv">$VariableName</span><span class="se">`&#34;</span><span class="s2"> to value </span><span class="se">`&#34;</span><span class="nv">$VariableValue</span><span class="se">`&#34;</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">       <span class="p">[</span><span class="no">System.Environment</span><span class="p">]::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;SITECORE_APPSETTINGS_</span><span class="nv">$VariableName</span><span class="s2">&#34;</span><span class="p">,</span> <span class="nv">$VariableValue</span><span class="p">,</span> <span class="p">[</span><span class="no">System.EnvironmentVariableTarget</span><span class="p">]::</span><span class="n">Machine</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">
+</span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="c"># store your variables below - to speed up onboarding your colleagues...</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">
+</span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="nb">Set-SitecoreAppSetting</span> <span class="s2">&#34;VariableName1&#34;</span> <span class="s1">&#39;VariableValue1&#39;</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="nb">Set-SitecoreAppSetting</span> <span class="s2">&#34;VariableName2&#34;</span> <span class="s1">&#39;VariableValue2&#39;</span>
+</span></span></code></pre></div><h3 id="conclusion">Conclusion</h3>
 <p>This approach eliminates the need for any custom code while leveraging Sitecore&rsquo;s built-in capabilities. The PowerShell script provides a clean way to manage environment variables without hardcoding sensitive details, and it ensures a consistent setup across the team. I hope this solution simplifies your workflow as much as it has mine!</p>
 
       </div>

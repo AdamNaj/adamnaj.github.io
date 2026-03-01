@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -204,266 +204,98 @@
         <p>Most of this post is also based on the Microsoft&rsquo;s <a href="http://www.microsoft.com/downloads/en/details.aspx--FamilyId=DF8ED469-9007-401C-85E7-46649A32D0E0&amp;displaylang=en" title="Windows PowerShell Quick Reference">Windows PowerShell Quick Reference</a> however despite the sharing scripting runtimes the nature of the both shells differ considerably as described in the previous post: <a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/">PowerShell for EPiServer - cheat sheet - Part 1</a>. In all cases where it made sense I&rsquo;ve converted the samples to establish them in EPiServer scenarios.</p>
 <h2 id="how-to-write-conditional-statements">How to Write Conditional Statements</h2>
 <p>To write an If statement use code similar to this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$page = Get-CurrentPage;
-</span></span><span class="line"><span class="cl">$changedBy = $page.ChangedBy;
-</span></span><span class="line"><span class="cl">$me = [EPiServer.Security.PrincipalInfo]::Current;
-</span></span><span class="line"><span class="cl">$myName = $me.Name;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">if ($changedBy -eq &#34;&#34;)
-</span></span><span class="line"><span class="cl">  { &#34;Unspecified author - a system page?&#34; }
-</span></span><span class="line"><span class="cl">elseif ($changedBy -eq $myName)
-</span></span><span class="line"><span class="cl">  { &#34;The page has been last edited by me!&#34; }
-</span></span><span class="line"><span class="cl">else
-</span></span><span class="line"><span class="cl">  { &#34;The page has been last edited by &#34;+ $changedBy }
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Instead of writing a series of If statements you can use a Switch statement, which is equivalent to VBScript&rsquo;s Select Case statement:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$page = Get-CurrentPage;
-</span></span><span class="line"><span class="cl">switch ($page.PageChildOrderRule) {
-</span></span><span class="line"><span class="cl">    0 {&#34;Undefined sort order. &#34;}
-</span></span><span class="line"><span class="cl">    1 {&#34;Most recently created page will be first in list&#34;}
-</span></span><span class="line"><span class="cl">    2 {&#34;Oldest created page will be first in list&#34;}
-</span></span><span class="line"><span class="cl">    3 {&#34;Sorted alphabetical on name&#34;}
-</span></span><span class="line"><span class="cl">    4 {&#34;Sorted on page index&#34;}
-</span></span><span class="line"><span class="cl">    5 {&#34;Most recently changed page will be first in list&#34;}
-</span></span><span class="line"><span class="cl">    6 {&#34;Sort on ranking, only supported by special controls&#34;}
-</span></span><span class="line"><span class="cl">    7 {&#34;Oldest published page will be first in list&#34;}
-</span></span><span class="line"><span class="cl">    8 {&#34;Most recently published page will be first in list&#34;}
-</span></span><span class="line"><span class="cl">    default {&#34;No idea what that means!&#34;}
-</span></span><span class="line"><span class="cl">  }
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-write-for-and-for-each-loops">How to Write For and For Each Loops</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">$page = Get-CurrentPage;
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">$changedBy = $page.ChangedBy;
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">$me = [EPiServer.Security.PrincipalInfo]::Current;
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">$myName = $me.Name;
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">if ($changedBy -eq &#34;&#34;)
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  { &#34;Unspecified author - a system page?&#34; }
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">elseif ($changedBy -eq $myName)
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  { &#34;The page has been last edited by me!&#34; }
+</span></span><span class="line"><span class="ln">10</span><span class="cl">else
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  { &#34;The page has been last edited by &#34;+ $changedBy }
+</span></span></code></pre></div><p>Instead of writing a series of If statements you can use a Switch statement, which is equivalent to VBScript&rsquo;s Select Case statement:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">$page = Get-CurrentPage;
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">switch ($page.PageChildOrderRule) {
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    0 {&#34;Undefined sort order. &#34;}
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    1 {&#34;Most recently created page will be first in list&#34;}
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    2 {&#34;Oldest created page will be first in list&#34;}
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    3 {&#34;Sorted alphabetical on name&#34;}
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    4 {&#34;Sorted on page index&#34;}
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    5 {&#34;Most recently changed page will be first in list&#34;}
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    6 {&#34;Sort on ranking, only supported by special controls&#34;}
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    7 {&#34;Oldest published page will be first in list&#34;}
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    8 {&#34;Most recently published page will be first in list&#34;}
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    default {&#34;No idea what that means!&#34;}
+</span></span><span class="line"><span class="ln">13</span><span class="cl">  }
+</span></span></code></pre></div><h2 id="how-to-write-for-and-for-each-loops">How to Write For and For Each Loops</h2>
 <h2></h2>
 <p>To write a For statement use code similar to this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">for ($a = 1; $a -le 10; $a++) {$a}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>By comparison, a For Each statement might look like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="nb">Get-ChildItem</span> <span class="p">.)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$i</span><span class="p">.</span><span class="py">PageTypeName</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-write-do-loops">How to Write Do Loops</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">for ($a = 1; $a -le 10; $a++) {$a}
+</span></span></code></pre></div><p>By comparison, a For Each statement might look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="nb">Get-ChildItem</span> <span class="p">.)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nv">$i</span><span class="p">.</span><span class="py">PageTypeName</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="how-to-write-do-loops">How to Write Do Loops</h2>
 <p>To write a Do loop use code like the following, replacing the code between the curly braces with the code to be executed on each iteration of the loop. Oh: and replacing the code inside the parentheses with the loop condition:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$a</span> <span class="p">=</span> <span class="mf">1</span>
-</span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span><span class="nv">$a</span><span class="p">;</span> <span class="nv">$a</span><span class="p">++}</span> 
-</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">-lt</span> <span class="mf">10</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>or</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$a</span> <span class="p">=</span> <span class="mf">1</span>
-</span></span><span class="line"><span class="cl"><span class="k">do</span> <span class="p">{</span><span class="nv">$a</span><span class="p">;</span> <span class="nv">$a</span><span class="p">++}</span> 
-</span></span><span class="line"><span class="cl"><span class="k">until</span> <span class="p">(</span><span class="nv">$a</span> <span class="k">?</span><span class="n">gt</span> <span class="mf">10</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-use-net-objects-and-classes">How to Use .NET Objects and Classes</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$a</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">do</span> <span class="p">{</span><span class="nv">$a</span><span class="p">;</span> <span class="nv">$a</span><span class="p">++}</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="nv">$a</span> <span class="o">-lt</span> <span class="mf">10</span><span class="p">)</span>
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$a</span> <span class="p">=</span> <span class="mf">1</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">do</span> <span class="p">{</span><span class="nv">$a</span><span class="p">;</span> <span class="nv">$a</span><span class="p">++}</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="k">until</span> <span class="p">(</span><span class="nv">$a</span> <span class="k">?</span><span class="n">gt</span> <span class="mf">10</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="how-to-use-net-objects-and-classes">How to Use .NET Objects and Classes</h2>
 <p>To use a .NET Framework class static method enclose the class name in square brackets, then separate the class name and the method using a pair of colons:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$parent</span> <span class="p">=</span> <span class="nb">Get-CurrentPage</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$myPage</span> <span class="p">=</span> <span class="p">[</span><span class="no">EPiServer.DataFactory</span><span class="p">]::</span><span class="n">Instance</span><span class="p">.</span><span class="py">GetDefaultPageData</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">              <span class="nv">$parent</span><span class="p">.</span><span class="n">PageLink</span><span class="p">,</span> <span class="s2">&#34;[AlloyTech] Standard page&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$myPage</span><span class="p">.</span><span class="py">PageName</span> <span class="p">=</span> <span class="s2">&#34;My New Page&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$myPage</span><span class="p">.</span><span class="py">URLSegment</span> <span class="p">=</span> <span class="p">[</span><span class="no">EPiServer.Web.UrlSegment</span><span class="p">]::</span><span class="n">CreateUrlSegment</span><span class="p">(</span><span class="nv">$myPage</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Save-Page</span><span class="p">(</span><span class="nv">$myPage</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To create an object reference to a .NET Framework object use the New-Object cmdlet:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$page</span> <span class="p">=</span> <span class="nb">Get-CurrentPage</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$urlBuilder</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">                   <span class="n">-type</span> <span class="n">EPiServer</span><span class="p">.</span><span class="py">UrlBuilder</span> 
-</span></span><span class="line"><span class="cl">                   <span class="n">-argumentlist</span> <span class="nv">$page</span><span class="p">.</span><span class="n">LinkURL</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">EPiServer.Global</span><span class="p">]::</span><span class="n">UrlRewriteProvider</span><span class="p">.</span><span class="py">ConvertToExternal</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$urlBuilder</span><span class="p">,</span> <span class="nv">$page</span><span class="p">.</span><span class="n">PageLink</span><span class="p">,</span> <span class="p">[</span><span class="no">System.Text.UTF8Encoding</span><span class="p">]::</span><span class="n">UTF8</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$currentPath</span> <span class="p">=</span> <span class="nv">$urlBuilder</span><span class="p">.</span><span class="py">Path</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Note</strong>. This is a cursory overview of working with .NET. The two techniques shown here will not necessarily work with all .NET classes.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$parent</span> <span class="p">=</span> <span class="nb">Get-CurrentPage</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$myPage</span> <span class="p">=</span> <span class="p">[</span><span class="no">EPiServer.DataFactory</span><span class="p">]::</span><span class="n">Instance</span><span class="p">.</span><span class="py">GetDefaultPageData</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">              <span class="nv">$parent</span><span class="p">.</span><span class="n">PageLink</span><span class="p">,</span> <span class="s2">&#34;[AlloyTech] Standard page&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nv">$myPage</span><span class="p">.</span><span class="py">PageName</span> <span class="p">=</span> <span class="s2">&#34;My New Page&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="nv">$myPage</span><span class="p">.</span><span class="py">URLSegment</span> <span class="p">=</span> <span class="p">[</span><span class="no">EPiServer.Web.UrlSegment</span><span class="p">]::</span><span class="n">CreateUrlSegment</span><span class="p">(</span><span class="nv">$myPage</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nb">Save-Page</span><span class="p">(</span><span class="nv">$myPage</span><span class="p">);</span>
+</span></span></code></pre></div><p>To create an object reference to a .NET Framework object use the New-Object cmdlet:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$page</span> <span class="p">=</span> <span class="nb">Get-CurrentPage</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$urlBuilder</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="err">&#39;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">                   <span class="n">-type</span> <span class="n">EPiServer</span><span class="p">.</span><span class="py">UrlBuilder</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">                   <span class="n">-argumentlist</span> <span class="nv">$page</span><span class="p">.</span><span class="n">LinkURL</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">[</span><span class="no">EPiServer.Global</span><span class="p">]::</span><span class="n">UrlRewriteProvider</span><span class="p">.</span><span class="py">ConvertToExternal</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="nv">$urlBuilder</span><span class="p">,</span> <span class="nv">$page</span><span class="p">.</span><span class="n">PageLink</span><span class="p">,</span> <span class="p">[</span><span class="no">System.Text.UTF8Encoding</span><span class="p">]::</span><span class="n">UTF8</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="nv">$currentPath</span> <span class="p">=</span> <span class="nv">$urlBuilder</span><span class="p">.</span><span class="py">Path</span>
+</span></span></code></pre></div><p><strong>Note</strong>. This is a cursory overview of working with .NET. The two techniques shown here will not necessarily work with all .NET classes.</p>
 <h2 id="how-to-select-properties">How to Select Properties</h2>
 <p>To work with or display specified properties of a collection, pipe the returned results to the Select-Object cmdlet:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-CurrentPage</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageTypeName</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-sort-data">How to Sort Data</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-CurrentPage</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageTypeName</span>
+</span></span></code></pre></div><h2 id="how-to-sort-data">How to Sort Data</h2>
 <p>To sort data returned by Windows PowerShell simply pipe that data to the Sort-Object cmdlet, specifying the property you want to sort by:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageName</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageTypeName</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can also add the ?descending or -ascending parameters to specify a sort order:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageSaved</span> <span class="n">-descending</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageSaved</span><span class="p">,</span> <span class="n">ChangedBy</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can even sort by multiple properties:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageTypeName</span><span class="p">,</span> <span class="n">ChangedBy</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageTypeName</span><span class="p">,</span> <span class="n">ChangedBy</span><span class="p">,</span> <span class="n">PageName</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-work-with-wmi">How to Work with WMI</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageName</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageTypeName</span>
+</span></span></code></pre></div><p>You can also add the ?descending or -ascending parameters to specify a sort order:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageSaved</span> <span class="n">-descending</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageName</span><span class="p">,</span> <span class="n">PageSaved</span><span class="p">,</span> <span class="n">ChangedBy</span>
+</span></span></code></pre></div><p>You can even sort by multiple properties:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageTypeName</span><span class="p">,</span> <span class="n">ChangedBy</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nb">Select-Object</span> <span class="n">PageTypeName</span><span class="p">,</span> <span class="n">ChangedBy</span><span class="p">,</span> <span class="n">PageName</span>
+</span></span></code></pre></div><h2 id="how-to-work-with-wmi">How to Work with WMI</h2>
 <p>To get computer information using WMI call the Get-WMIObject cmdlet followed by the class name:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-WMIObject Win32_BIOS
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>If the class you are interested in does not reside in the cimv2 namespace simply include the <strong>?namespace</strong> parameter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Get</span><span class="p">-</span><span class="n">WMIObject</span> <span class="n">SystemRestore</span> <span class="err">`</span>
-</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="k">namespace</span> <span class="nn">root</span><span class="err">\</span><span class="k">default</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To access data on another computer use the <strong>?computername</strong> parameter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-WMIObject Win32_BIOS `
-</span></span><span class="line"><span class="cl">    ?computername atl-ws-01
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To limit returned data, use a WQL query and the <strong>?query</strong> parameter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">Get</span><span class="o">-</span><span class="n">WMIObject</span><span class="w"> </span><span class="o">-</span><span class="n">query</span><span class="w"> </span><span class="o">`</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s2">&#34;Select * From Win32_Service `
-</span></span></span><span class="line"><span class="cl"><span class="s2">        Where State = &#39;Stopped&#39;&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-interrogate-an-object">How to ?Interrogate? an Object</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-WMIObject Win32_BIOS
+</span></span></code></pre></div><p>If the class you are interested in does not reside in the cimv2 namespace simply include the <strong>?namespace</strong> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Get</span><span class="p">-</span><span class="n">WMIObject</span> <span class="n">SystemRestore</span> <span class="err">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="p">-</span><span class="k">namespace</span> <span class="nn">root</span><span class="err">\</span><span class="k">default</span>
+</span></span></code></pre></div><p>To access data on another computer use the <strong>?computername</strong> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-WMIObject Win32_BIOS `
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    ?computername atl-ws-01
+</span></span></code></pre></div><p>To limit returned data, use a WQL query and the <strong>?query</strong> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">Get</span><span class="o">-</span><span class="n">WMIObject</span><span class="w"> </span><span class="o">-</span><span class="n">query</span><span class="w"> </span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="s2">&#34;Select * From Win32_Service `
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="s2">        Where State = &#39;Stopped&#39;&#34;</span><span class="w">
+</span></span></span></code></pre></div><h2 id="how-to-interrogate-an-object">How to ?Interrogate? an Object</h2>
 <p>To get information about the properties and methods of an object retrieve an instance of that object and then ?pipe? the object to the <strong>Get-Member</strong> cmdlet. For example, this command returns the properties and methods available when working with processes:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Get-Member</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>More tips coming soon?</strong> In the mean time please download the fresh version of the plugin with the latest improvements:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Get-Member</span>
+</span></span></code></pre></div><p><strong>More tips coming soon?</strong> In the mean time please download the fresh version of the plugin with the latest improvements:</p>
 <p><a href="http://www.najmanowicz.com/blog_bin/Cognifide.EPiserverControls.PowerShell.CheatSheet1.zip" title="Download Powershell console for Cheat Sheet 1">[Download &amp; Enjoy]</a></p>
 <p><strong>Get it while it&rsquo;s hot &ndash; still includes 3 bonus script collections!</strong></p>
 <h2 id="how-to-install">How to install?</h2>

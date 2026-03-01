@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -232,221 +232,105 @@
 <li>fully defined in the code &ndash; no need to modify web,config.</li>
 </ul>
 <p>All you need to do to create your own custom Enum property is declare it.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cognifide.EPiserverControls.EnumDropDown</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="na">
-</span></span></span><span class="line"><span class="cl"><span class="na">[PageDefinitionTypePlugIn(DisplayName = &#34;Sample Enum Property&#34;)]</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">SampleProperty</span> <span class="p">:</span> <span class="n">PropertyEnumSelector</span><span class="p">&lt;</span><span class="n">MySampleEnum</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>That&rsquo;s it, really!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">using</span> <span class="nn">Cognifide.EPiserverControls.EnumDropDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="na">[PageDefinitionTypePlugIn(DisplayName = &#34;Sample Enum Property&#34;)]</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">SampleProperty</span> <span class="p">:</span> <span class="n">PropertyEnumSelector</span><span class="p">&lt;</span><span class="n">MySampleEnum</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>That&rsquo;s it, really!</p>
 <p>Now if you want to customize it; obviously you need to provide the information for the property to work with. But let&rsquo;s stop for a while and think, where does that information belong?</p>
 <ul>
 <li>The property should worry about the mechanics of editing and the tediousness of persistence of the edited value, it clearly is not the place to specify the link between the Enum type and its human friendly drop down text.</li>
 <li>Web.config is for settings, not for describing content types and definitely not to enforce the property names.</li>
 <li>So where should the metadata around your Enum type be? How about we put it around the Enum type itself?</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">[</span><span class="n">Flags</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">enum</span> <span class="n">MySampleEnum</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;First Option&#34;</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/first&#34;</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option1</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Default Option&#34;</span><span class="p">,</span> <span class="n">Selected</span><span class="o">=</span><span class="bp">true</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/second&#34;</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option2</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Disabled Option&#34;</span><span class="p">,</span> <span class="n">Enabled</span><span class="o">=</span><span class="bp">false</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/disabled&#34;</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option3</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Hidden Option&#34;</span><span class="p">,</span> <span class="n">Hide</span><span class="o">=</span><span class="bp">true</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/hidden&#34;</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option4</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Fifth Option&#34;</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/fifth&#34;</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option5</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="what-does-all-that-do">What does all that do?</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="p">[</span><span class="n">Flags</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="n">public</span> <span class="k">enum</span> <span class="n">MySampleEnum</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;First Option&#34;</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/first&#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  <span class="n">Option1</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Default Option&#34;</span><span class="p">,</span> <span class="n">Selected</span><span class="o">=</span><span class="bp">true</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/second&#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  <span class="n">Option2</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Disabled Option&#34;</span><span class="p">,</span> <span class="n">Enabled</span><span class="o">=</span><span class="bp">false</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/disabled&#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="n">Option3</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Hidden Option&#34;</span><span class="p">,</span> <span class="n">Hide</span><span class="o">=</span><span class="bp">true</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/hidden&#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  <span class="n">Option4</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">  <span class="p">[</span><span class="n">ValueVisualisation</span><span class="p">(</span><span class="n">Name</span><span class="o">=</span><span class="s2">&#34;Fifth Option&#34;</span><span class="p">,</span> <span class="n">LanguageKey</span><span class="o">=</span><span class="s2">&#34;/enum/fifth&#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">  <span class="n">Option5</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="what-does-all-that-do">What does all that do?</h2>
 <p>The property using an Enum described this way will look the following way in EPiServer:</p>
 <p><a href="/images/SampleEnumPropertyFlags.png"><img src="/images/SampleEnumPropertyFlags_thumb.png" alt="SampleEnumPropertyFlags" title="SampleEnumPropertyFlags" class="aligncenter" width="517" height="357" /></a></p>
 <p>Let&rsquo;s get into the what&rsquo;s happened here as there&rsquo;s more than catches the eye.</p>
 <p>As you can see the enum values are named like they are in the attributes describing them, Default option is selected just like you could have expected by looking at the Selected=true in its attribute. The Enabled=false in the Disabled option results in an option that cannot be changed. The unchangeable option can be both unselected or selected by default. You may want to disable some deprecated options but still show them in the UI as a legacy but for some reason you might not want users to be able to change their value. Option4 is clearly missing, which is intended and specified by the Hide=true, as you might want to hide options that have been removed form the UI and on the same time you don&rsquo;t want to loose compatibility with a legacy API that uses the option.</p>
 <p>Also There is one thing about the first option on the list ? <strong>it&rsquo;s translated!</strong> The mechanism to specify the translation is based on the standard EPiServer localization files that you can find in the ?lang? folder in your typical EPiServer installation. The Translation for the property looks like the following</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; standalone=&#34;yes&#34;?&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;languages&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;language</span> <span class="na">name=</span><span class="s">&#34;English&#34;</span> <span class="na">id=</span><span class="s">&#34;en&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;enum&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;first&gt;</span>First Option Translated EN<span class="nt">&lt;/first&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/enum&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/language&gt;</span>    
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/languages&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>so you see the value will take its translation key from the LanguageKey=&quot;/enum/first&quot;.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; standalone=&#34;yes&#34;?&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nt">&lt;languages&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nt">&lt;language</span> <span class="na">name=</span><span class="s">&#34;English&#34;</span> <span class="na">id=</span><span class="s">&#34;en&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="nt">&lt;enum&gt;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">      <span class="nt">&lt;first&gt;</span>First Option Translated EN<span class="nt">&lt;/first&gt;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="nt">&lt;/enum&gt;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="nt">&lt;/language&gt;</span>    
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="nt">&lt;/languages&gt;</span>
+</span></span></code></pre></div><p>so you see the value will take its translation key from the LanguageKey=&quot;/enum/first&quot;.</p>
 <p>Ok, so we have the <strong><a href="http://sdk.episerver.com/library/cms5/html/T_EPiServer_SpecializedProperties_PropertyAppSettingsMultiple.htm">PropertyAppSettingsMultiple</a></strong> replacement, but what about <strong><a href="http://sdk.episerver.com/library/cms5/html/T_EPiServer_SpecializedProperties_PropertyAppSettings.htm">PropertyAppSettings</a></strong>?</p>
 <p>So here I reach the place where I am not 100% certain whether I took the proper path but I am sure I will hear about it if I didn&rsquo;t :) The place where the property determines if it&rsquo;s supposed to allow for multi selection or not is whether the Enum is marked with the [Flags] attribute. Obviously Flags mean that the property is a form of a bit flag and should be able to allow the user to flip the bits independently rather than being the ?one-of? type. So once you remove the [Flags] form your enum you&rsquo;re going to see it rendered the following way:</p>
 <p><a href="/images/SampleEnumPropertyNoFlags.png"><img src="/images/SampleEnumPropertyNoFlags_thumb.png" alt="SampleEnumPropertyNoFlags" title="SampleEnumPropertyNoFlags" class="aligncenter" width="517" height="357" /></a></p>
 <p>But hey, it&rsquo;s not a one way trip, if you decide that you want the enum rendered in another type of property and force the opposite behaviour you can always override it in the derived property like follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[PageDefinitionTypePlugIn(DisplayName = &#34;Sample Enum Property Checklist&#34;)]</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">SamplePropertyChecklist</span> <span class="p">:</span> <span class="n">PropertyEnumSelector</span><span class="p">&lt;</span><span class="n">MySampleEnum</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">static</span> <span class="n">SamplePropertyChecklist</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">MultiSelectEnum</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>so even if you think my usage of [Flags] is faulty, the damage can be undone :)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="na">[PageDefinitionTypePlugIn(DisplayName = &#34;Sample Enum Property Checklist&#34;)]</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">SamplePropertyChecklist</span> <span class="p">:</span> <span class="n">PropertyEnumSelector</span><span class="p">&lt;</span><span class="n">MySampleEnum</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="kd">static</span> <span class="n">SamplePropertyChecklist</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">            <span class="n">MultiSelectEnum</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>so even if you think my usage of [Flags] is faulty, the damage can be undone :)</p>
 <p>Ok, but what about the enums that we have no control over &ndash; like enums form libraries. Obviously cannot retrofit attributes into them. Well, true but we still can have all of the control over the property.</p>
 <p>Let&rsquo;s assume for a moment that this is our legacy enum:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">public</span> <span class="k">enum</span> <span class="n">MySampleLegacyEnum</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option1</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option2</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option3</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option4</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Option5</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can just do nothing and simply use it in the property but the UI will display the not so nice Option1? names. That can be easily fixed &ndash; Again, specifying translation is the easiest way of achieving that goal. An xml for that enum would look like follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; standalone=&#34;yes&#34;?&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;languages&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;language</span> <span class="na">name=</span><span class="s">&#34;English&#34;</span> <span class="na">id=</span><span class="s">&#34;en&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;MySampleLegacyEnum&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;Option1&gt;</span>First Option<span class="nt">&lt;/Option1&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;Option2&gt;</span>Default Option<span class="nt">&lt;/Option2&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;Option3&gt;</span>Disabled Option<span class="nt">&lt;/Option3&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;Option4&gt;</span>Hidden Option<span class="nt">&lt;/Option4&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;Option5&gt;</span>Fifth Option<span class="nt">&lt;/Option5&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/MySampleLegacyEnum&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/language&gt;</span>  
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/languages&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The default values can be added by retrofitting the ?DefaultValues? list with the elements that you want selected in the scenario where the property is first displayed for editing. You can also modify the inherited AvailableItems list to set the rest of the properties otherwise adjustable by the attributes.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">public</span> <span class="k">enum</span> <span class="n">MySampleLegacyEnum</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="n">Option1</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="n">Option2</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">  <span class="n">Option3</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">  <span class="n">Option4</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="n">Option5</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You can just do nothing and simply use it in the property but the UI will display the not so nice Option1? names. That can be easily fixed &ndash; Again, specifying translation is the easiest way of achieving that goal. An xml for that enum would look like follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34; standalone=&#34;yes&#34;?&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="nt">&lt;languages&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="nt">&lt;language</span> <span class="na">name=</span><span class="s">&#34;English&#34;</span> <span class="na">id=</span><span class="s">&#34;en&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="nt">&lt;MySampleLegacyEnum&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">      <span class="nt">&lt;Option1&gt;</span>First Option<span class="nt">&lt;/Option1&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">      <span class="nt">&lt;Option2&gt;</span>Default Option<span class="nt">&lt;/Option2&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">      <span class="nt">&lt;Option3&gt;</span>Disabled Option<span class="nt">&lt;/Option3&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">      <span class="nt">&lt;Option4&gt;</span>Hidden Option<span class="nt">&lt;/Option4&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">      <span class="nt">&lt;Option5&gt;</span>Fifth Option<span class="nt">&lt;/Option5&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="nt">&lt;/MySampleLegacyEnum&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  <span class="nt">&lt;/language&gt;</span>  
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="nt">&lt;/languages&gt;</span>
+</span></span></code></pre></div><p>The default values can be added by retrofitting the ?DefaultValues? list with the elements that you want selected in the scenario where the property is first displayed for editing. You can also modify the inherited AvailableItems list to set the rest of the properties otherwise adjustable by the attributes.</p>
 <p>Following is a sample of such retrofitted rules to match our original attribute-defined-enum.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[PageDefinitionTypePlugIn(DisplayName = &#34;Sample Legacy Enum Property&#34;)]</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">SampleProperty</span> <span class="p">:</span> <span class="n">PropertyEnumSelector</span><span class="p">&lt;</span><span class="n">MySampleLegacyEnum</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="n">SampleProperty</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">MultiSelectEnum</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// Make Option2 a default selected value</span>
-</span></span><span class="line"><span class="cl">        <span class="n">DefaultValues</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option2</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        <span class="n">AvailableItems</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Value</span> <span class="p">==</span> <span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option2</span><span class="p">.</span><span class="n">ToString</span><span class="p">()).</span><span class="n">First</span><span class="p">().</span><span class="n">Selected</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">//Disable selection of Option3</span>
-</span></span><span class="line"><span class="cl">        <span class="n">AvailableItems</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Value</span> <span class="p">==</span> <span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option3</span><span class="p">.</span><span class="n">ToString</span><span class="p">()).</span><span class="n">First</span><span class="p">().</span><span class="n">Enabled</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">//Remove hidden Option4</span>
-</span></span><span class="line"><span class="cl">        <span class="n">AvailableItems</span><span class="p">.</span><span class="n">RemoveAll</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Value</span> <span class="p">==</span> <span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option4</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The [<a href="http://www.najmanowicz.com/blog_bin/Cognifide.EPiserverControls.EnumDropDown.zip">code for the EnumProperty</a>] as well as [<a href="http://www.najmanowicz.com/blog_bin/Cognifide.EPiserverControls.EnumDropDown.Assembly.zip">the compiled binaries</a>] are available as Open Source and you can incorporate it in your projects as long as the Cognifide namespace is used for the code.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="na">[PageDefinitionTypePlugIn(DisplayName = &#34;Sample Legacy Enum Property&#34;)]</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">SampleProperty</span> <span class="p">:</span> <span class="n">PropertyEnumSelector</span><span class="p">&lt;</span><span class="n">MySampleLegacyEnum</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">static</span> <span class="n">SampleProperty</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="n">MultiSelectEnum</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="c1">// Make Option2 a default selected value</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">DefaultValues</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option2</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="n">AvailableItems</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Value</span> <span class="p">==</span> <span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option2</span><span class="p">.</span><span class="n">ToString</span><span class="p">()).</span><span class="n">First</span><span class="p">().</span><span class="n">Selected</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="c1">//Disable selection of Option3</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="n">AvailableItems</span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Value</span> <span class="p">==</span> <span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option3</span><span class="p">.</span><span class="n">ToString</span><span class="p">()).</span><span class="n">First</span><span class="p">().</span><span class="n">Enabled</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="c1">//Remove hidden Option4</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">AvailableItems</span><span class="p">.</span><span class="n">RemoveAll</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">Value</span> <span class="p">==</span> <span class="n">MySampleLegacyEnum</span><span class="p">.</span><span class="n">Option4</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The [<a href="http://www.najmanowicz.com/blog_bin/Cognifide.EPiserverControls.EnumDropDown.zip">code for the EnumProperty</a>] as well as [<a href="http://www.najmanowicz.com/blog_bin/Cognifide.EPiserverControls.EnumDropDown.Assembly.zip">the compiled binaries</a>] are available as Open Source and you can incorporate it in your projects as long as the Cognifide namespace is used for the code.</p>
 <p>What do you think? Is that going to be useful for you?</p>
 
       </div>

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -209,7 +209,7 @@ Naturally, my knee-jerk reaction is &ndash; let&rsquo;s do it with the PowerShel
           <h3 class="post-title"><a href="/2011/05/09/powershell-for-episerver-cheat-sheet-part-1/">PowerShell for EPiServer - cheat sheet - Part 1</a></h3>
           <div class="post-meta">
             <time datetime="2011-05-09">May 9, 2011</time>
-            &middot; <span class="reading-time">6 min read</span>
+            &middot; <span class="reading-time">5 min read</span>
           </div>
           <p class="post-excerpt"><p>Most of this is based on the Microsoft&rsquo;s <a href="http://www.microsoft.com/downloads/en/details.aspx--FamilyId=DF8ED469-9007-401C-85E7-46649A32D0E0&amp;displaylang=en" title="Windows PowerShell Quick Reference">Windows PowerShell Quick Reference</a> however despite the sharing scripting runtimes the nature of the both shells are pretty different (although the differences are not as vast as one might think).</p>
 <table>
@@ -255,43 +255,22 @@ Naturally, my knee-jerk reaction is &ndash; let&rsquo;s do it with the PowerShel
           </div>
           <p class="post-excerpt"><p>The PowerShell plugin gets an update once again to support Admin mode script collections in addition to the context scripts.</p>
 <h2 id="how-to-write-an-admin-mode-script-collections">How to write an Admin mode script collections?</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContextScriptCollection&gt;
-</span></span><span class="line"><span class="cl">  &lt;Title&gt;Statistics Scripts&lt;/Title&gt;
-</span></span><span class="line"><span class="cl">  &lt;Description&gt;This script collection ... &lt;/Description&gt;
-</span></span><span class="line"><span class="cl">  &lt;Area&gt;Administration&lt;/Area&gt;
-</span></span><span class="line"><span class="cl">  &lt;Scripts&gt;
-</span></span><span class="line"><span class="cl">    &lt;ContextScript&gt;
-</span></span><span class="line"><span class="cl">      &lt;Title&gt;Restart Application&lt;/Title&gt;
-</span></span><span class="line"><span class="cl">      &lt;Description&gt;The script restarts this instance of EPiServer...&lt;/Warning&gt;
-</span></span><span class="line"><span class="cl">      &lt;Script&gt;Restart-Application&lt;/Script&gt;
-</span></span><span class="line"><span class="cl">      &lt;Icon&gt;/App_Themes/Default/Images/Tools/Refresh.gif&lt;/Icon&gt;
-</span></span><span class="line"><span class="cl">      &lt;Groups&gt;
-</span></span><span class="line"><span class="cl">      &lt;/Groups&gt;
-</span></span><span class="line"><span class="cl">    &lt;/ContextScript&gt;
-</span></span><span class="line"><span class="cl">  &lt;/Scripts&gt;
-</span></span><span class="line"><span class="cl">&lt;/ContextScriptCollection&gt;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="where-can-i-access-that">Where can I access that?</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">&lt;ContextScriptCollection&gt;
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  &lt;Title&gt;Statistics Scripts&lt;/Title&gt;
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  &lt;Description&gt;This script collection ... &lt;/Description&gt;
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  &lt;Area&gt;Administration&lt;/Area&gt;
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  &lt;Scripts&gt;
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    &lt;ContextScript&gt;
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">      &lt;Title&gt;Restart Application&lt;/Title&gt;
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">      &lt;Description&gt;The script restarts this instance of EPiServer...&lt;/Warning&gt;
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">      &lt;Script&gt;Restart-Application&lt;/Script&gt;
+</span></span><span class="line"><span class="ln">10</span><span class="cl">      &lt;Icon&gt;/App_Themes/Default/Images/Tools/Refresh.gif&lt;/Icon&gt;
+</span></span><span class="line"><span class="ln">11</span><span class="cl">      &lt;Groups&gt;
+</span></span><span class="line"><span class="ln">12</span><span class="cl">      &lt;/Groups&gt;
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    &lt;/ContextScript&gt;
+</span></span><span class="line"><span class="ln">14</span><span class="cl">  &lt;/Scripts&gt;
+</span></span><span class="line"><span class="ln">15</span><span class="cl">&lt;/ContextScriptCollection&gt;
+</span></span></code></pre></div><h2 id="where-can-i-access-that">Where can I access that?</h2>
 <p><a href="/images/image.png"><img src="/images/image_thumb.png" alt="image" title="image" class="aligncenter" width="244" height="200" /></a></p></p><div class="post-actions">
             <a href="/2011/05/07/episerver-admin-mode-powershell-scripts/" class="read-more">Read More</a>
             <span class="post-comments-sep">&middot;</span>
@@ -461,7 +440,7 @@ Naturally, my knee-jerk reaction is &ndash; let&rsquo;s do it with the PowerShel
           <h3 class="post-title"><a href="/2009/03/17/get-out-of-my-way-or-the-story-of-file-metadata-for-virtualpathprovider-in-episerver/">Get out of my way! ... or the story of file metadata for VirtualPathProvider in EPiServer</a></h3>
           <div class="post-meta">
             <time datetime="2009-03-17">March 17, 2009</time>
-            &middot; <span class="reading-time">4 min read</span>
+            &middot; <span class="reading-time">3 min read</span>
           </div>
           <p class="post-excerpt"><p>Immediately after you implement the VirtualPathProvider proxy from my previous post you will notice a one fairly serious lack in it. Namely all the files within that provider will be hiding behind the registration form. That is not cool for a couple of reasons?</p>
 <ul>
@@ -540,65 +519,33 @@ Naturally, my knee-jerk reaction is &ndash; let&rsquo;s do it with the PowerShel
 <p>Compiler error: CS0433: Type ?EPiServer.Global? exists in ?c:\WINDOWS\assembly\GAC_MSIL\EPiServer\5.1.422.122__8fe83dea738b45b7\EPiServer.dll? and ?c:\WINDOWS\assembly\GAC\EPiServer\4.61.5.83__8fe83dea738b45b7\EPiServer.dll?</p>
 </blockquote>
 <p>The solution is to go to your web.config and edit the compilation section. The section will most probably look something like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;system.web&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;compilation</span> <span class="na">defaultLanguage=</span><span class="s">&#34;c#&#34;</span> <span class="na">debug=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;assemblies&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Web.Extensions.Design, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.BaseLibrary, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Configuration.Install, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Configuration, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Implementation, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.XForms, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Events, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Lucene, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;ElektroPost.Licensing, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Data.OracleClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Wsrp, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.WebParts, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.UI, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Web.WebControls, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/assemblies&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/compilation&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/system.web&gt;</span>                  
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>in my case only the 4th line referencing the EPiServer.dll was interfering with the editing working, but this can easily be trimmed to only first 3 options, so once you&rsquo;re done with removing CMS5 entries it could look something like:</p></p><div class="post-actions">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nt">&lt;system.web&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nt">&lt;compilation</span> <span class="na">defaultLanguage=</span><span class="s">&#34;c#&#34;</span> <span class="na">debug=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      <span class="nt">&lt;assemblies&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Web.Extensions.Design, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.BaseLibrary, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Configuration.Install, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Configuration, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Implementation, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.XForms, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Events, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Lucene, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;ElektroPost.Licensing, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;System.Data.OracleClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Wsrp, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.WebParts, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.UI, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">assembly=</span><span class="s">&#34;EPiServer.Web.WebControls, Version=5.1.422.122, Culture=neutral, PublicKeyToken=8FE83DEA738B45B7&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">      <span class="nt">&lt;/assemblies&gt;</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="nt">&lt;/compilation&gt;</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">  <span class="nt">&lt;/system.web&gt;</span>                  
+</span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>in my case only the 4th line referencing the EPiServer.dll was interfering with the editing working, but this can easily be trimmed to only first 3 options, so once you&rsquo;re done with removing CMS5 entries it could look something like:</p></p><div class="post-actions">
             <a href="/2008/06/27/fix-for-episerver-cms5-interfering-with-your-episerver-4/" class="read-more">Read More</a>
             <span class="post-comments-sep">&middot;</span>
             <a href="/2008/06/27/fix-for-episerver-cms5-interfering-with-your-episerver-4/#disqus_thread" class="post-comments-link" data-disqus-identifier="638229487">Comments</a>
@@ -615,51 +562,35 @@ Naturally, my knee-jerk reaction is &ndash; let&rsquo;s do it with the PowerShel
           </div>
           <p class="post-excerpt"><p>The configuration of the module is a descendant of any EPiServer Virtual Path Provider configuration. This aspect is fairly well <a href="http://world.episerver.com/Documentation/Items/Tech-Notes/EPiServer-CMS-SP2/Virtual-Path-Providers-in-EPiServer-CMS-5/">described on EPiServer pages</a>.</p>
 <p>A sample configuration for the TextImageVirtualPathProvider can look as follows</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;episerver&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;virtualPath</span>
-</span></span><span class="line"><span class="cl">      <span class="err">&lt;providers</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">showInFileManager=</span><span class="s">&#34;false&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">virtualName=</span><span class="s">&#34;Text Images&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">virtualPath=</span><span class="s">&#34;~/TextImages/&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">bypassAccessCheck=</span><span class="s">&#34;false&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">name=</span><span class="s">&#34;TextImages&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">type=</span><span class="s">&#34;Cognifide.ImageVirtualPathProvider.TextImageVirtualPathProvider,Cognifide.ImageVirtualPathProvider&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">physicalPath=</span><span class="s">&#34;C:\temp\TextImages&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">allowedReferers=</span><span class="s">&#34;(localhost)&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">allowNullReferrer=</span><span class="s">&#34;false&#34;</span>
-</span></span><span class="line"><span class="cl">             <span class="na">replacementStrings=</span><span class="s">&#34;$colon$,:,$gt$,&gt;,$dot$,.,$quot$,&#34;</span><span class="err">,$amp$,&amp;,$star$,*,$eol$,</span>
-</span></span><span class="line"><span class="cl"><span class="err">,&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/providers&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/virtualPath&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/episerver&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>where:</p></p><div class="post-actions">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nt">&lt;configuration&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nt">&lt;episerver&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nt">&lt;virtualPath</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      <span class="err">&lt;providers</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">showInFileManager=</span><span class="s">&#34;false&#34;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">             <span class="na">virtualName=</span><span class="s">&#34;Text Images&#34;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">             <span class="na">virtualPath=</span><span class="s">&#34;~/TextImages/&#34;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">             <span class="na">bypassAccessCheck=</span><span class="s">&#34;false&#34;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">             <span class="na">name=</span><span class="s">&#34;TextImages&#34;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">             <span class="na">type=</span><span class="s">&#34;Cognifide.ImageVirtualPathProvider.TextImageVirtualPathProvider,Cognifide.ImageVirtualPathProvider&#34;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">             <span class="na">physicalPath=</span><span class="s">&#34;C:\temp\TextImages&#34;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">             <span class="na">allowedReferers=</span><span class="s">&#34;(localhost)&#34;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">             <span class="na">allowNullReferrer=</span><span class="s">&#34;false&#34;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">             <span class="na">replacementStrings=</span><span class="s">&#34;$colon$,:,$gt$,&gt;,$dot$,.,$quot$,&#34;</span><span class="err">,$amp$,&amp;,$star$,*,$eol$,</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="err">,&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">      <span class="nt">&lt;/providers&gt;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="nt">&lt;/virtualPath&gt;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">  <span class="nt">&lt;/episerver&gt;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>where:</p>
+<ul>
+<li>physicalPath is where the cached version of images will be stored</li>
+<li>shownInFileManager is “false” as there is nothing to present for the user in the file manager.</li>
+<li>allowedReferrers is the regular expression containing the filter for sites that are allowed to access the path provider and get images. This has been added so that your server does not turn into the internet’s text-image open service :)</li>
+<li>allowNullReferrer should be set to false in production environment but allows for testing by directly creating URL’s without using a page to fill in the referrer.</li>
+<li>replacementStrings – this one actually turned out to be very useful since some characters are invalid and not even reaching the VPP if EPiServer or ASP detects them. so to allow for characters like colon or &lt; or even a dot (which would make it hard to form regular expression if it was explicitly available) or * you need to create an escape token for them. The string is a coma separated list of token,value,token,value,…</li>
+<li>virtualPath is something you need to change if you want your VPP to serve images under a different root level folder. (e.g. if you have a page with that name already)</li>
+</ul>
+<p>Additionally for IIS6 (most common scenario) you need to add <location> node to configuration for the VPP to work.</p></p><div class="post-actions">
             <a href="/2008/06/24/text-image-generation-virtualpathprovider-for-episerver-and-aspnet-in-general-part-2-configuration/" class="read-more">Read More</a>
             <span class="post-comments-sep">&middot;</span>
             <a href="/2008/06/24/text-image-generation-virtualpathprovider-for-episerver-and-aspnet-in-general-part-2-configuration/#disqus_thread" class="post-comments-link" data-disqus-identifier="641057570">Comments</a>
@@ -1023,61 +954,31 @@ I&rsquo;ve found out that the property can be easily integrated with the CMS (vi
           </div>
           <p class="post-excerpt"><p>The challenge - The site that we will be coding will have its pages tagged with episerver categories. Implement a control that will list all the pages tagged with a specific category.
 The control aspx code seems looks pretty straightforward and is derivative of some other controls that are defined in the EPiServer sample site:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Control Language=&#34;C#&#34; AutoEventWireup=&#34;false&#34; CodeFile=&#34;CategoryListing.ascx.cs&#34; Inherits=&#34;development.templates.Units.CategoryListing&#34; TargetSchema=&#34;http://schemas.microsoft.com/intellisense/ie5&#34; %&gt;
-</span></span><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;EPiServer&#34; Namespace=&#34;EPiServer.WebControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#34;rightmenudivStartPage&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingcontainer&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingleftcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&#34;listheading leftfloating&#34;</span> <span class="na">href=</span><span class="s">&#34;&lt;%=EventRootPage.LinkURL%&gt;&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="err">&lt;</span>%= EventRootPage.PageName %&gt;
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/a&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingrightcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;EPiServer:PageList</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">ID=</span><span class="s">&#34;PageList1&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;ItemTemplate&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;startpagecalendaritem&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;datelistingtext&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property1&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;PageLink&#34;</span> <span class="na">CssClass=</span><span class="s">&#34;StartCalendar&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;Normal&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property3&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;MainIntro&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/span&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/ItemTemplate&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/EPiServer:PageList&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;br/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;br/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/div&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The wirst thing you will notice after looking at the code is that PageList is pretty much a standard ASP.NET  reinvented and rehashed. GREAT! Sounds like we can use the Data binding, right? That&rsquo;s also true:</p></p><div class="post-actions">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="err">&lt;</span>%@ Control Language=&#34;C#&#34; AutoEventWireup=&#34;false&#34; CodeFile=&#34;CategoryListing.ascx.cs&#34; Inherits=&#34;development.templates.Units.CategoryListing&#34; TargetSchema=&#34;http://schemas.microsoft.com/intellisense/ie5&#34; %&gt;
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;EPiServer&#34; Namespace=&#34;EPiServer.WebControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#34;rightmenudivStartPage&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingcontainer&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingleftcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&#34;listheading leftfloating&#34;</span> <span class="na">href=</span><span class="s">&#34;&lt;%=EventRootPage.LinkURL%&gt;&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">            <span class="err">&lt;</span>%= EventRootPage.PageName %&gt;
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="nt">&lt;/a&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingrightcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="nt">&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="nt">&lt;EPiServer:PageList</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">ID=</span><span class="s">&#34;PageList1&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="nt">&lt;ItemTemplate&gt;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;startpagecalendaritem&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;datelistingtext&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">                    <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property1&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;PageLink&#34;</span> <span class="na">CssClass=</span><span class="s">&#34;StartCalendar&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;Normal&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">                        <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property3&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;MainIntro&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">                    <span class="nt">&lt;/span&gt;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">                <span class="nt">&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="nt">&lt;/ItemTemplate&gt;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="nt">&lt;/EPiServer:PageList&gt;</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="nt">&lt;br/&gt;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="nt">&lt;br/&gt;</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="nt">&lt;/div&gt;</span>
+</span></span></code></pre></div><p>The wirst thing you will notice after looking at the code is that PageList is pretty much a standard ASP.NET  reinvented and rehashed. GREAT! Sounds like we can use the Data binding, right? That&rsquo;s also true:</p></p><div class="post-actions">
             <a href="/2006/12/19/my-first-meaningful-episerver-control-z-biedronki/" class="read-more">Read More</a>
             <span class="post-comments-sep">&middot;</span>
             <a href="/2006/12/19/my-first-meaningful-episerver-control-z-biedronki/#disqus_thread" class="post-comments-link" data-disqus-identifier="637677022">Comments</a>

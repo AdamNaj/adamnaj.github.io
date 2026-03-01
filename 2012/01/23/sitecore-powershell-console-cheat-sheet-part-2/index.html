@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -200,75 +200,31 @@
         <p>Most of this post is also based on the Microsoft’s <a href="http://www.microsoft.com/downloads/en/details.aspx--FamilyId=DF8ED469-9007-401C-85E7-46649A32D0E0&amp;displaylang=en" title="Windows PowerShell Quick Reference">Windows PowerShell Quick Reference</a> however despite the sharing scripting runtimes the nature of the both shells differ considerably as described in the previous post: <a href="/2012/01/11/sitecore-powershell-console-cheat-sheetpart-1/">Sitecore PowerShell Console cheat sheet – Part 1</a>. In all cases where it made sense I’ve converted the samples to establish them in Sitecore scenarios.</p>
 <h2 id="how-to-write-conditional-statements">How to Write Conditional Statements</h2>
 <p>To write an If statement use code similar to this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$page = Get-item .;
-</span></span><span class="line"><span class="cl">$changedBy = $page.&#34;__Updated by&#34;;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">if ($changedBy -eq &#34;&#34;)
-</span></span><span class="line"><span class="cl">  { &#34;Unspecified author - a system page?&#34; }
-</span></span><span class="line"><span class="cl">elseif ($changedBy -eq $me)
-</span></span><span class="line"><span class="cl">  { &#34;The page has been last edited by me!&#34; }
-</span></span><span class="line"><span class="cl">else
-</span></span><span class="line"><span class="cl">  { &#34;The page has been last edited by &#34;+ $changedBy }
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Instead of writing a series of If statements you can use a Switch statement, which is equivalent to VBScript’s Select Case statement:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$page</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.;</span>
-</span></span><span class="line"><span class="cl"><span class="k">switch</span> <span class="p">(</span><span class="nv">$page</span><span class="p">.</span><span class="n">Language</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;en&#34;</span> <span class="p">{</span><span class="s2">&#34;This version is in English&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;pl&#34;</span> <span class="p">{</span><span class="s2">&#34;This version is in Polish&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;tlh-KX&#34;</span> <span class="p">{</span><span class="s2">&#34;This version is in Klingon?!&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">default</span> <span class="p">{</span><span class="s2">&#34;No idea what this language is!&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-write-for-and-for-each-loops">How to Write For and For Each Loops</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$page = Get-item .;
+</span></span><span class="line"><span class="ln">2</span><span class="cl">$changedBy = $page.&#34;__Updated by&#34;;
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl">if ($changedBy -eq &#34;&#34;)
+</span></span><span class="line"><span class="ln">5</span><span class="cl">  { &#34;Unspecified author - a system page?&#34; }
+</span></span><span class="line"><span class="ln">6</span><span class="cl">elseif ($changedBy -eq $me)
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  { &#34;The page has been last edited by me!&#34; }
+</span></span><span class="line"><span class="ln">8</span><span class="cl">else
+</span></span><span class="line"><span class="ln">9</span><span class="cl">  { &#34;The page has been last edited by &#34;+ $changedBy }
+</span></span></code></pre></div><p>Instead of writing a series of If statements you can use a Switch statement, which is equivalent to VBScript’s Select Case statement:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$page</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">switch</span> <span class="p">(</span><span class="nv">$page</span><span class="p">.</span><span class="n">Language</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="s2">&#34;en&#34;</span> <span class="p">{</span><span class="s2">&#34;This version is in English&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="s2">&#34;pl&#34;</span> <span class="p">{</span><span class="s2">&#34;This version is in Polish&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="s2">&#34;tlh-KX&#34;</span> <span class="p">{</span><span class="s2">&#34;This version is in Klingon?!&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="k">default</span> <span class="p">{</span><span class="s2">&#34;No idea what this language is!&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></div><h2 id="how-to-write-for-and-for-each-loops">How to Write For and For Each Loops</h2>
 <p>To write a For statement use code similar to this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">for ($a = 1; $a -le 10; $a++) {$a}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>By comparison, a For Each statement might look like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">home</span>
-</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="nb">Get-ChildItem</span> <span class="p">.)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span> <span class="nb">write-host</span> <span class="nv">$i</span><span class="p">.</span><span class="py">TemplateName</span> <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-write-do-loops">How to Write Do Loops</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">for ($a = 1; $a -le 10; $a++) {$a}
+</span></span></code></pre></div><p>By comparison, a For Each statement might look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">home</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="nb">Get-ChildItem</span> <span class="p">.)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">{</span> <span class="nb">write-host</span> <span class="nv">$i</span><span class="p">.</span><span class="py">TemplateName</span> <span class="p">}</span>
+</span></span></code></pre></div><h2 id="how-to-write-do-loops">How to Write Do Loops</h2>
 <p>To write a Do loop use code like the following, replacing the code between the curly braces with the code to be executed on each iteration of the loop. Oh: and replacing the code inside the parentheses with the loop condition:</p>
 <table>
   <thead>
@@ -286,172 +242,60 @@
       </tr>
   </tbody>
 </table>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$a = 1
-</span></span><span class="line"><span class="cl">do {$a; $a++} 
-</span></span><span class="line"><span class="cl">while ($a -lt 10)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|  |</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$a = 1
-</span></span><span class="line"><span class="cl">do {$a; $a++} 
-</span></span><span class="line"><span class="cl">until ($a –gt 10)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$a = 1
+</span></span><span class="line"><span class="ln">2</span><span class="cl">do {$a; $a++} 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">while ($a -lt 10)
+</span></span></code></pre></div><p>|  |</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$a = 1
+</span></span><span class="line"><span class="ln">2</span><span class="cl">do {$a; $a++} 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">until ($a –gt 10)
+</span></span></code></pre></div><p>|</p>
 <h2 id="how-to-use-net-objects-and-classes">How to Use .NET Objects and Classes</h2>
 <p>To use a .NET Framework class static method enclose the class name in square brackets, then separate the class name and the method using a pair of colons:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$master = [Sitecore.Configuration.Factory]::GetDatabase(&#34;master&#34;); 
-</span></span><span class="line"><span class="cl">$homeItem = $master.GetItem(&#34;/sitecore/content/home&#34;); 
-</span></span><span class="line"><span class="cl">$sample = $master.Templates[&#34;sample/sample item&#34;]; 
-</span></span><span class="line"><span class="cl">$myItem = $homeItem.Add(&#34;MyItem&#34;, $sample);
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To create an object reference to a .NET Framework object use the New-Object cmdlet:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="s2">&#34;master:\media library\Files\Sample&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$mediaItem</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">                   <span class="n">-type</span> <span class="n">Sitecore</span><span class="p">.</span><span class="py">Data</span><span class="p">.</span><span class="py">Items</span><span class="p">.</span><span class="py">MediaItem</span> 
-</span></span><span class="line"><span class="cl">                   <span class="n">-argumentlist</span> <span class="nv">$item</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Note</strong>. This is a cursory overview of working with .NET. The two techniques shown here will not necessarily work with all .NET classes.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$master = [Sitecore.Configuration.Factory]::GetDatabase(&#34;master&#34;); 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">$homeItem = $master.GetItem(&#34;/sitecore/content/home&#34;); 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">$sample = $master.Templates[&#34;sample/sample item&#34;]; 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">$myItem = $homeItem.Add(&#34;MyItem&#34;, $sample);
+</span></span></code></pre></div><p>To create an object reference to a .NET Framework object use the New-Object cmdlet:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="s2">&#34;master:\media library\Files\Sample&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$mediaItem</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">                   <span class="n">-type</span> <span class="n">Sitecore</span><span class="p">.</span><span class="py">Data</span><span class="p">.</span><span class="py">Items</span><span class="p">.</span><span class="py">MediaItem</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">                   <span class="n">-argumentlist</span> <span class="nv">$item</span>
+</span></span></code></pre></div><p><strong>Note</strong>. This is a cursory overview of working with .NET. The two techniques shown here will not necessarily work with all .NET classes.</p>
 <h2 id="how-to-select-properties">How to Select Properties</h2>
 <p>To work with or display specified properties of a collection, pipe the returned results to the Select-Object cmdlet:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">Home</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-sort-data">How to Sort Data</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">Home</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span>
+</span></span></code></pre></div><h2 id="how-to-sort-data">How to Sort Data</h2>
 <p>To sort data returned by Windows PowerShell simply pipe that data to the Sort-Object cmdlet, specifying the property you want to sort by:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">DisplayName</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can also add the –descending or -ascending parameters to specify a sort order:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageSaved</span> <span class="n">-descending</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">__Updated</span><span class="p">,</span> <span class="s2">&#34;__Updated By&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can even sort by multiple properties:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="s2">&#34;__Updated By&#34;</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Select-Object</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="s2">&#34;__Updated By&#34;</span><span class="p">,</span> <span class="n">DisplayName</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-work-with-wmi">How to Work with WMI</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">DisplayName</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span>
+</span></span></code></pre></div><p>You can also add the –descending or -ascending parameters to specify a sort order:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">PageSaved</span> <span class="n">-descending</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nb">Select-Object</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">__Updated</span><span class="p">,</span> <span class="s2">&#34;__Updated By&#34;</span>
+</span></span></code></pre></div><p>You can even sort by multiple properties:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-recurse</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nb">Sort-Object</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="s2">&#34;__Updated By&#34;</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nb">Select-Object</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="s2">&#34;__Updated By&#34;</span><span class="p">,</span> <span class="n">DisplayName</span>
+</span></span></code></pre></div><h2 id="how-to-work-with-wmi">How to Work with WMI</h2>
 <p>To get computer information using WMI call the Get-WMIObject cmdlet followed by the class name:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-WMIObject Win32_BIOS
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>If the class you are interested in does not reside in the cimv2 namespace simply include the <strong>–namespace</strong> parameter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Get</span><span class="p">-</span><span class="n">WMIObject</span> <span class="n">SystemRestore</span> <span class="err">`</span>
-</span></span><span class="line"><span class="cl">    <span class="p">-</span><span class="k">namespace</span> <span class="nn">root</span><span class="err">\</span><span class="k">default</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To access data on another computer use the <strong>–computername</strong> parameter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-WMIObject Win32_BIOS `
-</span></span><span class="line"><span class="cl">    –computername atl-ws-01
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To limit returned data, use a WQL query and the <strong>–query</strong> parameter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">Get</span><span class="o">-</span><span class="n">WMIObject</span><span class="w"> </span><span class="o">-</span><span class="n">query</span><span class="w"> </span><span class="o">`</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s2">&#34;Select * From Win32_Service `
-</span></span></span><span class="line"><span class="cl"><span class="s2">        Where State = &#39;Stopped&#39;&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-interrogate-an-object">How to “Interrogate” an Object</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-WMIObject Win32_BIOS
+</span></span></code></pre></div><p>If the class you are interested in does not reside in the cimv2 namespace simply include the <strong>–namespace</strong> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Get</span><span class="p">-</span><span class="n">WMIObject</span> <span class="n">SystemRestore</span> <span class="err">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="p">-</span><span class="k">namespace</span> <span class="nn">root</span><span class="err">\</span><span class="k">default</span>
+</span></span></code></pre></div><p>To access data on another computer use the <strong>–computername</strong> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-WMIObject Win32_BIOS `
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    –computername atl-ws-01
+</span></span></code></pre></div><p>To limit returned data, use a WQL query and the <strong>–query</strong> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">Get</span><span class="o">-</span><span class="n">WMIObject</span><span class="w"> </span><span class="o">-</span><span class="n">query</span><span class="w"> </span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="s2">&#34;Select * From Win32_Service `
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="s2">        Where State = &#39;Stopped&#39;&#34;</span><span class="w">
+</span></span></span></code></pre></div><h2 id="how-to-interrogate-an-object">How to “Interrogate” an Object</h2>
 <p>To get information about the properties and methods of an object retrieve an instance of that object and then “pipe” the object to the <strong>Get-Member</strong> cmdlet. For example, this command returns the properties and methods available when working with processes:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Get-Member</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>More tips coming soon…</strong> In the mean time please download the fresh version of the plugin with the latest improvements:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Get-Member</span>
+</span></span></code></pre></div><p><strong>More tips coming soon…</strong> In the mean time please download the fresh version of the plugin with the latest improvements:</p>
 <h2 id="heading"><a href="http://trac.sitecore.net/SitecorePowershellConsole" title="Sitecore Powershell console on Shared Source">[Download &amp; Enjoy]</a></h2>
 <p>All feedback appreciated!</p>
 <blockquote>

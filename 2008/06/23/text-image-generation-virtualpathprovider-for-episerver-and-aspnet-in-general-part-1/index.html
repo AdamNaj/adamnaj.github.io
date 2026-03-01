@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -208,69 +208,33 @@
 <p>The solution was to generate images, but how to do it the right way? This has presented us with a once-in-a-lifetime :) opportunity to create a virtual path provider, do something good and learn something new &amp; cool in the process.</p>
 <h2 id="creating-a-new-virtual-path-provider">Creating a new virtual path provider.</h2>
 <p>this functionality in itself is fairly well <a href="http://msdn.microsoft.com/en-us/library/system.web.hosting.virtualpathprovider.aspx">documented on MSDN</a> one thing to pay attention to is to remember to pass the control to the next provider in the provider queue if your provider does not want to serve the request, so in my case:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">override</span> <span class="n">VirtualFile</span> <span class="n">GetFile</span><span class="p">(</span><span class="kt">string</span> <span class="n">virtualPath</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">IsPathVirtual</span><span class="p">(</span><span class="n">virtualPath</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                <span class="n">VirtualFile</span> <span class="n">file</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TextImageVirtualFile</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">virtualPath</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">file</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">Previous</span><span class="p">.</span><span class="n">GetFile</span><span class="p">(</span><span class="n">virtualPath</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>this is necessary so you don’t have to have all-or nothing solution (your provider either serving everything the user requests or not being accessible at all) and honestly I’ve spent quite a while before I found out that… I was just being silly – thinking the technology by itself will resolve that ;)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span> <span class="kd">override</span> <span class="n">VirtualFile</span> <span class="n">GetFile</span><span class="p">(</span><span class="kt">string</span> <span class="n">virtualPath</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">IsPathVirtual</span><span class="p">(</span><span class="n">virtualPath</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">                <span class="n">VirtualFile</span> <span class="n">file</span> <span class="p">=</span> <span class="k">new</span> <span class="n">TextImageVirtualFile</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">virtualPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">                <span class="k">return</span> <span class="n">file</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">                <span class="k">return</span> <span class="n">Previous</span><span class="p">.</span><span class="n">GetFile</span><span class="p">(</span><span class="n">virtualPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>this is necessary so you don’t have to have all-or nothing solution (your provider either serving everything the user requests or not being accessible at all) and honestly I’ve spent quite a while before I found out that… I was just being silly – thinking the technology by itself will resolve that ;)</p>
 <p>If your Virtual path provider does not actually implement directories you don’t have to make the very provider to do a lot of complicated things. you are perfectly fine to limit the implementation to providing a custom constructor so that EPiServer passes you the configuration data and a couple of methods to tell whether a file is what you want to handle or not</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// this one is actually really cool - whatever values you set in your web.config 
-</span></span><span class="line"><span class="cl">// will be passed to you in the collection so you can really make your VPP // as configurable as necessary
-</span></span><span class="line"><span class="cl">public TextImageVirtualPathProvider(string name, NameValueCollection configAttributes)
-</span></span><span class="line"><span class="cl">// This one resolves if the file can be generated
-</span></span><span class="line"><span class="cl">public override bool FileExists(string virtualPath) { /* ... */ }
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">// Pretty much only passes the info that directory was not found 
-</span></span><span class="line"><span class="cl">// found if the virtual path matches a path that we should handle
-</span></span><span class="line"><span class="cl">public override bool DirectoryExists(string virtualDir) {  /* ... */  }
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">// Retrieves the virtual file that generates the image if the
-</span></span><span class="line"><span class="cl">// Virtual path matches our pattern or disregards the request if it doesn&#39;t
-</span></span><span class="line"><span class="cl">public override VirtualFile GetFile(string virtualPath) {  /* ... */  }
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">// Again this is only a pass through method as we don&#39;t support directories
-</span></span><span class="line"><span class="cl">public override VirtualDirectory GetDirectory(string virtualDir) {  /* ... */ }
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now that we have ASP passing the request to us we need to wonder how to format the request in a way that is intuitive to the user, I wanted the URL to be straightforward and follow the path of EPiServer’s friendly URL-S so that they are easily formed by editors. So how about:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">// this one is actually really cool - whatever values you set in your web.config 
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">// will be passed to you in the collection so you can really make your VPP // as configurable as necessary
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">public TextImageVirtualPathProvider(string name, NameValueCollection configAttributes)
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">// This one resolves if the file can be generated
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">public override bool FileExists(string virtualPath) { /* ... */ }
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">// Pretty much only passes the info that directory was not found 
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">// found if the virtual path matches a path that we should handle
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">public override bool DirectoryExists(string virtualDir) {  /* ... */  }
+</span></span><span class="line"><span class="ln">10</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">11</span><span class="cl">// Retrieves the virtual file that generates the image if the
+</span></span><span class="line"><span class="ln">12</span><span class="cl">// Virtual path matches our pattern or disregards the request if it doesn&#39;t
+</span></span><span class="line"><span class="ln">13</span><span class="cl">public override VirtualFile GetFile(string virtualPath) {  /* ... */  }
+</span></span><span class="line"><span class="ln">14</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">15</span><span class="cl">// Again this is only a pass through method as we don&#39;t support directories
+</span></span><span class="line"><span class="ln">16</span><span class="cl">public override VirtualDirectory GetDirectory(string virtualDir) {  /* ... */ }
+</span></span></code></pre></div><p>Now that we have ASP passing the request to us we need to wonder how to format the request in a way that is intuitive to the user, I wanted the URL to be straightforward and follow the path of EPiServer’s friendly URL-S so that they are easily formed by editors. So how about:</p>
 <p><a href="http://my.server.com/color/font-name/font-size/The%20text%20i%20want%20toprint.gif">http://my.server.com/color/font-name/font-size/The%20text%20i%20want%20to%20print.gif</a></p>
 <p>Ok.. well…, that won’t fly for GIFs - the font will be plain ugly if I don’t use antialiasing and if I do I will have an ugly black background underneath it. The solution to that would be using translucent PNG (which the VPP supports) but IE6 does not support those with transparency without ugly hacks. So I need to replace the blacks with a hint so that it generates a background colour when it merges the background with the font for antialiasing. For the sake of this article let’s assume it was an easy switch (IT WASN’T!) and let’s extend the URL to:</p>
 <p><a href="http://my.server.com/color/antialias-hint-color/font-name/font-size/the-text-i-want-to-print.gif">http://my.server.com/color/antialias-hint-color/font-name/font-size/The%20text%20i%20want%20to%20print.gif</a></p>
@@ -286,53 +250,27 @@
 <h2></h2>
 <h2 id="for-the-curious">For the curious</h2>
 <p>The final string format matching regular expression looks as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Regex</span> <span class="n">regex</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Regex</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="s">@&#34;^(?&lt;colour&gt;                  # The first match - starting form the beginning of the string    ([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[a-zA-Z]*))   # match either a 6 hex digit string or a name of a known color - this is for text color
-</span></span></span><span class="line"><span class="cl"><span class="s">    /                             # now we expect the first separating slash
-</span></span></span><span class="line"><span class="cl"><span class="s">    (?&lt;hint&gt;                      # next match group is about background hint for antialiasing
-</span></span></span><span class="line"><span class="cl"><span class="s">    ([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[a-zA-Z]*))   # match either a 3 or 6 hex digit string or a name of a known color - this is for antialiasing color hint
-</span></span></span><span class="line"><span class="cl"><span class="s">    /                             # again separating slash
-</span></span></span><span class="line"><span class="cl"><span class="s">    (?&lt;font&gt;[\w\s]*)              # font family name - accept white spaces
-</span></span></span><span class="line"><span class="cl"><span class="s">    /                             # yet another separating slash
-</span></span></span><span class="line"><span class="cl"><span class="s">    (?&lt;size&gt;[\d]{0,3})            # font size 
-</span></span></span><span class="line"><span class="cl"><span class="s">    /                             # oh noes! another slash!
-</span></span></span><span class="line"><span class="cl"><span class="s">    ((?&lt;style&gt;[BIUSRN\s]*)        # font style Bold, Italic, Underline, Strikethrough
-</span></span></span><span class="line"><span class="cl"><span class="s">    /){0,1}                       # this group is optional.
-</span></span></span><span class="line"><span class="cl"><span class="s">    ((?&lt;transform&gt;[\w]*)          # transformation name as specified with System.Drawing.RotateFlipType - this group is optional
-</span></span></span><span class="line"><span class="cl"><span class="s">    /){0,1}                       # this group is optional too.
-</span></span></span><span class="line"><span class="cl"><span class="s">    (?&lt;text&gt;[\s\S]*[^\.])         # the text to render - basically anything but a dot - use relacement strings for dots
-</span></span></span><span class="line"><span class="cl"><span class="s">    [\.]                          # separating dot - now that&#39;s a nice change!
-</span></span></span><span class="line"><span class="cl"><span class="s">    (?&lt;extension&gt;(png|gif))       # the file extension - so that we know whether to generate png or gif
-</span></span></span><span class="line"><span class="cl"><span class="s">    $                             # everything comes to an end  
-</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">RegexOptions</span><span class="p">.</span><span class="n">Compiled</span> <span class="p">|</span> <span class="n">RegexOptions</span><span class="p">.</span><span class="n">IgnoreCase</span> <span class="p">|</span> <span class="n">RegexOptions</span><span class="p">.</span><span class="n">IgnorePatternWhitespace</span> <span class="p">|</span> <span class="n">RegexOptions</span><span class="p">.</span><span class="n">CultureInvariant</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="usability-concerns">Usability concerns</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">Regex</span> <span class="n">regex</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Regex</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="s">@&#34;^(?&lt;colour&gt;                  # The first match - starting form the beginning of the string    ([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[a-zA-Z]*))   # match either a 6 hex digit string or a name of a known color - this is for text color
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="s">    /                             # now we expect the first separating slash
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="s">    (?&lt;hint&gt;                      # next match group is about background hint for antialiasing
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="s">    ([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[a-zA-Z]*))   # match either a 3 or 6 hex digit string or a name of a known color - this is for antialiasing color hint
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="s">    /                             # again separating slash
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="s">    (?&lt;font&gt;[\w\s]*)              # font family name - accept white spaces
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="s">    /                             # yet another separating slash
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="s">    (?&lt;size&gt;[\d]{0,3})            # font size 
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="s">    /                             # oh noes! another slash!
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="s">    ((?&lt;style&gt;[BIUSRN\s]*)        # font style Bold, Italic, Underline, Strikethrough
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="s">    /){0,1}                       # this group is optional.
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="s">    ((?&lt;transform&gt;[\w]*)          # transformation name as specified with System.Drawing.RotateFlipType - this group is optional
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="s">    /){0,1}                       # this group is optional too.
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="s">    (?&lt;text&gt;[\s\S]*[^\.])         # the text to render - basically anything but a dot - use relacement strings for dots
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="s">    [\.]                          # separating dot - now that&#39;s a nice change!
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="s">    (?&lt;extension&gt;(png|gif))       # the file extension - so that we know whether to generate png or gif
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="s">    $                             # everything comes to an end  
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="s">    &#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="n">RegexOptions</span><span class="p">.</span><span class="n">Compiled</span> <span class="p">|</span> <span class="n">RegexOptions</span><span class="p">.</span><span class="n">IgnoreCase</span> <span class="p">|</span> <span class="n">RegexOptions</span><span class="p">.</span><span class="n">IgnorePatternWhitespace</span> <span class="p">|</span> <span class="n">RegexOptions</span><span class="p">.</span><span class="n">CultureInvariant</span><span class="p">);</span>
+</span></span></code></pre></div><h2 id="usability-concerns">Usability concerns</h2>
 <p>The Colours can be provided as both named Colours (red, green, etc..) or html hex formatted colours (e.g. ff00bb, fob, fff, badfoo) both 6 and 3 hex digits strings are accepted.</p>
 <p>The URL accepts spaces, and whatever text string that cannot be passed as a part of the url or is invalidated by EPiServer can be escaped by defining a token for it in web.config so for example as you can see in the above url the end of line “\n” character has been escaped into $eol$.</p>
 <p>Obviously the font selection is limited to what is installed on your server.</p>

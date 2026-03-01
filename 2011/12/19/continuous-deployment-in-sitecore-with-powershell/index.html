@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -205,154 +205,50 @@
       <div class="entry-content">
         <p>A few days back a <a href="http://stackoverflow.com/users/3205/skolima">budy</a> from our Sitecore team has alerted me to this interesting question on <a href="http://stackoverflow.com/questions/8414482/is-it-possible-to-build-a-sitecore-data-package-from-command-line-or-outside-of">StackOverflow</a> which asks for automation of content promotion from one Sitecore instance to another. He suggested - and rightly so &ndash; that the <a href="http://trac.sitecore.net/SitecorePowershellConsole">PowerShell Console</a> could be used in that scenario. While this was always possible by simply writing it as a PowerShell code the latest version of the console added a few commandlets making building packages much easier.</p>
 <p>The easiest approach is to build the package visually in the package designer, save it and then simply use the console to read it and generate the installation zip like:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">get</span><span class="o">-</span><span class="kr">package</span> <span class="s2">&#34;powershell console.xml&#34;</span> <span class="sb">`
-</span></span></span><span class="line"><span class="cl"><span class="sb">  | Export-Package -FileName &#34;PowerShell Console.zip&#34; -Zip
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>That&rsquo;s fine in most cases but if you have some more complex scenarios or want to generate some custom packages &ndash; you might want to generate packages directly in PowerShell.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="ln">1</span><span class="cl"><span class="nx">get</span><span class="o">-</span><span class="kr">package</span> <span class="s2">&#34;powershell console.xml&#34;</span> <span class="sb">`
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="sb">  | Export-Package -FileName &#34;PowerShell Console.zip&#34; -Zip
+</span></span></span></code></pre></div><p>That&rsquo;s fine in most cases but if you have some more complex scenarios or want to generate some custom packages &ndash; you might want to generate packages directly in PowerShell.</p>
 <p>To Create a Package you simply use:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span><span class="kn">package</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">new</span><span class="o">-</span><span class="kn">package</span><span class="w"> </span><span class="s">&#34;Test Package&#34;</span><span class="p">;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now that you have that package you might want to add some files and items to it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="ln">1</span><span class="cl"><span class="err">$</span><span class="kn">package</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">new</span><span class="o">-</span><span class="kn">package</span><span class="w"> </span><span class="s">&#34;Test Package&#34;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>Now that you have that package you might want to add some files and items to it.</p>
 <p>Let&rsquo;s add for example our item templates by querying the master database and creating a dynamic item source:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$TemplatesSource</span> <span class="p">=</span> <span class="nb">get-childitem</span> <span class="s2">&#34;master:/templates/Cognifide&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="nb">New-ItemSource</span> <span class="s2">&#34;Cognifide Templates&#34;</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And subsequently add it to our new package:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$package.Sources.Add($TemplatesSource);
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>While that by itself is fairly useful, the really cool part is that you have a full flexibility of PowerShell at your disposal when you create a source with static items. Let&rsquo;s say you want to add all items of template ?Article Template? that reside anywhere under your ?home? node &ndash; now that would require quite a bit of clicking in the Package Designer, but is trivial with the PowerShell Console:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$ArticlesSource</span> <span class="p">=</span> <span class="nb">get-childitem</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">/</span><span class="nb">about-us</span><span class="p">/*</span> <span class="n">-recurse</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-match</span> <span class="s2">&#34;ArticleTemplate&#34;</span> <span class="p">}</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="nb">New-ExplicitItemSource</span> <span class="s2">&#34;Cognifide Articles&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$package</span><span class="p">.</span><span class="py">Sources</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$ArticlesSource</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can specify any automation or filter you can think of to your <strong>Get-ChildItem</strong>, and you really don&rsquo;t have to skimp on the number of data sources &ndash; after all you can re-generate your package at any time!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$TemplatesSource</span> <span class="p">=</span> <span class="nb">get-childitem</span> <span class="s2">&#34;master:/templates/Cognifide&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="p">|</span> <span class="nb">New-ItemSource</span> <span class="s2">&#34;Cognifide Templates&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>And subsequently add it to our new package:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$package.Sources.Add($TemplatesSource);
+</span></span></code></pre></div><p>While that by itself is fairly useful, the really cool part is that you have a full flexibility of PowerShell at your disposal when you create a source with static items. Let&rsquo;s say you want to add all items of template ?Article Template? that reside anywhere under your ?home? node &ndash; now that would require quite a bit of clicking in the Package Designer, but is trivial with the PowerShell Console:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$ArticlesSource</span> <span class="p">=</span> <span class="nb">get-childitem</span> <span class="n">master</span><span class="err">:</span><span class="p">/</span><span class="n">content</span><span class="p">/</span><span class="n">home</span><span class="p">/</span><span class="nb">about-us</span><span class="p">/*</span> <span class="n">-recurse</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="p">|</span> <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-match</span> <span class="s2">&#34;ArticleTemplate&#34;</span> <span class="p">}</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="p">|</span> <span class="nb">New-ExplicitItemSource</span> <span class="s2">&#34;Cognifide Articles&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="nv">$package</span><span class="p">.</span><span class="py">Sources</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$ArticlesSource</span><span class="p">);</span>
+</span></span></code></pre></div><p>You can specify any automation or filter you can think of to your <strong>Get-ChildItem</strong>, and you really don&rsquo;t have to skimp on the number of data sources &ndash; after all you can re-generate your package at any time!</p>
 <p>Similarly you can do this to the files on disk. Let&rsquo;s say &ndash; you want to add all .aspx, .ascx and .ashx files, just to make sure your deployment features all the latest code and for the sake of this example let&rsquo;s assume your UI elements are located in the <em>Layouts</em> folder under your web application:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$LayoutsPath</span> <span class="p">=</span> <span class="nv">$AppPath</span><span class="p">+</span><span class="s2">&#34;layouts\*&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$Layouts</span> <span class="p">=</span> <span class="nb">get-childitem</span> <span class="nv">$LayoutsPath</span> <span class="n">-include</span> <span class="s2">&#34;*.as?x&#34;</span> <span class="n">-recurse</span> <span class="n">-force</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="p">|</span> <span class="nb">New-ExplicitFileSource</span> <span class="s2">&#34;My Layouts&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$package</span><span class="p">.</span><span class="py">Sources</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$Layouts</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Easy enough? now let&rsquo;s add everything that is within the bin folder as a dynamic file source:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$BinFolder</span> <span class="p">=</span> <span class="nb">New-FileSource</span> <span class="s2">&#34;Bin Folder&#34;</span> <span class="n">-Root</span> <span class="s2">&#34;/bin&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$package</span><span class="p">.</span><span class="py">Sources</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$BinFolder</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>That is it really? you may want to specify your package metadata which you would do like:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$package.Metadata.Author = &#34;Auto generated &#34; + `
-</span></span><span class="line"><span class="cl">  [DateTime]::Now.ToShortDateString();
-</span></span><span class="line"><span class="cl">$package.Metadata.Comment = &#34;Isn&#39;t it cool?!&#34;;
-</span></span><span class="line"><span class="cl">$package.Metadata.Publisher = &#34;Cognifide&#34;;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>and then save it for later opening in package designer:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span><span class="kn">package</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">Export</span><span class="o">-</span><span class="nx">Package</span><span class="w"> </span><span class="o">-</span><span class="nx">FileName</span><span class="w"> </span><span class="s">&#34;test package.xml&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>alternatively you can open such package as specified earlier</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">get</span><span class="o">-</span><span class="kn">package</span><span class="w"> </span><span class="s">&#34;test package.xml&#34;</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>if you ever wanted to add more sources to it or export as a zip file to be imported with the assets in your target environment:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">$</span><span class="kn">package</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">Export</span><span class="o">-</span><span class="nx">Package</span><span class="w"> </span><span class="o">-</span><span class="nx">FileName</span><span class="w"> </span><span class="s">&#34;test package.zip&#34;</span><span class="w"> </span><span class="o">-</span><span class="nx">Zip</span><span class="w">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>? now on your target machine you need to upload your package to the Data\Packages folder. But then to install it all it takes is:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Import-Package &#34;test package.zip&#34;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Obviously all of it can be hooked to ribbon, context items, or be scheduled? but I get ahead of myself&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$LayoutsPath</span> <span class="p">=</span> <span class="nv">$AppPath</span><span class="p">+</span><span class="s2">&#34;layouts\*&#34;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$Layouts</span> <span class="p">=</span> <span class="nb">get-childitem</span> <span class="nv">$LayoutsPath</span> <span class="n">-include</span> <span class="s2">&#34;*.as?x&#34;</span> <span class="n">-recurse</span> <span class="n">-force</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="p">|</span> <span class="nb">New-ExplicitFileSource</span> <span class="s2">&#34;My Layouts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nv">$package</span><span class="p">.</span><span class="py">Sources</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$Layouts</span><span class="p">);</span>
+</span></span></code></pre></div><p>Easy enough? now let&rsquo;s add everything that is within the bin folder as a dynamic file source:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$BinFolder</span> <span class="p">=</span> <span class="nb">New-FileSource</span> <span class="s2">&#34;Bin Folder&#34;</span> <span class="n">-Root</span> <span class="s2">&#34;/bin&#34;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$package</span><span class="p">.</span><span class="py">Sources</span><span class="p">.</span><span class="py">Add</span><span class="p">(</span><span class="nv">$BinFolder</span><span class="p">);</span>
+</span></span></code></pre></div><p>That is it really? you may want to specify your package metadata which you would do like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$package.Metadata.Author = &#34;Auto generated &#34; + `
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  [DateTime]::Now.ToShortDateString();
+</span></span><span class="line"><span class="ln">3</span><span class="cl">$package.Metadata.Comment = &#34;Isn&#39;t it cool?!&#34;;
+</span></span><span class="line"><span class="ln">4</span><span class="cl">$package.Metadata.Publisher = &#34;Cognifide&#34;;
+</span></span></code></pre></div><p>and then save it for later opening in package designer:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="ln">1</span><span class="cl"><span class="err">$</span><span class="kn">package</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">Export</span><span class="o">-</span><span class="nx">Package</span><span class="w"> </span><span class="o">-</span><span class="nx">FileName</span><span class="w"> </span><span class="s">&#34;test package.xml&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>alternatively you can open such package as specified earlier</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="ln">1</span><span class="cl"><span class="nx">get</span><span class="o">-</span><span class="kn">package</span><span class="w"> </span><span class="s">&#34;test package.xml&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>if you ever wanted to add more sources to it or export as a zip file to be imported with the assets in your target environment:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="ln">1</span><span class="cl"><span class="err">$</span><span class="kn">package</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">Export</span><span class="o">-</span><span class="nx">Package</span><span class="w"> </span><span class="o">-</span><span class="nx">FileName</span><span class="w"> </span><span class="s">&#34;test package.zip&#34;</span><span class="w"> </span><span class="o">-</span><span class="nx">Zip</span><span class="w">
+</span></span></span></code></pre></div><p>? now on your target machine you need to upload your package to the Data\Packages folder. But then to install it all it takes is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Import-Package &#34;test package.zip&#34;
+</span></span></code></pre></div><p>Obviously all of it can be hooked to ribbon, context items, or be scheduled? but I get ahead of myself&hellip;</p>
 <h2 id="so-how-does-it-all-relate-to-continuous-deployment">So how does it all relate to continuous deployment?</h2>
 <p>All of this can be completely automated, all you need to do is create a Script item as described in <a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">one of my previous posts</a> and call the PowerShell execution URL referencing your script from your CruiseControl server or whichever continuous integration product you use in a fashion similar to:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://myhost/Console/Layouts/PowerShellResults.aspx?scriptId={1680E211-BD28-49BE-82FB-DA7232814C62}&amp;scriptDb=web
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You need to deal with the fact that you are most probably not logged in with your continuous delivery environment &ndash; in this case probably best approach is to use the web database or the script item my turn out to be unavailable to you and the script will not execute.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">http://myhost/Console/Layouts/PowerShellResults.aspx?scriptId={1680E211-BD28-49BE-82FB-DA7232814C62}&amp;scriptDb=web
+</span></span></code></pre></div><p>You need to deal with the fact that you are most probably not logged in with your continuous delivery environment &ndash; in this case probably best approach is to use the web database or the script item my turn out to be unavailable to you and the script will not execute.</p>
 <p>Now in your source environment your script will create the package and upload it to an FTP server (there is plenty of ways to do this from PowerShell? you can find a <a href="http://stackoverflow.com/questions/1867385/upload-files-with-ftp-using-powershell">couple of samples on Stack Overflow</a>) and subsequently <a href="http://stackoverflow.com/questions/508565/how-to-make-an-authenticated-web-request-in-powershell">call a second part of the script on the target server</a>.</p>
 <p>On the Target server &ndash; a complementary script will be executed in the similar fashion &ndash; by the originating server and if you don&rsquo;t have direct access to the file on the FTP server you&rsquo;ve just uploaded &ndash; you can download it and import the package.</p>
 <p>Now if you integrate the script with a ribbon in Content Editor on the source server (<a href="/2011/11/24/extending-sitecore-ribbon-with-powershell-scripts/">like described in the previous post</a>) you can have a one-click-deployment solution on your dev machine, but then the REALLY cool part would be to integrate it with the context menu (<a href="/2011/11/22/context-powershell-scripts-for-sitecore/">as described in this post</a>) and be able to push parts of the site to production with a single click! Not to mention your nightlies can really be nightlies if you do it using the <a href="/2011/11/29/powershell-driven-sitecore-scheduled-tasks/">scheduled tasks integration</a>.</p>

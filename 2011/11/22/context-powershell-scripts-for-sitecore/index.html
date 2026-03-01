@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -227,15 +227,8 @@
 <p>Create a context menu item of template <em><strong>/sitecore/templates/System/Menus/Menu item</strong></em> within the <em><strong>/sitecore/content/Applications/Content Editor/Context Menues/Default/PowerShell/</strong></em> branch in the core database. If you have more than just a few scripts, a more elaborate structure might need to be created to group your scripts by functionality/purpose.</p>
 <h3 id="3-bind-it-to-your-script-to-the-menu-item">3. Bind it to your script to the menu item</h3>
 <p>Within the menu item you&rsquo;ve just created edit the <em><strong>Message</strong></em> field and bind the script to it using the following pattern:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">item:executescript(id=$Target,script={1680E211-BD28-49BE-82FB-DA7232814C62},scriptDb=core)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>where the <em><strong>script</strong></em> guid is the ID of your script and the <em><strong>scriptDb</strong></em> is the database the script is located in.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">item:executescript(id=$Target,script={1680E211-BD28-49BE-82FB-DA7232814C62},scriptDb=core)
+</span></span></code></pre></div><p>where the <em><strong>script</strong></em> guid is the ID of your script and the <em><strong>scriptDb</strong></em> is the database the script is located in.</p>
 <p>Since this is a simple Sitecore command &ndash; similarly you can use the PowerShell functionality to expose your script on any ribbon or other kinds of menus!</p>
 <p>That&rsquo;s it really, and since you have pretty much all of the Sitecore API at your disposal you can hotfix a great deal of missing functionality without ever logging into Visual Studio, how is that not cool?!</p>
 <p>On a final note? you might want to protect scripts that might create a heavy load on your site or do anything critical on your database from some users, but that&rsquo;s a matter of simple permissions setting on your menu items.</p>

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -199,144 +199,69 @@
 While our website was running on Sitecore 6.4 this problem was already solved and we have implemented something akin to the solution from <a href="http://sitecore.jeroenveldhuis.nl/post/2011/02/24/Obtaining-visitor-IP-address-in-OMS-behind-load-balancer.aspx">Jeroen&rsquo;s blog</a>. Meanwhile Sitecore has reimplemented its analytics engine from the grounds up in version 6.5, and I should say they did a great job on that. However in the process the API for the analytics has changed to a degree that made our current solution obsolete, basically what we got logged looked as follows:</p>
 <p><a href="/images/BrokenAnalytics.png"><img src="/images/BrokenAnalytics_thumb-300x202.png" alt="BrokenAnalytics" title="BrokenAnalytics" class="aligncenter" width="300" height="202" /></a></p>
 <p>Unfortunately, and I suspect it&rsquo;s because 6.5 is not a recommended version yet, this is not yet very well documented. Standing on the shoulders of giants, I&rsquo;ve found a hint on the solution on <a href="http://www.sitecore.net/Community/Technical-Blogs/John-West-Sitecore-Blog/Posts/2011/05/Spoof-an-IP-Address-to-Test-GeoIP-with-the-Sitecore-Customer-Engagement-Platform.aspx">John West&rsquo;s</a> blog. However after implementing this &ndash; the default report still showed the same? no luck? so I started looking in the analytics database. and found that the data in fact is not kept on the <strong>Page Request</strong> level but rather on the <strong>Visit</strong> level. Even better(!)? So there is no need for me to set it on every call to the server like before but instead I can dig into the improved analytics pipeline and plug only once when the first call to a server is made by the visitor. For that purpose I need to inherit a CreateVisitProcessor class and override the following method:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">CreateVisitArgs</span> <span class="n">args</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The body of the method is somewhat similar to John&rsquo;s implementation however for the report to show proper visitor ISP/company name you need to overwrite the RDNS field of the VisitRow object  - IP/GeoIP is not enough.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">CreateVisitArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span></code></pre></div><p>The body of the method is somewhat similar to John&rsquo;s implementation however for the report to show proper visitor ISP/company name you need to overwrite the RDNS field of the VisitRow object  - IP/GeoIP is not enough.
 The body of my class looks as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">headers</span> <span class="p">=</span> <span class="p">{</span> <span class="s">&#34;true-client-ip&#34;</span><span class="p">,</span> <span class="s">&#34;X-Forwarded-For&#34;</span> <span class="p">};</span>
-</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">CreateVisitArgs</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">VisitorDataSet</span><span class="p">.</span><span class="n">VisitsRow</span> <span class="n">visit</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Visit</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">HttpRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Request</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">visit</span> <span class="p">==</span> <span class="kc">null</span> <span class="p">||</span> <span class="n">visit</span><span class="p">.</span><span class="n">Ip</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">forwardedFor</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">headerUsed</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// looking through all the headers where the true client IPs might be sent</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// the headers are ordered from highest to lowest priority</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">string</span> <span class="n">header</span> <span class="k">in</span> <span class="n">headers</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">forwardedFor</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="n">header</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">forwardedFor</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">headerUsed</span> <span class="p">=</span> <span class="n">header</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">forwardedFor</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// do the best effort for parsing x-forwarded-for</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// we need to check for multiple coma separates addresses</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// as there can be multiple proxies between the server and the client</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// this might not be 100% reliable as soem proxies and CDN&#39;s don&#39;t</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// append their IP&#39;s in the back but rather put themselves in the front</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">rdns</span> <span class="p">=</span> <span class="n">forwardedFor</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="sc">&#39;,&#39;</span><span class="p">).</span><span class="n">First</span><span class="p">().</span><span class="n">Trim</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">byte</span><span class="p">[]</span> <span class="n">bForwardedFor</span> <span class="p">=</span> <span class="n">rdns</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="sc">&#39;.&#39;</span><span class="p">).</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="kt">byte</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">p</span><span class="p">)).</span><span class="n">ToArray</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">proxyIp</span> <span class="p">=</span> <span class="n">visit</span><span class="p">.</span><span class="n">Ip</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">visit</span><span class="p">.</span><span class="n">GeoIp</span> <span class="p">=</span> <span class="n">Tracker</span><span class="p">.</span><span class="n">Visitor</span><span class="p">.</span><span class="n">DataContext</span><span class="p">.</span><span class="n">GetGeoIp</span><span class="p">(</span><span class="n">bForwardedFor</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">visit</span><span class="p">.</span><span class="n">Ip</span> <span class="p">=</span> <span class="n">bForwardedFor</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c1">// the following needs to be set for the reverse dns lookup done by Sitecore</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// be performed on the right IP</span>
-</span></span><span class="line"><span class="cl">        <span class="n">visit</span><span class="p">.</span><span class="n">RDNS</span> <span class="p">=</span> <span class="n">rdns</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c1">// feel free to eliminate that or change the default logging level to Debug</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// to stop it from poluting your logs</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Sitecore</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Log</span><span class="p">.</span><span class="n">Info</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">            <span class="s">&#34;Proxy overridden IP address: original [{0}.{1}.{2}.{3}] &#34;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl">            <span class="s">&#34;replaced by [{4}] from header &#39;{5}&#39;.&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">proxyIp</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="n">proxyIp</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">proxyIp</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">proxyIp</span><span class="p">[</span><span class="m">3</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">            <span class="n">forwardedFor</span><span class="p">,</span> <span class="n">headerUsed</span><span class="p">),</span> <span class="n">visit</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now you may wonder why do I use more than one signature? The problem is that both CDN-s and proxy servers have a tendency to abuse the &ldquo;x-forwarded-for&rdquo; header, for example some append their IP in the beginning rather than append it as a last. This, together with potentially having a number of proxies on the way is why we usually configure the CDN instances for our clients to put the real user IP address in an additional field that we can reliably parse.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">headers</span> <span class="p">=</span> <span class="p">{</span> <span class="s">&#34;true-client-ip&#34;</span><span class="p">,</span> <span class="s">&#34;X-Forwarded-For&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">public</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">CreateVisitArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">VisitorDataSet</span><span class="p">.</span><span class="n">VisitsRow</span> <span class="n">visit</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Visit</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">HttpRequest</span> <span class="n">request</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">visit</span> <span class="p">==</span> <span class="kc">null</span> <span class="p">||</span> <span class="n">visit</span><span class="p">.</span><span class="n">Ip</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="kt">string</span> <span class="n">forwardedFor</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="kt">string</span> <span class="n">headerUsed</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="c1">// looking through all the headers where the true client IPs might be sent</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="c1">// the headers are ordered from highest to lowest priority</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">string</span> <span class="n">header</span> <span class="k">in</span> <span class="n">headers</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="n">forwardedFor</span> <span class="p">=</span> <span class="n">request</span><span class="p">.</span><span class="n">Headers</span><span class="p">[</span><span class="n">header</span><span class="p">];</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">forwardedFor</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">            <span class="n">headerUsed</span> <span class="p">=</span> <span class="n">header</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="k">if</span> <span class="p">(!</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">forwardedFor</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="c1">// do the best effort for parsing x-forwarded-for</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="c1">// we need to check for multiple coma separates addresses</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">        <span class="c1">// as there can be multiple proxies between the server and the client</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">        <span class="c1">// this might not be 100% reliable as soem proxies and CDN&#39;s don&#39;t</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">        <span class="c1">// append their IP&#39;s in the back but rather put themselves in the front</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        <span class="kt">string</span> <span class="n">rdns</span> <span class="p">=</span> <span class="n">forwardedFor</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="sc">&#39;,&#39;</span><span class="p">).</span><span class="n">First</span><span class="p">().</span><span class="n">Trim</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="kt">byte</span><span class="p">[]</span> <span class="n">bForwardedFor</span> <span class="p">=</span> <span class="n">rdns</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="sc">&#39;.&#39;</span><span class="p">).</span><span class="n">Select</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="kt">byte</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">p</span><span class="p">)).</span><span class="n">ToArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="kt">var</span> <span class="n">proxyIp</span> <span class="p">=</span> <span class="n">visit</span><span class="p">.</span><span class="n">Ip</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="n">visit</span><span class="p">.</span><span class="n">GeoIp</span> <span class="p">=</span> <span class="n">Tracker</span><span class="p">.</span><span class="n">Visitor</span><span class="p">.</span><span class="n">DataContext</span><span class="p">.</span><span class="n">GetGeoIp</span><span class="p">(</span><span class="n">bForwardedFor</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">        <span class="n">visit</span><span class="p">.</span><span class="n">Ip</span> <span class="p">=</span> <span class="n">bForwardedFor</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">        
+</span></span><span class="line"><span class="ln">40</span><span class="cl">        <span class="c1">// the following needs to be set for the reverse dns lookup done by Sitecore</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">        <span class="c1">// be performed on the right IP</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        <span class="n">visit</span><span class="p">.</span><span class="n">RDNS</span> <span class="p">=</span> <span class="n">rdns</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">        
+</span></span><span class="line"><span class="ln">44</span><span class="cl">        <span class="c1">// feel free to eliminate that or change the default logging level to Debug</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">        <span class="c1">// to stop it from poluting your logs</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="n">Sitecore</span><span class="p">.</span><span class="n">Diagnostics</span><span class="p">.</span><span class="n">Log</span><span class="p">.</span><span class="n">Info</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">            <span class="s">&#34;Proxy overridden IP address: original [{0}.{1}.{2}.{3}] &#34;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">            <span class="s">&#34;replaced by [{4}] from header &#39;{5}&#39;.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">            <span class="n">proxyIp</span><span class="p">[</span><span class="m">0</span><span class="p">],</span> <span class="n">proxyIp</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">proxyIp</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">proxyIp</span><span class="p">[</span><span class="m">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">            <span class="n">forwardedFor</span><span class="p">,</span> <span class="n">headerUsed</span><span class="p">),</span> <span class="n">visit</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Now you may wonder why do I use more than one signature? The problem is that both CDN-s and proxy servers have a tendency to abuse the &ldquo;x-forwarded-for&rdquo; header, for example some append their IP in the beginning rather than append it as a last. This, together with potentially having a number of proxies on the way is why we usually configure the CDN instances for our clients to put the real user IP address in an additional field that we can reliably parse.
 Pawel Cegielski (our local Cognifide&rsquo;s CDN guru) will writing more about that <a href="http://hacqing.com/2011/10/11/sitecore-analytics-and-akamai/">on his blog</a>.
 Now to integrate it with the Sitecore CreateVisit pipeline add the reference to your class as the first line in the createVisit section of the sitecore.analytics.config file similarly to the following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;createVisit&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;processor</span> <span class="na">type=</span><span class="s">&#34;Cognifide.SiteCore.Framework.Facilities.Analytics.CreateVisitForProxy,Cognifide.SiteCore.Framework&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">    ...
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/createVisit&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Your analytics should now work as if the proxy or CDN was never there&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;createVisit&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nt">&lt;processor</span> <span class="na">type=</span><span class="s">&#34;Cognifide.SiteCore.Framework.Facilities.Analytics.CreateVisitForProxy,Cognifide.SiteCore.Framework&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    ...
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nt">&lt;/createVisit&gt;</span>
+</span></span></code></pre></div><p>Your analytics should now work as if the proxy or CDN was never there&hellip;</p>
 
       </div>
 

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -203,43 +203,22 @@
       <div class="entry-content">
         <p>The PowerShell plugin gets an update once again to support Admin mode script collections in addition to the context scripts.</p>
 <h2 id="how-to-write-an-admin-mode-script-collections">How to write an Admin mode script collections?</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;ContextScriptCollection&gt;
-</span></span><span class="line"><span class="cl">  &lt;Title&gt;Statistics Scripts&lt;/Title&gt;
-</span></span><span class="line"><span class="cl">  &lt;Description&gt;This script collection ... &lt;/Description&gt;
-</span></span><span class="line"><span class="cl">  &lt;Area&gt;Administration&lt;/Area&gt;
-</span></span><span class="line"><span class="cl">  &lt;Scripts&gt;
-</span></span><span class="line"><span class="cl">    &lt;ContextScript&gt;
-</span></span><span class="line"><span class="cl">      &lt;Title&gt;Restart Application&lt;/Title&gt;
-</span></span><span class="line"><span class="cl">      &lt;Description&gt;The script restarts this instance of EPiServer...&lt;/Warning&gt;
-</span></span><span class="line"><span class="cl">      &lt;Script&gt;Restart-Application&lt;/Script&gt;
-</span></span><span class="line"><span class="cl">      &lt;Icon&gt;/App_Themes/Default/Images/Tools/Refresh.gif&lt;/Icon&gt;
-</span></span><span class="line"><span class="cl">      &lt;Groups&gt;
-</span></span><span class="line"><span class="cl">      &lt;/Groups&gt;
-</span></span><span class="line"><span class="cl">    &lt;/ContextScript&gt;
-</span></span><span class="line"><span class="cl">  &lt;/Scripts&gt;
-</span></span><span class="line"><span class="cl">&lt;/ContextScriptCollection&gt;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="where-can-i-access-that">Where can I access that?</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln"> 1</span><span class="cl">&lt;ContextScriptCollection&gt;
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  &lt;Title&gt;Statistics Scripts&lt;/Title&gt;
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  &lt;Description&gt;This script collection ... &lt;/Description&gt;
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  &lt;Area&gt;Administration&lt;/Area&gt;
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  &lt;Scripts&gt;
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    &lt;ContextScript&gt;
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">      &lt;Title&gt;Restart Application&lt;/Title&gt;
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">      &lt;Description&gt;The script restarts this instance of EPiServer...&lt;/Warning&gt;
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">      &lt;Script&gt;Restart-Application&lt;/Script&gt;
+</span></span><span class="line"><span class="ln">10</span><span class="cl">      &lt;Icon&gt;/App_Themes/Default/Images/Tools/Refresh.gif&lt;/Icon&gt;
+</span></span><span class="line"><span class="ln">11</span><span class="cl">      &lt;Groups&gt;
+</span></span><span class="line"><span class="ln">12</span><span class="cl">      &lt;/Groups&gt;
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    &lt;/ContextScript&gt;
+</span></span><span class="line"><span class="ln">14</span><span class="cl">  &lt;/Scripts&gt;
+</span></span><span class="line"><span class="ln">15</span><span class="cl">&lt;/ContextScriptCollection&gt;
+</span></span></code></pre></div><h2 id="where-can-i-access-that">Where can I access that?</h2>
 <p><a href="/images/image.png"><img src="/images/image_thumb.png" alt="image" title="image" class="aligncenter" width="244" height="200" /></a></p>
 <h2 id="additional-changes-in-this-version">Additional changes in this version</h2>
 <p>Scripts now have access to 3 starting predefined variables:</p>

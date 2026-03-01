@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -212,115 +212,58 @@
 </ul>
 <p>Or just run the script and enjoy the glorious cognifide.com page structure reproduced in your Sitecore&hellip; now how cool is THAT!?</p>
 <p>Also&hellip; now that I&rsquo;ve got your attention&hellip; <a href="http://bit.ly/PsConScMplc" title="Cognifide PowerShell Console on Sitecore Marketplace">Cognifide&rsquo;s PowerShell Console 2.0 FINAL is now available on Sitecore Marketplace. Get your copy and&hellip; Happy Scripting!</a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Script configuration</span>
-</span></span><span class="line"><span class="cl"><span class="c"># --------------------</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$sitemapUrl</span> <span class="p">=</span> <span class="s2">&#34;http://www.cognifide.com/sitemap&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$prefix</span> <span class="p">=</span> <span class="s2">&#34;http://www.cognifide.com/&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$postfix</span> <span class="p">=</span> <span class="s2">&#34;.aspx$&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">$createAt</span> <span class="p">=</span> <span class="s2">&#34;master:/content/Home/&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$itemTemplate</span> <span class="p">=</span> <span class="s2">&#34;/templates/Sample/Sample Item&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#                    </span>
-</span></span><span class="line"><span class="cl"><span class="c"># Script starts here </span>
-</span></span><span class="line"><span class="cl"><span class="c"># ------------------                   </span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># function to create items (creates parent recursively if needed)</span>
-</span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">CreateItem</span> <span class="p">([</span><span class="no">string</span><span class="p">]</span><span class="nv">$itemName</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$fullPath</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$createAt</span><span class="s2">\</span><span class="nv">$itemName</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">  <span class="nv">$parentPath</span> <span class="p">=</span> <span class="nb">Split-Path</span> <span class="nv">$itemName</span> <span class="n">-parent</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&#34;</span><span class="nv">$createAt</span><span class="s2">\</span><span class="nv">$parentPath</span><span class="s2">&#34;</span><span class="p">)){</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$parentPath</span><span class="p">.</span><span class="py">Length</span> <span class="o">-gt</span> <span class="mf">2</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">      <span class="n">CreateItem</span> <span class="nv">$parentPath</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&#34;</span><span class="nv">$fullPath</span><span class="s2">&#34;</span><span class="p">)){</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Creating </span><span class="nv">$fullPath</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$item</span> <span class="p">=</span> <span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="nv">$itemTemplate</span> <span class="n">-Name</span> <span class="nv">$itemName</span> <span class="n">-Path</span> <span class="nv">$createAt</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$item</span><span class="p">.</span><span class="s2">&#34;__Display name&#34;</span> <span class="p">=</span> <span class="nv">$itemName</span> <span class="n">-split</span> <span class="s1">&#39;[\\/]&#39;</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">Select </span><span class="n">-last</span> <span class="mf">1</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">      <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="s2">&#34; &#34;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Get the sitemap</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="no">xml</span><span class="p">]</span><span class="nv">$w</span> <span class="p">=</span> <span class="p">(</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(</span><span class="nv">$sitemapUrl</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Get the urls frm the xml</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$locations</span> <span class="p">=</span> <span class="nv">$w</span><span class="p">.</span><span class="py">urlset</span><span class="p">.</span><span class="py">url</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">             <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">loc</span> <span class="o">-match</span> <span class="nv">$prefix</span><span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">             <span class="nb">Select-Object</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">               <span class="n">loc</span><span class="p">,</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">               <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Path&#34;</span><span class="p">;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">                 <span class="n">Expression</span> <span class="p">=</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">loc</span> <span class="o">-replace</span> <span class="nv">$prefix</span><span class="p">,</span><span class="s2">&#34;&#34;</span> <span class="o">-replace</span> <span class="nv">$postfix</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">}}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># send url&#39;s for creation</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$locations</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> 
-</span></span><span class="line"><span class="cl">  <span class="nv">$name</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Path</span><span class="p">.</span><span class="py">Trim</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&#34;</span><span class="nv">$createAt</span><span class="s2">/</span><span class="nv">$name</span><span class="s2">&#34;</span><span class="p">)){</span>
-</span></span><span class="line"><span class="cl">    <span class="n">CreateItem</span> <span class="nv">$name</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Enjoy!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c"># Script configuration</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c"># --------------------</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="nv">$sitemapUrl</span> <span class="p">=</span> <span class="s2">&#34;http://www.cognifide.com/sitemap&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="nv">$prefix</span> <span class="p">=</span> <span class="s2">&#34;http://www.cognifide.com/&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="nv">$postfix</span> <span class="p">=</span> <span class="s2">&#34;.aspx$&#34;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="nv">$createAt</span> <span class="p">=</span> <span class="s2">&#34;master:/content/Home/&#34;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="nv">$itemTemplate</span> <span class="p">=</span> <span class="s2">&#34;/templates/Sample/Sample Item&#34;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="c">#                    </span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c"># Script starts here </span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c"># ------------------                   </span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="c"># function to create items (creates parent recursively if needed)</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">CreateItem</span> <span class="p">([</span><span class="no">string</span><span class="p">]</span><span class="nv">$itemName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">  <span class="nv">$fullPath</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="nv">$createAt</span><span class="s2">\</span><span class="nv">$itemName</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">  <span class="nv">$parentPath</span> <span class="p">=</span> <span class="nb">Split-Path</span> <span class="nv">$itemName</span> <span class="n">-parent</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&#34;</span><span class="nv">$createAt</span><span class="s2">\</span><span class="nv">$parentPath</span><span class="s2">&#34;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$parentPath</span><span class="p">.</span><span class="py">Length</span> <span class="o">-gt</span> <span class="mf">2</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">      <span class="n">CreateItem</span> <span class="nv">$parentPath</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&#34;</span><span class="nv">$fullPath</span><span class="s2">&#34;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="s2">&#34;Creating </span><span class="nv">$fullPath</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="nv">$item</span> <span class="p">=</span> <span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="nv">$itemTemplate</span> <span class="n">-Name</span> <span class="nv">$itemName</span> <span class="n">-Path</span> <span class="nv">$createAt</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="nv">$item</span><span class="p">.</span><span class="s2">&#34;__Display name&#34;</span> <span class="p">=</span> <span class="nv">$itemName</span> <span class="n">-split</span> <span class="s1">&#39;[\\/]&#39;</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">      <span class="nb">Select </span><span class="n">-last</span> <span class="mf">1</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">      <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="s2">&#34; &#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">
+</span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="c"># Get the sitemap</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="p">[</span><span class="no">xml</span><span class="p">]</span><span class="nv">$w</span> <span class="p">=</span> <span class="p">(</span><span class="nb">new-object</span> <span class="n">net</span><span class="p">.</span><span class="n">webclient</span><span class="p">).</span><span class="py">DownloadString</span><span class="p">(</span><span class="nv">$sitemapUrl</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">
+</span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="c"># Get the urls frm the xml</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="nv">$locations</span> <span class="p">=</span> <span class="nv">$w</span><span class="p">.</span><span class="py">urlset</span><span class="p">.</span><span class="py">url</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">             <span class="nb">Where-Object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">loc</span> <span class="o">-match</span> <span class="nv">$prefix</span><span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">             <span class="nb">Select-Object</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">               <span class="n">loc</span><span class="p">,</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">               <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Path&#34;</span><span class="p">;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">                 <span class="n">Expression</span> <span class="p">=</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">loc</span> <span class="o">-replace</span> <span class="nv">$prefix</span><span class="p">,</span><span class="s2">&#34;&#34;</span> <span class="o">-replace</span> <span class="nv">$postfix</span><span class="p">,</span><span class="s2">&#34;&#34;</span><span class="p">}}</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">
+</span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="c"># send url&#39;s for creation</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl"><span class="nv">$locations</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="ln">47</span><span class="cl">  <span class="nv">$name</span> <span class="p">=</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Path</span><span class="p">.</span><span class="py">Trim</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">  <span class="k">if</span><span class="p">(</span><span class="o">-not</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="s2">&#34;</span><span class="nv">$createAt</span><span class="s2">/</span><span class="nv">$name</span><span class="s2">&#34;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">    <span class="n">CreateItem</span> <span class="nv">$name</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Enjoy!</p>
 
       </div>
 

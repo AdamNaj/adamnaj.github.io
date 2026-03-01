@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -202,31 +202,16 @@
 That&rsquo;s extending Sitecore with PowerShell but what about PowerShell itself?
 One of the coolest features introduced in 2.0 is the ability to write your own commandlets. Sure you could always use PowerShell to do it and <a href="http://technet.microsoft.com/en-us/magazine/ff677563.aspx">write commandlets in script</a>. But then the caveat was that you had to attach such commandlets to your own scripts (or put them in the initial script that would have to execute prior to the console). Now I&rsquo;m talking about writing the real commandlets, just like those that come with the PowerShell console itself. Starting from 2.0 the console does not default to only attach commandlets that come with it, but can also scan other assemblies to attach your commandlets. To add your own all you have to do is well.. write them but then? all you have to do is to use the standard Sitecore include mechanism to enable the console to find them.</p>
 <h3 id="including-my-own-commandlets-into-sitecore-powershell-console">Including my own commandlets into Sitecore PowerShell Console</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;powershell&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;commandlets&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;add</span> <span class="na">type=</span><span class="s">&#34;\*, Cognifide.PowerShell&#34;</span> <span class="na">name=</span><span class="s">&#34;Cognifide\_PowerShell\_Commandlets&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/commandlets&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/powershell&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Where the type parameter is just a regular Sitecore type reference with a slight twist &ndash; you can use wildcards in it. So with the above example, the console will scan the Cognifide.PowerShell assembly and allow you to use all the commandlet classes that are tagged appropriately.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nt">&lt;powershell&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">      <span class="nt">&lt;commandlets&gt;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="nt">&lt;add</span> <span class="na">type=</span><span class="s">&#34;\*, Cognifide.PowerShell&#34;</span> <span class="na">name=</span><span class="s">&#34;Cognifide\_PowerShell\_Commandlets&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">      <span class="nt">&lt;/commandlets&gt;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="nt">&lt;/powershell&gt;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>Where the type parameter is just a regular Sitecore type reference with a slight twist &ndash; you can use wildcards in it. So with the above example, the console will scan the Cognifide.PowerShell assembly and allow you to use all the commandlet classes that are tagged appropriately.</p>
 <h3 id="how-to-write-a-commandlet">How to write a commandlet?</h3>
 <p>Fortunately there is a lot of documentation on that subject from both Microsoft and community a few good starters:</p>
 <ul>
@@ -244,83 +229,40 @@ One of the coolest features introduced in 2.0 is the ability to write your own c
 <p>and PowerShell will take care of all of the pipeline processing, parameter handling, binding and so on, you only implement the logic you want your commandlet to perform.
 If you want to make your life even easier the Sitecore Console introduces a Cognifide.PowerShell.Shell.Commands.BaseCommand class that does some of the common tasks you might want to perform like getting the CurrentDrive (Windows Drive or Sitecore Database), learning if your script context is within one of the database (master:\ etc.) IsCurrentDriveSitecore or learning the current full path CurrentPath or getting a Wildcard to verify if a name matches a user-provided wildcard GetWildcardPattern allowing you to write into pipeline only if your object matches a wildcard provided by the user WildcardFilter.
 For example a commandlet that retrieves a user from Sitecore and puts it into pipeline looks like following</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Management.Automation</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Security.Accounts</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.PowerShell.Shell.Commands</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="na">    [Cmdlet(&#34;Get&#34;, &#34;User&#34;, DefaultParameterSetName = &#34;Name&#34;)]</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">GetUserCommand</span> <span class="p">:</span> <span class="n">BaseCommand</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="na">        [Parameter(ValueFromPipeline = true, Position = 0)]</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="na">        [Parameter]</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">SwitchParameter</span> <span class="n">Current</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">ProcessRecord</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">Current</span><span class="p">.</span><span class="n">IsPresent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">WriteObject</span><span class="p">(</span><span class="n">Sitecore</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">User</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">Name</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// from BaseCommand</span>
-</span></span><span class="line"><span class="cl">                <span class="n">WildcardWrite</span><span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="n">UserManager</span><span class="p">.</span><span class="n">GetUsers</span><span class="p">(),</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">else</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">WriteObject</span><span class="p">(</span><span class="n">UserManager</span><span class="p">.</span><span class="n">GetUsers</span><span class="p">(),</span><span class="kc">true</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In this case the commandlet can be used in Powershell as a ?Get-User? as defined in the Cmdlet attribute on the class while Current and Name are exposed as its parameters. This is quite cool seeing how you don&rsquo;t have to do anything about Parsing or binding the arguments &ndash; PowerShell does all the plumbing for you. The Name parameter is bound to the pipeline input which means that you can feed the commandlets with multiple user names (e.g. from a CSV file) and it will turn those into User objects for its pipeline consumers.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">using</span> <span class="nn">System.Management.Automation</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Security.Accounts</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.PowerShell.Shell.Commands</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="na">    [Cmdlet(&#34;Get&#34;, &#34;User&#34;, DefaultParameterSetName = &#34;Name&#34;)]</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">GetUserCommand</span> <span class="p">:</span> <span class="n">BaseCommand</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="na">        [Parameter(ValueFromPipeline = true, Position = 0)]</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="kd">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="na">        [Parameter]</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="kd">public</span> <span class="n">SwitchParameter</span> <span class="n">Current</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">ProcessRecord</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">Current</span><span class="p">.</span><span class="n">IsPresent</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">                <span class="n">WriteObject</span><span class="p">(</span><span class="n">Sitecore</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">User</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">Name</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">                <span class="c1">// from BaseCommand</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">                <span class="n">WildcardWrite</span><span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="n">UserManager</span><span class="p">.</span><span class="n">GetUsers</span><span class="p">(),</span> <span class="n">user</span> <span class="p">=&gt;</span> <span class="n">user</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">                <span class="n">WriteObject</span><span class="p">(</span><span class="n">UserManager</span><span class="p">.</span><span class="n">GetUsers</span><span class="p">(),</span><span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>In this case the commandlet can be used in Powershell as a ?Get-User? as defined in the Cmdlet attribute on the class while Current and Name are exposed as its parameters. This is quite cool seeing how you don&rsquo;t have to do anything about Parsing or binding the arguments &ndash; PowerShell does all the plumbing for you. The Name parameter is bound to the pipeline input which means that you can feed the commandlets with multiple user names (e.g. from a CSV file) and it will turn those into User objects for its pipeline consumers.
 The Current parameter in turn is interesting for other reasons &ndash; shows how to define a switch that can be checked for existense &ndash; in this case calling the commandlet like</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-User</span> <span class="n">-Current</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Will add the currently logged in user ad the output of the commandlet pipeline by its mere inclusion in the command line.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-User</span> <span class="n">-Current</span>
+</span></span></code></pre></div><p>Will add the currently logged in user ad the output of the commandlet pipeline by its mere inclusion in the command line.
 Overall I would strongly encourage you to crack the PowerShell console assembly and see how the existing commandlets work and build your own based on that.</p>
 
       </div>

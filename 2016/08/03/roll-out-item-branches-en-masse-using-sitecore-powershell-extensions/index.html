@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -209,180 +209,84 @@ Many thanks for your help!
 Phil Neale</p>
 </blockquote>
 <p>First let&rsquo;s set up a bit of a folder structure for our PoC.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Clean-up after previous run</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Remove-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="nb">branch-test</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="n">-Recurse</span> <span class="n">-Force</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#Create a folder strcture for our tests</span>
-</span></span><span class="line"><span class="cl"><span class="nb">New-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span> <span class="n">-Name</span> <span class="s2">&#34;branch-test&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Common/Folder&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="mf">1</span><span class="p">.</span><span class="mf">.3</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">#Create folders for items that we will serve as branch hosts</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">New-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="nb">branch-test</span> <span class="n">-Name</span> <span class="s2">&#34;folder </span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Common/Folder&#34;</span> <span class="p">|</span> <span class="nb">Out-Null</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">foreach</span><span class="p">(</span><span class="nv">$j</span> <span class="k">in</span> <span class="mf">1</span><span class="p">.</span><span class="mf">.3</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c">#Create items underneath which we will be creating our branches</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">New-Item</span> <span class="s2">&#34;master:\content\branch-test\folder </span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="n">-Name</span> <span class="s2">&#34;branch-host </span><span class="nv">$j</span><span class="s2">&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Sample/Sample Item&#34;</span> <span class="p">|</span> <span class="nb">Out-Null</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>After this the content tree structure should look like on the following picture</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c">#Clean-up after previous run</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="nb">Remove-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="nb">branch-test</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span> <span class="n">-Recurse</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c">#Create a folder strcture for our tests</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="nb">New-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span> <span class="n">-Name</span> <span class="s2">&#34;branch-test&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Common/Folder&#34;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="mf">1</span><span class="p">.</span><span class="mf">.3</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="c">#Create folders for items that we will serve as branch hosts</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="nb">New-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="nb">branch-test</span> <span class="n">-Name</span> <span class="s2">&#34;folder </span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Common/Folder&#34;</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">foreach</span><span class="p">(</span><span class="nv">$j</span> <span class="k">in</span> <span class="mf">1</span><span class="p">.</span><span class="mf">.3</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="c">#Create items underneath which we will be creating our branches</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="nb">New-Item</span> <span class="s2">&#34;master:\content\branch-test\folder </span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="n">-Name</span> <span class="s2">&#34;branch-host </span><span class="nv">$j</span><span class="s2">&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Sample/Sample Item&#34;</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>After this the content tree structure should look like on the following picture</p>
 <img src="/images/Test-Item-Structure.png" alt="Test Item Structure" class="aligncenter" width="211" height="414" />
 <p>In the simplest scenario I want to browse the created folder and and under each item of the &ldquo;Sample Item&rdquo; template I want to deploy my branch. For the sake of not having to create a branch template (which doesn&rsquo;t really add anything to this exercise) I&rsquo;ve picked one of the branches that already exists in vanilla Sitecore 7.1+ by default: <code>/sitecore/templates/Branches/System/Rules/Taxonomy/Element Folder</code>.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Pull all children from our test folder</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="nb">branch-test</span> <span class="n">-Recurse</span> <span class="p">|</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c">#filter only the items that are of specific template</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Sample Item&#34;</span> <span class="p">}</span> <span class="p">|</span>
-</span></span><span class="line"><span class="cl">    <span class="p">%</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c">#Create a branch based on some system branch in Polish language. </span>
-</span></span><span class="line"><span class="cl">        <span class="nb">New-Item</span> <span class="nv">$_</span><span class="p">.</span><span class="py">ProviderPath</span> <span class="n">-Name</span> <span class="s2">&#34;test&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span> <span class="n">-Language</span> <span class="nb">pl-PL</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c">#Add Danish, English and Japanese language to the newly created items based on the original Polish version. </span>
-</span></span><span class="line"><span class="cl">        <span class="nb">Add-ItemLanguage</span> <span class="n">-Path</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">ProviderPath</span><span class="p">)</span><span class="s2">\test&#34;</span> <span class="n">-Language</span> <span class="nb">pl-PL</span> <span class="n">-TargetLanguage</span> <span class="nb">da-DK</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="nb">ja-JP</span> <span class="n">-Recurse</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now I understand that you might not want to do it in all the languages on all of the items so to aid in this we will wrap the branch creation logic in a function:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Deploy-Branch</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nb">CmdletBinding</span><span class="p">()]</span>
-</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Mandatory</span><span class="p">=</span><span class="vm">$true</span><span class="p">,</span> <span class="na">Position</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span> <span class="na">ValueFromPipeline</span><span class="p">=</span><span class="vm">$true</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$ParentPath</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c">#you can provide your name here as a default if it&#39;s constant for all items </span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">1</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Name</span> <span class="p">=</span> <span class="s2">&#34;test&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c">#you can provide your branch path here as a default if you don&#39;t want to do it every time </span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">2</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$BranchTemplate</span> <span class="p">=</span> <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">3</span><span class="p">)]</span>
-</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="no">string[]</span><span class="p">]</span><span class="nv">$Languages</span>
-</span></span><span class="line"><span class="cl">        <span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c">#if languages are not defined use the same languages as the item parent</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nv">$Languages</span> <span class="o">-eq</span> <span class="vm">$null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="nv">$Languages</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="nv">$ParentPath</span> <span class="n">-language</span> <span class="p">*</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Language</span><span class="p">.</span><span class="py">Name</span> <span class="p">}</span> 
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="c">#Create a branch based on some system branch in first language provided. </span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$newItem</span> <span class="p">=</span> <span class="nb">New-Item</span> <span class="s2">&#34;</span><span class="nv">$ParentPath</span><span class="s2">&#34;</span> <span class="n">-Name</span> <span class="nv">$Name</span> <span class="n">-ItemType</span> <span class="nv">$BranchTemplate</span> <span class="n">-Language</span> <span class="nv">$Languages</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c">#return the item to the pipeline    </span>
-</span></span><span class="line"><span class="cl">        <span class="nv">$newItem</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c">#If more languages specified - add those to the newly created item branch</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nv">$Languages</span><span class="p">.</span><span class="py">Count</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">            <span class="nb">Add-ItemLanguage</span> <span class="n">-Item</span> <span class="nv">$newItem</span> <span class="n">-Language</span> <span class="nv">$Languages</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="n">-TargetLanguage</span> <span class="p">(</span><span class="nv">$Languages</span> <span class="p">|</span> <span class="nb">select </span><span class="n">-Skip</span> <span class="mf">1</span><span class="p">)</span> <span class="n">-Recurse</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And now you can simply enumerate your granular cases (multiple syntax&rsquo;s as well as language variations used to show the variety of options):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Use parameters explicitly, create single language item</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Deploy-Branch</span> <span class="n">-ParentPath</span> <span class="s1">&#39;master:\content\branch-test\folder 1\branch-host 1&#39;</span> <span class="n">-Name</span> <span class="s2">&#34;test 1 language&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-BranchTemplate</span> <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span> <span class="n">-Languages</span> <span class="nb">pl-PL</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#Use parameters based on parameter order, create the branch in 4 languages</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Deploy-Branch</span> <span class="s1">&#39;master:\content\branch-test\folder 1\branch-host 2&#39;</span>  <span class="s2">&#34;test 4 languages&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span> <span class="nb">da-DK</span><span class="p">,</span> <span class="nb">pl-PL</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="nb">ja-JP</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#create in languages my parent item exists in, use parameter defaults, parent name from pipeline</span>
-</span></span><span class="line"><span class="cl"><span class="s1">&#39;master:\content\branch-test\folder 1\branch-host 3&#39;</span> <span class="p">|</span> <span class="nb">Deploy-Branch</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Hopefully this does the job for you Phil!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c">#Pull all children from our test folder</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="nb">branch-test</span> <span class="n">-Recurse</span> <span class="p">|</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="c">#filter only the items that are of specific template</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Sample Item&#34;</span> <span class="p">}</span> <span class="p">|</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">%</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="c">#Create a branch based on some system branch in Polish language. </span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="nb">New-Item</span> <span class="nv">$_</span><span class="p">.</span><span class="py">ProviderPath</span> <span class="n">-Name</span> <span class="s2">&#34;test&#34;</span> <span class="n">-ItemType</span> <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span> <span class="n">-Language</span> <span class="nb">pl-PL</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="c">#Add Danish, English and Japanese language to the newly created items based on the original Polish version. </span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="nb">Add-ItemLanguage</span> <span class="n">-Path</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">ProviderPath</span><span class="p">)</span><span class="s2">\test&#34;</span> <span class="n">-Language</span> <span class="nb">pl-PL</span> <span class="n">-TargetLanguage</span> <span class="nb">da-DK</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="nb">ja-JP</span> <span class="n">-Recurse</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>Now I understand that you might not want to do it in all the languages on all of the items so to aid in this we will wrap the branch creation logic in a function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Deploy-Branch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="p">[</span><span class="nb">CmdletBinding</span><span class="p">()]</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">param</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Mandatory</span><span class="p">=</span><span class="vm">$true</span><span class="p">,</span> <span class="na">Position</span><span class="p">=</span><span class="mf">0</span><span class="p">,</span> <span class="na">ValueFromPipeline</span><span class="p">=</span><span class="vm">$true</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$ParentPath</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="c">#you can provide your name here as a default if it&#39;s constant for all items </span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">1</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$Name</span> <span class="p">=</span> <span class="s2">&#34;test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="c">#you can provide your branch path here as a default if you don&#39;t want to do it every time </span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">2</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$BranchTemplate</span> <span class="p">=</span> <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="p">[</span><span class="nb">Parameter</span><span class="p">(</span><span class="na">Position</span><span class="p">=</span><span class="mf">3</span><span class="p">)]</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="p">[</span><span class="no">string[]</span><span class="p">]</span><span class="nv">$Languages</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="c">#if languages are not defined use the same languages as the item parent</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nv">$Languages</span> <span class="o">-eq</span> <span class="vm">$null</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            <span class="nv">$Languages</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="nv">$ParentPath</span> <span class="n">-language</span> <span class="p">*</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Language</span><span class="p">.</span><span class="py">Name</span> <span class="p">}</span> 
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="c">#Create a branch based on some system branch in first language provided. </span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="nv">$newItem</span> <span class="p">=</span> <span class="nb">New-Item</span> <span class="s2">&#34;</span><span class="nv">$ParentPath</span><span class="s2">&#34;</span> <span class="n">-Name</span> <span class="nv">$Name</span> <span class="n">-ItemType</span> <span class="nv">$BranchTemplate</span> <span class="n">-Language</span> <span class="nv">$Languages</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="c">#return the item to the pipeline    </span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="nv">$newItem</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="c">#If more languages specified - add those to the newly created item branch</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nv">$Languages</span><span class="p">.</span><span class="py">Count</span> <span class="o">-gt</span> <span class="mf">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">            <span class="nb">Add-ItemLanguage</span> <span class="n">-Item</span> <span class="nv">$newItem</span> <span class="n">-Language</span> <span class="nv">$Languages</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span> <span class="n">-TargetLanguage</span> <span class="p">(</span><span class="nv">$Languages</span> <span class="p">|</span> <span class="nb">select </span><span class="n">-Skip</span> <span class="mf">1</span><span class="p">)</span> <span class="n">-Recurse</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>And now you can simply enumerate your granular cases (multiple syntax&rsquo;s as well as language variations used to show the variety of options):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c">#Use parameters explicitly, create single language item</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="nb">Deploy-Branch</span> <span class="n">-ParentPath</span> <span class="s1">&#39;master:\content\branch-test\folder 1\branch-host 1&#39;</span> <span class="n">-Name</span> <span class="s2">&#34;test 1 language&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">-BranchTemplate</span> <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span> <span class="n">-Languages</span> <span class="nb">pl-PL</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c">#Use parameters based on parameter order, create the branch in 4 languages</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="nb">Deploy-Branch</span> <span class="s1">&#39;master:\content\branch-test\folder 1\branch-host 2&#39;</span>  <span class="s2">&#34;test 4 languages&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="s2">&#34;Branches/System/Rules/Taxonomy/Element Folder&#34;</span> <span class="nb">da-DK</span><span class="p">,</span> <span class="nb">pl-PL</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="nb">ja-JP</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c">#create in languages my parent item exists in, use parameter defaults, parent name from pipeline</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="s1">&#39;master:\content\branch-test\folder 1\branch-host 3&#39;</span> <span class="p">|</span> <span class="nb">Deploy-Branch</span>
+</span></span></code></pre></div><p>Hopefully this does the job for you Phil!</p>
 
       </div>
 

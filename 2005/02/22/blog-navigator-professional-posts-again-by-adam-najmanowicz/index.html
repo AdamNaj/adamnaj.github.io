@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -208,189 +208,84 @@
 </ol>
 <blockquote>
 </blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">type
-</span></span><span class="line"><span class="cl">  TMSHtmlCommandTranslation = array [DECMD_BOLD .. DECMD_PROPERTIES] of WideString;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span>
-</span></span><span class="line"><span class="cl">  <span class="n">MSHtmlCommandTranslation</span> <span class="p">:</span> <span class="n">TMSHtmlCommandTranslation</span> <span class="o">=</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Bold&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DECMD_BOLD</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001388</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Copy&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DECMD_COPY</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">A</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Cut&#39;</span><span class="p">,</span>                <span class="o">//</span><span class="n">DECMD_CUT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">B</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Delete&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_DELETE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">C</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_DELETECELLS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">D</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_DELETECOLS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">E</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_DELETEROWS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">F</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Find&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DDECMD_FINDTEXT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001390</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;FontName&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_FONT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001391</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETBACKCOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001392</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETBLOCKFMT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001393</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETBLOCKFMTNAMES</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001394</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETFONTNAME</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001395</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;FontSize&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_GETFONTSIZE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001396</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETFORECOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001397</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;CreateLink&#39;</span><span class="p">,</span>         <span class="o">//</span><span class="n">DDECMD_HYPERLINK</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001398</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;InsertImage&#39;</span><span class="p">,</span>        <span class="o">//</span><span class="n">DDECMD_IMAGE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001399</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Indent&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_INDENT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">A</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTCELL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">B</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTCOL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">C</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTROW</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">D</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTTABLE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">E</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Italic&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_ITALIC</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">F</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;JustifyCenter&#39;</span><span class="p">,</span>      <span class="o">//</span><span class="n">DDECMD_JUSTIFYCENTER</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;JustifyLeft&#39;</span><span class="p">,</span>        <span class="o">//</span><span class="n">DDECMD_JUSTIFYLEFT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;JustifyRight&#39;</span><span class="p">,</span>       <span class="o">//</span><span class="n">DDECMD_JUSTIFYRIGHT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_LOCK_ELEMENT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A3</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_MAKE_ABSOLUTE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_MERGECELLS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A5</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;InsertOrderedList&#39;</span><span class="p">,</span>  <span class="o">//</span><span class="n">DDECMD_ORDERLIST</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A6</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Outdent&#39;</span><span class="p">,</span>            <span class="o">//</span><span class="n">DDECMD_OUTDENT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A7</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Paste&#39;</span><span class="p">,</span>              <span class="o">//</span><span class="n">DDECMD_PASTE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A8</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Redo&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DDECMD_REDO</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A9</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_REMOVEFORMAT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;SelectAll&#39;</span><span class="p">,</span>          <span class="o">//</span><span class="n">DDECMD_SELECTALL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SEND_BACKWARD</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AC</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_BRING_FORWARD</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AD</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SEND_BELOW_TEXT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AE</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_BRING_ABOVE_TEXT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AF</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SEND_TO_BACK</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_BRING_TO_FRONT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SETBACKCOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SETBLOCKFMT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B3</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;FontName&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_SETFONTNAME</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B4</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;FontSize&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_SETFONTSIZE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B5</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;ForeColor&#39;</span><span class="p">,</span>          <span class="o">//</span><span class="n">DDECMD_SETFORECOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B6</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SPLITCELL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B7</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Underline&#39;</span><span class="p">,</span>          <span class="o">//</span><span class="n">DDECMD_UNDERLINE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B8</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Undo&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DDECMD_UNDO</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B9</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;Unlink&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_UNLINK</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">BA</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;InsertUnorderedList&#39;</span><span class="p">,</span><span class="o">//</span><span class="n">DDECMD_UNORDERLIST</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">BB</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">);</span>                  <span class="o">//</span><span class="n">DECMD_PROPERTIES</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">BC</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>I store the command values as the controls Tags so now instead of calling:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">type
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  TMSHtmlCommandTranslation = array [DECMD_BOLD .. DECMD_PROPERTIES] of WideString;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">const</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="n">MSHtmlCommandTranslation</span> <span class="p">:</span> <span class="n">TMSHtmlCommandTranslation</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="s1">&#39;Bold&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DECMD_BOLD</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001388</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  <span class="s1">&#39;Copy&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DECMD_COPY</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="s1">&#39;Cut&#39;</span><span class="p">,</span>                <span class="o">//</span><span class="n">DECMD_CUT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">B</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  <span class="s1">&#39;Delete&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_DELETE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">C</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_DELETECELLS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">D</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_DELETECOLS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">E</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_DELETEROWS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000138</span><span class="n">F</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">  <span class="s1">&#39;Find&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DDECMD_FINDTEXT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001390</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">  <span class="s1">&#39;FontName&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_FONT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001391</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETBACKCOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001392</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETBLOCKFMT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001393</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETBLOCKFMTNAMES</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001394</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETFONTNAME</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001395</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">  <span class="s1">&#39;FontSize&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_GETFONTSIZE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001396</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_GETFORECOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001397</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">  <span class="s1">&#39;CreateLink&#39;</span><span class="p">,</span>         <span class="o">//</span><span class="n">DDECMD_HYPERLINK</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001398</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">  <span class="s1">&#39;InsertImage&#39;</span><span class="p">,</span>        <span class="o">//</span><span class="n">DDECMD_IMAGE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">00001399</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">  <span class="s1">&#39;Indent&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_INDENT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTCELL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">B</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTCOL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">C</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTROW</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">D</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_INSERTTABLE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">E</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">  <span class="s1">&#39;Italic&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_ITALIC</span> <span class="o">=</span> <span class="o">$</span><span class="mi">0000139</span><span class="n">F</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">  <span class="s1">&#39;JustifyCenter&#39;</span><span class="p">,</span>      <span class="o">//</span><span class="n">DDECMD_JUSTIFYCENTER</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">  <span class="s1">&#39;JustifyLeft&#39;</span><span class="p">,</span>        <span class="o">//</span><span class="n">DDECMD_JUSTIFYLEFT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A1</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">  <span class="s1">&#39;JustifyRight&#39;</span><span class="p">,</span>       <span class="o">//</span><span class="n">DDECMD_JUSTIFYRIGHT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A2</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_LOCK_ELEMENT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A3</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_MAKE_ABSOLUTE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A4</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_MERGECELLS</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A5</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">  <span class="s1">&#39;InsertOrderedList&#39;</span><span class="p">,</span>  <span class="o">//</span><span class="n">DDECMD_ORDERLIST</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A6</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">  <span class="s1">&#39;Outdent&#39;</span><span class="p">,</span>            <span class="o">//</span><span class="n">DDECMD_OUTDENT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A7</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">  <span class="s1">&#39;Paste&#39;</span><span class="p">,</span>              <span class="o">//</span><span class="n">DDECMD_PASTE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A8</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">  <span class="s1">&#39;Redo&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DDECMD_REDO</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">A9</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_REMOVEFORMAT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AA</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">  <span class="s1">&#39;SelectAll&#39;</span><span class="p">,</span>          <span class="o">//</span><span class="n">DDECMD_SELECTALL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AB</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SEND_BACKWARD</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AC</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_BRING_FORWARD</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AD</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SEND_BELOW_TEXT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AE</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_BRING_ABOVE_TEXT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">AF</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SEND_TO_BACK</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B0</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_BRING_TO_FRONT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B1</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SETBACKCOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B2</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SETBLOCKFMT</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B3</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">  <span class="s1">&#39;FontName&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_SETFONTNAME</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B4</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">  <span class="s1">&#39;FontSize&#39;</span><span class="p">,</span>           <span class="o">//</span><span class="n">DDECMD_SETFONTSIZE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B5</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">  <span class="s1">&#39;ForeColor&#39;</span><span class="p">,</span>          <span class="o">//</span><span class="n">DDECMD_SETFORECOLOR</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B6</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">,</span>                   <span class="o">//</span><span class="n">DDECMD_SPLITCELL</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B7</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">  <span class="s1">&#39;Underline&#39;</span><span class="p">,</span>          <span class="o">//</span><span class="n">DDECMD_UNDERLINE</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B8</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">  <span class="s1">&#39;Undo&#39;</span><span class="p">,</span>               <span class="o">//</span><span class="n">DDECMD_UNDO</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">B9</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">  <span class="s1">&#39;Unlink&#39;</span><span class="p">,</span>             <span class="o">//</span><span class="n">DDECMD_UNLINK</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">BA</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">  <span class="s1">&#39;InsertUnorderedList&#39;</span><span class="p">,</span><span class="o">//</span><span class="n">DDECMD_UNORDERLIST</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">BB</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">  <span class="s1">&#39;&#39;</span><span class="p">);</span>                  <span class="o">//</span><span class="n">DECMD_PROPERTIES</span> <span class="o">=</span> <span class="o">$</span><span class="mi">000013</span><span class="n">BC</span><span class="p">;</span>
+</span></span></code></pre></div><p>I store the command values as the controls Tags so now instead of calling:</p>
 <blockquote>
 </blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">DHTMLEdit.ExecCommand(TControl(Sender).Tag,OLECMDEXECOPT_DODEFAULT);
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>I simply call:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">DHTMLEdit.ExecCommand(TControl(Sender).Tag,OLECMDEXECOPT_DODEFAULT);
+</span></span></code></pre></div><p>I simply call:</p>
 <blockquote>
 </blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">FDocument</span><span class="o">.</span><span class="n">execCommand</span><span class="p">(</span><span class="n">MSHtmlCommandTranslation</span><span class="p">[</span><span class="n">TControl</span><span class="p">(</span><span class="n">Sender</span><span class="p">)</span><span class="o">.</span><span class="n">Tag</span><span class="p">],</span><span class="n">True</span><span class="p">,</span><span class="n">variant</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>where the FDocument is the <a href="http://msdn.microsoft.com/library/default.asp?url=/workshop/browser/mshtml/reference/ifaces/document2/document2.asp">IHTMLDocument2</a> DOM document I extracted from the TWebBrowser for the sake of not having to cast it each time I use it. and instead of:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">FDocument</span><span class="o">.</span><span class="n">execCommand</span><span class="p">(</span><span class="n">MSHtmlCommandTranslation</span><span class="p">[</span><span class="n">TControl</span><span class="p">(</span><span class="n">Sender</span><span class="p">)</span><span class="o">.</span><span class="n">Tag</span><span class="p">],</span><span class="n">True</span><span class="p">,</span><span class="n">variant</span><span class="p">)</span>
+</span></span></code></pre></div><p>where the FDocument is the <a href="http://msdn.microsoft.com/library/default.asp?url=/workshop/browser/mshtml/reference/ifaces/document2/document2.asp">IHTMLDocument2</a> DOM document I extracted from the TWebBrowser for the sake of not having to cast it each time I use it. and instead of:</p>
 <blockquote>
 </blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">DHTMLEdit.QueryStatus(TControl(Sender).Tag);
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>I can now use:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">DHTMLEdit.QueryStatus(TControl(Sender).Tag);
+</span></span></code></pre></div><p>I can now use:</p>
 <blockquote>
 </blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">FDocument.queryCommandValue(MSHtmlCommandTranslation[TControl(Sender).Tag]);
-</span></span><span class="line"><span class="cl"> FDocument.queryCommandEnabled(MSHtmlCommandTranslation[TControl(Sender).Tag]);
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>this allowed me to migrate away from <a href="http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/dnaredcom/html/cncpt.asp">DHTML Editing Component</a> within one day after shunning all other options).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">FDocument.queryCommandValue(MSHtmlCommandTranslation[TControl(Sender).Tag]);
+</span></span><span class="line"><span class="ln">2</span><span class="cl"> FDocument.queryCommandEnabled(MSHtmlCommandTranslation[TControl(Sender).Tag]);
+</span></span></code></pre></div><p>this allowed me to migrate away from <a href="http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/dnaredcom/html/cncpt.asp">DHTML Editing Component</a> within one day after shunning all other options).</p>
 <p>One thing that was pretty indispensible for <a href="http://msdn.microsoft.com/archive/default.asp?url=/archive/en-us/dnaredcom/html/cncpt.asp">DHTML Editing Component</a> was that it called me back evary time a blok formatting was changed, it had this useful <em>OnDisplayChanged</em> event which was summoned every time the UI needed updating. That&rsquo;s where <a href="http://www.euromind.com/iedelphi/embeddedwb.htm">TEmbeddedWB</a> comes handy it implements a</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">UpdateUI</span><span class="err">:</span> <span class="n">HRESULT</span><span class="p">;</span> <span class="n">stdcall</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>which than triggers the <em>OnUpdateUI</em> event, which for our needs does exactly the save what the <em>OnDisplayChanged</em> event did. so you can simply call your previous OnDisplayChanged event with the numerical querries remapped to strings and&hellip; with minimal effort you have your control fully migrated to the <a href="http://msdn.microsoft.com/library/default.asp?url=/workshop/browser/mshtml/reference/reference.asp">MSHTML</a> editor.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">UpdateUI</span><span class="err">:</span> <span class="n">HRESULT</span><span class="p">;</span> <span class="n">stdcall</span><span class="p">;</span>
+</span></span></code></pre></div><p>which than triggers the <em>OnUpdateUI</em> event, which for our needs does exactly the save what the <em>OnDisplayChanged</em> event did. so you can simply call your previous OnDisplayChanged event with the numerical querries remapped to strings and&hellip; with minimal effort you have your control fully migrated to the <a href="http://msdn.microsoft.com/library/default.asp?url=/workshop/browser/mshtml/reference/reference.asp">MSHTML</a> editor.</p>
 <p>So&hellip; this post is the first post made with the updated <a href="http://www.blognavigator.com/">Blog Navigator</a> with its poat editong brought back to normal functionality.</p>
 
       </div>

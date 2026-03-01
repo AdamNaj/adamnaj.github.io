@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -213,52 +213,19 @@
 </blockquote>
 <p>It might be fine in a small site to verify in a few data templates that it&rsquo;s not violated, but  In my case I was dealing with a multisite platform that can potentially host tens or even hundreds of sites? Going manually over the hundreds of fields in nearly 300 data templates, bah even finding them &ndash; would not be fun or easy thing to do. But hey? we have PowerShell why should I look there if I can whip up a one liner for it? Let&rsquo;s try it then.</p>
 <p>In any of the following scripts it is important to navigate to the appropriate part of the Sitecore tree? which in my case could be:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">templates</span><span class="p">\</span><span class="n">Cognifide</span><span class="p">\</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>or</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">Home</span><span class="p">\</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>in the case of the recommendation above you could use the following one liner within the templates branch to list what field types and in what numbers you have in your solution:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template Field&#34;</span> <span class="p">}</span> <span class="p">|</span>  <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">group-object</span> <span class="nb">Type </span><span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">sort </span><span class="n">count</span> <span class="n">-descending</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To get some idea what kind of fields and in what quantities you&rsquo;ve used in your solution, then probably you need to identify all those pesky Treelist fields:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template Field&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="nb">Type </span><span class="o">-eq</span> <span class="s2">&#34;Treelist&#34;</span> <span class="p">}</span> <span class="p">|</span>  <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>So that you can easily investigate them. In my case the result of the script looks as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">templates</span><span class="p">\</span><span class="n">Cognifide</span><span class="p">\</span>
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">Home</span><span class="p">\</span>
+</span></span></code></pre></div><p>in the case of the recommendation above you could use the following one liner within the templates branch to list what field types and in what numbers you have in your solution:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template Field&#34;</span> <span class="p">}</span> <span class="p">|</span>  <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nb">group-object</span> <span class="nb">Type </span><span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="nb">sort </span><span class="n">count</span> <span class="n">-descending</span>
+</span></span></code></pre></div><p>To get some idea what kind of fields and in what quantities you&rsquo;ve used in your solution, then probably you need to identify all those pesky Treelist fields:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template Field&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="nb">Type </span><span class="o">-eq</span> <span class="s2">&#34;Treelist&#34;</span> <span class="p">}</span> <span class="p">|</span>  <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span>
+</span></span></code></pre></div><p>So that you can easily investigate them. In my case the result of the script looks as follows:</p>
 <p><a href="/images/TreeListResults.png"><img src="/images/TreeListResults_thumb.png" alt="TreeListResults" title="TreeListResults" class="aligncenter" width="644" height="256" /></a></p>
 <p>I think you will agree it&rsquo;s faster than hunting for it all over the tree, right?</p>
 <p>In many cases or if you&rsquo;re just writing an audit - you might be more interested in numbers rather than actual lists of items. in those cases it&rsquo;s probably easiest to replace the last <strong>format-xxx</strong> element in the pipeline with <strong>measure</strong>. This way you don&rsquo;t have to count the lines</p>
@@ -269,113 +236,53 @@
 <p><strong>Make good use of inheritance</strong> ? Place commonly used sections and fields in their own template, so that more specific templates can inherit them. For example, the <strong>Title</strong> and <strong>Text</strong> fields in the <strong>Page Title</strong> and <strong>Text</strong> section are used in multiple different content templates. Rather than duplicate these fields in each content template, simply inherit the <strong>Page Title</strong> and <strong>Text</strong> template.</p>
 </blockquote>
 <p>What does this mean? Basically every data template that inherits from the <strong>Standard template</strong> is a candidate to violate this. So you might want to investigate the items that you will have listed as a result of the following script:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">                 <span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__base template&#34;</span> <span class="o">-match</span> <span class="s2">&#34;1930BBEB&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">   <span class="nb">format-table</span> <span class="n">ItemPath</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>what it does is: check all the templates that have the first segment of the GUID signature in it&rsquo;s base template for a match with Standard Template. Now the output you get does not list the items that violate the rule, it just lists all your base types, what you need to verify is that this list makes sense and that perhaps some of the templates might be moved up the inheritance structure.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">                 <span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__base template&#34;</span> <span class="o">-match</span> <span class="s2">&#34;1930BBEB&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">   <span class="nb">format-table</span> <span class="n">ItemPath</span>
+</span></span></code></pre></div><p>what it does is: check all the templates that have the first segment of the GUID signature in it&rsquo;s base template for a match with Standard Template. Now the output you get does not list the items that violate the rule, it just lists all your base types, what you need to verify is that this list makes sense and that perhaps some of the templates might be moved up the inheritance structure.</p>
 <h3 id="assign-icons-to-templates">Assign icons to templates</h3>
 <blockquote>
 <p><strong>Assign icons to templates</strong> ? This provides a visual clue to the type of item that will be created.</p>
 </blockquote>
 <p>this one will be similar. You want to learn which templates do not define <strong>__Icon</strong> here:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__icon&#34;</span> <span class="o">-eq</span> <span class="s2">&#34;&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You might need to be careful with using <strong>measure</strong> here. Since templates will also contain rendering templates and Rendering templates have no use for icons, so you need to subtract those from your audit figure.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__icon&#34;</span> <span class="o">-eq</span> <span class="s2">&#34;&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span>
+</span></span></code></pre></div><p>You might need to be careful with using <strong>measure</strong> here. Since templates will also contain rendering templates and Rendering templates have no use for icons, so you need to subtract those from your audit figure.</p>
 <h3 id="__standard-values">__Standard Values</h3>
 <blockquote>
 <p><strong>__Standard Values</strong> ? Define layout details, initial workflow, and insert options to a template. This reduces administration and centrally manages system settings, rather than setting them on individual items</p>
 </blockquote>
 <p><a href="http://adeneys.wordpress.com/author/adeneys/">Alistair Deneys</a> have blogged about <a href="http://adeneys.wordpress.com/2009/04/24/find-items-which-override-standard-values-using-revolver/">how to do something like this in Revolver</a>, You might want to read his blog before proceeding. I will try to replicate some of that in PowerShell.</p>
 <p>Simplest approach would be to find the templates that <strong>do not have Standard Values</strong> and perform an assessment on whether you need rendering or workflow attached to them:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">                <span class="p">!</span><span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Once you have the list, go over it and rationalize whether the item does or does not need Standard Values and thus Renderings/Workflows/Insert Options attached to them.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">                <span class="p">!</span><span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span>
+</span></span></code></pre></div><p>Once you have the list, go over it and rationalize whether the item does or does not need Standard Values and thus Renderings/Workflows/Insert Options attached to them.</p>
 <p>Now let&rsquo;s look at the items <strong>with Standard Values</strong> defined. With the following script you might want to find out which of templates that define the Renderings,Default Workflows, Insert Options or Rules.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">select-object</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;__StandardValues&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}}</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Has Renderings&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={!</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Renderings&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Default Workflow&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Default Workflow&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Options&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__masters&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Rules&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Insert Rules&#34;</span><span class="p">]}}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Having that data on the screen might be limiting &ndash; if you want to export it and then process it in Excel you might do so with a small change modifying the script above to look like following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">select-object</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;__StandardValues&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}}</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">select-object</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Has Renderings&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={!</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Renderings&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Default Workflow&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Default Workflow&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Options&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__masters&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Rules&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Insert Rules&#34;</span><span class="p">]}}</span>  <span class="p">|</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">        <span class="nb">export-csv</span> <span class="n">C:</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="n">StandardValues</span><span class="p">.</span><span class="py">csv</span> <span class="n">-NoTypeInformation</span> <span class="n">-Delimiter</span> <span class="p">`</span><span class="n">t</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Then import the file to Excel using the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nb">select-object</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;__StandardValues&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}}</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">5</span><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Has Renderings&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={!</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Renderings&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Default Workflow&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Default Workflow&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Options&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__masters&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">9</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Rules&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Insert Rules&#34;</span><span class="p">]}}</span>
+</span></span></code></pre></div><p>Having that data on the screen might be limiting &ndash; if you want to export it and then process it in Excel you might do so with a small change modifying the script above to look like following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">TemplateName</span> <span class="o">-eq</span> <span class="s2">&#34;Template&#34;</span> <span class="o">-and</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="nb">select-object</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;__StandardValues&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">Children</span><span class="p">[</span><span class="s2">&#34;__Standard Values&#34;</span><span class="p">]}}</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  <span class="nb">select-object</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Has Renderings&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={!</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Renderings&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Default Workflow&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Default Workflow&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Options&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__masters&#34;</span><span class="p">]}},</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="n">Name</span><span class="p">=</span><span class="s2">&#34;Insert Rules&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span><span class="nv">$_</span><span class="p">.</span><span class="n">__StandardValues</span><span class="p">[</span><span class="s2">&#34;__Insert Rules&#34;</span><span class="p">]}}</span>  <span class="p">|</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="nb">export-csv</span> <span class="n">C:</span><span class="p">\</span><span class="n">temp</span><span class="p">\</span><span class="n">StandardValues</span><span class="p">.</span><span class="py">csv</span> <span class="n">-NoTypeInformation</span> <span class="n">-Delimiter</span> <span class="p">`</span><span class="n">t</span>
+</span></span></code></pre></div><p>Then import the file to Excel using the following:</p>
 <p><a href="/images/ExcelImport1.png"><img src="/images/ExcelImport_thumb1.png" alt="ExcelImport" title="ExcelImport" class="aligncenter" width="412" height="250" /></a></p>
 <p>So you can graph and agonize about the values to your heart?s content.</p>
 <p>Now what about items that use those templates? After all the recommendation states:</p>
@@ -383,19 +290,10 @@
 <p>This [?] centrally manages system settings, rather than setting them on individual items.</p>
 </blockquote>
 <p>Cool, let&rsquo;s find the items that violate this recommendation. The following finds all items that define renderings or insert options/rules of their own (set-location to your content part of the tree before running it):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">__Renderings</span> <span class="o">-or</span> <span class="nv">$_</span><span class="p">.</span><span class="py">__masters</span> <span class="o">-or</span> <span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Insert Rules&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>   
-</span></span><span class="line"><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="n">__Renderings</span><span class="p">,</span> <span class="n">__masters</span><span class="p">,</span> <span class="s2">&#34;__Insert Rules&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now the fact that something is there does not by itself means the recommendation is being violated. The option is there to use it, just use it sparingly and where it makes sense, it&rsquo;s only when you&rsquo;ll build your layout over and over again you risk your Sitecore consultant start crying when they visit you.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">get-childitem</span> <span class="n">-recurse</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="nb">where-object</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">__Renderings</span> <span class="o">-or</span> <span class="nv">$_</span><span class="p">.</span><span class="py">__masters</span> <span class="o">-or</span> <span class="nv">$_</span><span class="p">.</span><span class="s2">&#34;__Insert Rules&#34;</span> <span class="p">}</span> <span class="p">|</span> <span class="p">`</span>   
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nb">format-table</span> <span class="n">ItemPath</span><span class="p">,</span> <span class="n">__Renderings</span><span class="p">,</span> <span class="n">__masters</span><span class="p">,</span> <span class="s2">&#34;__Insert Rules&#34;</span>
+</span></span></code></pre></div><p>Now the fact that something is there does not by itself means the recommendation is being violated. The option is there to use it, just use it sparingly and where it makes sense, it&rsquo;s only when you&rsquo;ll build your layout over and over again you risk your Sitecore consultant start crying when they visit you.</p>
 <p>I&rsquo;ll go over more recommendations regarding fields usage and how to audit them in the next post.</p>
 
       </div>

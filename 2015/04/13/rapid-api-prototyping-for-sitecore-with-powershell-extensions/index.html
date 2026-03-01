@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -225,68 +225,33 @@ If you need to call the Web API script as an unauthenticated user - that&rsquo;s
 <p>Should your script encounter any execution errors the API will respond with the HTTP Code <code>424 Method Failure</code> and should produce the error information as well as the script output.</p>
 <h2 id="writing-scripts-to-respond-to-api-calls">Writing Scripts to respond to API calls</h2>
 <p>The API call will respond with whatever your script produces as an output in text form. By default the response will be of MIME type <code>text/plain</code> but you can modify it easily as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You also need to make sure your response is in the proper format depending on the response, but PowerShell is of great help here providing us with the support of conversion in form of <code>ConvertTo-Json</code>, <code>ConvertTo-Xml</code>, <code>ConvertTo-Html</code> or even <code>ConvertTo-Csv</code> cmdlets.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You also need to make sure your response is in the proper format depending on the response, but PowerShell is of great help here providing us with the support of conversion in form of <code>ConvertTo-Json</code>, <code>ConvertTo-Xml</code>, <code>ConvertTo-Html</code> or even <code>ConvertTo-Csv</code> cmdlets.</p>
 <h2 id="what-can-i-do-with-it">What can I do with it?</h2>
 <p>Armed in the knowledge we can start writing APIs let&rsquo;s start with a JSON API that will return a basic list of children of a given item:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#if the location is not Sitecore tree, switch to root of Master Database</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">((</span><span class="nb">Get-Location</span><span class="p">).</span><span class="py">Provider</span><span class="p">.</span><span class="py">Name</span> <span class="o">-ne</span> <span class="s2">&#34;CmsItemProvider&#34;</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Set-Location</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#change the path to the item that was given as an item parameter</span>
-</span></span><span class="line"><span class="cl"><span class="nb">cd </span><span class="nv">$item</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#Set the response MIME type to JSON</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#if JSON serialization depth is not provided as a parameter set it to 1</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$depth</span> <span class="o">-eq</span> <span class="vm">$null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$depth</span> <span class="p">=</span> <span class="mf">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#return some of the children&#39;s properties as JSON</span>
-</span></span><span class="line"><span class="cl"><span class="nb">gci </span><span class="p">.</span> <span class="p">|</span> <span class="nb">select-object</span> <span class="vm">@</span><span class="p">{</span><span class="n">Label</span><span class="p">=</span><span class="s2">&#34;Path&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">}}</span>  <span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">Paths</span> <span class="p">|</span> <span class="nb">ConvertTo-Html</span> <span class="n">-Depth</span> <span class="nv">$depth</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now when we save the script with a <code>ChildrenAsJson</code> name to a <code>Web API</code> library in our module, we can call it as follows:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c">#if the location is not Sitecore tree, switch to root of Master Database</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">if</span><span class="p">((</span><span class="nb">Get-Location</span><span class="p">).</span><span class="py">Provider</span><span class="p">.</span><span class="py">Name</span> <span class="o">-ne</span> <span class="s2">&#34;CmsItemProvider&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nb">Set-Location</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c">#change the path to the item that was given as an item parameter</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="nb">cd </span><span class="nv">$item</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c">#Set the response MIME type to JSON</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;application/json&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c">#if JSON serialization depth is not provided as a parameter set it to 1</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$depth</span> <span class="o">-eq</span> <span class="vm">$null</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="nv">$depth</span> <span class="p">=</span> <span class="mf">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="c">#return some of the children&#39;s properties as JSON</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="nb">gci </span><span class="p">.</span> <span class="p">|</span> <span class="nb">select-object</span> <span class="vm">@</span><span class="p">{</span><span class="n">Label</span><span class="p">=</span><span class="s2">&#34;Path&#34;</span><span class="p">;</span> <span class="n">Expression</span><span class="p">={</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">}}</span>  <span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">Paths</span> <span class="p">|</span> <span class="nb">ConvertTo-Html</span> <span class="n">-Depth</span> <span class="nv">$depth</span>
+</span></span></code></pre></div><p>Now when we save the script with a <code>ChildrenAsJson</code> name to a <code>Web API</code> library in our module, we can call it as follows:
 <code>http://hostname/-/script/v2/master/ChildrenAsJson?item=content&amp;user=admin&amp;password=b</code>
 Which will produce the following result:</p>
 <p><a href="/images/ApiCall1.png"><img src="/images/ApiCall1.png" alt="ApiCall1" class="aligncenter" width="752" height="1059" /></a></p>
@@ -296,94 +261,46 @@ You might have noticed that I&rsquo;ve neglected to provide the <code>depth</cod
 <p> 
 Nice, isn&rsquo;t it?
 Similarly if I need my API to be in the XML format a matching script could look as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">if</span><span class="p">((</span><span class="nb">Get-Location</span><span class="p">).</span><span class="py">Provider</span><span class="p">.</span><span class="py">Name</span> <span class="o">-ne</span> <span class="s2">&#34;CmsItemProvider&#34;</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Set-Location</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">cd </span><span class="nv">$item</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;text/xml&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="c">#return some of the children&#39;s properties as XML</span>
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nb">gci </span><span class="p">.</span> <span class="p">|</span> <span class="nb">select-object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">DiaplayName</span><span class="p">,</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">Paths</span> <span class="p">|</span> <span class="nb">ConvertTo-Xml</span><span class="p">).</span><span class="py">OuterXml</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Which would produce the following output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">if</span><span class="p">((</span><span class="nb">Get-Location</span><span class="p">).</span><span class="py">Provider</span><span class="p">.</span><span class="py">Name</span> <span class="o">-ne</span> <span class="s2">&#34;CmsItemProvider&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="nb">Set-Location</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="nb">cd </span><span class="nv">$item</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;text/xml&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c">#return some of the children&#39;s properties as XML</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">(</span><span class="nb">gci </span><span class="p">.</span> <span class="p">|</span> <span class="nb">select-object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">DiaplayName</span><span class="p">,</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">Paths</span> <span class="p">|</span> <span class="nb">ConvertTo-Xml</span><span class="p">).</span><span class="py">OuterXml</span>
+</span></span></code></pre></div><p>Which would produce the following output:</p>
 <p><a href="/images/ApiCall3.png"><img src="/images/ApiCall3.png" alt="ApiCall3" class="aligncenter" width="772" height="898" /></a></p>
 <p>Naturally your XML might need further work but this simple example gives you the idea on how you can approach it. As for a human readable version of the report you could do it as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Let&#39;s style it nicely:</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$head</span> <span class="p">=</span> <span class="s1">&#39;&lt;style&gt;&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;body{font-family:&#34;Lucida Sans Unicode&#34;, &#34;Lucida Grande&#34;, Sans-Serif; text-align:left;}&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;h1 {width:100%;font-family: &#34;Skolar Bold&#34;, Palatino, Cambria, &#34;Droid Serif&#34;, Georgia, &#34;Times New Roman&#34;, Times, serif; font-size: 28px;}&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;p {width:100%;font-family: &#34;Proxima Nova Regular&#34;, &#34;Helvetica Neue&#34;, Calibri, &#34;Droid Sans&#34;, Helvetica, Arial, sans-serif; font-size: 18px}&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;table {font-size:12px; border-collapse:collapse; border:1px solid #69c; margin:20px;}&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;th{font-weight:normal; font-size:14px; color:#039; border-bottom:1px dashed #69c; padding:12px 17px;}&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;td{color:#668;padding:7px 17px;border-bottom: 1px dashed #d8e8ff;}&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;tbody tr:hover td{color:#339;background:#f0f0ff;}&#39;</span><span class="p">+</span>
-</span></span><span class="line"><span class="cl"> <span class="s1">&#39;&lt;/style&gt;&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="c">#and provide a title so users know what they are looking at </span>
-</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s2">&#34;&lt;h1&gt;Children of </span><span class="p">$(</span><span class="nv">$item</span><span class="p">)</span><span class="s2">&lt;/h1&gt;&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">((</span><span class="nb">Get-Location</span><span class="p">).</span><span class="py">Provider</span><span class="p">.</span><span class="py">Name</span> <span class="o">-ne</span> <span class="s2">&#34;CmsItemProvider&#34;</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl"> <span class="nb">Set-Location</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">cd </span><span class="nv">$item</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c">#let the browser know they are looking at an HTML output</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl"> <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;text/html&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="c"># now query and format the output</span>
-</span></span><span class="line"><span class="cl"><span class="nb">gci </span><span class="p">.</span> <span class="p">|</span> <span class="nb">select-object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">ProviderPath</span> <span class="p">|</span> <span class="nb">ConvertTo-Html</span> <span class="n">-head</span> <span class="nv">$head</span> <span class="n">-body</span> <span class="nv">$body</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">[</span><span class="no">System.Web.HttpUtility</span><span class="p">]::</span><span class="n">HtmlDecode</span><span class="p">(</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Showing to the users as:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c">#Let&#39;s style it nicely:</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="nv">$head</span> <span class="p">=</span> <span class="s1">&#39;&lt;style&gt;&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"> <span class="s1">&#39;body{font-family:&#34;Lucida Sans Unicode&#34;, &#34;Lucida Grande&#34;, Sans-Serif; text-align:left;}&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"> <span class="s1">&#39;h1 {width:100%;font-family: &#34;Skolar Bold&#34;, Palatino, Cambria, &#34;Droid Serif&#34;, Georgia, &#34;Times New Roman&#34;, Times, serif; font-size: 28px;}&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"> <span class="s1">&#39;p {width:100%;font-family: &#34;Proxima Nova Regular&#34;, &#34;Helvetica Neue&#34;, Calibri, &#34;Droid Sans&#34;, Helvetica, Arial, sans-serif; font-size: 18px}&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"> <span class="s1">&#39;table {font-size:12px; border-collapse:collapse; border:1px solid #69c; margin:20px;}&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"> <span class="s1">&#39;th{font-weight:normal; font-size:14px; color:#039; border-bottom:1px dashed #69c; padding:12px 17px;}&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"> <span class="s1">&#39;td{color:#668;padding:7px 17px;border-bottom: 1px dashed #d8e8ff;}&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"> <span class="s1">&#39;tbody tr:hover td{color:#339;background:#f0f0ff;}&#39;</span><span class="p">+</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"> <span class="s1">&#39;&lt;/style&gt;&#39;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c">#and provide a title so users know what they are looking at </span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="s2">&#34;&lt;h1&gt;Children of </span><span class="p">$(</span><span class="nv">$item</span><span class="p">)</span><span class="s2">&lt;/h1&gt;&#34;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="k">if</span><span class="p">((</span><span class="nb">Get-Location</span><span class="p">).</span><span class="py">Provider</span><span class="p">.</span><span class="py">Name</span> <span class="o">-ne</span> <span class="s2">&#34;CmsItemProvider&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl"> <span class="nb">Set-Location</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="nb">cd </span><span class="nv">$item</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="c">#let the browser know they are looking at an HTML output</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nv">$HttpContext</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"> <span class="nv">$HttpContext</span><span class="p">.</span><span class="py">Response</span><span class="p">.</span><span class="py">ContentType</span> <span class="p">=</span> <span class="s2">&#34;text/html&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="c"># now query and format the output</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="nb">gci </span><span class="p">.</span> <span class="p">|</span> <span class="nb">select-object</span> <span class="n">Name</span><span class="p">,</span> <span class="n">DisplayName</span><span class="p">,</span> <span class="n">TemplateName</span><span class="p">,</span> <span class="n">Language</span><span class="p">,</span> <span class="n">Version</span><span class="p">,</span> <span class="n">ProviderPath</span> <span class="p">|</span> <span class="nb">ConvertTo-Html</span> <span class="n">-head</span> <span class="nv">$head</span> <span class="n">-body</span> <span class="nv">$body</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span> <span class="p">[</span><span class="no">System.Web.HttpUtility</span><span class="p">]::</span><span class="n">HtmlDecode</span><span class="p">(</span><span class="nv">$_</span><span class="p">)</span> <span class="p">}</span>
+</span></span></code></pre></div><p>Showing to the users as:</p>
 <p><a href="/images/ApiCall4.png"><img src="/images/ApiCall4.png" alt="ApiCall4" class="aligncenter" width="801" height="447" /></a></p>
 <p>So you can easily create scripted reports available under a simple URL to the unauthenticated users if needed.</p>
 <h2 id="what-else">What else?</h2>

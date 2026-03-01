@@ -911,6 +911,8 @@ pre {
   border-left: 3px solid var(--color-pre-border);
   border-radius: var(--radius-md);
   overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
   margin: 1.5em 0;
   line-height: 1.5;
   font-size: 15px;
@@ -930,8 +932,7 @@ pre code {
   border-left: 3px solid var(--color-pre-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-subtle);
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -947,9 +948,12 @@ pre code {
   font-size: 15px;
   background-color: transparent;
   color: inherit;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
-/* Line numbers table layout */
+/* Line numbers table layout (kept for legacy/fallback) */
 .highlight table {
   border-spacing: 0;
   padding: 0;

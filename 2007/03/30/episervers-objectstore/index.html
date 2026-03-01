@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -209,33 +209,17 @@ Basically the ObjectStore is a way of persisting any serializable object (with s
 </ul>
 <h2 id="the-research-field">The Research Field</h2>
 <p>The namespaces of your interest is EPiServer.BaseLibrary, namely the following parts of it:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">EPiServer.BaseLibrary</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">sealed</span> <span class="k">class</span> <span class="nc">Context</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IContext</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IItem</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IItemList</span> <span class="p">:</span> <span class="n">IEnumerable</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IObjectStore</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IRepository</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">ISession</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Then you may want to open EPiServer.XForms.XFormData and EPiServer.XForms.XForm especially the Save() method of the latter is very educating.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">namespace</span> <span class="nn">EPiServer.BaseLibrary</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">public</span> <span class="kd">sealed</span> <span class="k">class</span> <span class="nc">Context</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IContext</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IItem</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IItemList</span> <span class="p">:</span> <span class="n">IEnumerable</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IObjectStore</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IRepository</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">ISession</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Then you may want to open EPiServer.XForms.XFormData and EPiServer.XForms.XForm especially the Save() method of the latter is very educating.
 The code for the ObjectStore implementation lives in the <em><strong>EPiServer.Implementation</strong></em> namespace but having all the interfaces exposed its implementation details should not be of our concern. Suffice to say itseems to be flexible ane extensible. You can have it sitting on an Oracle &amp; Microsoft SQL Server databases as well as having it stored In an XML file. I assume there would not be much trouble replacing the object store looking as the Logging service has it setup dynamically through settings in its config file.</p>
 <h2 id="the-results">The results</h2>
 <ul>
@@ -243,239 +227,120 @@ The code for the ObjectStore implementation lives in the <em><strong>EPiServer.I
 <li>The default repository is stored in the Context and is capable of creating more sessions for us</li>
 <li>Bah, enough of the bulleted lists&hellip; let the code speak for itself&hellip;</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">EPiServer.Implementation</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">EPiServer.Implementation.Serialization</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">EPiServer.BaseLibrary</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Xml.Serialization</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.EPiServerTest.ObjectStore</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="na">    [Serializable, XmlInclude(typeof(CogObjectStoreItem))]</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">CogObjectStoreItem</span> <span class="p">:</span> <span class="n">IItem</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">object</span> <span class="n">id</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">object</span> <span class="n">Id</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">id</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">set</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kt">string</span> <span class="n">Name</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">set</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">CogObjectStoreItem</span><span class="p">(</span><span class="kt">object</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">string</span> <span class="n">data</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="n">data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">id</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="k">void</span> <span class="n">Save</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">try</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// check if there is a schema for the type, if not create it.</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">GetType</span><span class="p">())</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">TypeSchemaBuilder</span><span class="p">.</span><span class="n">RegisterSchemaAndType</span>
-</span></span><span class="line"><span class="cl">                        <span class="p">(</span><span class="s">&#34;CogObjectStoreItem&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="n">GetType</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="c1">// get a new session from the current context.</span>
-</span></span><span class="line"><span class="cl">                <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// wrap it in a transaction</span>
-</span></span><span class="line"><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">BeginTransaction</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// make sure the id has been defined.</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">this</span><span class="p">.</span><span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="c1">//persist</span>
-</span></span><span class="line"><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">CommitTransaction</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">exception</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// ... rollback the transaction and do some reporting</span>
-</span></span><span class="line"><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">RollbackTransaction</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="n">exception</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">finally</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">static</span> <span class="n">CogObjectStoreItem</span> <span class="n">Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">Id</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">try</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// make sure there is a schema to read from.</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">CogObjectStoreItem</span><span class="p">))</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="c1">//acquire a session</span>
-</span></span><span class="line"><span class="cl">                <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// ... and load the object</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="p">(</span><span class="n">CogObjectStoreItem</span><span class="p">)</span><span class="n">session</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">Id</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">exception</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// ... do some reporting</span>
-</span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="n">exception</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">finally</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">override</span> <span class="kt">string</span> <span class="n">ToString</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="the-conclusion">The Conclusion</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">  1</span><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">  2</span><span class="cl"><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">  3</span><span class="cl"><span class="k">using</span> <span class="nn">System.Text</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">  4</span><span class="cl"><span class="k">using</span> <span class="nn">EPiServer.Implementation</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">  5</span><span class="cl"><span class="k">using</span> <span class="nn">EPiServer.Implementation.Serialization</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">  6</span><span class="cl"><span class="k">using</span> <span class="nn">EPiServer.BaseLibrary</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">  7</span><span class="cl"><span class="k">using</span> <span class="nn">System.Xml.Serialization</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">  8</span><span class="cl">
+</span></span><span class="line"><span class="ln">  9</span><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.EPiServerTest.ObjectStore</span>
+</span></span><span class="line"><span class="ln"> 10</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 11</span><span class="cl"><span class="na">    [Serializable, XmlInclude(typeof(CogObjectStoreItem))]</span>
+</span></span><span class="line"><span class="ln"> 12</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">CogObjectStoreItem</span> <span class="p">:</span> <span class="n">IItem</span>
+</span></span><span class="line"><span class="ln"> 13</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 14</span><span class="cl">        <span class="kt">string</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 15</span><span class="cl">        <span class="kd">private</span> <span class="kt">object</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 16</span><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 17</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 18</span><span class="cl">        <span class="kd">public</span> <span class="kt">object</span> <span class="n">Id</span>
+</span></span><span class="line"><span class="ln"> 19</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 20</span><span class="cl">            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">id</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 21</span><span class="cl">            <span class="k">set</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 22</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 23</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 24</span><span class="cl">        <span class="kd">public</span> <span class="kt">string</span> <span class="n">Name</span>
+</span></span><span class="line"><span class="ln"> 25</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 26</span><span class="cl">            <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">name</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 27</span><span class="cl">            <span class="k">set</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="k">value</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 28</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 29</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 30</span><span class="cl">        <span class="kd">public</span> <span class="n">CogObjectStoreItem</span><span class="p">(</span><span class="kt">object</span> <span class="n">id</span><span class="p">,</span> <span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">string</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 31</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 32</span><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">data</span> <span class="p">=</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 33</span><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">id</span> <span class="p">=</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 34</span><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 35</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 36</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 37</span><span class="cl">        <span class="kd">public</span> <span class="k">void</span> <span class="n">Save</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 38</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 39</span><span class="cl">            <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 40</span><span class="cl">            <span class="k">try</span>
+</span></span><span class="line"><span class="ln"> 41</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 42</span><span class="cl">                <span class="c1">// check if there is a schema for the type, if not create it.</span>
+</span></span><span class="line"><span class="ln"> 43</span><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">GetType</span><span class="p">())</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 44</span><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 45</span><span class="cl">                    <span class="n">TypeSchemaBuilder</span><span class="p">.</span><span class="n">RegisterSchemaAndType</span>
+</span></span><span class="line"><span class="ln"> 46</span><span class="cl">                        <span class="p">(</span><span class="s">&#34;CogObjectStoreItem&#34;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="n">GetType</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln"> 47</span><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 48</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 49</span><span class="cl">                <span class="c1">// get a new session from the current context.</span>
+</span></span><span class="line"><span class="ln"> 50</span><span class="cl">                <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 51</span><span class="cl">                <span class="c1">// wrap it in a transaction</span>
+</span></span><span class="line"><span class="ln"> 52</span><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">BeginTransaction</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 53</span><span class="cl">                <span class="c1">// make sure the id has been defined.</span>
+</span></span><span class="line"><span class="ln"> 54</span><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">Id</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln"> 55</span><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 56</span><span class="cl">                    <span class="k">this</span><span class="p">.</span><span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 57</span><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 58</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 59</span><span class="cl">                <span class="c1">//persist</span>
+</span></span><span class="line"><span class="ln"> 60</span><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 61</span><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">CommitTransaction</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 62</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 63</span><span class="cl">            <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 64</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 65</span><span class="cl">                <span class="c1">// ... rollback the transaction and do some reporting</span>
+</span></span><span class="line"><span class="ln"> 66</span><span class="cl">                <span class="n">session</span><span class="p">.</span><span class="n">RollbackTransaction</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 67</span><span class="cl">                <span class="k">throw</span> <span class="n">exception</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 68</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 69</span><span class="cl">            <span class="k">finally</span>
+</span></span><span class="line"><span class="ln"> 70</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 71</span><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 72</span><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 73</span><span class="cl">                    <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 74</span><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 75</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 76</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 77</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 78</span><span class="cl">        <span class="kd">public</span> <span class="kd">static</span> <span class="n">CogObjectStoreItem</span> <span class="n">Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">Id</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 79</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 80</span><span class="cl">            <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 81</span><span class="cl">            <span class="k">try</span>
+</span></span><span class="line"><span class="ln"> 82</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 83</span><span class="cl">                <span class="c1">// make sure there is a schema to read from.</span>
+</span></span><span class="line"><span class="ln"> 84</span><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">CogObjectStoreItem</span><span class="p">))</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 85</span><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 86</span><span class="cl">                    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 87</span><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 88</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 89</span><span class="cl">                <span class="c1">//acquire a session</span>
+</span></span><span class="line"><span class="ln"> 90</span><span class="cl">                <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 91</span><span class="cl">                <span class="c1">// ... and load the object</span>
+</span></span><span class="line"><span class="ln"> 92</span><span class="cl">                <span class="k">return</span> <span class="p">(</span><span class="n">CogObjectStoreItem</span><span class="p">)</span><span class="n">session</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">Id</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 93</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 94</span><span class="cl">            <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 95</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 96</span><span class="cl">                <span class="c1">// ... do some reporting</span>
+</span></span><span class="line"><span class="ln"> 97</span><span class="cl">                <span class="k">throw</span> <span class="n">exception</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 98</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 99</span><span class="cl">            <span class="k">finally</span>
+</span></span><span class="line"><span class="ln">100</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">101</span><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">102</span><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="ln">103</span><span class="cl">                    <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">104</span><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="ln">105</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">106</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">107</span><span class="cl">
+</span></span><span class="line"><span class="ln">108</span><span class="cl">        <span class="kd">public</span> <span class="kd">override</span> <span class="kt">string</span> <span class="n">ToString</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">109</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">110</span><span class="cl">            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">111</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">112</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">113</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="the-conclusion">The Conclusion</h2>
 <p>ObjectStore seems like a kind of Hibernate surrogate, the cool thing is that you can create the stored data without modifying the database schema, the not so cool is that there may be a serious penalty for bigger structures and I suspect there might be issues with speed for large data sets since the searching technique implemented seems to require that the objects be de-serialized to be checked if the match the filter.
 Mateusz is going to test its performance over the following days to decide if it&rsquo;s going to perform with what we need it for and I&rsquo;ll try to see if I can get some hints for solving our problem on the EPiServer developer forums. But then again, even if it&rsquo;s nto going to be our solution it may still prove useful for other issues.</p>
 

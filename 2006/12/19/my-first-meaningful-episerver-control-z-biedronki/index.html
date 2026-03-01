@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -195,153 +195,71 @@
       <div class="entry-content">
         <p>The challenge - The site that we will be coding will have its pages tagged with episerver categories. Implement a control that will list all the pages tagged with a specific category.
 The control aspx code seems looks pretty straightforward and is derivative of some other controls that are defined in the EPiServer sample site:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Control Language=&#34;C#&#34; AutoEventWireup=&#34;false&#34; CodeFile=&#34;CategoryListing.ascx.cs&#34; Inherits=&#34;development.templates.Units.CategoryListing&#34; TargetSchema=&#34;http://schemas.microsoft.com/intellisense/ie5&#34; %&gt;
-</span></span><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;EPiServer&#34; Namespace=&#34;EPiServer.WebControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#34;rightmenudivStartPage&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingcontainer&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingleftcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&#34;listheading leftfloating&#34;</span> <span class="na">href=</span><span class="s">&#34;&lt;%=EventRootPage.LinkURL%&gt;&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="err">&lt;</span>%= EventRootPage.PageName %&gt;
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/a&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingrightcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;EPiServer:PageList</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">ID=</span><span class="s">&#34;PageList1&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;ItemTemplate&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;startpagecalendaritem&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;datelistingtext&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property1&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;PageLink&#34;</span> <span class="na">CssClass=</span><span class="s">&#34;StartCalendar&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;Normal&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">                        <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property3&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;MainIntro&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;/span&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/div&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/ItemTemplate&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/EPiServer:PageList&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;br/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;br/&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/div&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The wirst thing you will notice after looking at the code is that PageList is pretty much a standard ASP.NET  reinvented and rehashed. GREAT! Sounds like we can use the Data binding, right? That&rsquo;s also true:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="k">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(!</span><span class="n">IsPostBack</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PageList1</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">CategoryPages</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">DataBind</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Does the trick of binding the data to the repeater&hellip; uh&hellip; oh&hellip; sorry&hellip; I mean PageList.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="err">&lt;</span>%@ Control Language=&#34;C#&#34; AutoEventWireup=&#34;false&#34; CodeFile=&#34;CategoryListing.ascx.cs&#34; Inherits=&#34;development.templates.Units.CategoryListing&#34; TargetSchema=&#34;http://schemas.microsoft.com/intellisense/ie5&#34; %&gt;
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;EPiServer&#34; Namespace=&#34;EPiServer.WebControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#34;rightmenudivStartPage&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingcontainer&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingleftcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">&#34;listheading leftfloating&#34;</span> <span class="na">href=</span><span class="s">&#34;&lt;%=EventRootPage.LinkURL%&gt;&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">            <span class="err">&lt;</span>%= EventRootPage.PageName %&gt;
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="nt">&lt;/a&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;listheadingrightcorner&#34;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="nt">&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="nt">&lt;EPiServer:PageList</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">ID=</span><span class="s">&#34;PageList1&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="nt">&lt;ItemTemplate&gt;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#34;startpagecalendaritem&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;datelistingtext&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">                    <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property1&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;PageLink&#34;</span> <span class="na">CssClass=</span><span class="s">&#34;StartCalendar&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#34;Normal&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">                        <span class="nt">&lt;episerver:property</span> <span class="na">ID=</span><span class="s">&#34;Property3&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span> <span class="na">PropertyName=</span><span class="s">&#34;MainIntro&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">                    <span class="nt">&lt;/span&gt;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">                <span class="nt">&lt;/div&gt;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="nt">&lt;/ItemTemplate&gt;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="nt">&lt;/EPiServer:PageList&gt;</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="nt">&lt;br/&gt;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="nt">&lt;br/&gt;</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="nt">&lt;/div&gt;</span>
+</span></span></code></pre></div><p>The wirst thing you will notice after looking at the code is that PageList is pretty much a standard ASP.NET  reinvented and rehashed. GREAT! Sounds like we can use the Data binding, right? That&rsquo;s also true:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">private</span> <span class="k">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">if</span> <span class="p">(!</span><span class="n">IsPostBack</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="n">PageList1</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">CategoryPages</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="n">DataBind</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Does the trick of binding the data to the repeater&hellip; uh&hellip; oh&hellip; sorry&hellip; I mean PageList.
 Now comes the hard and non-obvious part.
 How does one actually find the pages assigned to a category? Short of calling the database directly to query the tblCategorypage table that comes to mind at first, it looks like EPiServer has a really cool page finding module that allows for simple yet fairly effective discovery of pages conforming to some developer defined criteria. Those criteria are defined by means of forming any necessary number of instances of PropertyCriteria class provided as a PropertyCriteriaCollection to Global.EPDataFactory. The result is handed to us back as a PageDataCollection. The fetching of the pages looks like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">PageDataCollection</span> <span class="n">GetCategoryPages</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PropertyCriteria</span> <span class="n">criteria</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">CategoryList</span> <span class="n">categories</span> <span class="p">=</span> <span class="p">((</span><span class="n">PropertyCategory</span><span class="p">)(</span><span class="n">CurrentPage</span><span class="p">.</span><span class="n">Property</span><span class="p">[</span><span class="s">&#34;AggregatedCategory&#34;</span><span class="p">])).</span><span class="n">Category</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">criteria</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PropertyCriteria</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Condition</span> <span class="p">=</span> <span class="n">CompareCondition</span><span class="p">.</span><span class="n">Equal</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="n">PropertyDataType</span><span class="p">.</span><span class="n">Category</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Value</span> <span class="p">=</span> <span class="n">categories</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;PageCategory&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Required</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PropertyCriteriaCollection</span> <span class="n">col</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PropertyCriteriaCollection</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">col</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">criteria</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PageDataCollection</span> <span class="n">pdc</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PageDataCollection</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pdc</span> <span class="p">=</span> <span class="n">Global</span><span class="p">.</span><span class="n">EPDataFactory</span><span class="p">.</span><span class="n">FindPagesWithCriteria</span><span class="p">(</span><span class="n">EPiServer</span><span class="p">.</span><span class="n">Global</span><span class="p">.</span><span class="n">EPConfig</span><span class="p">.</span><span class="n">StartPage</span><span class="p">,</span> <span class="n">col</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">pdc</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>For this to work though, one has to define some more stuff in the web admin part of the site. the usual task is to define the Page Template for the control. In this case when you define the Page Template make sure to put the &ldquo;AggregatedCategory&rdquo; property in that should be of type Category selection. This property defines what categories you want your control to aggregate, and you can provide one or more of those. the other property that is required for this very control is &ldquo;CategoryContainer&rdquo; of type Page. This is solely for the purpose of having a master page that you define as the &ldquo;main page&rdquo; for the chosen category selection. It serves as a clickable header in the control. Unnecessary maybe but one would have to define a caption for the control anyway so why not make it meaningful.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="n">PageDataCollection</span> <span class="n">GetCategoryPages</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">PropertyCriteria</span> <span class="n">criteria</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">CategoryList</span> <span class="n">categories</span> <span class="p">=</span> <span class="p">((</span><span class="n">PropertyCategory</span><span class="p">)(</span><span class="n">CurrentPage</span><span class="p">.</span><span class="n">Property</span><span class="p">[</span><span class="s">&#34;AggregatedCategory&#34;</span><span class="p">])).</span><span class="n">Category</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">criteria</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PropertyCriteria</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Condition</span> <span class="p">=</span> <span class="n">CompareCondition</span><span class="p">.</span><span class="n">Equal</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Type</span> <span class="p">=</span> <span class="n">PropertyDataType</span><span class="p">.</span><span class="n">Category</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Value</span> <span class="p">=</span> <span class="n">categories</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Name</span> <span class="p">=</span> <span class="s">&#34;PageCategory&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">criteria</span><span class="p">.</span><span class="n">Required</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">PropertyCriteriaCollection</span> <span class="n">col</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PropertyCriteriaCollection</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">col</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">criteria</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">PageDataCollection</span> <span class="n">pdc</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PageDataCollection</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="n">pdc</span> <span class="p">=</span> <span class="n">Global</span><span class="p">.</span><span class="n">EPDataFactory</span><span class="p">.</span><span class="n">FindPagesWithCriteria</span><span class="p">(</span><span class="n">EPiServer</span><span class="p">.</span><span class="n">Global</span><span class="p">.</span><span class="n">EPConfig</span><span class="p">.</span><span class="n">StartPage</span><span class="p">,</span> <span class="n">col</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">return</span> <span class="n">pdc</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>For this to work though, one has to define some more stuff in the web admin part of the site. the usual task is to define the Page Template for the control. In this case when you define the Page Template make sure to put the &ldquo;AggregatedCategory&rdquo; property in that should be of type Category selection. This property defines what categories you want your control to aggregate, and you can provide one or more of those. the other property that is required for this very control is &ldquo;CategoryContainer&rdquo; of type Page. This is solely for the purpose of having a master page that you define as the &ldquo;main page&rdquo; for the chosen category selection. It serves as a clickable header in the control. Unnecessary maybe but one would have to define a caption for the control anyway so why not make it meaningful.
 The usage of the said control is trivial. A sample usage on the default EPiServer site looks like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Page language=&#34;c#&#34; Codebehind=&#34;CategorySummary.aspx.cs&#34; AutoEventWireup=&#34;false&#34; Inherits=&#34;development.Templates.CategorySummary&#34; %&gt;
-</span></span><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;EPiServer&#34; Namespace=&#34;EPiServer.WebControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
-</span></span><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;development&#34; TagName=&#34;CategoryListing&#34;  Src=&#34;~/templates/Units/CategoryListing.ascx&#34;%&gt;
-</span></span><span class="line"><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;development&#34; TagName=&#34;DefaultFramework&#34;    Src=&#34;~/templates/Frameworks/DefaultFramework.ascx&#34;%&gt;
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;development:DefaultFramework</span> <span class="na">ID=</span><span class="s">&#34;DefaultFramework&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;EPiServer:Content</span> <span class="na">ID=</span><span class="s">&#34;Content1&#34;</span> <span class="na">Region=</span><span class="s">&#34;fullRegion&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;development:CategoryListing</span>  <span class="na">ID=</span><span class="s">&#34;CategoryContent&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span><span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/EPiServer:Content&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/development:DefaultFramework&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Out of which really only the <code>&lt;development:CategoryListing  ID=&quot;CategoryContent&quot; runat=&quot;server&quot;/&gt;</code> part is meaningful.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="err">&lt;</span>%@ Page language=&#34;c#&#34; Codebehind=&#34;CategorySummary.aspx.cs&#34; AutoEventWireup=&#34;false&#34; Inherits=&#34;development.Templates.CategorySummary&#34; %&gt;
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;EPiServer&#34; Namespace=&#34;EPiServer.WebControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;development&#34; TagName=&#34;CategoryListing&#34;  Src=&#34;~/templates/Units/CategoryListing.ascx&#34;%&gt;
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="err">&lt;</span>%@ Register TagPrefix=&#34;development&#34; TagName=&#34;DefaultFramework&#34;    Src=&#34;~/templates/Frameworks/DefaultFramework.ascx&#34;%&gt;
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="nt">&lt;development:DefaultFramework</span> <span class="na">ID=</span><span class="s">&#34;DefaultFramework&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="nt">&lt;EPiServer:Content</span> <span class="na">ID=</span><span class="s">&#34;Content1&#34;</span> <span class="na">Region=</span><span class="s">&#34;fullRegion&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">        <span class="nt">&lt;development:CategoryListing</span>  <span class="na">ID=</span><span class="s">&#34;CategoryContent&#34;</span> <span class="na">runat=</span><span class="s">&#34;server&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="nt">&lt;/EPiServer:Content&gt;</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="nt">&lt;/development:DefaultFramework&gt;</span>
+</span></span></code></pre></div><p>Out of which really only the <code>&lt;development:CategoryListing  ID=&quot;CategoryContent&quot; runat=&quot;server&quot;/&gt;</code> part is meaningful.
 For the record&hellip; It looks like THE place to go to solve that kind of dilemas fast is the <a href="http://www.episerver.com/devforum/default.aspx?id=746&amp;epslanguage=EN">EpiServer &ldquo;Developer to Developer&rdquo; forums</a>.
 <em>*)&hellip; couldn&rsquo;t ressist with the title joke :) For those not in subject&hellip; It&rsquo;s a reference to a silly commercial of one of the market chain (Biedronka) in Poland that advertises recently with &ldquo;My first *something*&hellip; from Biedronka*</em></p>
 <p><a href="http://www.cognifide.com"><img src="http://www.cognifide.com/logo.jpg" alt="Cognifide" class="aligncenter" /></a></p>

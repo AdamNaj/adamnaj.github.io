@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -213,173 +213,78 @@
 <p>A cool part of the experience is that you can have multiple roots, which means that your scripts can be more liberal in what roots they expose.</p>
 <p><a href="/images/image.png"><img src="/images/image_thumb.png" alt="image" title="image" class="aligncenter" width="480" height="380" /></a></p>
 <p>This is done using the getRenderingDatasource pipeline and the implementation looks as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ScriptedRenderingDataSourceRoots</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">GetRenderingDatasourceArgs</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Assert</span><span class="p">.</span><span class="n">IsNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">sources</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">RenderingItem</span><span class="p">[</span><span class="s">&#34;Datasource Location&#34;</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">IsScripted</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">items</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">contextItem</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">ContentDatabase</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                                  <span class="n">args</span><span class="p">.</span><span class="n">ContextItemPath</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">GetScriptedQueries</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span> <span class="n">contextItem</span><span class="p">,</span> <span class="n">items</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">args</span><span class="p">.</span><span class="n">DatasourceRoots</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The implementation of IsScripted and GetScriptedQueries are the same as in my <a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/">previous blog post</a> so I&rsquo;ll just skip those. Now in the console implementation the IsScripted has been improved to not only take over when ?script:? is detected but also when the data source definition points directly at the script library in &ldquo;/sitecore/system/Modules/PowerShell/Script Library/&rdquo; ? so you no longer have to add the ?script:? for the console to detect that it needs to take action.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ScriptedRenderingDataSourceRoots</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">GetRenderingDatasourceArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="n">Assert</span><span class="p">.</span><span class="n">IsNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="kt">string</span> <span class="n">sources</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">RenderingItem</span><span class="p">[</span><span class="s">&#34;Datasource Location&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">IsScripted</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="kt">var</span> <span class="n">items</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="kt">var</span> <span class="n">contextItem</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">ContentDatabase</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">                                  <span class="n">args</span><span class="p">.</span><span class="n">ContextItemPath</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">            <span class="n">GetScriptedQueries</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span> <span class="n">contextItem</span><span class="p">,</span> <span class="n">items</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="n">args</span><span class="p">.</span><span class="n">DatasourceRoots</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The implementation of IsScripted and GetScriptedQueries are the same as in my <a href="/2013/04/17/powershell-scripted-datasources-in-sitecore-part-1/">previous blog post</a> so I&rsquo;ll just skip those. Now in the console implementation the IsScripted has been improved to not only take over when ?script:? is detected but also when the data source definition points directly at the script library in &ldquo;/sitecore/system/Modules/PowerShell/Script Library/&rdquo; ? so you no longer have to add the ?script:? for the console to detect that it needs to take action.</p>
 <p>The hook into the pipeline is simply:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;pipelines&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;getRenderingDatasource&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;processor</span>
-</span></span><span class="line"><span class="cl">            <span class="na">patch:before=</span><span class="s">&#34;*[@type=&#39;Sitecore.Pipelines.GetRenderingDatasource.GetDatasourceLocation, Sitecore.Kernel&#39;]&#34;</span>
-</span></span><span class="line"><span class="cl">            <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.Processors.ScriptedRenderingDataSourceRoots, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/getRenderingDatasource&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/pipelines&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>That&rsquo;s really all it took to implement PowerShell integration there! Isn&rsquo;t Sitecore awesome?!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nt">&lt;pipelines&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      <span class="nt">&lt;getRenderingDatasource&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nt">&lt;processor</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">            <span class="na">patch:before=</span><span class="s">&#34;*[@type=&#39;Sitecore.Pipelines.GetRenderingDatasource.GetDatasourceLocation, Sitecore.Kernel&#39;]&#34;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">            <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.Processors.ScriptedRenderingDataSourceRoots, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">      <span class="nt">&lt;/getRenderingDatasource&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="nt">&lt;/pipelines&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>That&rsquo;s really all it took to implement PowerShell integration there! Isn&rsquo;t Sitecore awesome?!</p>
 <h2 id="scripted-renderingsublayout-data-source-items">Scripted rendering/sublayout data source items</h2>
 <p>Now this is probably the coolest data source integration of the three implemented so far &ndash; instead of pointing at an item &ndash; you can point at a script and make the script provide an item! This is based on a new functionality in Using this you can have your rendering e.g.:</p>
 <ul>
 <li>randomize promo content between requests</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">home</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Get-Random</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span><span class="n">content</span><span class="p">\</span><span class="n">home</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Get-Random</span>
+</span></span></code></pre></div><ul>
 <li>provide different content for different time of day, day of week etc.</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="s2">&#34;master:\content\home\</span><span class="p">$([</span><span class="no">DateTime</span><span class="p">]::</span><span class="n">Now</span><span class="p">.</span><span class="n">DayOfWeek</span><span class="p">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="s2">&#34;master:\content\home\</span><span class="p">$([</span><span class="no">DateTime</span><span class="p">]::</span><span class="n">Now</span><span class="p">.</span><span class="n">DayOfWeek</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><ul>
 <li>provide different content for different users?</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="s2">&#34;master:\content\home\</span><span class="p">$(</span><span class="nv">$me</span><span class="p">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>? to provide just a few samples. Now - there is nothing in it you couldn&rsquo;t otherwise do with code, but with PowerShell you can change the module?s behaviour on the fly without ever needing to restart your server or recompile your code!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="s2">&#34;master:\content\home\</span><span class="p">$(</span><span class="nv">$me</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><p>? to provide just a few samples. Now - there is nothing in it you couldn&rsquo;t otherwise do with code, but with PowerShell you can change the module?s behaviour on the fly without ever needing to restart your server or recompile your code!</p>
 <p>Starting with CMS 6.5.0 rev. 120706 (Update-5) &ndash; Sitecore added a new pipeline (which by the way is not really well documented and it took some digging to find out how it works) which means that it will not work on older versions than 6.5 Update-5.</p>
 <p>The console hooks into the pipeline using the following include:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;pipelines&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;resolveRenderingDatasource&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;processor</span> 
-</span></span><span class="line"><span class="cl">            <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.Processors.ScriptedRenderingDataSourceResolve, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/resolveRenderingDatasource&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/pipelines&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And the code for it is even simpler than the roots resolver:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ScriptedRenderingDataSourceResolve</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">ResolveRenderingDatasourceArgs</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Assert</span><span class="p">.</span><span class="n">IsNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">source</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Datasource</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">IsScripted</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">items</span> <span class="p">=</span> <span class="n">RunEnumeration</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">Sitecore</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Item</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">args</span><span class="p">.</span><span class="n">Datasource</span> <span class="p">=</span> <span class="n">items</span><span class="p">.</span><span class="n">First</span><span class="p">().</span><span class="n">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Again with the RunEnumeration identical to the previous post implementation. Now, I think I&rsquo;m happy and ready to put the data sources to rest? did I miss anything that could get scripted (?) Let me know!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nt">&lt;pipelines&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      <span class="nt">&lt;resolveRenderingDatasource&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nt">&lt;processor</span> 
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">            <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.Processors.ScriptedRenderingDataSourceResolve, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">      <span class="nt">&lt;/resolveRenderingDatasource&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="nt">&lt;/pipelines&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>And the code for it is even simpler than the roots resolver:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ScriptedRenderingDataSourceResolve</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">ResolveRenderingDatasourceArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="n">Assert</span><span class="p">.</span><span class="n">IsNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="kt">string</span> <span class="n">source</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Datasource</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">IsScripted</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="kt">var</span> <span class="n">items</span> <span class="p">=</span> <span class="n">RunEnumeration</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">Sitecore</span><span class="p">.</span><span class="n">Context</span><span class="p">.</span><span class="n">Item</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="n">args</span><span class="p">.</span><span class="n">Datasource</span> <span class="p">=</span> <span class="n">items</span><span class="p">.</span><span class="n">First</span><span class="p">().</span><span class="n">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Again with the RunEnumeration identical to the previous post implementation. Now, I think I&rsquo;m happy and ready to put the data sources to rest? did I miss anything that could get scripted (?) Let me know!</p>
 <p>The full implementation is available in the <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Cognifide&rsquo;s Sitecore PowerShell Console (starting with 2.0 RC3) already available on Sitecore Marketplace</a>.</p>
 
       </div>

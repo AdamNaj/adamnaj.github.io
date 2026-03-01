@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -212,136 +212,50 @@
 <p>Not discouraged by the early discoveries, I’ve dusted my trusty copy of Reflector and dived inside the installer code. Following are the findings of my investigations and sample solutions for using them with your Jobs.</p>
 <h2 id="jobmonitor">JobMonitor</h2>
 <p>The key role in the asynchronous communication between Job and Sheer UI plays the JobMonitor control. For your job to be able to talk with your dialog you need to place this control on your dialog which you can do the following way. Add the namespace JobMonitor lives in to your code:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Jobs.AsyncUI</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now add JobMonitor as a field to your Sheer dialog/control:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="n">JobMonitor</span> <span class="n">Monitor</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now we need to instantiate and use the control. For that modify the OnLoad method in your dialog to include the following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnLoad</span><span class="p">(</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">base</span><span class="p">.</span><span class="n">OnLoad</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// your code ...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">Monitor</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">IsEvent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Monitor</span> <span class="p">=</span> <span class="k">new</span> <span class="n">JobMonitor</span> <span class="p">{</span><span class="n">ID</span> <span class="p">=</span> <span class="s">&#34;Monitor&#34;</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">Controls</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">Monitor</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Monitor</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;Monitor&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">JobMonitor</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">Monitor</span><span class="p">.</span><span class="n">JobFinished</span> <span class="p">+=</span> <span class="n">MonitorJobFinished</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Monitor</span><span class="p">.</span><span class="n">JobDisappeared</span> <span class="p">+=</span> <span class="n">MonitorJobFinished</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// more of your code ...</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Where JobMonitorFinished is a delegate called when the asynchronous task is finished. Now all you need to do in your code to start using the JobMonitor is to run your code in its context:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Monitor</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&#34;MyJobExecution&#34;</span><span class="p">,</span> <span class="s">&#34;UI&#34;</span><span class="p">,</span> <span class="n">jobRunner</span><span class="p">.</span><span class="n">Run</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>where jobRunner is an instance of my class that contains any parameters I need for my Job to run. as well as a pointer to your method, but it can as well be containing the code of the job itself. JobMonitor now takes and executes the “Run” method in a new asynchronous Job context. It will also poll the job for any messages and execute them periodically.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Jobs.AsyncUI</span><span class="p">;</span>
+</span></span></code></pre></div><p>Now add JobMonitor as a field to your Sheer dialog/control:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">protected</span> <span class="n">JobMonitor</span> <span class="n">Monitor</span><span class="p">;</span>
+</span></span></code></pre></div><p>Now we need to instantiate and use the control. For that modify the OnLoad method in your dialog to include the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnLoad</span><span class="p">(</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">base</span><span class="p">.</span><span class="n">OnLoad</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">// your code ...</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">Monitor</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">IsEvent</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="n">Monitor</span> <span class="p">=</span> <span class="k">new</span> <span class="n">JobMonitor</span> <span class="p">{</span><span class="n">ID</span> <span class="p">=</span> <span class="s">&#34;Monitor&#34;</span><span class="p">};</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">            <span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">Controls</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">Monitor</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">            <span class="n">Monitor</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;Monitor&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">JobMonitor</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="n">Monitor</span><span class="p">.</span><span class="n">JobFinished</span> <span class="p">+=</span> <span class="n">MonitorJobFinished</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="n">Monitor</span><span class="p">.</span><span class="n">JobDisappeared</span> <span class="p">+=</span> <span class="n">MonitorJobFinished</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="c1">// more of your code ...</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Where JobMonitorFinished is a delegate called when the asynchronous task is finished. Now all you need to do in your code to start using the JobMonitor is to run your code in its context:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Monitor</span><span class="p">.</span><span class="n">Start</span><span class="p">(</span><span class="s">&#34;MyJobExecution&#34;</span><span class="p">,</span> <span class="s">&#34;UI&#34;</span><span class="p">,</span> <span class="n">jobRunner</span><span class="p">.</span><span class="n">Run</span><span class="p">);</span>
+</span></span></code></pre></div><p>where jobRunner is an instance of my class that contains any parameters I need for my Job to run. as well as a pointer to your method, but it can as well be containing the code of the job itself. JobMonitor now takes and executes the “Run” method in a new asynchronous Job context. It will also poll the job for any messages and execute them periodically.</p>
 <h2 id="executing-ui-commands-from-the-job">Executing UI commands from the Job</h2>
 <p>Now from the Job context point of view you signal JobMonitor to do stuff for you by sending Messages. You can do some stuff pretty easily like execute the following to show an alert to your user:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">JobContext</span><span class="p">.</span><span class="n">Alert</span><span class="p">(</span><span class="n">Title</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>or as for confirmation in the following way:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">JobContext</span><span class="p">.</span><span class="n">Confirm</span><span class="p">(</span><span class="err">“</span><span class="n">Would</span> <span class="n">you</span> <span class="n">like</span> <span class="n">fries</span> <span class="n">with</span> <span class="n">that</span><span class="p">?</span><span class="err">”</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>If you want to show do some more elaborate things you might want to either use the following to send a command message and retrieve response:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">JobContext</span><span class="p">.</span><span class="n">SendMessage</span><span class="p">(</span><span class="err">“</span><span class="n">my</span><span class="p">:</span><span class="n">command</span><span class="err">”</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>But if all you want to do is execute a command you can as well use:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">JobContext</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="err">“</span><span class="n">my</span><span class="p">:</span><span class="n">command</span><span class="err">”</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>to post the message asynchronously and ignore the results.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">JobContext</span><span class="p">.</span><span class="n">Alert</span><span class="p">(</span><span class="n">Title</span><span class="p">);</span>
+</span></span></code></pre></div><p>or as for confirmation in the following way:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">JobContext</span><span class="p">.</span><span class="n">Confirm</span><span class="p">(</span><span class="err">“</span><span class="n">Would</span> <span class="n">you</span> <span class="n">like</span> <span class="n">fries</span> <span class="n">with</span> <span class="n">that</span><span class="p">?</span><span class="err">”</span><span class="p">);</span>
+</span></span></code></pre></div><p>If you want to show do some more elaborate things you might want to either use the following to send a command message and retrieve response:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">JobContext</span><span class="p">.</span><span class="n">SendMessage</span><span class="p">(</span><span class="err">“</span><span class="n">my</span><span class="p">:</span><span class="n">command</span><span class="err">”</span><span class="p">);</span>
+</span></span></code></pre></div><p>But if all you want to do is execute a command you can as well use:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kt">string</span> <span class="n">response</span> <span class="p">=</span> <span class="n">JobContext</span><span class="p">.</span><span class="n">PostMessage</span><span class="p">(</span><span class="err">“</span><span class="n">my</span><span class="p">:</span><span class="n">command</span><span class="err">”</span><span class="p">);</span>
+</span></span></code></pre></div><p>to post the message asynchronously and ignore the results.</p>
 <p>You can even show dialogs using something like the following (even including parameters to the dialog):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">JobContext</span><span class="p">.</span><span class="n">ShowModalDialog</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="s">&#34;ConfirmChoice&#34;</span><span class="p">,</span> <span class="s">&#34;800&#34;</span><span class="p">,</span> <span class="s">&#34;300&#34;</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>and retrieve a response from it. Which finally brings us to the Powershell interactivity that was introduced in the latest console using this technique…</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">JobContext</span><span class="p">.</span><span class="n">ShowModalDialog</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="s">&#34;ConfirmChoice&#34;</span><span class="p">,</span> <span class="s">&#34;800&#34;</span><span class="p">,</span> <span class="s">&#34;300&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>and retrieve a response from it. Which finally brings us to the Powershell interactivity that was introduced in the latest console using this technique…</p>
 <p><a href="/images/image3.png"><img src="/images/image_thumb3.png" alt="image" title="image" class="aligncenter" width="644" height="471" /></a></p>
 <p>I strongly encourage you to look into the <a href="http://bit.ly/PsConScMplc">Cognifide PowerShell Console for Sitecore</a> code <a href="http://sitecorepowershell.codeplex.com/">available on CodePlex</a>. For further investigation on techniques you could employ for some more advanced usages (like sending an item to your dialogs and such. The console available on Sitecore Marketplace now already has this functionality in it and you can use this in multiple ways in commandlets starting with the word Show, like:</p>
 <ul>
@@ -352,15 +266,8 @@
 <li>Show-YesNoCancel</li>
 </ul>
 <p>To find out the latest commandlets in the further versions of console and to find out what parameters each of them can supports execute the following script:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Command</span> <span class="n">Show</span><span class="p">-*</span> <span class="p">|</span> <span class="nb">ft </span><span class="n">Definition</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>There, now we have Asynchronous Job-UI communication documented… somewhat. Hope this helps somebody.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Command</span> <span class="n">Show</span><span class="p">-*</span> <span class="p">|</span> <span class="nb">ft </span><span class="n">Definition</span>
+</span></span></code></pre></div><p>There, now we have Asynchronous Job-UI communication documented… somewhat. Hope this helps somebody.</p>
 
       </div>
 

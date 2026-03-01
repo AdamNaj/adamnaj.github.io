@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -195,398 +195,191 @@
       <div class="entry-content">
         <p>I think we&rsquo;re mostly finished investigating ObjectStore for now. In this article I&rsquo;ll try to finish up on the apsects of using the Object store in a real life solution that is a basic Page comments. In my <a href="/2007/03/30/episervers-objectstore/">previous article concerning ObjectStore</a> I have described a way of storing and retrieving an object from the Store, which is fine and dandy if we know exactly the object&rsquo;s OD, for example if we reference it from a page. But what good is a store like that if we cannot search it for content? The problem we were trying to solve using ObjectStore was storing comments for ANY Episerver page without having to do anything to the page type. We might need that for the upcoming project so the discovery may prove useful since this is a really neat way of storing objects.</p>
 <p>So the class that we are going to store needs to persists the following values:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.EPiServerTest.ObjectStore</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="na">    [Serializable, XmlInclude(typeof (PageCommentDO))]</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">PageCommentDO</span> <span class="p">:</span> <span class="n">IItem</span><span class="p">,</span> <span class="n">IPageComment</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">object</span> <span class="n">id</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="na">        [Indexed(true)]</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">int</span> <span class="n">pageId</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">title</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">content</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="na">        [Indexed(true)]</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="n">DateTime</span> <span class="n">submitDate</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="na">        [Indexed(true)]</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">bool</span> <span class="n">moderated</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="na">        [Indexed(true)]</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">bool</span> <span class="n">published</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="na">        [Indexed(true)]</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="kt">bool</span> <span class="n">reported</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p> You might have noticed that contrary to what I did before this class has some of its fields tagged with [Indexed(true)] attribute. This is required by the store object if we ever want to query the store for the class using those fields as a filtering criteria. The page also implements the required IItem interface (although the properties required by the interface are not shown in the excerpt) as well as our internal IPageComment which is added there for the purpose of easy switching of implementations. We intend to implement it on both ObjectStore and using NHibernate to make sure we get the best performance possible out of our solution. This interface is to allow us to easily switch between the 2 implementations.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.EPiServerTest.ObjectStore</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="na">    [Serializable, XmlInclude(typeof (PageCommentDO))]</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">PageCommentDO</span> <span class="p">:</span> <span class="n">IItem</span><span class="p">,</span> <span class="n">IPageComment</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="kd">private</span> <span class="kt">object</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="na">        [Indexed(true)]</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="kd">private</span> <span class="kt">int</span> <span class="n">pageId</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">title</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="kd">private</span> <span class="kt">string</span> <span class="n">content</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="na">        [Indexed(true)]</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="kd">private</span> <span class="n">DateTime</span> <span class="n">submitDate</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="na">        [Indexed(true)]</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="kd">private</span> <span class="kt">bool</span> <span class="n">moderated</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="na">        [Indexed(true)]</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="kd">private</span> <span class="kt">bool</span> <span class="n">published</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="na">        [Indexed(true)]</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="kd">private</span> <span class="kt">bool</span> <span class="n">reported</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p> You might have noticed that contrary to what I did before this class has some of its fields tagged with [Indexed(true)] attribute. This is required by the store object if we ever want to query the store for the class using those fields as a filtering criteria. The page also implements the required IItem interface (although the properties required by the interface are not shown in the excerpt) as well as our internal IPageComment which is added there for the purpose of easy switching of implementations. We intend to implement it on both ObjectStore and using NHibernate to make sure we get the best performance possible out of our solution. This interface is to allow us to easily switch between the 2 implementations.</p>
 <h2 id="back-to-the-objectstore">Back to the ObjectStore</h2>
 <p> First we need to introduce a few new classes EPiServer uses for querying the Store. The namespace that scopes the querying consists of the following entities:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">EPiServer.BaseLibrary.Search</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>    
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">BetweenExpression</span> <span class="p">:</span> <span class="n">IExpression</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">EqualExpression</span> <span class="p">:</span> <span class="n">IExpression</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">sealed</span> <span class="k">class</span> <span class="nc">Expression</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IExpression</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">Order</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">Query</span> <span class="p">:</span> <span class="n">IEnumerable</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The Query class is at the center of any search in the Store, let&rsquo;s start with the samples right away. The saving is almost identical to the sample that I&rsquo;ve shown in my previous article:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">Save</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">try</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// check if there is a schema for the type, if not create it.</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span><span class="n">GetType</span><span class="p">())</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">TypeSchemaBuilder</span><span class="p">.</span><span class="n">RegisterSchemaAndType</span><span class="p">(</span><span class="s">&#34;CognifidePageCommentsStorage&#34;</span><span class="p">,</span> <span class="n">GetType</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// get a new session from the current context.</span>
-</span></span><span class="line"><span class="cl">        <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// wrap it in a transaction </span>
-</span></span><span class="line"><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">BeginTransaction</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// make sure the id has been defined.</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Id</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">//persist</span>
-</span></span><span class="line"><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">CommitTransaction</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">exception</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// ... rollback the transaction and do some reporting</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">RollbackTransaction</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">throw</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">finally</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Really there is not much meat there. The interesting part comes in the object retrieval. Even though the Search namespace does not look like it offers much, you can still build a fairly fophisticated filter with it. following code retrieves comments for a specific PageLinkID. The comments can be filtered by date and since the call is used to retrieve the page for viewing, we probably only want the ones that are public (meaning they have not been removed by the comment moderator).</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;</span> <span class="n">GetCommentsForPage</span><span class="p">(</span><span class="kt">int</span> <span class="n">pageId</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">DateTime</span> <span class="n">beforeDate</span><span class="p">,</span> <span class="n">DateTime</span> <span class="n">afterDate</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">includeOnlyPublished</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    <span class="k">try</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// make sure there is a schema to read from, otherwise there is no point</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span> <span class="k">typeof</span> <span class="p">(</span><span class="n">PageCommentDO</span><span class="p">))</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">//acquire a session</span>
-</span></span><span class="line"><span class="cl">        <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">//create the query </span>
-</span></span><span class="line"><span class="cl">        <span class="n">Query</span> <span class="n">query</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Query</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">PageCommentDO</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// we only want comments for a singler page </span>
-</span></span><span class="line"><span class="cl">        <span class="n">query</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">Expression</span><span class="p">.</span><span class="n">Equal</span><span class="p">(</span><span class="s">&#34;pageId&#34;</span><span class="p">,</span> <span class="n">pageId</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// should we filter to only wshow comments from some set time period?</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// the following demonstrate how to request a value from within a range</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">((</span><span class="n">beforeDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)</span> <span class="p">||</span>
-</span></span><span class="line"><span class="cl">            <span class="p">((</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="p">(</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">query</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                <span class="n">Expression</span><span class="p">.</span><span class="n">Between</span><span class="p">(</span><span class="s">&#34;submitDate&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                                   <span class="p">(</span><span class="n">beforeDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)</span> <span class="p">?</span> <span class="n">beforeDate</span> <span class="p">:</span> <span class="k">new</span> <span class="n">DateTime</span><span class="p">(</span><span class="m">0x76c</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">                                   <span class="p">((</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="p">(</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                                       <span class="p">?</span> <span class="n">afterDate</span>
-</span></span><span class="line"><span class="cl">                                       <span class="p">:</span> <span class="k">new</span> <span class="n">DateTime</span><span class="p">(</span><span class="m">0x834</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)));</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// probably for a displayed page we will only want to show published comments</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">includeOnlyPublished</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">query</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">Expression</span><span class="p">.</span><span class="n">Equal</span><span class="p">(</span><span class="s">&#34;published&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// order the comments by date/time so that we get the most recent first</span>
-</span></span><span class="line"><span class="cl">        <span class="n">query</span><span class="p">.</span><span class="n">AddOrder</span><span class="p">(</span><span class="k">new</span> <span class="n">Order</span><span class="p">(</span><span class="s">&#34;submitDate&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">        <span class="n">IList</span> <span class="n">list</span> <span class="p">=</span> <span class="n">session</span><span class="p">.</span><span class="n">ExecuteQueryObject</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;(</span><span class="n">list</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">object</span> <span class="n">item</span> <span class="k">in</span> <span class="n">list</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">result</span><span class="p">.</span><span class="n">Add</span><span class="p">((</span><span class="n">PageCommentDO</span><span class="p">)</span> <span class="n">item</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">ex</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// ... do some reporting</span>
-</span></span><span class="line"><span class="cl">        <span class="k">throw</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">finally</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You nahe to agree, this really IS neat. All you need to do now to place the comments on a page is a few lines of code to bind the data from the Store with a repeated of a kind, and a set of edit boxes with a submit button :)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">namespace</span> <span class="nn">EPiServer.BaseLibrary.Search</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>    
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">BetweenExpression</span> <span class="p">:</span> <span class="n">IExpression</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">EqualExpression</span> <span class="p">:</span> <span class="n">IExpression</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="kd">public</span> <span class="kd">sealed</span> <span class="k">class</span> <span class="nc">Expression</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="kd">public</span> <span class="k">interface</span> <span class="nc">IExpression</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">Order</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">Query</span> <span class="p">:</span> <span class="n">IEnumerable</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The Query class is at the center of any search in the Store, let&rsquo;s start with the samples right away. The saving is almost identical to the sample that I&rsquo;ve shown in my previous article:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">Save</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">try</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="c1">// check if there is a schema for the type, if not create it.</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span><span class="n">GetType</span><span class="p">())</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="n">TypeSchemaBuilder</span><span class="p">.</span><span class="n">RegisterSchemaAndType</span><span class="p">(</span><span class="s">&#34;CognifidePageCommentsStorage&#34;</span><span class="p">,</span> <span class="n">GetType</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="c1">// get a new session from the current context.</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="c1">// wrap it in a transaction </span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">BeginTransaction</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="c1">// make sure the id has been defined.</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Id</span><span class="p">.</span><span class="n">Equals</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            <span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="c1">//persist</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">CommitTransaction</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="c1">// ... rollback the transaction and do some reporting</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">RollbackTransaction</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="k">throw</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">    <span class="k">finally</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Really there is not much meat there. The interesting part comes in the object retrieval. Even though the Search namespace does not look like it offers much, you can still build a fairly fophisticated filter with it. following code retrieves comments for a specific PageLinkID. The comments can be filtered by date and since the call is used to retrieve the page for viewing, we probably only want the ones that are public (meaning they have not been removed by the comment moderator).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;</span> <span class="n">GetCommentsForPage</span><span class="p">(</span><span class="kt">int</span> <span class="n">pageId</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">DateTime</span> <span class="n">beforeDate</span><span class="p">,</span> <span class="n">DateTime</span> <span class="n">afterDate</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">includeOnlyPublished</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">ISession</span> <span class="n">session</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"> 
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">try</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="c1">// make sure there is a schema to read from, otherwise there is no point</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">SchemaForType</span><span class="p">(</span> <span class="k">typeof</span> <span class="p">(</span><span class="n">PageCommentDO</span><span class="p">))</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="c1">//acquire a session</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="n">session</span> <span class="p">=</span> <span class="n">Context</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">CreateSession</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="c1">//create the query </span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="n">Query</span> <span class="n">query</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Query</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">PageCommentDO</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="c1">// we only want comments for a singler page </span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="n">query</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">Expression</span><span class="p">.</span><span class="n">Equal</span><span class="p">(</span><span class="s">&#34;pageId&#34;</span><span class="p">,</span> <span class="n">pageId</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="c1">// should we filter to only wshow comments from some set time period?</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="c1">// the following demonstrate how to request a value from within a range</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="k">if</span> <span class="p">((</span><span class="n">beforeDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)</span> <span class="p">||</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">            <span class="p">((</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="p">(</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)))</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">            <span class="n">query</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">                <span class="n">Expression</span><span class="p">.</span><span class="n">Between</span><span class="p">(</span><span class="s">&#34;submitDate&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">                                   <span class="p">(</span><span class="n">beforeDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)</span> <span class="p">?</span> <span class="n">beforeDate</span> <span class="p">:</span> <span class="k">new</span> <span class="n">DateTime</span><span class="p">(</span><span class="m">0x76c</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">                                   <span class="p">((</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="p">(</span><span class="n">afterDate</span> <span class="p">!=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">                                       <span class="p">?</span> <span class="n">afterDate</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">                                       <span class="p">:</span> <span class="k">new</span> <span class="n">DateTime</span><span class="p">(</span><span class="m">0x834</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)));</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="c1">// probably for a displayed page we will only want to show published comments</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">includeOnlyPublished</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">            <span class="n">query</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">Expression</span><span class="p">.</span><span class="n">Equal</span><span class="p">(</span><span class="s">&#34;published&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        <span class="c1">// order the comments by date/time so that we get the most recent first</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">        <span class="n">query</span><span class="p">.</span><span class="n">AddOrder</span><span class="p">(</span><span class="k">new</span> <span class="n">Order</span><span class="p">(</span><span class="s">&#34;submitDate&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">45</span><span class="cl">        <span class="n">IList</span> <span class="n">list</span> <span class="p">=</span> <span class="n">session</span><span class="p">.</span><span class="n">ExecuteQueryObject</span><span class="p">(</span><span class="n">query</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;</span> <span class="n">result</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;(</span><span class="n">list</span><span class="p">.</span><span class="n">Count</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="kt">object</span> <span class="n">item</span> <span class="k">in</span> <span class="n">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">            <span class="n">result</span><span class="p">.</span><span class="n">Add</span><span class="p">((</span><span class="n">PageCommentDO</span><span class="p">)</span> <span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">    <span class="k">catch</span> <span class="p">(</span><span class="n">ElektroPostException</span> <span class="n">ex</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">        <span class="c1">// ... do some reporting</span>
+</span></span><span class="line"><span class="ln">56</span><span class="cl">        <span class="k">throw</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">58</span><span class="cl">    <span class="k">finally</span>
+</span></span><span class="line"><span class="ln">59</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">60</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">session</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">61</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">62</span><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">Close</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">63</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">64</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">65</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>You nahe to agree, this really IS neat. All you need to do now to place the comments on a page is a few lines of code to bind the data from the Store with a repeated of a kind, and a set of edit boxes with a submit button :)</p>
 <p>This is basically how much code the submission and retrieval the comments comment take:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// Load the comments to a repeater</span>
-</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;</span> <span class="n">comments</span> <span class="p">=</span> 
-</span></span><span class="line"><span class="cl">            <span class="n">PageCommentDO</span><span class="p">.</span><span class="n">GetCommentsForPage</span><span class="p">(</span><span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">comments</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataBind</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="c1">// Comment submission</span>
-</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">SubmitComment</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PageCommentDO</span> <span class="n">newComment</span> <span class="p">=</span> <span class="k">new</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PageCommentDO</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&#34;CommentForPage{0}&#34;</span><span class="p">,</span> <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">        <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">SubjectTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">ContentTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">newComment</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl"><span class="c1">// the data binding for the labels</span>
-</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">CurrentComments_ItemDataBound</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RepeaterItemEventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PageCommentDO</span> <span class="n">comment</span> <span class="p">=</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">DataItem</span> <span class="k">as</span> <span class="n">PageCommentDO</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    <span class="n">Label</span> <span class="n">commentSubjectLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentSubjectLabel&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">commentSubjectLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Title</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    <span class="n">Label</span> <span class="n">commentContentLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentContentLabel&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">commentContentLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Content</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Short of having a control pre=built for you I cannot think of it being able to make it easier.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// Load the comments to a repeater</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="n">List</span><span class="p">&lt;</span><span class="n">PageCommentDO</span><span class="p">&gt;</span> <span class="n">comments</span> <span class="p">=</span> 
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">            <span class="n">PageCommentDO</span><span class="p">.</span><span class="n">GetCommentsForPage</span><span class="p">(</span><span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">comments</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataBind</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1">// Comment submission</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">SubmitComment</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">PageCommentDO</span> <span class="n">newComment</span> <span class="p">=</span> <span class="k">new</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="n">PageCommentDO</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&#34;CommentForPage{0}&#34;</span><span class="p">,</span> <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="n">SubjectTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">ContentTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="n">newComment</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="c1">// the data binding for the labels</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">CurrentComments_ItemDataBound</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RepeaterItemEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="n">PageCommentDO</span> <span class="n">comment</span> <span class="p">=</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">DataItem</span> <span class="k">as</span> <span class="n">PageCommentDO</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="n">Label</span> <span class="n">commentSubjectLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentSubjectLabel&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="n">commentSubjectLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Title</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">32</span><span class="cl">    <span class="n">Label</span> <span class="n">commentContentLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentContentLabel&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="n">commentContentLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Content</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Short of having a control pre=built for you I cannot think of it being able to make it easier.</p>
 <p>I will look into packing it into a nice control that we would be looking into contributing some time in the future and of course if there is actually a demand for it.</p>
 
       </div>

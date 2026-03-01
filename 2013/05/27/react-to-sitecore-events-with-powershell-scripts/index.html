@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -206,161 +206,73 @@
 <p>This is a fairly easy task that Sitecore pretty thoroughly describes in the ?<a href="http://sdn.sitecore.net/Articles/API/Using%20Events.aspx">Using Events</a>? SDN article. So there is little point for me to reiterate it here.</p>
 <p>The integration requires to add some entries to the include files. I&rsquo;ve added definitions for most of the item related events to the Cognifide.PowerShell.config file, but commented them out, because I don&rsquo;t want you to have any performance penalty associated with the PowerShell Console installation and by default it has some scripts defined for you to try out.. All you need to do to enable it is to uncomment the <events> section of the config file and scripts will start firing up.</p>
 <p>Implementation is pretty straightforward - the console has well defined place within its script libraries where your scripts should be placed:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">const</span> <span class="kt">string</span> <span class="n">EventHandlerLibraryPath</span> <span class="p">=</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/&#34;</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Which you can access from the PowerShell ISE:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">private</span> <span class="kd">const</span> <span class="kt">string</span> <span class="n">EventHandlerLibraryPath</span> <span class="p">=</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="s">&#34;/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/&#34;</span><span class="p">;</span>
+</span></span></code></pre></div><p>Which you can access from the PowerShell ISE:</p>
 <p><a href="/images/image4.png"><img src="/images/image_thumb4.png" alt="image" title="image" class="aligncenter" width="400" height="395" /></a></p>
 <p>Now if you follow the code you can see that the handler upon receiving an event will trigger all scripts located in the appropriate folder in that library:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">OnEvent</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">eventArgs</span> <span class="p">=</span> <span class="n">args</span> <span class="k">as</span> <span class="n">SitecoreEventArgs</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">eventArgs</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Item</span> <span class="n">item</span> <span class="p">=</span> <span class="n">eventArgs</span><span class="p">.</span><span class="n">Parameters</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="k">as</span> <span class="n">Item</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">eventName</span> <span class="p">=</span> <span class="n">eventArgs</span><span class="p">.</span><span class="n">EventName</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="sc">&#39;:&#39;</span><span class="p">,</span> <span class="sc">&#39;/&#39;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">Database</span> <span class="n">database</span> <span class="p">=</span> <span class="n">item</span> <span class="p">!=</span> <span class="kc">null</span> <span class="p">?</span> 
-</span></span><span class="line"><span class="cl">                            <span class="n">item</span><span class="p">.</span><span class="n">Database</span> <span class="p">??</span>
-</span></span><span class="line"><span class="cl">                            <span class="n">Context</span><span class="p">.</span><span class="n">ContentDatabase</span> <span class="p">:</span> 
-</span></span><span class="line"><span class="cl">                            <span class="n">Context</span><span class="p">.</span><span class="n">ContentDatabase</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Item</span> <span class="n">libraryItem</span> <span class="p">=</span> 
-</span></span><span class="line"><span class="cl">             <span class="n">database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">EventHandlerLibraryPath</span> <span class="p">+</span> <span class="n">eventName</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">libraryItem</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">session</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ScriptSession</span><span class="p">(</span><span class="n">ApplicationNames</span><span class="p">.</span><span class="n">Default</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="n">Item</span> <span class="n">scriptItem</span> <span class="k">in</span> <span class="n">libraryItem</span><span class="p">.</span><span class="n">Children</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">item</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">SetItemLocationContext</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">SetVariable</span><span class="p">(</span><span class="s">&#34;eventArgs&#34;</span><span class="p">,</span> <span class="n">eventArgs</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">script</span> <span class="p">=</span> <span class="n">scriptItem</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">script</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">ExecuteScriptPart</span><span class="p">(</span><span class="n">script</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>So e.g. ?item:added? event will trigger all scripts located under ?/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Added? this has been done by convention as there is no way I know of to define which script item to associate with a particular event. But then again &ndash; you want that information in the CMS anyway!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">OnEvent</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kt">var</span> <span class="n">eventArgs</span> <span class="p">=</span> <span class="n">args</span> <span class="k">as</span> <span class="n">SitecoreEventArgs</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">eventArgs</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">Item</span> <span class="n">item</span> <span class="p">=</span> <span class="n">eventArgs</span><span class="p">.</span><span class="n">Parameters</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="k">as</span> <span class="n">Item</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="kt">string</span> <span class="n">eventName</span> <span class="p">=</span> <span class="n">eventArgs</span><span class="p">.</span><span class="n">EventName</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="sc">&#39;:&#39;</span><span class="p">,</span> <span class="sc">&#39;/&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">Database</span> <span class="n">database</span> <span class="p">=</span> <span class="n">item</span> <span class="p">!=</span> <span class="kc">null</span> <span class="p">?</span> 
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                            <span class="n">item</span><span class="p">.</span><span class="n">Database</span> <span class="p">??</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">                            <span class="n">Context</span><span class="p">.</span><span class="n">ContentDatabase</span> <span class="p">:</span> 
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                            <span class="n">Context</span><span class="p">.</span><span class="n">ContentDatabase</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="n">Item</span> <span class="n">libraryItem</span> <span class="p">=</span> 
+</span></span><span class="line"><span class="ln">16</span><span class="cl">             <span class="n">database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">EventHandlerLibraryPath</span> <span class="p">+</span> <span class="n">eventName</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">libraryItem</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="kt">var</span> <span class="n">session</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ScriptSession</span><span class="p">(</span><span class="n">ApplicationNames</span><span class="p">.</span><span class="n">Default</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="n">Item</span> <span class="n">scriptItem</span> <span class="k">in</span> <span class="n">libraryItem</span><span class="p">.</span><span class="n">Children</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">item</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">SetItemLocationContext</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">
+</span></span><span class="line"><span class="ln">31</span><span class="cl">        <span class="n">session</span><span class="p">.</span><span class="n">SetVariable</span><span class="p">(</span><span class="s">&#34;eventArgs&#34;</span><span class="p">,</span> <span class="n">eventArgs</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">        <span class="kt">string</span> <span class="n">script</span> <span class="p">=</span> <span class="n">scriptItem</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">String</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">script</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">            <span class="n">session</span><span class="p">.</span><span class="n">ExecuteScriptPart</span><span class="p">(</span><span class="n">script</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>So e.g. ?item:added? event will trigger all scripts located under ?/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Added? this has been done by convention as there is no way I know of to define which script item to associate with a particular event. But then again &ndash; you want that information in the CMS anyway!</p>
 <p>Naturally you need the matching event added or uncommented in either Cognifide.PowerShell.config, or another config you should choose? which for the mentioned ?item:added? would look like:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;sitecore&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;events&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;event</span> <span class="na">name=</span><span class="s">&#34;item:added&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;handler</span> <span class="na">method=</span><span class="s">&#34;OnEvent&#34;</span> 
-</span></span><span class="line"><span class="cl">            <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.SitecoreIntegrations.Tasks.ScriptedItemEventHandler, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>      
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/events&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="now-we-can-start-scripting">Now we can start scripting!</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;sitecore&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nt">&lt;events&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">      <span class="nt">&lt;event</span> <span class="na">name=</span><span class="s">&#34;item:added&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="nt">&lt;handler</span> <span class="na">method=</span><span class="s">&#34;OnEvent&#34;</span> 
+</span></span><span class="line"><span class="ln">5</span><span class="cl">            <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.SitecoreIntegrations.Tasks.ScriptedItemEventHandler, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>      
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="nt">&lt;/events&gt;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><h2 id="now-we-can-start-scripting">Now we can start scripting!</h2>
 <p>As you can see in the code above the code passes the event arguments to the script as eventArgs variable so you can act upon the value you got from the event. It will also attempt to change the context (location) the script starts at to the item it got from the triggering code (if event supports and uses items). So a sample script that accepts item related events and logs them into a item-event-log.txt file in the Sitecore logs folder could look like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$logFile</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="p">$([</span><span class="no">Sitecore.Configuration.Settings</span><span class="p">]::</span><span class="n">LogFolder</span><span class="p">)</span><span class="s2">\item-event-log.txt&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nv">$eventArgs</span><span class="p">.</span><span class="n">Parameters</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl"><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$eventArgs</span><span class="p">.</span><span class="n">EventName</span><span class="p">)</span><span class="s2"> : </span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">:</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">)</span><span class="s2">&#34;</span> <span class="p">&gt;&gt;</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$logFile</span><span class="p">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>and after attaching this to a couple more events my log looks as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Added/Save to log
-</span></span><span class="line"><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/Save to log
-</span></span><span class="line"><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/Save to Log
-</span></span><span class="line"><span class="cl">item:renamed : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/Save to Log
-</span></span><span class="line"><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/PowerShell Script
-</span></span><span class="line"><span class="cl">item:added : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/PowerShell Script
-</span></span><span class="line"><span class="cl">item:deleted : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/PowerShell Script
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now that opens plenty of possibilities:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$logFile</span> <span class="p">=</span> <span class="s2">&#34;</span><span class="p">$([</span><span class="no">Sitecore.Configuration.Settings</span><span class="p">]::</span><span class="n">LogFolder</span><span class="p">)</span><span class="s2">\item-event-log.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nv">$eventArgs</span><span class="p">.</span><span class="n">Parameters</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$eventArgs</span><span class="p">.</span><span class="n">EventName</span><span class="p">)</span><span class="s2"> : </span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">:</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">)</span><span class="s2">&#34;</span> <span class="p">&gt;&gt;</span> <span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$logFile</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><p>and after attaching this to a couple more events my log looks as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Added/Save to log
+</span></span><span class="line"><span class="ln">2</span><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/Save to log
+</span></span><span class="line"><span class="ln">3</span><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/Save to Log
+</span></span><span class="line"><span class="ln">4</span><span class="cl">item:renamed : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/Save to Log
+</span></span><span class="line"><span class="ln">5</span><span class="cl">item:saved : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/PowerShell Script
+</span></span><span class="line"><span class="ln">6</span><span class="cl">item:added : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/PowerShell Script
+</span></span><span class="line"><span class="ln">7</span><span class="cl">item:deleted : master:/sitecore/system/Modules/PowerShell/Script Library/Event Handlers/Item/Renamed/PowerShell Script
+</span></span></code></pre></div><p>Now that opens plenty of possibilities:</p>
 <ul>
 <li>Why not watch an item and get yourself notified every time someone messes with your article or configuration?</li>
 <li>get notified when someone publishes something?</li>

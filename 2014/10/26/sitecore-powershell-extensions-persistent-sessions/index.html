@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -215,29 +215,15 @@ After the script is executed and the Job has ended the session is discarded unle
 <p>Let&rsquo;s see how this works based on 2 scripts I&rsquo;ve added to SPE some time ago that allow you to copy Layout data from one item to another. You can find those scripts in the Content Editor/Context Menu/Layout/ library:</p>
 <p><a href="/images/image11.png"><img src="/images/image_thumb11.png" alt="image" title="image" class="aligncenter" width="399" height="391" /></a></p>
 <p>If you open the <em><strong>Copy Renderings</strong></em> script you can see that it&rsquo;s extremely simple and it&rsquo;s not quite apparent what it does on its own until you understand that it&rsquo;s a part of a bigger solution that spans across 2 scripts. I&rsquo;ve added some comments to make it more understandable for the purpose of this post:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#get the item for which the script was executed</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$sourceItem</span> <span class="p">=</span> <span class="nb">get-item</span> <span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="c">#assign rendering to a variable - we will need it in the other script</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$renderings</span> <span class="p">=</span> <span class="nv">$sourceItem</span><span class="p">.</span><span class="n">__Renderings</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="c">#remember the path of this item just for reporting purposes in the second script</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$sourceName</span> <span class="p">=</span> <span class="nv">$sourceItem</span><span class="p">.</span><span class="n">ProviderPath</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="c">#write a status to the script output that we&#39;ve copied the layout</span>
-</span></span><span class="line"><span class="cl"><span class="nb">write-host</span> <span class="s2">&#34;Rendering copied from </span><span class="p">$(</span><span class="nv">$sourceName</span><span class="p">)</span><span class="s2">&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Now this script does nothing other than copy the layout information from the current item into a $renderings variable. The secret sauce is in the script settings. If you open the runtime settings of the script:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="c">#get the item for which the script was executed</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$sourceItem</span> <span class="p">=</span> <span class="nb">get-item</span> <span class="p">.</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="c">#assign rendering to a variable - we will need it in the other script</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nv">$renderings</span> <span class="p">=</span> <span class="nv">$sourceItem</span><span class="p">.</span><span class="n">__Renderings</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c">#remember the path of this item just for reporting purposes in the second script</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nv">$sourceName</span> <span class="p">=</span> <span class="nv">$sourceItem</span><span class="p">.</span><span class="n">ProviderPath</span><span class="p">;</span> 
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="c">#write a status to the script output that we&#39;ve copied the layout</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="nb">write-host</span> <span class="s2">&#34;Rendering copied from </span><span class="p">$(</span><span class="nv">$sourceName</span><span class="p">)</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><p>Now this script does nothing other than copy the layout information from the current item into a $renderings variable. The secret sauce is in the script settings. If you open the runtime settings of the script:</p>
 <p><a href="/images/image12.png"><img src="/images/image_thumb12.png" alt="image" title="image" class="aligncenter" width="861" height="446" /></a></p>
 <p>You will see that the script has a <em><strong>Persistent Session ID</strong></em> set on it. Which make the session that&rsquo;s running it stay resident upon script termination:</p>
 <p><a href="/images/image23.png"><img src="/images/image_thumb23.png" alt="image" title="image" class="aligncenter" width="736" height="770" /></a></p>
@@ -245,29 +231,15 @@ After the script is executed and the Job has ended the session is discarded unle
 <p><a href="/images/image15.png"><img src="/images/image_thumb15.png" alt="image" title="image" class="aligncenter" width="863" height="384" /></a></p>
 <p>While <em><strong>Enable rules</strong></em> field allows you to disable a menu item the <em><strong>Show rules</strong></em> field allows you to hide them altogether to avoid clutter in the Scripts context menu if you&rsquo;re having a lot of them.
 The above setting of the <em><strong>Persistent Session ID</strong></em> will cause the PowerShell Runspace to be kept for future reuse whenever a script with the same <em><strong>Persistent Session ID</strong></em> will be executed. Such consecutive script will have access to all the previously set variables. Let&rsquo;s look at the <em><strong>Paste renderings</strong></em> script then to see how this would be used:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#get the item to which we want to paste the renderings from the source item</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$targetItem</span> <span class="p">=</span> <span class="nb">get-item</span> <span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="c">#get the item path for printing it later</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$targetName</span> <span class="p">=</span> <span class="nv">$targetItem</span><span class="p">.</span><span class="n">ProviderPath</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="c">#assign the renderings that we&#39;ve recorded in the previous script</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$targetItem</span><span class="p">.</span><span class="py">__Renderings</span> <span class="p">=</span> <span class="nv">$renderings</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="c">#Write what you&#39;ve done</span>
-</span></span><span class="line"><span class="cl"><span class="nb">write-host</span> <span class="s2">&#34;Renderings pasted from &#39;</span><span class="p">$(</span><span class="nv">$sourceName</span><span class="p">)</span><span class="s2">&#39; to &#39;</span><span class="p">$(</span><span class="nv">$targetName</span><span class="p">)</span><span class="s2">&#39;&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can see that the $renderings variable is not initialized anywhere in this script. That&rsquo;s not necessary because we did this in the previous script and it indeed persisted! Let&rsquo;s look at this script runtime settings then to see how you can achieve this?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="c">#get the item to which we want to paste the renderings from the source item</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$targetItem</span> <span class="p">=</span> <span class="nb">get-item</span> <span class="p">.</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="c">#get the item path for printing it later</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nv">$targetName</span> <span class="p">=</span> <span class="nv">$targetItem</span><span class="p">.</span><span class="n">ProviderPath</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c">#assign the renderings that we&#39;ve recorded in the previous script</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nv">$targetItem</span><span class="p">.</span><span class="py">__Renderings</span> <span class="p">=</span> <span class="nv">$renderings</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="c">#Write what you&#39;ve done</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="nb">write-host</span> <span class="s2">&#34;Renderings pasted from &#39;</span><span class="p">$(</span><span class="nv">$sourceName</span><span class="p">)</span><span class="s2">&#39; to &#39;</span><span class="p">$(</span><span class="nv">$targetName</span><span class="p">)</span><span class="s2">&#39;&#34;</span>
+</span></span></code></pre></div><p>You can see that the $renderings variable is not initialized anywhere in this script. That&rsquo;s not necessary because we did this in the previous script and it indeed persisted! Let&rsquo;s look at this script runtime settings then to see how you can achieve this?</p>
 <p><a href="/images/image16.png"><img src="/images/image_thumb16.png" alt="image" title="image" class="aligncenter" width="629" height="687" /></a></p>
 <p>You can see that the <em><strong>Persistent Session ID</strong></em> is the same as in the previous script therefore it will get executed in the same runspace and thus we&rsquo;ll get access to the previous script variables. More than that though - you see that the script <em><strong>Enable rule</strong></em> requires that a session with our selected <em><strong>Persistent Session ID</strong></em> already exist for the menu item to be enabled in the context menu. Which is desirable as if you haven&rsquo;t copied anything at first &ndash; the required $renderings variable would not be initialized yet and the script would not be able to perform its job. That is why in the above context menu screenshot the <em><strong>Paste Renderings</strong></em> item was disabled. Once we execute the <em><strong>Copy renderings</strong></em> script from the menu the session with the <em><strong>renderingCopySession</strong></em> ID will be present in SessionManager and this script will become enabled:</p>
 <p><a href="/images/image17.png"><img src="/images/image_thumb17.png" alt="image" title="image" class="aligncenter" width="391" height="370" /></a></p>

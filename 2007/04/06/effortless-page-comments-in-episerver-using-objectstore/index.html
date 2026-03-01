@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -199,150 +199,70 @@
 <h2 id="posting-comments">Posting comments</h2>
 <p>the posting is somewhat manual in terms of not having a pre-made control for it. Which if you look at the code does not have much sense to have.</p>
 <p>All you need to do is put two edit boxes on a page and a submit button, and then bind the action of the submit button to a code looking somewhat like:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">SubmitComment</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">IPageComment</span> <span class="n">newComment</span> <span class="p">=</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PageCommentFactory</span><span class="p">.</span><span class="n">createInstance</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&#34;CommentForPage{0}&#34;</span><span class="p">,</span> <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">        <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">SubjectTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">ContentTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">newComment</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>I honestly don&rsquo;t feel like making a custom control for creating those would be worthwhile since no one would end up using it anyway.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">SubmitComment</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">System</span><span class="p">.</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">IPageComment</span> <span class="n">newComment</span> <span class="p">=</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="n">PageCommentFactory</span><span class="p">.</span><span class="n">createInstance</span><span class="p">(</span><span class="n">Guid</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&#34;CommentForPage{0}&#34;</span><span class="p">,</span> <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">        <span class="n">SubjectTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">ContentTextBox</span><span class="p">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="n">newComment</span><span class="p">.</span><span class="n">Save</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>I honestly don&rsquo;t feel like making a custom control for creating those would be worthwhile since no one would end up using it anyway.</p>
 <h2 id="the-listing-of-comments-however">The listing of comments however&hellip;</h2>
 <p>The comments can be accessed in a number of ways.</p>
 <p>Probably the easiest one would be by using the templated control I&rsquo;ve written in the library, which is a simple descendant of the ASP.NET repeater. The page could would look something like:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="p">...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;%</span><span class="err">@</span> <span class="n">Register</span> <span class="n">TagPrefix</span><span class="p">=</span><span class="s">&#34;CognifideControls&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Namespace</span><span class="p">=</span><span class="s">&#34;Cognifide.EPiServerControls.PageComments.Controls&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Assembly</span><span class="p">=</span><span class="s">&#34;Cognifide.EPiServerControls.PageComments&#34;</span> <span class="p">%&gt;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">...</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">CognifideControls</span><span class="p">:</span><span class="n">PageCommentsList</span> <span class="n">ID</span><span class="p">=</span><span class="s">&#34;CommentControl&#34;</span> <span class="n">runat</span><span class="p">=</span><span class="s">&#34;server&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">PageLinkIdProperty</span><span class="p">=</span><span class="s">&#34;&lt;%# CurrentPage.PageLink.ID %&gt;&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="n">ItemTemplate</span><span class="p">&gt;</span> 
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="n">b</span><span class="p">&gt;&lt;%</span><span class="err">#</span> <span class="n">CommentControl</span><span class="p">.</span><span class="n">CurrentComment</span><span class="p">.</span><span class="n">Title</span> <span class="p">%&gt;&lt;/</span><span class="n">b</span><span class="p">&gt;</span> <span class="p">-</span> 
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;%</span><span class="err">#</span> <span class="n">CommentControl</span><span class="p">.</span><span class="n">CurrentComment</span><span class="p">.</span><span class="n">SubmitDate</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">%&gt;&lt;</span><span class="n">br</span> <span class="p">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">&lt;%</span><span class="err">#</span> <span class="n">CommentControl</span><span class="p">.</span><span class="n">CurrentComment</span><span class="p">.</span><span class="n">Content</span><span class="p">%&gt;&lt;</span><span class="n">br</span> <span class="p">/&gt;&lt;</span><span class="n">br</span> <span class="p">/&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="n">ItemTemplate</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="n">CognifideControls</span><span class="p">:</span><span class="n">PageCommentsList</span><span class="p">&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>I&rsquo;ve chose this way since that&rsquo;s pretty much the standard way of adding controls that are defined in Episerver and just generally ASP.Net.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">&lt;%</span><span class="err">@</span> <span class="n">Register</span> <span class="n">TagPrefix</span><span class="p">=</span><span class="s">&#34;CognifideControls&#34;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">Namespace</span><span class="p">=</span><span class="s">&#34;Cognifide.EPiServerControls.PageComments.Controls&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">Assembly</span><span class="p">=</span><span class="s">&#34;Cognifide.EPiServerControls.PageComments&#34;</span> <span class="p">%&gt;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">&lt;</span><span class="n">CognifideControls</span><span class="p">:</span><span class="n">PageCommentsList</span> <span class="n">ID</span><span class="p">=</span><span class="s">&#34;CommentControl&#34;</span> <span class="n">runat</span><span class="p">=</span><span class="s">&#34;server&#34;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">PageLinkIdProperty</span><span class="p">=</span><span class="s">&#34;&lt;%# CurrentPage.PageLink.ID %&gt;&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="p">&lt;</span><span class="n">ItemTemplate</span><span class="p">&gt;</span> 
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="p">&lt;</span><span class="n">b</span><span class="p">&gt;&lt;%</span><span class="err">#</span> <span class="n">CommentControl</span><span class="p">.</span><span class="n">CurrentComment</span><span class="p">.</span><span class="n">Title</span> <span class="p">%&gt;&lt;/</span><span class="n">b</span><span class="p">&gt;</span> <span class="p">-</span> 
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="p">&lt;%</span><span class="err">#</span> <span class="n">CommentControl</span><span class="p">.</span><span class="n">CurrentComment</span><span class="p">.</span><span class="n">SubmitDate</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span> <span class="p">%&gt;&lt;</span><span class="n">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="p">&lt;%</span><span class="err">#</span> <span class="n">CommentControl</span><span class="p">.</span><span class="n">CurrentComment</span><span class="p">.</span><span class="n">Content</span><span class="p">%&gt;&lt;</span><span class="n">br</span> <span class="p">/&gt;&lt;</span><span class="n">br</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">&lt;/</span><span class="n">ItemTemplate</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">&lt;/</span><span class="n">CognifideControls</span><span class="p">:</span><span class="n">PageCommentsList</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>I&rsquo;ve chose this way since that&rsquo;s pretty much the standard way of adding controls that are defined in Episerver and just generally ASP.Net.</p>
 <p>But nothing stops you from accessing the comments directly,  and then filling in the data for the repeater yourself like:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;asp:Repeater ID=&#34;CurrentComments&#34; runat=&#34;server&#34; 
-</span></span><span class="line"><span class="cl">    OnItemDataBound=&#34;CurrentComments_ItemDataBound&#34;&gt; 
-</span></span><span class="line"><span class="cl">    &lt;ItemTemplate&gt;
-</span></span><span class="line"><span class="cl">        &lt;b&gt;&lt;asp:Label ID=&#34;CommentSubjectLabel&#34; runat=&#34;server&#34;&gt;&lt;/asp:Label&gt;&lt;/b&gt;&lt;br /&gt;
-</span></span><span class="line"><span class="cl">        &lt;asp:Label ID=&#34;CommentContentLabel&#34; runat=&#34;server&#34;&gt;&lt;/asp:Label&gt;&lt;br /&gt;&lt;br /&gt;
-</span></span><span class="line"><span class="cl">    &lt;/ItemTemplate&gt;
-</span></span><span class="line"><span class="cl">&lt;/asp:Repeater&gt;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And then in the code-behind</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="p">&lt;</span><span class="n">IPageComment</span><span class="p">&gt;</span> <span class="n">comments</span> <span class="p">=</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PageCommentFactory</span><span class="p">.</span><span class="n">GetCommentsForPage</span><span class="p">(</span><span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl">        <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">comments</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataBind</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">CurrentComments_ItemDataBound</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RepeaterItemEventArgs</span> <span class="n">e</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">IPageComment</span> <span class="n">comment</span> <span class="p">=</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">DataItem</span> <span class="k">as</span> <span class="n">IPageComment</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Label</span> <span class="n">commentSubjectLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentSubjectLabel&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">commentSubjectLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Title</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">    <span class="n">Label</span> <span class="n">commentContentLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentContentLabel&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">commentContentLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Content</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>That&rsquo;s pretty much what my implementation does anyway.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">&lt;asp:Repeater ID=&#34;CurrentComments&#34; runat=&#34;server&#34; 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    OnItemDataBound=&#34;CurrentComments_ItemDataBound&#34;&gt; 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    &lt;ItemTemplate&gt;
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        &lt;b&gt;&lt;asp:Label ID=&#34;CommentSubjectLabel&#34; runat=&#34;server&#34;&gt;&lt;/asp:Label&gt;&lt;/b&gt;&lt;br /&gt;
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        &lt;asp:Label ID=&#34;CommentContentLabel&#34; runat=&#34;server&#34;&gt;&lt;/asp:Label&gt;&lt;br /&gt;&lt;br /&gt;
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    &lt;/ItemTemplate&gt;
+</span></span><span class="line"><span class="ln">7</span><span class="cl">&lt;/asp:Repeater&gt;
+</span></span></code></pre></div><p>And then in the code-behind</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">Page_Load</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">List</span><span class="p">&lt;</span><span class="n">IPageComment</span><span class="p">&gt;</span> <span class="n">comments</span> <span class="p">=</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="n">PageCommentFactory</span><span class="p">.</span><span class="n">GetCommentsForPage</span><span class="p">(</span><span class="n">CurrentPage</span><span class="p">.</span><span class="n">PageLink</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="n">DateTime</span><span class="p">.</span><span class="n">MinValue</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">MaxValue</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataSource</span> <span class="p">=</span> <span class="n">comments</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">CurrentComments</span><span class="p">.</span><span class="n">DataBind</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="kd">protected</span> <span class="k">void</span> <span class="n">CurrentComments_ItemDataBound</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">RepeaterItemEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">IPageComment</span> <span class="n">comment</span> <span class="p">=</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">DataItem</span> <span class="k">as</span> <span class="n">IPageComment</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">Label</span> <span class="n">commentSubjectLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentSubjectLabel&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">commentSubjectLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Title</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="n">Label</span> <span class="n">commentContentLabel</span> <span class="p">=</span> <span class="p">(</span><span class="n">Label</span><span class="p">)</span><span class="n">e</span><span class="p">.</span><span class="n">Item</span><span class="p">.</span><span class="n">FindControl</span><span class="p">(</span><span class="s">&#34;CommentContentLabel&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">comment</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="n">commentContentLabel</span><span class="p">.</span><span class="n">Text</span> <span class="p">=</span> <span class="n">comment</span><span class="p">.</span><span class="n">Content</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>That&rsquo;s pretty much what my implementation does anyway.</p>
 <p>I hope to be able to put it up on CodeResort soon so that we can see what else could be done. Additionally my library allows for replacing the persistence provider, which we will probably have implemented using nHibernate to test its speed versus the ObjectStore. Should you be interested in providing some help with this, or adding come moderation code to the admin side of the site on top of the interface, it would definitely be greatly appreciated.</p>
 <p>I have started implementing the Property based on the code so that it can be easily displayed on the editor&rsquo;s page, but for now, I&rsquo;ll have to delay it since we&rsquo;ve got some other stuff to do related to the project I&rsquo;m currently working on.</p>
 

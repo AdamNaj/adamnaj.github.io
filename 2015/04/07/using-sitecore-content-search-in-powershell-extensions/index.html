@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -210,33 +210,17 @@ You will find the available parameters on it as follows:</p>
 <li><code>-Criteria</code> - simple search criteria in the following example form:</li>
 </ul>
 <p>The Criteria syntax is similar to how you provide the extensible formatting for <code>Format-Table</code>, namely a hashtable array:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;Equals&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_templatename&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;PowerShell Script&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">},</span> 
-</span></span><span class="line"><span class="cl"><span class="vm">@</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;StartsWith&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_fullpath&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;/sitecore/system/Modules/PowerShell/Script Library/System Maintenance&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Where <code>Filter</code> in the criteria allows for one of the following values:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;Equals&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_templatename&#34;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;PowerShell Script&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">},</span> 
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="vm">@</span><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;StartsWith&#34;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_fullpath&#34;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;/sitecore/system/Modules/PowerShell/Script Library/System Maintenance&#34;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Where <code>Filter</code> in the criteria allows for one of the following values:</p>
 <ul>
 <li>Equals</li>
 <li>StartsWith,</li>
@@ -244,21 +228,11 @@ You will find the available parameters on it as follows:</p>
 <li>EndsWith</li>
 </ul>
 <p>Resulting in the following Syntax reported by PowerShell:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Find-Item</span> <span class="p">[</span><span class="n">-Index</span><span class="p">]</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span> <span class="p">[</span><span class="n">-Criteria</span> <span class="p">&lt;</span><span class="n">searchcriteria</span><span class="p">[]&gt;]</span> 
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">-Where</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;]</span> <span class="p">[</span><span class="n">-WhereValues</span> <span class="p">&lt;</span><span class="n">Object</span><span class="p">[]&gt;]</span> 
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">-OrderBy</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;]</span> <span class="p">[</span><span class="n">-First</span> <span class="p">&lt;</span><span class="n">int</span><span class="p">&gt;]</span> 
-</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">-Skip</span> <span class="p">&lt;</span><span class="n">int</span><span class="p">&gt;]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="when-to-use-which-parameters">When to use which parameters?</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Find-Item</span> <span class="p">[</span><span class="n">-Index</span><span class="p">]</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;</span> <span class="p">[</span><span class="n">-Criteria</span> <span class="p">&lt;</span><span class="n">searchcriteria</span><span class="p">[]&gt;]</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="p">[</span><span class="n">-Where</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;]</span> <span class="p">[</span><span class="n">-WhereValues</span> <span class="p">&lt;</span><span class="n">Object</span><span class="p">[]&gt;]</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="p">[</span><span class="n">-OrderBy</span> <span class="p">&lt;</span><span class="n">string</span><span class="p">&gt;]</span> <span class="p">[</span><span class="n">-First</span> <span class="p">&lt;</span><span class="n">int</span><span class="p">&gt;]</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">[</span><span class="n">-Skip</span> <span class="p">&lt;</span><span class="n">int</span><span class="p">&gt;]</span>
+</span></span></code></pre></div><h2 id="when-to-use-which-parameters">When to use which parameters?</h2>
 <p>You might have noticed that there are 2 ways of filtering items.</p>
 <ul>
 <li>Using the <code>-Criteria</code> parameter,</li>
@@ -267,78 +241,34 @@ You will find the available parameters on it as follows:</p>
 <p>This is due to the new capabilities introduced in Sitecore 7.5 which were not available before that version was released, namely integration of the <a href="http://weblogs.asp.net/scottgu/dynamic-linq-part-1-using-the-linq-dynamic-query-library">Dynamic LINQ</a> library. While the <code>-Criteria</code> approach is limited to string values, the <code>-Where</code> filtering allows you to use proper objects. Because this capability is only available starting with Sitecore 7.5 - if you attempt to use the <code>-Where</code> parameter on an older version - the cmdlet will fail to yield any results and you will see an appropriate warning message instead.
 Let&rsquo;s examine how you would do similar searches using both parameter sets. Let&rsquo;s find all <strong>Template fields</strong> defined in English. For the sake of time saving let&rsquo;s return only first 10 items in both cases.</p>
 <h4 id="dynamic-linq">Dynamic Linq</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Find-Item</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Where</span> <span class="s1">&#39;TemplateName = @0 And Language=@1&#39;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-WhereValues</span> <span class="s2">&#34;Template Field&#34;</span><span class="p">,</span> <span class="s2">&#34;en&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl"> <span class="n">-First</span> <span class="mf">10</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h4 id="criteria-search">Criteria search</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Find-Item</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Criteria</span> <span class="vm">@</span><span class="p">{</span><span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;Equals&#34;</span><span class="p">;</span> <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_templatename&#34;</span><span class="p">;</span> <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;Template Field&#34;</span><span class="p">;</span> <span class="n">CaseSensitive</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;Equals&#34;</span><span class="p">;</span> <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_language&#34;</span><span class="p">;</span> <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;en&#34;</span><span class="p">;</span> <span class="n">CaseSensitive</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">}</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-First</span> <span class="mf">10</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>As you can see the <code>-Where</code> approach is much simpler to understand, and while we don&rsquo;t use it here - the <code>-WhereValues</code> can be proper objects like dates. This enables you to search for items that are e.g. older than a week.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Find-Item</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">-Where</span> <span class="s1">&#39;TemplateName = @0 And Language=@1&#39;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="n">-WhereValues</span> <span class="s2">&#34;Template Field&#34;</span><span class="p">,</span> <span class="s2">&#34;en&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"> <span class="n">-First</span> <span class="mf">10</span>
+</span></span></code></pre></div><h4 id="criteria-search">Criteria search</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Find-Item</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">-Criteria</span> <span class="vm">@</span><span class="p">{</span><span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;Equals&#34;</span><span class="p">;</span> <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_templatename&#34;</span><span class="p">;</span> <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;Template Field&#34;</span><span class="p">;</span> <span class="n">CaseSensitive</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">},</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="vm">@</span><span class="p">{</span><span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;Equals&#34;</span><span class="p">;</span> <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_language&#34;</span><span class="p">;</span> <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;en&#34;</span><span class="p">;</span> <span class="n">CaseSensitive</span> <span class="p">=</span> <span class="vm">$true</span><span class="p">}</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">-First</span> <span class="mf">10</span>
+</span></span></code></pre></div><p>As you can see the <code>-Where</code> approach is much simpler to understand, and while we don&rsquo;t use it here - the <code>-WhereValues</code> can be proper objects like dates. This enables you to search for items that are e.g. older than a week.</p>
 <h2 id="but-imnot-getting-items-from-thecmdlet">But I&rsquo;m not getting items from the cmdlet!</h2>
 <p>Straight from the commandlet you&rsquo;re getting the <code>Sitecore.ContentSearch.SearchTypes.SearchResultItem</code> objects rather than full blown Sitecore Items. It&rsquo;s done this way so you can do lightweight searching and filtering and only convert the final results to items. If you recall we&rsquo;ve always had a <code>Wrap-Item</code> commandlet that has recently been renamed to <code>Initialize-Item</code> (old name still available as an alias). This commandlet has been extended to support <code>SearchResultItem</code> as an input from the pipeline. Consequently you can do the following with the above search to get the proper Items you can work with:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Find-Item</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Where</span> <span class="s1">&#39;TemplateName = @0 And Language=@1&#39;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-WhereValues</span> <span class="s2">&#34;Template Field&#34;</span><span class="p">,</span> <span class="s2">&#34;en&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-First</span> <span class="mf">10</span> <span class="p">|</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">Initialize-Item</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can find some speed measurements using different approaches to get items running the script in <a href="https://gist.github.com/AdamNaj/273458beb3f2b179a0b6">this gist</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Find-Item</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">-Where</span> <span class="s1">&#39;TemplateName = @0 And Language=@1&#39;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="n">-WhereValues</span> <span class="s2">&#34;Template Field&#34;</span><span class="p">,</span> <span class="s2">&#34;en&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">-First</span> <span class="mf">10</span> <span class="p">|</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="nb">Initialize-Item</span>
+</span></span></code></pre></div><p>You can find some speed measurements using different approaches to get items running the script in <a href="https://gist.github.com/AdamNaj/273458beb3f2b179a0b6">this gist</a>.</p>
 <h2 id="how-do-i-find-what-i-can-filter-my-items-against">How do I find what I can filter my items against.</h2>
 <p>If you&rsquo;re stuck on a Sitecore version older than 7.5 you might find the following query helpful to find the Index keys by which you can filter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Find-Item</span> <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">          <span class="n">-Criteria</span> <span class="vm">@</span><span class="p">{</span><span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;StartsWith&#34;</span><span class="p">;</span> <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_fullpath&#34;</span><span class="p">;</span> <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;/sitecore/system/modules/PowerShell/&#34;</span> <span class="p">}</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">          <span class="n">-First</span> <span class="mf">1</span> <span class="p">|</span> 
-</span></span><span class="line"><span class="cl">    <span class="nb">Select </span><span class="n">-expand</span> <span class="s2">&#34;Fields&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Find-Item</span> <span class="n">-Index</span> <span class="n">sitecore_master_index</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">          <span class="n">-Criteria</span> <span class="vm">@</span><span class="p">{</span><span class="k">Filter</span> <span class="p">=</span> <span class="s2">&#34;StartsWith&#34;</span><span class="p">;</span> <span class="n">Field</span> <span class="p">=</span> <span class="s2">&#34;_fullpath&#34;</span><span class="p">;</span> <span class="n">Value</span> <span class="p">=</span> <span class="s2">&#34;/sitecore/system/modules/PowerShell/&#34;</span> <span class="p">}</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">          <span class="n">-First</span> <span class="mf">1</span> <span class="p">|</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="nb">Select </span><span class="n">-expand</span> <span class="s2">&#34;Fields&#34;</span>
+</span></span></code></pre></div>
       </div>
 
       <footer class="entry-footer">

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -213,29 +213,15 @@ Let&rsquo;s begin with describing the actions and how you can configure them to
 <p><a href="/images/Action-Scripts.png"><img src="/images/Action-Scripts.png" alt="Action Scripts" class="aligncenter" width="460" height="414" /></a></p>
 <p>You define an action as a script located in an SPE script library and appears in the Actions panel. In the simplest scenario the action would appear when the script library name matches the .Net class name of the items displayed. In the above scenario the actions are placed under <code>/Platform/Internal/List View/Ribbon/Item/</code> where Platform is the module and Item is a script library. Let&rsquo;s take a look at the script here <code>/Platform/Internal/List View/Ribbon/Item/Open</code>
 Contents of the <em>Open</em> script:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$item</span> <span class="k">in</span> <span class="nv">$selectedData</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl"><span class="c"># Run Sheer application on Desktop</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Show-Application</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Application</span> <span class="s2">&#34;Content Editor&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Parameter</span> <span class="vm">@</span><span class="p">{</span><span class="n">id</span> <span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="n">ID</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> <span class="n">fo</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="n">ID</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">                 <span class="n">la</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Language</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> <span class="n">vs</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Version</span><span class="p">.</span><span class="n">Number</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                 <span class="n">sc_content</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The variable <code>$selectedData</code> is provided to the script automatically by SPE in context of the content of the results on <code>Show-ListView</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">foreach</span><span class="p">(</span><span class="nv">$item</span> <span class="k">in</span> <span class="nv">$selectedData</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c"># Run Sheer application on Desktop</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="nb">Show-Application</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="n">-Application</span> <span class="s2">&#34;Content Editor&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">-Parameter</span> <span class="vm">@</span><span class="p">{</span><span class="n">id</span> <span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="n">ID</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> <span class="n">fo</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="n">ID</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> 
+</span></span><span class="line"><span class="ln">6</span><span class="cl">                 <span class="n">la</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Language</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span> <span class="n">vs</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Version</span><span class="p">.</span><span class="n">Number</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">                 <span class="n">sc_content</span><span class="p">=</span><span class="s2">&#34;</span><span class="p">$(</span><span class="nv">$item</span><span class="p">.</span><span class="py">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The variable <code>$selectedData</code> is provided to the script automatically by SPE in context of the content of the results on <code>Show-ListView</code>.</p>
 <h2 id="what-input-is-passed-to-an-action-script">What input is passed to an action script?</h2>
 <p>When your action script is executed the environment is initialized with a number of variables at your disposal as seen below:</p>
 <ul>
@@ -263,15 +249,8 @@ The following screenshot shows how to create an action that only appears in rep
 <p><a href="/images/Schedule-Action.png"><img src="/images/Schedule-Action-1024x867.png" alt="Schedule Action" class="aligncenter" width="1024" height="867" /></a></p>
 <p>For specific reports this global state might not always be enough. You can narrow down the rules further by using the report <strong>name</strong>. Name your report by providing an additional parameter to your <code>Show-List view</code> in addition to what I described in <a href="/2014/10/25/creating-beautiful-sitecore-reports-easily-with-powershell-extensions/">my previous post about reports</a>.
 Consider the following script:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-ViewName</span> <span class="n">ListChildren</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The output of the report will be like any other unnamed report but adds support for additional rules. Let&rsquo;s say I want my action to open a new report that lists all the children of the selected items in the report &ldquo;ListChildren&rdquo;. After running the action my script should display the new report with the children and close the &ldquo;ListChildren&rdquo; report. Not very useful but illustrates the point.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-ViewName</span> <span class="n">ListChildren</span>
+</span></span></code></pre></div><p>The output of the report will be like any other unnamed report but adds support for additional rules. Let&rsquo;s say I want my action to open a new report that lists all the children of the selected items in the report &ldquo;ListChildren&rdquo;. After running the action my script should display the new report with the children and close the &ldquo;ListChildren&rdquo; report. Not very useful but illustrates the point.</p>
 <p><a href="/images/Action-Script1.png"><img src="/images/Action-Script1.png" alt="Action Script" class="aligncenter" width="790" height="496" /></a></p>
 <p>Now I need to save my script in the proper Script Library in my enabled module:</p>
 <p><a href="/images/Action-Save.png"><img src="/images/Action-Save.png" alt="Action Save" class="aligncenter" width="889" height="690" /></a></p>
@@ -281,25 +260,11 @@ At this point my action will show on all reports what list <code>Item</code> ob
 <p>Now you can specify that you want the action to only appear when the report is named &ldquo;ListChildren&rdquo;</p>
 <p><a href="/images/Script-Rule.png"><img src="/images/Script-Rule.png" alt="Script Rule" class="aligncenter" width="764" height="671" /></a></p>
 <p>Confirm the save on all dialogs to persist your changes. Now our action appears when we run this script in ISE.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-ViewName</span> <span class="n">ListChildren</span> <span class="n">-Property</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ProviderPath</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><a href="/images/Now-you-see-me1.png"><img src="/images/Now-you-see-me1.png" alt="Now you see me" class="aligncenter" width="1000" height="570" /></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-ViewName</span> <span class="n">ListChildren</span> <span class="n">-Property</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ProviderPath</span>
+</span></span></code></pre></div><p><a href="/images/Now-you-see-me1.png"><img src="/images/Now-you-see-me1.png" alt="Now you see me" class="aligncenter" width="1000" height="570" /></a></p>
 <p>The actiona does not appear if no view name is provided to the <code>-ViewName</code> parameter. Running the script below will produce a report with the action not shown:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ProviderPath</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><a href="/images/Now-you-dont1.png"><img src="/images/Now-you-dont1.png" alt="Now you dont" class="aligncenter" width="965" height="541" /></a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Show-ListView</span> <span class="n">-Property</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ProviderPath</span>
+</span></span></code></pre></div><p><a href="/images/Now-you-dont1.png"><img src="/images/Now-you-dont1.png" alt="Now you dont" class="aligncenter" width="965" height="541" /></a></p>
 <h2 id="but-wait-theres-more">But wait, there&rsquo;s more!</h2>
 <h3 id="updating-report-in-place">Updating report in place</h3>
 <p>The above action works just fine but will close the previous report and open a new report window in the Sitecore desktop. That&rsquo;s not a great user experience. What if you want to update the content of the report in place using the action? That&rsquo;s possible using the <code>Update-ListView</code> command. Consider the following script:</p>
@@ -307,55 +272,28 @@ At this point my action will show on all reports what list <code>Item</code> ob
 <p>In this case we&rsquo;re not closing the existing report but rather updating the list in place, all you need to do is send the new data to the <code>Update-ListView</code> command.</p>
 <h3 id="showing-user-progress-for-long-running-scripts">Showing user progress for long running scripts</h3>
 <p>One last thing that you might wonder is if the <code>Write-Progress</code> command works as it does in case of ISE or the dialog that runs scripts from Content Editor context menu. Let&rsquo;s copy the following script into your action:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-le</span> <span class="mf">10</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++){</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;I need to do something important for 5 seconds&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;I&#39;m quite on track...&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-PercentComplete</span> <span class="p">(</span><span class="nv">$i</span><span class="p">*</span><span class="mf">10</span><span class="p">)</span> <span class="n">-SecondsRemaining</span> <span class="p">(</span><span class="mf">5</span><span class="p">-</span><span class="nv">$i</span><span class="p">/</span><span class="mf">2</span><span class="p">)</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-CurrentOperation</span> <span class="s2">&#34;Trying to look busy.&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">Start-Sleep</span> <span class="n">-m</span> <span class="mf">500</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;Now I&#39;m doing something else...&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;Should take me about 3 seconds but I&#39;m not quite sure...&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Start-Sleep</span> <span class="n">-s</span> <span class="mf">3</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">for</span><span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-le</span> <span class="mf">10</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++){</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;Ok let me revisit one more thing...&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;Just 5 more seconds&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-PercentComplete</span> <span class="p">(</span><span class="nv">$i</span><span class="p">*</span><span class="mf">10</span><span class="p">)</span> <span class="n">-SecondsRemaining</span> <span class="p">(</span><span class="mf">5</span><span class="p">-</span><span class="nv">$i</span><span class="p">/</span><span class="mf">2</span><span class="p">)</span> <span class="p">`</span>
-</span></span><span class="line"><span class="cl">    <span class="n">-CurrentOperation</span> <span class="s2">&#34;Just making sure.&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nb">Start-Sleep</span> <span class="n">-m</span> <span class="mf">500</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">Write-Progress</span> <span class="n">-Completed</span> <span class="n">-Activity</span> <span class="s2">&#34;Done.&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And you will see the following output:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">for</span><span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-le</span> <span class="mf">10</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++){</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;I need to do something important for 5 seconds&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;I&#39;m quite on track...&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="n">-PercentComplete</span> <span class="p">(</span><span class="nv">$i</span><span class="p">*</span><span class="mf">10</span><span class="p">)</span> <span class="n">-SecondsRemaining</span> <span class="p">(</span><span class="mf">5</span><span class="p">-</span><span class="nv">$i</span><span class="p">/</span><span class="mf">2</span><span class="p">)</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">-CurrentOperation</span> <span class="s2">&#34;Trying to look busy.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="nb">Start-Sleep</span> <span class="n">-m</span> <span class="mf">500</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;Now I&#39;m doing something else...&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;Should take me about 3 seconds but I&#39;m not quite sure...&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="nb">Start-Sleep</span> <span class="n">-s</span> <span class="mf">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="k">for</span><span class="p">(</span><span class="nv">$i</span> <span class="p">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">-le</span> <span class="mf">10</span><span class="p">;</span> <span class="nv">$i</span><span class="p">++){</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">  <span class="nb">Write-Progress</span> <span class="n">-Activity</span> <span class="s2">&#34;Ok let me revisit one more thing...&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="n">-Status</span> <span class="s2">&#34;Just 5 more seconds&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="n">-PercentComplete</span> <span class="p">(</span><span class="nv">$i</span><span class="p">*</span><span class="mf">10</span><span class="p">)</span> <span class="n">-SecondsRemaining</span> <span class="p">(</span><span class="mf">5</span><span class="p">-</span><span class="nv">$i</span><span class="p">/</span><span class="mf">2</span><span class="p">)</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="n">-CurrentOperation</span> <span class="s2">&#34;Just making sure.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">  <span class="nb">Start-Sleep</span> <span class="n">-m</span> <span class="mf">500</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="nb">Write-Progress</span> <span class="n">-Completed</span> <span class="n">-Activity</span> <span class="s2">&#34;Done.&#34;</span>
+</span></span></code></pre></div><p>And you will see the following output:</p>
 <p><a href="/images/Write-Progress.png"><img src="/images/Write-Progress.png" alt="Write Progress" class="aligncenter" width="910" height="574" /></a></p>
 <h3 id="showing-other-powershell-dialogs">Showing other PowerShell dialogs</h3>
 <p>The action runs fully asynchronously so you&rsquo;re free to show any of the power of the provided commands. This means that you can ask for additional input using the <code>Read-Variable</code> command or Show alert using the <code>Show-Alert</code> command or do just about anything possible otherwise from the context menu, ribbon or other interactive integration points.</p>

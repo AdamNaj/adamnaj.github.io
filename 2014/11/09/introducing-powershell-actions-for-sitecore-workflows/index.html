@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -213,152 +213,76 @@ To do that I have Implemented the following template:</p>
 The <em><strong>Script</strong></em> field allows you to pick the script to execute in your action.
 The <em><strong>EnableRule</strong></em> field allows you to specify additional rules for when you want the action NOT to be triggered. e.g. You might only execute it for users in some roles or only for items under some specific branch &ndash; this gives you the flexibility to customize that.
 Based on the template I&rsquo;ve implemented the action as following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Globalization</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cognifide.PowerShell.PowerShellIntegrations.Settings</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Cognifide.PowerShell.Utility</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Data.Items</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Diagnostics</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Text</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Web.UI.Sheer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Workflows.Simple</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.PowerShell.SitecoreIntegrations.Workflows</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">ScriptAction</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">WorkflowPipelineArgs</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">ArgumentNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">ProcessorItem</span> <span class="n">processorItem</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">ProcessorItem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">processorItem</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// this is the action item that defines which script will be executed etc.</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Item</span> <span class="n">actionItem</span> <span class="p">=</span> <span class="n">processorItem</span><span class="p">.</span><span class="n">InnerItem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// and this is the item for which the action has been triggered</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Item</span> <span class="n">dataItem</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">DataItem</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// is the script is not defined - just do nothing</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">actionItem</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">]))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// retrieve the scrpt item</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Item</span> <span class="n">scriptItem</span> <span class="p">=</span> <span class="n">actionItem</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="k">new</span> <span class="n">ID</span><span class="p">(</span><span class="n">actionItem</span><span class="p">[</span><span class="n">ScriptItemFieldNames</span><span class="p">.</span><span class="n">Script</span><span class="p">]));</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// make sure that rules on both the script and action are valid for this execution</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">RulesUtils</span><span class="p">.</span><span class="n">EvaluateRules</span><span class="p">(</span><span class="n">actionItem</span><span class="p">[</span><span class="n">ScriptItemFieldNames</span><span class="p">.</span><span class="n">EnableRule</span><span class="p">],</span> <span class="n">dataItem</span><span class="p">)</span> <span class="p">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">RulesUtils</span><span class="p">.</span><span class="n">EvaluateRules</span><span class="p">(</span><span class="n">scriptItem</span><span class="p">[</span><span class="n">ScriptItemFieldNames</span><span class="p">.</span><span class="n">EnableRule</span><span class="p">],</span> <span class="n">dataItem</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// pass the relevant data to the PowerShell Runner App</span>
-</span></span><span class="line"><span class="cl">                <span class="kt">var</span> <span class="n">str</span> <span class="p">=</span> <span class="k">new</span> <span class="n">UrlString</span><span class="p">(</span><span class="n">UIUtil</span><span class="p">.</span><span class="n">GetUri</span><span class="p">(</span><span class="s">&#34;control:PowerShellRunner&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">ID</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;db&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;lang&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">Language</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;ver&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">Version</span><span class="p">.</span><span class="n">Number</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;scriptId&#34;</span><span class="p">,</span> <span class="n">scriptItem</span><span class="p">.</span><span class="n">ID</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;scriptDb&#34;</span><span class="p">,</span> <span class="n">scriptItem</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">ClientResponse</span><span class="p">.</span><span class="n">Broadcast</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">SheerResponse</span><span class="p">.</span><span class="n">ShowModalDialog</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">ToString</span><span class="p">(),</span> <span class="s">&#34;400&#34;</span><span class="p">,</span> <span class="s">&#34;220&#34;</span><span class="p">,</span> <span class="s">&#34;PowerShell Script Results&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">                    <span class="s">&#34;Shell&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And I could immediately start using my scripted actions!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">using</span> <span class="nn">System.Globalization</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">using</span> <span class="nn">Cognifide.PowerShell.PowerShellIntegrations.Settings</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="k">using</span> <span class="nn">Cognifide.PowerShell.Utility</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Data</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Data.Items</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Diagnostics</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Text</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Web.UI.Sheer</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">using</span> <span class="nn">Sitecore.Workflows.Simple</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="k">namespace</span> <span class="nn">Cognifide.PowerShell.SitecoreIntegrations.Workflows</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">ScriptAction</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">WorkflowPipelineArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="n">Assert</span><span class="p">.</span><span class="n">ArgumentNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">            <span class="n">ProcessorItem</span> <span class="n">processorItem</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">ProcessorItem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">processorItem</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">
+</span></span><span class="line"><span class="ln">25</span><span class="cl">            <span class="c1">// this is the action item that defines which script will be executed etc.</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">            <span class="n">Item</span> <span class="n">actionItem</span> <span class="p">=</span> <span class="n">processorItem</span><span class="p">.</span><span class="n">InnerItem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">
+</span></span><span class="line"><span class="ln">28</span><span class="cl">            <span class="c1">// and this is the item for which the action has been triggered</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">            <span class="n">Item</span> <span class="n">dataItem</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">DataItem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">
+</span></span><span class="line"><span class="ln">31</span><span class="cl">            <span class="c1">// is the script is not defined - just do nothing</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">actionItem</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">]))</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">
+</span></span><span class="line"><span class="ln">37</span><span class="cl">            <span class="c1">// retrieve the scrpt item</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">            <span class="n">Item</span> <span class="n">scriptItem</span> <span class="p">=</span> <span class="n">actionItem</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="k">new</span> <span class="n">ID</span><span class="p">(</span><span class="n">actionItem</span><span class="p">[</span><span class="n">ScriptItemFieldNames</span><span class="p">.</span><span class="n">Script</span><span class="p">]));</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">
+</span></span><span class="line"><span class="ln">40</span><span class="cl">            <span class="c1">// make sure that rules on both the script and action are valid for this execution</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">RulesUtils</span><span class="p">.</span><span class="n">EvaluateRules</span><span class="p">(</span><span class="n">actionItem</span><span class="p">[</span><span class="n">ScriptItemFieldNames</span><span class="p">.</span><span class="n">EnableRule</span><span class="p">],</span> <span class="n">dataItem</span><span class="p">)</span> <span class="p">&amp;&amp;</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">                <span class="n">RulesUtils</span><span class="p">.</span><span class="n">EvaluateRules</span><span class="p">(</span><span class="n">scriptItem</span><span class="p">[</span><span class="n">ScriptItemFieldNames</span><span class="p">.</span><span class="n">EnableRule</span><span class="p">],</span> <span class="n">dataItem</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">                <span class="c1">// pass the relevant data to the PowerShell Runner App</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">                <span class="kt">var</span> <span class="n">str</span> <span class="p">=</span> <span class="k">new</span> <span class="n">UrlString</span><span class="p">(</span><span class="n">UIUtil</span><span class="p">.</span><span class="n">GetUri</span><span class="p">(</span><span class="s">&#34;control:PowerShellRunner&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">ID</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;db&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;lang&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">Language</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">49</span><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;ver&#34;</span><span class="p">,</span> <span class="n">dataItem</span><span class="p">.</span><span class="n">Version</span><span class="p">.</span><span class="n">Number</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;scriptId&#34;</span><span class="p">,</span> <span class="n">scriptItem</span><span class="p">.</span><span class="n">ID</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">                <span class="n">str</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s">&#34;scriptDb&#34;</span><span class="p">,</span> <span class="n">scriptItem</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">                <span class="n">Context</span><span class="p">.</span><span class="n">ClientPage</span><span class="p">.</span><span class="n">ClientResponse</span><span class="p">.</span><span class="n">Broadcast</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">                    <span class="n">SheerResponse</span><span class="p">.</span><span class="n">ShowModalDialog</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">ToString</span><span class="p">(),</span> <span class="s">&#34;400&#34;</span><span class="p">,</span> <span class="s">&#34;220&#34;</span><span class="p">,</span> <span class="s">&#34;PowerShell Script Results&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">                    <span class="s">&#34;Shell&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">56</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">58</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>And I could immediately start using my scripted actions!</p>
 <h2 id="use-case">Use case</h2>
 <p>What triggered this was my need to add comments to the history table without changing the workflow state of an item. I&rsquo;ve tried this by adding a command that would take me from a workflow step to the same step but ask for a comment. Unfortunately when Sitecore does not change the workflow state it does not store the comment you provide during the workflow command execution either.
 Our new scripted actions can help?
 A script that would do this couldn&rsquo;t really be more trivial:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.</span>
-</span></span><span class="line"><span class="cl"><span class="nv">$comment</span> <span class="p">=</span> <span class="nb">Show-Input</span> <span class="n">-Prompt</span> <span class="s2">&#34;Provide comment to add to history...&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$comment</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">New-ItemWorkflowEvent</span> <span class="n">-Item</span> <span class="nv">$item</span> <span class="n">-Text</span> <span class="nv">$comment</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Close-Window</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>What it does is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">$item</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">.</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nv">$comment</span> <span class="p">=</span> <span class="nb">Show-Input</span> <span class="n">-Prompt</span> <span class="s2">&#34;Provide comment to add to history...&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nv">$comment</span> <span class="o">-ne</span> <span class="vm">$null</span><span class="p">){</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="nb">New-ItemWorkflowEvent</span> <span class="n">-Item</span> <span class="nv">$item</span> <span class="n">-Text</span> <span class="nv">$comment</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nb">Close-Window</span>
+</span></span></code></pre></div><p>What it does is:</p>
 <ul>
 <li>retrieve the context item and stores it in the <strong>$item</strong> variable.</li>
 <li>Ask user for comment (we do it in the script as we only want to do this if the rules validate)</li>

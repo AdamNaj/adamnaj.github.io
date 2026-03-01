@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -252,202 +252,99 @@
 <p><a href="/images/image7.png"><img src="/images/image_thumb7.png" alt="image" title="image" class="aligncenter" width="644" height="360" /></a></p>
 <h3 id="how-does-it-work">How does it work?</h3>
 <p>The solution hooks into the getLookupSourceItems pipeline like follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;pipelines&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;getLookupSourceItems&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="nt">&lt;processor</span> 
-</span></span><span class="line"><span class="cl">          <span class="na">patch:before=</span><span class="s">&#34;*[@type=&#39;Sitecore.Pipelines.GetLookupSourceItems.ProcessQuerySource, Sitecore.Kernel&#39;]&#34;</span>
-</span></span><span class="line"><span class="cl">          <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.Processors.ScriptedDataSource, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>
-</span></span><span class="line"><span class="cl">      <span class="nt">&lt;/getLookupSourceItems&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/pipelines&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>And the class that takes the pipeline input and executes PowerShell accordingly can look like the following:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
-</span><span class="lnt">64
-</span><span class="lnt">65
-</span><span class="lnt">66
-</span><span class="lnt">67
-</span><span class="lnt">68
-</span><span class="lnt">69
-</span><span class="lnt">70
-</span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">GetLookupSourceItemsArgs</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Assert</span><span class="p">.</span><span class="n">ArgumentNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">//should we care?</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">IsScripted</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">Source</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">items</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">item</span><span class="p">&gt;();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// parse my sources and get me the items</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">GetScriptedQueries</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">Source</span><span class="p">,</span> <span class="n">args</span><span class="p">.</span><span class="n">Item</span><span class="p">,</span> <span class="n">items</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">args</span><span class="p">.</span><span class="n">Result</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">ToArray</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// if no other queries to be served, no need to continue pipeline</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">args</span><span class="p">.</span><span class="n">AbortPipeline</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kt">bool</span> <span class="n">IsScripted</span><span class="p">(</span><span class="kt">string</span> <span class="n">dataSource</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">dataSource</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s">&#34;script:&#34;</span> <span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">)</span> <span class="p">&gt;</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">static</span> <span class="kt">string</span> <span class="n">GetScriptedQueries</span><span class="p">(</span><span class="kt">string</span> <span class="n">sources</span><span class="p">,</span> <span class="n">Item</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">contextItem</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">item</span><span class="p">&gt;</span> <span class="n">items</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">unusedLocations</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">string</span> <span class="n">location</span> <span class="k">in</span> <span class="k">new</span> <span class="n">ListString</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">location</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="s">&#34;script:&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">scriptLocation</span> <span class="p">=</span> <span class="n">location</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;script:&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">).</span><span class="n">Trim</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="c1">// for every scripted source, run it through powershell</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">itemArray</span> <span class="p">=</span> <span class="n">RunEnumeration</span><span class="p">(</span><span class="n">scriptLocation</span><span class="p">,</span> <span class="n">contextItem</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">item</span> <span class="k">in</span> <span class="n">itemArray</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">unusedLocations</span> <span class="p">+=</span> 
-</span></span><span class="line"><span class="cl">                <span class="n">unusedLocations</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">0</span> 
-</span></span><span class="line"><span class="cl">                    <span class="p">?</span> <span class="s">&#34;|&#34;</span> <span class="p">+</span> <span class="n">location</span> 
-</span></span><span class="line"><span class="cl">                    <span class="p">:</span> <span class="n">location</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">unusedLocations</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">protected</span> <span class="kd">static</span> <span class="n">Item</span><span class="p">[]</span> <span class="n">RunEnumeration</span><span class="p">(</span><span class="kt">string</span> <span class="n">scriptSource</span><span class="p">,</span> <span class="n">Item</span> <span class="n">item</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// get my script item from the Script library</span>
-</span></span><span class="line"><span class="cl">    <span class="n">scriptSource</span> <span class="p">=</span> <span class="n">scriptSource</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;script:&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">).</span><span class="n">Trim</span><span class="p">();</span>  
-</span></span><span class="line"><span class="cl">    <span class="n">Item</span> <span class="n">scriptItem</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">scriptSource</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// initialize the PowerShell session</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ScriptSession</span> <span class="n">session</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ScriptSession</span><span class="p">(</span><span class="n">ApplicationNames</span><span class="p">.</span><span class="n">Default</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// get the script from the script item</span>
-</span></span><span class="line"><span class="cl">    <span class="n">String</span> <span class="n">script</span> <span class="p">=</span> <span class="p">(</span><span class="n">scriptItem</span><span class="p">.</span><span class="n">Fields</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">]</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl">                        <span class="p">?</span> <span class="n">scriptItem</span><span class="p">.</span><span class="n">Fields</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">].</span><span class="n">Value</span> 
-</span></span><span class="line"><span class="cl">                        <span class="p">:</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// put the script in context of the current item</span>
-</span></span><span class="line"><span class="cl">    <span class="n">script</span> <span class="p">=</span> <span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="s">&#34;cd \&#34;{0}:{1}\&#34;\n&#34;</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> 
-</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="s">&#34;\\&#34;</span><span class="p">).</span><span class="n">Substring</span><span class="p">(</span><span class="m">9</span><span class="p">))</span> <span class="p">+</span> <span class="n">script</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// execute the script</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// &#34;false&#34; value provided as the second parameter specifies that</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// session should return objects rather than text to be displayed</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">session</span><span class="p">.</span><span class="n">ExecuteScriptPart</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="kc">false</span><span class="p">).</span><span class="n">Cast</span><span class="p">&lt;</span><span class="n">item</span><span class="p">&gt;().</span><span class="n">ToArray</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Word of caution is to make sure your script runs in reasonable time just as you would with your code solution, as while it does not impact the delivery side of Sitecore a poorly performing script might make your editors not send you a Christmas card. That said - from my tests I&rsquo;ve not seen any noticeable slow down or any measurable impact where my script would be slower than something that you would solve using the code: datasource of the same complexity.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nt">&lt;configuration</span> <span class="na">xmlns:patch=</span><span class="s">&#34;http://www.sitecore.net/xmlconfig/&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="nt">&lt;sitecore&gt;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="nt">&lt;pipelines&gt;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      <span class="nt">&lt;getLookupSourceItems&gt;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="nt">&lt;processor</span> 
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">          <span class="na">patch:before=</span><span class="s">&#34;*[@type=&#39;Sitecore.Pipelines.GetLookupSourceItems.ProcessQuerySource, Sitecore.Kernel&#39;]&#34;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">          <span class="na">type=</span><span class="s">&#34;Cognifide.PowerShell.Processors.ScriptedDataSource, Cognifide.PowerShell&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">      <span class="nt">&lt;/getLookupSourceItems&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="nt">&lt;/pipelines&gt;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  <span class="nt">&lt;/sitecore&gt;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="nt">&lt;/configuration&gt;</span>
+</span></span></code></pre></div><p>And the class that takes the pipeline input and executes PowerShell accordingly can look like the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">GetLookupSourceItemsArgs</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">Assert</span><span class="p">.</span><span class="n">ArgumentNotNull</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">&#34;args&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="c1">//should we care?</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">IsScripted</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">Source</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="kt">var</span> <span class="n">items</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">item</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="c1">// parse my sources and get me the items</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">GetScriptedQueries</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">Source</span><span class="p">,</span> <span class="n">args</span><span class="p">.</span><span class="n">Item</span><span class="p">,</span> <span class="n">items</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="n">args</span><span class="p">.</span><span class="n">Result</span><span class="p">.</span><span class="n">AddRange</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">ToArray</span><span class="p">());</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="c1">// if no other queries to be served, no need to continue pipeline</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">            <span class="n">args</span><span class="p">.</span><span class="n">AbortPipeline</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="kd">protected</span> <span class="kt">bool</span> <span class="n">IsScripted</span><span class="p">(</span><span class="kt">string</span> <span class="n">dataSource</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="k">return</span> <span class="n">dataSource</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="s">&#34;script:&#34;</span> <span class="p">,</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="n">StringComparison</span><span class="p">.</span><span class="n">OrdinalIgnoreCase</span><span class="p">)</span> <span class="p">&gt;</span> <span class="p">-</span><span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">
+</span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="kd">protected</span> <span class="kd">static</span> <span class="kt">string</span> <span class="n">GetScriptedQueries</span><span class="p">(</span><span class="kt">string</span> <span class="n">sources</span><span class="p">,</span> <span class="n">Item</span> 
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="n">contextItem</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">item</span><span class="p">&gt;</span> <span class="n">items</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="kt">string</span> <span class="n">unusedLocations</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">string</span> <span class="n">location</span> <span class="k">in</span> <span class="k">new</span> <span class="n">ListString</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">location</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="s">&#34;script:&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl">            <span class="kt">var</span> <span class="n">scriptLocation</span> <span class="p">=</span> <span class="n">location</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;script:&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">).</span><span class="n">Trim</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">
+</span></span><span class="line"><span class="ln">38</span><span class="cl">            <span class="c1">// for every scripted source, run it through powershell</span>
+</span></span><span class="line"><span class="ln">39</span><span class="cl">            <span class="kt">var</span> <span class="n">itemArray</span> <span class="p">=</span> <span class="n">RunEnumeration</span><span class="p">(</span><span class="n">scriptLocation</span><span class="p">,</span> <span class="n">contextItem</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">item</span> <span class="k">in</span> <span class="n">itemArray</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">42</span><span class="cl">                <span class="n">items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">            <span class="n">unusedLocations</span> <span class="p">+=</span> 
+</span></span><span class="line"><span class="ln">48</span><span class="cl">                <span class="n">unusedLocations</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">0</span> 
+</span></span><span class="line"><span class="ln">49</span><span class="cl">                    <span class="p">?</span> <span class="s">&#34;|&#34;</span> <span class="p">+</span> <span class="n">location</span> 
+</span></span><span class="line"><span class="ln">50</span><span class="cl">                    <span class="p">:</span> <span class="n">location</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">52</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">    <span class="k">return</span> <span class="n">unusedLocations</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">
+</span></span><span class="line"><span class="ln">56</span><span class="cl"><span class="kd">protected</span> <span class="kd">static</span> <span class="n">Item</span><span class="p">[]</span> <span class="n">RunEnumeration</span><span class="p">(</span><span class="kt">string</span> <span class="n">scriptSource</span><span class="p">,</span> <span class="n">Item</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln">58</span><span class="cl">    <span class="c1">// get my script item from the Script library</span>
+</span></span><span class="line"><span class="ln">59</span><span class="cl">    <span class="n">scriptSource</span> <span class="p">=</span> <span class="n">scriptSource</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;script:&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">).</span><span class="n">Trim</span><span class="p">();</span>  
+</span></span><span class="line"><span class="ln">60</span><span class="cl">    <span class="n">Item</span> <span class="n">scriptItem</span> <span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">scriptSource</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">61</span><span class="cl">
+</span></span><span class="line"><span class="ln">62</span><span class="cl">    <span class="c1">// initialize the PowerShell session</span>
+</span></span><span class="line"><span class="ln">63</span><span class="cl">    <span class="n">ScriptSession</span> <span class="n">session</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ScriptSession</span><span class="p">(</span><span class="n">ApplicationNames</span><span class="p">.</span><span class="n">Default</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">64</span><span class="cl">
+</span></span><span class="line"><span class="ln">65</span><span class="cl">    <span class="c1">// get the script from the script item</span>
+</span></span><span class="line"><span class="ln">66</span><span class="cl">    <span class="n">String</span> <span class="n">script</span> <span class="p">=</span> <span class="p">(</span><span class="n">scriptItem</span><span class="p">.</span><span class="n">Fields</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">]</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span> 
+</span></span><span class="line"><span class="ln">67</span><span class="cl">                        <span class="p">?</span> <span class="n">scriptItem</span><span class="p">.</span><span class="n">Fields</span><span class="p">[</span><span class="s">&#34;Script&#34;</span><span class="p">].</span><span class="n">Value</span> 
+</span></span><span class="line"><span class="ln">68</span><span class="cl">                        <span class="p">:</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">69</span><span class="cl">
+</span></span><span class="line"><span class="ln">70</span><span class="cl">    <span class="c1">// put the script in context of the current item</span>
+</span></span><span class="line"><span class="ln">71</span><span class="cl">    <span class="n">script</span> <span class="p">=</span> <span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">72</span><span class="cl">        <span class="s">&#34;cd \&#34;{0}:{1}\&#34;\n&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln">73</span><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Database</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln">74</span><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Paths</span><span class="p">.</span><span class="n">Path</span><span class="p">.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="s">&#34;\\&#34;</span><span class="p">).</span><span class="n">Substring</span><span class="p">(</span><span class="m">9</span><span class="p">))</span> <span class="p">+</span> <span class="n">script</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">75</span><span class="cl">
+</span></span><span class="line"><span class="ln">76</span><span class="cl">    <span class="c1">// execute the script</span>
+</span></span><span class="line"><span class="ln">77</span><span class="cl">    <span class="c1">// &#34;false&#34; value provided as the second parameter specifies that</span>
+</span></span><span class="line"><span class="ln">78</span><span class="cl">    <span class="c1">// session should return objects rather than text to be displayed</span>
+</span></span><span class="line"><span class="ln">79</span><span class="cl">    <span class="k">return</span> <span class="n">session</span><span class="p">.</span><span class="n">ExecuteScriptPart</span><span class="p">(</span><span class="n">script</span><span class="p">,</span> <span class="kc">false</span><span class="p">).</span><span class="n">Cast</span><span class="p">&lt;</span><span class="n">item</span><span class="p">&gt;().</span><span class="n">ToArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">80</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Word of caution is to make sure your script runs in reasonable time just as you would with your code solution, as while it does not impact the delivery side of Sitecore a poorly performing script might make your editors not send you a Christmas card. That said - from my tests I&rsquo;ve not seen any noticeable slow down or any measurable impact where my script would be slower than something that you would solve using the code: datasource of the same complexity.</p>
 <p>The solution is available with the <a href="http://marketplace.sitecore.net/en/Modules/Sitecore_PowerShell_console.aspx">Cognifide&rsquo;s Sitecore PowerShell Console</a> (starting with 2.0 RC2) already available on Sitecore Marketplace.</p>
 
       </div>

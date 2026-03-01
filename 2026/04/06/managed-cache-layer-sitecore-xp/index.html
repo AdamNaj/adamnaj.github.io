@@ -213,168 +213,81 @@
 </ul>
 <h2 id="the-core-managedcache-and-imanagedcacheservice">The Core: ManagedCache and IManagedCacheService</h2>
 <p>The foundation is a <code>ManagedCache</code> class that extends <code>Sitecore.XA.Foundation.Caching.DictionaryCache</code>. It adds two capabilities that the stock SXA cache does not have: a list of template IDs that trigger automatic clearing, and a pluggable <code>ManagedCacheInvalidationDelegate</code> for custom flushing logic.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ManagedCache</span> <span class="p">:</span> <span class="n">Sitecore</span><span class="p">.</span><span class="n">XA</span><span class="p">.</span><span class="n">Foundation</span><span class="p">.</span><span class="n">Caching</span><span class="p">.</span><span class="n">DictionaryCache</span><span class="p">,</span> <span class="n">IManagedCache</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ID</span><span class="p">&gt;</span> <span class="n">InvalidatingTemplateIds</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">_cacheClearer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ManagedCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">long</span> <span class="n">maxSize</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">cacheClearer</span> <span class="p">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">maxSize</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">_cacheClearer</span> <span class="p">=</span> <span class="n">cacheClearer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">InvalidatingTemplateIds</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ID</span><span class="p">&gt;();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">LastCleared</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">bool</span> <span class="n">Clear</span><span class="p">(</span><span class="n">Item</span> <span class="n">item</span><span class="p">,</span> <span class="n">ItemEventType</span> <span class="n">eventType</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">remote</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">bool</span> <span class="n">result</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">InvalidatingTemplateIds</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">InvalidatingTemplateIds</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">id</span> <span class="p">=&gt;</span> <span class="n">CheckItemInheritance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">id</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Clear</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">_cacheClearer</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="n">_cacheClearer</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">||</span> <span class="n">result</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The <code>Clear(Item item, ...)</code> method is the decision point. When a Sitecore item event fires (save, delete, rename, publish), the event handler calls this method on every managed cache. The cache first checks its template list - if the changed item inherits from any of the registered templates, it clears itself. Then it calls the custom delegate if one was provided. Both mechanisms can coexist on the same cache.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ManagedCache</span> <span class="p">:</span> <span class="n">Sitecore</span><span class="p">.</span><span class="n">XA</span><span class="p">.</span><span class="n">Foundation</span><span class="p">.</span><span class="n">Caching</span><span class="p">.</span><span class="n">DictionaryCache</span><span class="p">,</span> <span class="n">IManagedCache</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ID</span><span class="p">&gt;</span> <span class="n">InvalidatingTemplateIds</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">_cacheClearer</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">public</span> <span class="n">ManagedCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">long</span> <span class="n">maxSize</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">cacheClearer</span> <span class="p">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">maxSize</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">_cacheClearer</span> <span class="p">=</span> <span class="n">cacheClearer</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="n">InvalidatingTemplateIds</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ID</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="n">LastCleared</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="kd">public</span> <span class="kt">bool</span> <span class="n">Clear</span><span class="p">(</span><span class="n">Item</span> <span class="n">item</span><span class="p">,</span> <span class="n">ItemEventType</span> <span class="n">eventType</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">remote</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="kt">bool</span> <span class="n">result</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">InvalidatingTemplateIds</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="p">&amp;&amp;</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="n">InvalidatingTemplateIds</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">id</span> <span class="p">=&gt;</span> <span class="n">CheckItemInheritance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">id</span><span class="p">)))</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            <span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">_cacheClearer</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">            <span class="n">result</span> <span class="p">=</span> <span class="n">_cacheClearer</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">||</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The <code>Clear(Item item, ...)</code> method is the decision point. When a Sitecore item event fires (save, delete, rename, publish), the event handler calls this method on every managed cache. The cache first checks its template list - if the changed item inherits from any of the registered templates, it clears itself. Then it calls the custom delegate if one was provided. Both mechanisms can coexist on the same cache.</p>
 <p>The <code>IManagedCacheService</code> manages the lifecycle of all caches. You ask it for a cache by name, and it either returns an existing one or creates a new one with your specified size, flushing delegate, and template IDs:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">interface</span> <span class="nc">IManagedCacheService</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">IManagedCache</span> <span class="n">GetCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">defaultMaxSize</span> <span class="p">=</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">clearer</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span> <span class="n">ID</span><span class="p">[]</span> <span class="n">invalidatingTemplateIds</span> <span class="p">=</span> <span class="kc">null</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">ClearCaches</span><span class="p">(</span><span class="n">Item</span> <span class="n">item</span><span class="p">,</span> <span class="n">ItemEventType</span> <span class="n">eventType</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">remote</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">GetCacheNames</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">ClearCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">RaiseClearCacheEvent</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">userName</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">RaiseClearCacheEventOnRemotes</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">userName</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The service is registered as a singleton via Sitecore&rsquo;s DI container. Every service that needs caching takes <code>IManagedCacheService</code> as a constructor parameter, calls <code>GetCache(...)</code> once in the constructor, and then uses the returned <code>IManagedCache</code> throughout its lifetime.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">interface</span> <span class="nc">IManagedCacheService</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="n">IManagedCache</span> <span class="n">GetCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">defaultMaxSize</span> <span class="p">=</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="n">ManagedCacheInvalidationDelegate</span> <span class="n">clearer</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span> <span class="n">ID</span><span class="p">[]</span> <span class="n">invalidatingTemplateIds</span> <span class="p">=</span> <span class="kc">null</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kt">bool</span> <span class="n">ClearCaches</span><span class="p">(</span><span class="n">Item</span> <span class="n">item</span><span class="p">,</span> <span class="n">ItemEventType</span> <span class="n">eventType</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">remote</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">GetCacheNames</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="k">void</span> <span class="n">ClearCache</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="k">void</span> <span class="n">RaiseClearCacheEvent</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">userName</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="k">void</span> <span class="n">RaiseClearCacheEventOnRemotes</span><span class="p">(</span><span class="kt">string</span> <span class="n">cacheName</span><span class="p">,</span> <span class="kt">string</span> <span class="n">userName</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The service is registered as a singleton via Sitecore&rsquo;s DI container. Every service that needs caching takes <code>IManagedCacheService</code> as a constructor parameter, calls <code>GetCache(...)</code> once in the constructor, and then uses the returned <code>IManagedCache</code> throughout its lifetime.</p>
 <h2 id="the-secret-sauce-managedcacheextensions">The Secret Sauce: ManagedCacheExtensions</h2>
 <p>Here is where the design gets interesting. The <code>GetOrSetIfNotCached&lt;T&gt;</code> extension method is what makes the cache essentially invisible to the consuming code:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">GetOrSetIfNotCached</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">IManagedCache</span> <span class="n">cache</span><span class="p">,</span> <span class="kt">string</span> <span class="n">cacheKey</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">getObject</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">objectToString</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">T</span><span class="p">&gt;</span> <span class="n">stringToObject</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cache</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">cacheValue</span> <span class="p">=</span> <span class="n">cache</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cacheValue</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">sCachedObject</span> <span class="p">=</span> <span class="n">cacheValue</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">sCachedObject</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">())</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">stringToObject</span><span class="p">(</span><span class="n">sCachedObject</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="k">value</span> <span class="p">=</span> <span class="n">getObject</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cache</span> <span class="p">!=</span> <span class="kc">null</span> <span class="p">&amp;&amp;</span> <span class="k">value</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">cachedValue</span> <span class="p">=</span> <span class="n">objectToString</span><span class="p">(</span><span class="k">value</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cache</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">,</span> <span class="k">new</span> <span class="n">DictionaryCacheValue</span> <span class="p">{</span> <span class="n">Value</span> <span class="p">=</span> <span class="n">cachedValue</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">value</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Notice the <code>if (cache != null)</code> checks. When the cache reference is null, this method simply calls <code>getObject()</code> and returns the result. No caching, no serialization, no overhead. This is what makes it transparent:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">GetOrSetIfNotCached</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">this</span> <span class="n">IManagedCache</span> <span class="n">cache</span><span class="p">,</span> <span class="kt">string</span> <span class="n">cacheKey</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">getObject</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">objectToString</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="n">T</span><span class="p">&gt;</span> <span class="n">stringToObject</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">class</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cache</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="kt">var</span> <span class="n">cacheValue</span> <span class="p">=</span> <span class="n">cache</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cacheValue</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="kt">var</span> <span class="n">sCachedObject</span> <span class="p">=</span> <span class="n">cacheValue</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">sCachedObject</span><span class="p">.</span><span class="n">IsNullOrEmpty</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">            <span class="k">return</span> <span class="n">stringToObject</span><span class="p">(</span><span class="n">sCachedObject</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="kt">var</span> <span class="k">value</span> <span class="p">=</span> <span class="n">getObject</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cache</span> <span class="p">!=</span> <span class="kc">null</span> <span class="p">&amp;&amp;</span> <span class="k">value</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="kt">string</span> <span class="n">cachedValue</span> <span class="p">=</span> <span class="n">objectToString</span><span class="p">(</span><span class="k">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="n">cache</span><span class="p">.</span><span class="n">Set</span><span class="p">(</span><span class="n">cacheKey</span><span class="p">,</span> <span class="k">new</span> <span class="n">DictionaryCacheValue</span> <span class="p">{</span> <span class="n">Value</span> <span class="p">=</span> <span class="n">cachedValue</span> <span class="p">});</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="k">return</span> <span class="k">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Notice the <code>if (cache != null)</code> checks. When the cache reference is null, this method simply calls <code>getObject()</code> and returns the result. No caching, no serialization, no overhead. This is what makes it transparent:</p>
 <ul>
 <li><strong>In production</strong>, <code>IManagedCacheService.GetCache(...)</code> returns a real cache, and every call goes through the cache-check-then-fetch-and-store flow.</li>
 <li><strong>In unit tests</strong>, you can pass <code>null</code> for the cache (or simply not register <code>IManagedCacheService</code>), and all your service logic runs without caching. You test your business logic, not the caching layer.</li>
@@ -383,175 +296,86 @@
 <p>The serialization pair (<code>objectToString</code> / <code>stringToObject</code>) is the developer&rsquo;s responsibility. For simple objects, <code>ToString()</code> and a parse method work. For complex objects, JSON serialization does the job. This keeps Sitecore&rsquo;s cache size tracking accurate, since Sitecore caches store strings and need to know the byte size of each entry.</p>
 <h2 id="usage-example-1-template-sensitive-flushing">Usage Example 1: Template-Sensitive Flushing</h2>
 <p>Here is how a product listing provider uses the cache with automatic template-based flushing. The cache will auto-clear whenever any item inheriting from the <code>Product</code> or <code>ProductCategory</code> templates is saved, deleted, or published:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CachedProductListingProvider</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_productCache</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_categoryCache</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">CachedProductListingProvider</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">cacheService</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// These caches auto-flush when Product or ProductCategory items change</span>
-</span></span><span class="line"><span class="cl">        <span class="n">_productCache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">?.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;ProductSolrCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="kc">null</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">Product</span><span class="p">.</span><span class="n">ItemTemplateId</span><span class="p">,</span> <span class="n">ProductCategory</span><span class="p">.</span><span class="n">ItemTemplateId</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">_categoryCache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">?.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;CategorySolrCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="kc">null</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">ProductCategory</span><span class="p">.</span><span class="n">ItemTemplateId</span> <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ProductSearchResultItem</span><span class="p">&gt;</span> <span class="n">GetProducts</span><span class="p">(</span><span class="n">Database</span> <span class="n">database</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_productCache</span><span class="p">.</span><span class="n">GetOrSetIfNotCached</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">            <span class="s">$&#34;ProductSolrCache::{database.Name}&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">QuerySolrForProducts</span><span class="p">(</span><span class="n">database</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">            <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">ProductSearchResultItem</span><span class="p">&gt;&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The <code>null</code> passed as the <code>clearer</code> parameter means no custom flush logic. The template ID array does all the work. When a content author publishes a Product item, the event handler fires, the <code>ManagedCache.Clear(Item, ...)</code> method checks template inheritance, finds a match, and clears the cache.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CachedProductListingProvider</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_productCache</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_categoryCache</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="kd">public</span> <span class="n">CachedProductListingProvider</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">cacheService</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="c1">// These caches auto-flush when Product or ProductCategory items change</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="n">_productCache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">?.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;ProductSolrCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="kc">null</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">Product</span><span class="p">.</span><span class="n">ItemTemplateId</span><span class="p">,</span> <span class="n">ProductCategory</span><span class="p">.</span><span class="n">ItemTemplateId</span> <span class="p">});</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="n">_categoryCache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">?.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;CategorySolrCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="kc">null</span><span class="p">,</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="n">ProductCategory</span><span class="p">.</span><span class="n">ItemTemplateId</span> <span class="p">});</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">ProductSearchResultItem</span><span class="p">&gt;</span> <span class="n">GetProducts</span><span class="p">(</span><span class="n">Database</span> <span class="n">database</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="k">return</span> <span class="n">_productCache</span><span class="p">.</span><span class="n">GetOrSetIfNotCached</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">            <span class="s">$&#34;ProductSolrCache::{database.Name}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">QuerySolrForProducts</span><span class="p">(</span><span class="n">database</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">            <span class="n">JsonConvert</span><span class="p">.</span><span class="n">SerializeObject</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">            <span class="n">JsonConvert</span><span class="p">.</span><span class="n">DeserializeObject</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">ProductSearchResultItem</span><span class="p">&gt;&gt;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The <code>null</code> passed as the <code>clearer</code> parameter means no custom flush logic. The template ID array does all the work. When a content author publishes a Product item, the event handler fires, the <code>ManagedCache.Clear(Item, ...)</code> method checks template inheritance, finds a match, and clears the cache.</p>
 <p>Notice how <code>JsonConvert.SerializeObject</code> and <code>JsonConvert.DeserializeObject&lt;T&gt;</code> are passed directly as the serialization pair. For most use cases, that is all you need.</p>
 <h2 id="usage-example-2-custom-flushing-delegate">Usage Example 2: Custom Flushing Delegate</h2>
 <p>Sometimes template-based flushing is not enough. An output cache service, for example, needs to selectively flush only the cache entries that are affected by a specific content change, rather than clearing everything:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">OutputCacheService</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_cache</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">OutputCacheService</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">managedCacheService</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">_cache</span> <span class="p">=</span> <span class="n">managedCacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;OutputCache&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">clearer</span><span class="p">:</span> <span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">=&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="c1">// Custom logic: only flush entries affected by this item</span>
-</span></span><span class="line"><span class="cl">                <span class="n">FlushEntriesForItem</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The <code>ManagedCacheInvalidationDelegate</code> receives the cache reference, the changed item, the event type (save, delete, rename, etc.), and whether the event is remote. You return <code>true</code> if you handled the clearing, <code>false</code> if the cache should remain untouched for this particular change.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">OutputCacheService</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_cache</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kd">public</span> <span class="n">OutputCacheService</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">managedCacheService</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="n">_cache</span> <span class="p">=</span> <span class="n">managedCacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;OutputCache&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">            <span class="n">clearer</span><span class="p">:</span> <span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                <span class="c1">// Custom logic: only flush entries affected by this item</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">                <span class="n">FlushEntriesForItem</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The <code>ManagedCacheInvalidationDelegate</code> receives the cache reference, the changed item, the event type (save, delete, rename, etc.), and whether the event is remote. You return <code>true</code> if you handled the clearing, <code>false</code> if the cache should remain untouched for this particular change.</p>
 <p>This delegate runs <em>after</em> the template check, so you can combine both approaches: register invalidating templates for broad flushing and a delegate for fine-grained control.</p>
 <h2 id="usage-example-3-selective-template-check-in-the-delegate">Usage Example 3: Selective Template Check in the Delegate</h2>
 <p>A product resolver service uses a custom delegate that checks template inheritance manually, giving it full control over when to flush:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ProductResolverService</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_cache</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ProductResolverService</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">cacheService</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">_cache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;ProductResolveCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">=&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">TemplateID</span> <span class="p">==</span> <span class="n">Product</span><span class="p">.</span><span class="n">ItemTemplateId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">cache</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="p">});</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Product</span> <span class="n">ResolveProduct</span><span class="p">(</span><span class="kt">string</span> <span class="n">productId</span><span class="p">,</span> <span class="n">Database</span> <span class="n">database</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_cache</span><span class="p">.</span><span class="n">GetOrSetIfNotCached</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;(</span>
-</span></span><span class="line"><span class="cl">            <span class="s">$&#34;ProductResolveCache::{database.Name}::{productId}&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">GetProductByIdInternal</span><span class="p">(</span><span class="n">productId</span><span class="p">,</span> <span class="n">database</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">            <span class="n">product</span> <span class="p">=&gt;</span> <span class="n">product</span><span class="p">?.</span><span class="n">ID</span><span class="p">?.</span><span class="n">ToString</span><span class="p">(),</span>
-</span></span><span class="line"><span class="cl">            <span class="n">sCachedItemId</span> <span class="p">=&gt;</span>
-</span></span><span class="line"><span class="cl">                <span class="n">ID</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">sCachedItemId</span><span class="p">,</span> <span class="k">out</span> <span class="n">ID</span> <span class="n">itemId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">?</span> <span class="n">database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">sCachedItemId</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">:</span> <span class="kc">null</span>
-</span></span><span class="line"><span class="cl">        <span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Notice the serialization approach here. Instead of serializing the entire Product object, we store just the Sitecore item ID as a string. On cache hit, we resolve the item from the database. This is a useful pattern when the object is cheap to construct from an ID but expensive to find through a search index.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ProductResolverService</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IManagedCache</span> <span class="n">_cache</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="kd">public</span> <span class="n">ProductResolverService</span><span class="p">(</span><span class="n">IManagedCacheService</span> <span class="n">cacheService</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="n">_cache</span> <span class="p">=</span> <span class="n">cacheService</span><span class="p">.</span><span class="n">GetCache</span><span class="p">(</span><span class="s">&#34;ProductResolveCache&#34;</span><span class="p">,</span> <span class="s">&#34;50MB&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">            <span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">remote</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">TemplateID</span> <span class="p">==</span> <span class="n">Product</span><span class="p">.</span><span class="n">ItemTemplateId</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                    <span class="n">cache</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">                    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="kd">public</span> <span class="n">Product</span> <span class="n">ResolveProduct</span><span class="p">(</span><span class="kt">string</span> <span class="n">productId</span><span class="p">,</span> <span class="n">Database</span> <span class="n">database</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="k">return</span> <span class="n">_cache</span><span class="p">.</span><span class="n">GetOrSetIfNotCached</span><span class="p">&lt;</span><span class="n">Product</span><span class="p">&gt;(</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">            <span class="s">$&#34;ProductResolveCache::{database.Name}::{productId}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">            <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">GetProductByIdInternal</span><span class="p">(</span><span class="n">productId</span><span class="p">,</span> <span class="n">database</span><span class="p">),</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">            <span class="n">product</span> <span class="p">=&gt;</span> <span class="n">product</span><span class="p">?.</span><span class="n">ID</span><span class="p">?.</span><span class="n">ToString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">            <span class="n">sCachedItemId</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">                <span class="n">ID</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">sCachedItemId</span><span class="p">,</span> <span class="k">out</span> <span class="n">ID</span> <span class="n">itemId</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">                    <span class="p">?</span> <span class="n">database</span><span class="p">.</span><span class="n">GetItem</span><span class="p">(</span><span class="n">sCachedItemId</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">                    <span class="p">:</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Notice the serialization approach here. Instead of serializing the entire Product object, we store just the Sitecore item ID as a string. On cache hit, we resolve the item from the database. This is a useful pattern when the object is cheap to construct from an ID but expensive to find through a search index.</p>
 <h2 id="the-event-plumbing">The Event Plumbing</h2>
 <p>For the automatic flushing to work, Sitecore item events need to reach the <code>ManagedCacheService</code>. The <code>ManagedCacheInvalidationHandler</code> event handler handles this. It hooks into all relevant Sitecore item events (saved, deleted, moved, renamed, copied, published) and calls <code>ClearCaches(item, eventType, remote)</code> on the service. The service iterates all managed caches and lets each one decide whether to flush.</p>
 <p>The event handler supports both local and remote events. In a multi-instance deployment (CM + multiple CDs), when a cache is manually cleared on the CM, you can propagate that clear to all CDs via <code>RaiseClearCacheEvent(...)</code>. This uses Sitecore&rsquo;s event queue, so it works across instances without any custom messaging infrastructure.</p>

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -210,35 +210,18 @@ First of all you need to have Sitecore installed somewhere (obviously). For the 
 <p>First step that I always perform when I setup a new environment is to seed the Sitecore instance with the items required which is best done by installing the latest release of PowerShell Extensions.</p>
 <h2 id="2-set-up-sitecore-spe-folders-to-use-the-latest-files-youre-working-on">2) Set up Sitecore SPE folders to use the latest files you&rsquo;re working on</h2>
 <p>Since we&rsquo;re likely to modify the assets like JavaScript, styles or XML Controls I want those to be automatically synchronized with changes I do in *<strong>C:\Projects\SitecorePowerShell*</strong> for this purpose I set up junction points in my Sitecore instance folder to point at my repository folder. To do this I delete the folders that were created by the install package and perform the Junction creation. Assuming the folders as they were specified before you can write a short batch file that would look like this:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-batch" data-lang="batch"><span class="line"><span class="cl"><span class="k">set</span> <span class="nv">SITECORE</span><span class="p">=</span>C:\inetpub\wwwroot\Sitecore8\
-</span></span><span class="line"><span class="cl"><span class="k">set</span> <span class="nv">PROJECT</span><span class="p">=</span>C:\Projects\sitecorepowershell\
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">rmdir</span> <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Data\serialization /Q</span>
-</span></span><span class="line"><span class="cl"><span class="k">mklink</span> /J <span class="nv">%SITECORE%</span>Data\serialization <span class="nv">%PROJECT%</span>Data\serialization
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">rmdir</span> <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\PowerShell&#34;</span> /Q
-</span></span><span class="line"><span class="cl"><span class="k">mklink</span> /J <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\PowerShell&#34;</span> <span class="s2">&#34;</span><span class="nv">%PROJECT%</span><span class="s2">sitecore modules\PowerShell&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">rmdir</span> <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\Shell\PowerShell&#34;</span> /Q
-</span></span><span class="line"><span class="cl"><span class="k">mklink</span> /J <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\Shell\PowerShell&#34;</span> <span class="s2">&#34;</span><span class="nv">%PROJECT%</span><span class="s2">sitecore modules\Shell\PowerShell&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="3-update-your-sitecore-instance-to-latest-items">3) Update your Sitecore instance to latest items</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-batch" data-lang="batch"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">set</span> <span class="nv">SITECORE</span><span class="p">=</span>C:\inetpub\wwwroot\Sitecore8\
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="k">set</span> <span class="nv">PROJECT</span><span class="p">=</span>C:\Projects\sitecorepowershell\
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="k">rmdir</span> <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Data\serialization /Q</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="k">mklink</span> /J <span class="nv">%SITECORE%</span>Data\serialization <span class="nv">%PROJECT%</span>Data\serialization
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="k">rmdir</span> <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\PowerShell&#34;</span> /Q
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="k">mklink</span> /J <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\PowerShell&#34;</span> <span class="s2">&#34;</span><span class="nv">%PROJECT%</span><span class="s2">sitecore modules\PowerShell&#34;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">rmdir</span> <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\Shell\PowerShell&#34;</span> /Q
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="k">mklink</span> /J <span class="s2">&#34;</span><span class="nv">%SITECORE%</span><span class="s2">Website\sitecore modules\Shell\PowerShell&#34;</span> <span class="s2">&#34;</span><span class="nv">%PROJECT%</span><span class="s2">sitecore modules\Shell\PowerShell&#34;</span>
+</span></span></code></pre></div><h2 id="3-update-your-sitecore-instance-to-latest-items">3) Update your Sitecore instance to latest items</h2>
 <p>Once you I have my folders set up I look into the repository and look what&rsquo;s changed since the last release and do the manual &ldquo;Revert tree&rdquo; on the content branches that have changed since the last release.</p>
 <p><a href="/images/Deserialize_SPE_items.png"><img src="/images/Deserialize_SPE_items-1024x603.png" alt="Deserialize_SPE_items" class="aligncenter" width="1024" height="603" /></a></p>
 <p>I Agree - this should be automated, but it happens so infrequently to me that I&rsquo;ve not had much motivation to do that yet.</p>
@@ -254,28 +237,14 @@ And depending on which version of Sitecore I&rsquo;m working with I update the r
 <p>You&rsquo;re probably going to need only the latest version of SC7x and SC8 as the code might not compile with older versions. It will run, but might not compile due to lacks in the older versions of Sitecore APIs.</p>
 <h2 id="5-post-build-step">5) Post Build step</h2>
 <p>Additionally I have a build action that copies the freshly compiled binary into the bin folder of my Sitecore instance:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">IF %USERDOMAIN%==WIN123 xcopy C:\Projects\sitecorepowershell\bin\Debug\Cognifide.PowerShell*.* C:\inetpub\wwwroot\Sitecore8\Website\bin\*.* /s /e /c /y
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>The IF that checks the machine name is there only so that it doesn&rsquo;t cause problems for other contributors as I only want this to happen on my machine. You might add a line for your machine if you want this happening automatically for you.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">IF %USERDOMAIN%==WIN123 xcopy C:\Projects\sitecorepowershell\bin\Debug\Cognifide.PowerShell*.* C:\inetpub\wwwroot\Sitecore8\Website\bin\*.* /s /e /c /y
+</span></span></code></pre></div><p>The IF that checks the machine name is there only so that it doesn&rsquo;t cause problems for other contributors as I only want this to happen on my machine. You might add a line for your machine if you want this happening automatically for you.</p>
 <h2 id="6-develop">6) Develop!</h2>
 <p>Now you&rsquo;re ready to start developing PowerShell Extensions. You can Build your solution and your Sitecore Instance should immediately pick up all tha changes. All you need to do to debug is attach to the relevant w3wp.exe process.</p>
 <h2 id="7-contribute-back">7) Contribute back</h2>
 <p>To serialize the changes you&rsquo;ve introduced to the Sitecore content we&rsquo;re using the following script:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">master:system/Modules/PowerShell/Script Library/Platform/Development/PowerShell Extensions Maintenance/Serialize Change
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>running this script should serialize all your changes that are in the branches that we track. If you&rsquo;ve added any items that would not be handled by this script (like a new integration point) you should modify this script to include those, and serialize it as well.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">master:system/Modules/PowerShell/Script Library/Platform/Development/PowerShell Extensions Maintenance/Serialize Change
+</span></span></code></pre></div><p>running this script should serialize all your changes that are in the branches that we track. If you&rsquo;ve added any items that would not be handled by this script (like a new integration point) you should modify this script to include those, and serialize it as well.
 In the case of modifying the above script you should also modify the <strong>Prepare Console Distribution</strong> script in the same Script Library so that such items will make it into the next release package.</p>
 <p><a href="/images/SPE_Development_ItemChangesPersistence.png"><img src="/images/SPE_Development_ItemChangesPersistence.png" alt="SPE_Development_ItemChangesPersistence" class="aligncenter" width="511" height="645" /></a></p>
 <h2 id="8-be-mindful-of-supported-versions-of-sitecore">8) Be mindful of supported versions of Sitecore</h2>

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -200,54 +200,25 @@
 <p>Another big issue with the page selecting dialog - apart form being unable to select multiple pages is its inability to root it anywhere outside the original EPiServer repository root. This really limits its quality in terms of re-using of its functionality to be able to use it for selecting of a limited set of pages.</p>
 <p>I really wish I could have a clear API for it like I can use the Windows Forms  Open/Save Dialog in desktop applications. I mean seriously - I thought it was impossible that in a product as well thought out as EPiServer something as basic would be missing - there must be something out there to do it, right? WRONG. I looked all around the EPiServer code assemblies and short of re-coding the dialog form grounds up, all I have been able to dig out was a way to re-use the a part of the favorites functionality of the dialog.</p>
 <p>You might find a way to reuse the following piece of code. If you put this in your .ASP :</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;%@ Register TagPrefix=&#34;EPiServerSystem&#34; 
-</span></span><span class="line"><span class="cl">    Namespace=&#34;EPiServer.SystemControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
-</span></span><span class="line"><span class="cl"> 
-</span></span><span class="line"><span class="cl">&lt;EPiServerSystem:FavoritesExplorerTree runat=&#34;server&#34; ID=&#34;ATree&#34;&gt;
-</span></span><span class="line"><span class="cl">    &lt;/EPiServerSystem:FavoritesExplorerTree&gt;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Plus a bit of initialization in the Page_Load of the page in the code behind:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">ExplorerTree</span> <span class="n">tree</span> <span class="p">=</span> <span class="n">ATree</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">PageLink</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PageReference</span><span class="p">(</span><span class="n">FacetFactory</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">EnableVisibleInMenu</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">PublishedStatus</span> <span class="p">=</span> <span class="n">PagePublishedStatus</span><span class="p">.</span><span class="n">Ignore</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowIcons</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowStatusIcons</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowRootPage</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowToolTip</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowACL</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ClickScript</span> <span class="p">=</span> <span class="s">&#34;window.parent.navigateEvent(window, &#39;{PageLink}&#39;);&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ExpandAll</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">Visible</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Then the result is surprisingly pleasant. A tree that allows for selection of (only!) a single node but rooted anywhere you wish.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">&lt;%@ Register TagPrefix=&#34;EPiServerSystem&#34; 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    Namespace=&#34;EPiServer.SystemControls&#34; Assembly=&#34;EPiServer&#34; %&gt;
+</span></span><span class="line"><span class="ln">3</span><span class="cl"> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">&lt;EPiServerSystem:FavoritesExplorerTree runat=&#34;server&#34; ID=&#34;ATree&#34;&gt;
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    &lt;/EPiServerSystem:FavoritesExplorerTree&gt;
+</span></span></code></pre></div><p>Plus a bit of initialization in the Page_Load of the page in the code behind:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">ExplorerTree</span> <span class="n">tree</span> <span class="p">=</span> <span class="n">ATree</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">PageLink</span> <span class="p">=</span> <span class="k">new</span> <span class="n">PageReference</span><span class="p">(</span><span class="n">FacetFactory</span><span class="p">.</span><span class="n">Repository</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">EnableVisibleInMenu</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">PublishedStatus</span> <span class="p">=</span> <span class="n">PagePublishedStatus</span><span class="p">.</span><span class="n">Ignore</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowIcons</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowStatusIcons</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowRootPage</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowToolTip</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ShowACL</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ClickScript</span> <span class="p">=</span> <span class="s">&#34;window.parent.navigateEvent(window, &#39;{PageLink}&#39;);&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">ExpandAll</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="n">tree</span><span class="p">.</span><span class="n">Visible</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span></code></pre></div><p>Then the result is surprisingly pleasant. A tree that allows for selection of (only!) a single node but rooted anywhere you wish.</p>
 <img src="/images/MultiPageSelector2.png" alt="Favorites Functionality" class="aligncenter" />
 <p>Neat. But that&rsquo;s still nowhere near a full dialog, which in the end made us reimplement most of the functionality ourselves.</p>
 <h2 id="i-had-a-dream">I had a dream&hellip;</h2>

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Alegreya+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 
-      <link rel="stylesheet" href="/css/main.min.ff306ca66e7b2bc8165a0ff06764a456af31beb5f62d1d4d77ae277fa7dfde44.css" integrity="sha256-/zBspm57K8gWWg/wZ2SkVq8xvrX2LR1Nd64nf6ff3kQ=" crossorigin="anonymous">
+      <link rel="stylesheet" href="/css/main.min.cc0429c6f305be00178011a517adc90c36caea4a542892e5168f9f794bc9ed8b.css" integrity="sha256-zAQpxvMFvgAXgBGlF63JDDbK6kpUKJLlFo&#43;feUvJ7Ys=" crossorigin="anonymous">
       <link rel="stylesheet" href="/css/syntax.min.17ca6f7a68a8709ff966c5ad518e7600f33e21bd0f8a2ce6442db978acbd0805.css" integrity="sha256-F8pvemiocJ/5ZsWtUY52APM&#43;Ib0PiizmRC25eKy9CAU=" crossorigin="anonymous">
 
 <script>
@@ -250,35 +250,14 @@
       </tr>
   </tbody>
 </table>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Help</span> <span class="nb">Get-Item</span> <span class="err">–</span><span class="n">Full</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|  |</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Help</span> <span class="nb">ForEach-Object</span> <span class="err">–</span><span class="n">Verbose</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Help</span> <span class="nb">Get-Item</span> <span class="err">–</span><span class="n">Full</span>
+</span></span></code></pre></div><p>|  |</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Help</span> <span class="nb">ForEach-Object</span> <span class="err">–</span><span class="n">Verbose</span>
+</span></span></code></pre></div><p>|</p>
 <p>You can learn more about the help system by being slightly recursive</p>
 <img src="/images/wlEmoticon-smile.png" alt="Smile" class="aligncenter" />
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-Help Get-Help –Full
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>There is a lot of discoverability within the environment. For example to learn about commandlets available to you you can try experimenting with these:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-Help Get-Help –Full
+</span></span></code></pre></div><p>There is a lot of discoverability within the environment. For example to learn about commandlets available to you you can try experimenting with these:</p>
 <table>
   <thead>
       <tr>
@@ -295,34 +274,13 @@
       </tr>
   </tbody>
 </table>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-Command -CommandType Cmdlet
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|  |</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-Command Get-*
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-Command -CommandType Cmdlet
+</span></span></code></pre></div><p>|  |</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-Command Get-*
+</span></span></code></pre></div><p>|</p>
 <p>You can discover what capabilities an object you got in pipeline possesses by using Get-Member e.g.:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Get-Member</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="and-here-go-the-sitecore-specific-tips">And here go the Sitecore specific tips</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="n">master</span><span class="err">:</span><span class="p">\</span> <span class="p">|</span> <span class="nb">Get-Member</span>
+</span></span></code></pre></div><h1 id="and-here-go-the-sitecore-specific-tips">And here go the Sitecore specific tips</h1>
 <h2 id="how-to-work-with-items">How to work with items</h2>
 <p>To switch to the desired database item you would use the following:</p>
 <table>
@@ -341,93 +299,29 @@
       </tr>
   </tbody>
 </table>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd master:\
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|  |</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd core:\content\Applications
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>|</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">cd master:\
+</span></span></code></pre></div><p>|  |</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">cd core:\content\Applications
+</span></span></code></pre></div><p>|</p>
 <p>The environment deliberately skips the “Sitecore” root in the tree as it provides no value to give the script access to the item and in fact unnecessarily lengthens each path so the “Sitecore” root is treated as the drive root. You can still access it as follows:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-get-current-item">How to get Current Item</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">cd </span><span class="n">master</span><span class="err">:</span><span class="p">\</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span>
+</span></span></code></pre></div><h2 id="how-to-get-current-item">How to get Current Item</h2>
 <p>To get the page for the location you’re in you can use:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-get-current-pages-children">How to get Current Page’s children</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span>
+</span></span></code></pre></div><h2 id="how-to-get-current-pages-children">How to get Current Page’s children</h2>
 <p>To get the children of the page you’re currently in:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To get the children of the page you’re currently in and all of its children children (whole branch):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="err">–</span><span class="n">recurse</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-modify-an-item">How to Modify an item</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Text</span> <span class="p">=</span> <span class="err">“</span><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span><span class="err">”</span> <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>or in short:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|%</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Text</span> <span class="p">=</span> <span class="err">“</span><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span><span class="err">”</span> <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-restart-the-application">How to restart the application</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span>
+</span></span></code></pre></div><p>To get the children of the page you’re currently in and all of its children children (whole branch):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="err">–</span><span class="n">recurse</span>
+</span></span></code></pre></div><h2 id="how-to-modify-an-item">How to Modify an item</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Text</span> <span class="p">=</span> <span class="err">“</span><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span><span class="err">”</span> <span class="p">}</span>
+</span></span></code></pre></div><p>or in short:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|%</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="py">Text</span> <span class="p">=</span> <span class="err">“</span><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="n">Hello</span> <span class="n">World</span><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span><span class="err">”</span> <span class="p">}</span>
+</span></span></code></pre></div><h2 id="how-to-restart-the-application">How to restart the application</h2>
 <p>To restart the application use the following command:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Restart-Application
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-get-system-properties-and-environment-variables">How to get system properties and environment variables</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Restart-Application
+</span></span></code></pre></div><h2 id="how-to-get-system-properties-and-environment-variables">How to get system properties and environment variables</h2>
 <p>Some more important variables are mapped onto the PowerShell variables by the plugin. Notable variables (value depending on your server configuration):</p>
 <table>
   <thead>
@@ -464,77 +358,26 @@
   </tbody>
 </table>
 <p>You can list all PowerShell variables by using:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-Variable *
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Additionally you can list all environment variables by using:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[System.Environment]::GetEnvironmentVariables()
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>and get the value of a specific variable with e.g.:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[System.Environment]::GetEnvironmentVariable(&#34;ComputerName&#34;)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h1 id="powershell-language-and-environment-specific-tips">PowerShell Language and environment specific tips</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-Variable *
+</span></span></code></pre></div><p>Additionally you can list all environment variables by using:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">[System.Environment]::GetEnvironmentVariables()
+</span></span></code></pre></div><p>and get the value of a specific variable with e.g.:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">[System.Environment]::GetEnvironmentVariable(&#34;ComputerName&#34;)
+</span></span></code></pre></div><h1 id="powershell-language-and-environment-specific-tips">PowerShell Language and environment specific tips</h1>
 <h2 id="how-to-insert-comments">How to Insert Comments</h2>
 <p>To insert a comment, use the pound sign (#):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># This is a comment, not a line to be run.
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-insert-line-breaks">How to Insert Line Breaks</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl"># This is a comment, not a line to be run.
+</span></span></code></pre></div><h2 id="how-to-insert-line-breaks">How to Insert Line Breaks</h2>
 <p>To insert a line break into a Windows PowerShell script use the backtick (`) :</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$b = `
-</span></span><span class="line"><span class="cl">&#34;This is a continuation of the line.&#34;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>You can also break a line at the pipe separator (|) character (assuming your line uses the pipeline):</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span> <span class="p">|</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Sort-Object</span> <span class="n">Length</span> <span class="err">–</span><span class="n">Descending</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-create-multi-command-lines">How to Create Multi-Command Lines</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$b = `
+</span></span><span class="line"><span class="ln">2</span><span class="cl">&#34;This is a continuation of the line.&#34;
+</span></span></code></pre></div><p>You can also break a line at the pipe separator (|) character (assuming your line uses the pipeline):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span> <span class="p">|</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nb">Sort-Object</span> <span class="n">Length</span> <span class="err">–</span><span class="n">Descending</span>
+</span></span></code></pre></div><h2 id="how-to-create-multi-command-lines">How to Create Multi-Command Lines</h2>
 <p>To put multiple commands on a single line, separate those commands using a semicolon:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$a = 1,2,3,4,5; $b = $a[2]; $b
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Hint.</strong> This script writes-out the value of <strong>$b</strong> which is <strong>3</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$a = 1,2,3,4,5; $b = $a[2]; $b
+</span></span></code></pre></div><p><strong>Hint.</strong> This script writes-out the value of <strong>$b</strong> which is <strong>3</strong></p>
 <h2 id="how-to-make-comparisons">How to Make Comparisons</h2>
 <p>Windows PowerShell cmdlets (like <strong>Where-Object</strong>) use a special set of comparison operators, including those shown in the following table.</p>
 <p>Each of these operators can be made case sensitive by adding a <strong>c</strong> immediately after the hyphen. For example, <strong>-ceq</strong> represents the case-sensitive equals operator; <strong>-clt</strong> is the case-sensitive less than operator.</p>
@@ -582,73 +425,23 @@
 </table>
 <h2 id="how-to-read-a-text-file">How to Read a Text File</h2>
 <p>To read the contents of a text file into a variable, call the <strong>Get-Content</strong> cmdlet followed by the path to the text file:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$a = Get-Content C:\Scripts\Test.txt
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Each line in the file ends up as an item in the array $a. If you want to access a single line in the file you can simply specify the index number corresponding to that line:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$a[0]
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>This command echoes back the <em>last</em> line in $a:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$a[-1]
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Bonus</strong>. To determine the number of lines, words, and characters in a text file use this command:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Get-Content c:\scripts\test.txt |
-</span></span><span class="line"><span class="cl">measure-object -line -word -character
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="how-to-write-to-a-text-file">How to Write to a Text File</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$a = Get-Content C:\Scripts\Test.txt
+</span></span></code></pre></div><p>Each line in the file ends up as an item in the array $a. If you want to access a single line in the file you can simply specify the index number corresponding to that line:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$a[0]
+</span></span></code></pre></div><p>This command echoes back the <em>last</em> line in $a:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">$a[-1]
+</span></span></code></pre></div><p><strong>Bonus</strong>. To determine the number of lines, words, and characters in a text file use this command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Get-Content c:\scripts\test.txt |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">measure-object -line -word -character
+</span></span></code></pre></div><h2 id="how-to-write-to-a-text-file">How to Write to a Text File</h2>
 <p>To save data to a text file use the <strong>Out-File</strong> cmdlet:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Test</span><span class="p">.</span><span class="py">txt</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>To append data to an existing file, add the –<strong>append</strong> parameter:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Test</span><span class="p">.</span><span class="py">txt</span> <span class="err">–</span><span class="n">append</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>Attention.</strong> Unlike in the regular Windows PowerShell console you cannot use the MS-DOS redirection characters (&gt; for write, &raquo; for append) when using Sitecore hosted PowerShell.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Test</span><span class="p">.</span><span class="py">txt</span>
+</span></span></code></pre></div><p>To append data to an existing file, add the –<strong>append</strong> parameter:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Test</span><span class="p">.</span><span class="py">txt</span> <span class="err">–</span><span class="n">append</span>
+</span></span></code></pre></div><p><strong>Attention.</strong> Unlike in the regular Windows PowerShell console you cannot use the MS-DOS redirection characters (&gt; for write, &raquo; for append) when using Sitecore hosted PowerShell.</p>
 <p>Another option is to use the <strong>Export-CSV</strong> cmdlet to save data as a comma-separated-values file:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Export-CSV</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Test</span><span class="p">.</span><span class="py">txt</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>More tips coming soon…</strong> In the mean time please download the fresh version of the plugin with the latest improvements:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Get-Item</span> <span class="p">.</span> <span class="p">|</span> <span class="nb">Export-CSV</span> <span class="n">C:</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Test</span><span class="p">.</span><span class="py">txt</span>
+</span></span></code></pre></div><p><strong>More tips coming soon…</strong> In the mean time please download the fresh version of the plugin with the latest improvements:</p>
 <h2 id="heading"><a href="http://trac.sitecore.net/SitecorePowershellConsole" title="Download Powershell console">[Download &amp; Enjoy]</a></h2>
 <p>All feedback appreciated!</p>
 
